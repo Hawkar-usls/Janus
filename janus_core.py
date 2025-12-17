@@ -35,7 +35,7 @@ KEYS_FILE = os.path.join(BASE_DIR, "janus_keys.json")
 RPG_CONFIG_FILE = os.path.join(BASE_DIR, "janus_rpg_config.json")
 
 # --- CASINO CONFIGURATION ---
-BOT_TOKEN = "8210764275:AAHQXfrQ7NIr1Iny2tbSPqps2gl7HvfOeTg"
+BOT_TOKEN = "you_token"
 CASINO_ADMIN_ID = "392910542" # Куда бот будет слать тикеты на выплату
 
 # Wager Rules (Multiplier)
@@ -1042,4 +1042,5 @@ async def main():
 
 if __name__ == "__main__":
     try: asyncio.run(main())
+
     except KeyboardInterrupt: pass
