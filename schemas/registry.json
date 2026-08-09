@@ -8,12 +8,14 @@
     "hawkar.portfolio-visibility.v1": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.portfolio-visibility.v1.schema.json"
   },
   "vocabularies": {
-    "portfolio_class": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/portfolio-classes.json"
+    "portfolio_class": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/portfolio-classes.json",
+    "repository_maturity": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/maturity-classes.json"
   },
   "notes": [
     "schema_id is the stable discriminator used by public metadata objects",
     "repository-specific fields may extend hawkar.project-status.v1 because the shared schema allows additional properties",
     "claim status remains evidence-specific; schema validity does not establish scientific truth",
+    "maturity describes repository state/presentation rather than scientific truth or quality",
     "visibility recommendations are portfolio-presentation metadata and do not mutate GitHub repository settings"
   ]
 }
