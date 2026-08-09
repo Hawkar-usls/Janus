@@ -3,23 +3,33 @@
   "$id": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.portfolio-visibility.v1.schema.json",
   "title": "Hawkar Portfolio Visibility v1",
   "type": "object",
-  "required": ["schema_id", "owner", "last_reviewed", "purpose", "policy", "repositories"],
+  "required": ["schema_id", "owner", "last_reviewed", "purpose", "github_ui_state", "policy", "repositories"],
   "properties": {
     "schema_id": {"const": "hawkar.portfolio-visibility.v1"},
     "owner": {"type": "string", "minLength": 1},
     "last_reviewed": {"type": "string", "format": "date"},
     "purpose": {"type": "string"},
+    "github_ui_state": {
+      "type": "object",
+      "required": ["pins_observed_by_connector", "archive_state_mutation_available_to_connector", "visibility_recommendations_are_not_observed_ui_state"],
+      "properties": {
+        "pins_observed_by_connector": {"type": "boolean"},
+        "archive_state_mutation_available_to_connector": {"type": "boolean"},
+        "visibility_recommendations_are_not_observed_ui_state": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
     "policy": {"type": "object"},
     "repositories": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["repository", "class", "recommended_action", "pinned", "reason"],
+        "required": ["repository", "class", "recommended_action", "recommended_pin", "reason"],
         "properties": {
           "repository": {"type": "string", "minLength": 1},
           "class": {"type": "string", "minLength": 1},
           "recommended_action": {"type": "string", "minLength": 1},
-          "pinned": {"type": "boolean"},
+          "recommended_pin": {"type": "boolean"},
           "reason": {"type": "string", "minLength": 1}
         },
         "additionalProperties": false
