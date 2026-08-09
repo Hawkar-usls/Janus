@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.portfolio-visibility.v1.schema.json",
+  "title": "Hawkar Portfolio Visibility v1",
+  "type": "object",
+  "required": ["schema_id", "owner", "last_reviewed", "purpose", "policy", "repositories"],
+  "properties": {
+    "schema_id": {"const": "hawkar.portfolio-visibility.v1"},
+    "owner": {"type": "string", "minLength": 1},
+    "last_reviewed": {"type": "string", "format": "date"},
+    "purpose": {"type": "string"},
+    "policy": {"type": "object"},
+    "repositories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["repository", "class", "recommended_action", "pinned", "reason"],
+        "properties": {
+          "repository": {"type": "string", "minLength": 1},
+          "class": {"type": "string", "minLength": 1},
+          "recommended_action": {"type": "string", "minLength": 1},
+          "pinned": {"type": "boolean"},
+          "reason": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "note": {"type": "string"}
+  },
+  "additionalProperties": false
+}
