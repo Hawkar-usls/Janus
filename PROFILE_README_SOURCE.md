@@ -34,7 +34,12 @@ I build small, inspectable research and engineering systems with explicit claim 
 
 The most useful contributions now are counterexamples, prior art, clean-room implementations, independent replication, and verifier defects — not additional internal PASS layers.
 
-**Machine-readable portfolio:** [`portfolio-index.json`](https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json)
+## Machine-readable entry points
+
+- [`portfolio-index.json`](https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json) — account-wide project classification and claim boundaries.
+- [`schemas/registry.json`](https://github.com/Hawkar-usls/Janus/blob/main/schemas/registry.json) — `schema_id` → canonical JSON Schema mapping.
+
+Schema validity describes metadata structure; it does not establish the truth of a scientific claim.
 
 ---
 
