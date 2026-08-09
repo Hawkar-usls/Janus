@@ -1,96 +1,58 @@
-What is Janus?
-Janus is a fully self-hosted, OpenAI-compatible API gateway for Large Language Models that I built in 2025 — months before managed solutions like ngrok AI Gateway entered early access.
-It allows you to:
+<div align="center">
 
-Route requests through a single unified endpoint (/v1/chat/completions compatible)
-Automatically failover between cloud providers (Gemini, Grok, OpenAI, Anthropic-ready) and local/self-hosted models (Ollama, vLLM, LM Studio, etc.)
-Work completely offline when needed (fallback to local model on private NAS)
-Apply dynamic routing policies (cost, latency, accuracy, offline priority)
-Serve multiple production AI products from one backend
+# Janus
+### Local / cloud LLM gateway experiment
 
-Janus currently powers several live Telegram-based AI experiences:
+`self-hosted` · `provider routing` · `local fallback` · `explicit claim boundaries`
 
-Medical diagnostic assistant (Symptoma)
-Mystical tarot oracle
-Narrative RPG engine (Tabula Rasa style)
-Telegram Stars casino with wager system
+</div>
 
-All running on a mix of Google Gemini and a local Qwen2.5 1.5B model on a QNAP NAS in Ukraine — even during power outages.
-Why Janus exists
-The future of AI is decentralized and resilient.
-We shouldn’t depend on one cloud provider going down, rate limits, or internet blackouts.
-Janus proves that you can have:
+Janus is a small Python gateway for routing chat-style requests between configured cloud providers and local/self-hosted model endpoints.
 
-Production reliability
-Hybrid cloud + local inference
-Full control over keys and traffic
-True offline capability
+It is a **supporting engineering project**, not one of the account's flagship research results.
 
-…all in a single lightweight Python service.
-Key Features
+## Scope
 
-OpenAI API compatible — works with official SDKs, LangChain, Vercel AI, etc. (just change base_url)
-Automatic failover & smart routing via SpoilManager (key + provider rotation)
-Offline-first mode — seamless fallback to local Ollama instance
-Multi-product backend — one gateway serves chat, structured generation, RPG, oracle, etc.
-Persistent memory via SQLite (player states, chat history, world entities)
-Production casino module with Telegram Stars payments, wager requirements, auto-withdraw tickets
-CORS enabled — ready for WebApps and frontend integration
-Async aiohttp server — high concurrency, low footprint
+The repository explores:
 
-Quick Start (Local)
-Bashgit clone https://github.com/Hawkar-usls/janus-llm-gateway.git
-cd janus-llm-gateway
+- a single chat-completion-style entry point;
+- provider selection and fallback;
+- local-model integration, including Ollama-style endpoints;
+- shared state for small companion applications;
+- operation on modest self-hosted hardware.
 
-# Create virtual env
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+Provider compatibility, latency, uptime and fallback behavior depend on the deployed configuration and external APIs.
 
-# Install dependencies
-pip install aiohttp aiohttp-cors google-generativeai aiosqlite
+## Claim boundary
 
-# Configure your keys (create janus_keys.json)
-# Example structure:
-# {
-#   "gemini": "AIzaSy...",
-#   "openai": "sk-...",
-#   "grok": "grok-..."
-# }
+```text
+PROJECT_CLASS = ENGINEERING_PROTOTYPE
+PRODUCTION_UPTIME_GUARANTEE = NOT_CLAIMED
+SECURITY_CERTIFICATION = NOT_ESTABLISHED
+BENCHMARKED_PROVIDER_SUPERIORITY = NOT_CLAIMED
+MEDICAL_DIAGNOSIS_AUTHORITY = FALSE
+FINANCIAL_OR_GAMBLING_OUTCOME_GUARANTEE = FALSE
+HISTORICAL_PRIORITY_OVER_OTHER_GATEWAYS = NOT_CLAIMED
+```
 
-# Run
-python "janus_core (5).py"
-Server will start on http://localhost:5000
-Test with curl:
-Bashcurl http://localhost:5000/v1/chat/completions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "model": "gemini-2.5-flash",
-    "messages": [{"role": "user", "content": "Say hello from Janus"}]
-  }'
-Configuration
+Applications connected to this gateway may include games, creative interfaces, health-information prototypes or other experiments. Their presence does not make the gateway a medical device, financial service, safety authority or independently audited production platform.
 
-USE_LOCAL_QUEEN = True → forces fallback to local Ollama
-LOCAL_AI_URL → your Ollama/vLLM endpoint
-janus_keys.json → store API keys securely
-All endpoints under /api/ for custom apps (rpg, symptoma, oracle, hrain, casino)
+## Security
 
-Philosophy
-"Iane Bifrons, respiciens et prospiciens."
-"Aperi viam initio, claude viam fini."
-"Sit initium faustum."
-Janus looks both backward (to reliable local inference) and forward (to powerful cloud models).
-It opens the path at the beginning and closes it at the end.
-May the beginning be fortunate.
-Status
+Keep API keys, Wi-Fi credentials, private endpoints and local deployment data outside committed source files. Any public deployment should receive its own authentication, authorization, rate-limit, logging, dependency and threat-model review.
 
-Core gateway: Stable, production-used
-Casino module: Live with real payments
-Offline resilience: Battle-tested in real blackouts
-Open-sourcing: Ongoing cleanup for public release
+## Portfolio navigation
 
-Author
-Alexander Agapov 
-Built in Ukraine, 2025 — mostly while recovering from illness, using AI as primary development partner.
-This project is proof that the future of building is already here: human vision + AI execution.
-License
-MIT License — use, modify, deploy, fork freely.
+- **Research:** [Janus-Fundamentum](https://github.com/Hawkar-usls/Janus-Fundamentum), [AIFC](https://github.com/Hawkar-usls/AIFC), [janus-io-public](https://github.com/Hawkar-usls/janus-io-public)
+- **Embedded engineering:** [janus-distributed-ai-swarm](https://github.com/Hawkar-usls/janus-distributed-ai-swarm)
+- **Creative technology:** [Janus_Genesis](https://github.com/Hawkar-usls/Janus_Genesis)
+- **Machine-readable account index:** [`portfolio-index.json`](portfolio-index.json)
+- **Profile README source:** [`PROFILE_README_SOURCE.md`](PROFILE_README_SOURCE.md)
+
+## Status
+
+This repository is retained as a compact gateway/integration project. Scientific claims should be evaluated in the dedicated research repositories above, not inferred from this codebase.
+
+---
+
+Hawkar / Oleksandr Ahapov · Ukraine
