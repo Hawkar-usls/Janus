@@ -9,9 +9,9 @@
     "repository_url": "https://github.com/Hawkar-usls/Hawkar-usls",
     "readme_url": "https://github.com/Hawkar-usls/Hawkar-usls/blob/main/README.md",
     "canonical_source_url": "https://github.com/Hawkar-usls/Janus/blob/main/PROFILE_README_SOURCE.md",
-    "profile_readme_commit": "b479a5f2afdb99e2d1d6ee9ddf310dbf2f6fe967",
-    "canonical_source_commit": "5742aa940dd31f88f6031c614d3b0a55dd4355a5",
-    "git_blob_sha1": "aa6cdc87569f8fa5877868d0459c10a3f0abb17d",
+    "profile_readme_commit": "c06de37a602134983e57bf8d30068718cde1f912",
+    "canonical_source_commit": "262404485eb9770441ee17e9b5d87bde98e5251a",
+    "git_blob_sha1": "cf64ad680fc06ddf4a950e68ff214c410fef3067",
     "content_identity": "MATCH",
     "role": "presentation_and_navigation_surface",
     "evidence_bearing_project": false
@@ -29,30 +29,36 @@
     "intentional_exceptions": [
       {
         "repository": "Janus-Fundamentum",
-        "reason": "A3 publication/review surface is frozen; this documentation pass intentionally did not mutate that repository.",
+        "reason": "A3 publication/review surface is frozen; documentation polish intentionally does not mutate that repository.",
         "central_status_source": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json",
         "review_gate": "https://github.com/Hawkar-usls/Janus-Fundamentum/issues/173"
       },
       {
         "repository": "AIFC",
-        "reason": "Internal assurance line is stopped pending independent Implementation B / external bench; this documentation pass intentionally did not add another internal metadata commit.",
+        "reason": "Internal assurance line is stopped pending independent Implementation B / external bench; documentation polish intentionally does not add another internal metadata commit.",
         "central_status_source": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json",
         "review_gate": "https://github.com/Hawkar-usls/AIFC/issues/66"
       },
       {
         "repository_role": "github_profile_readme",
         "canonical_repository_name": "Hawkar-usls",
-        "reason": "The profile repository is a presentation surface, not an evidence-bearing project. It links to the account-wide machine-readable portfolio index, coverage audit and schema registry instead of duplicating PROJECT_STATUS.json."
+        "reason": "The profile repository is a presentation surface, not an evidence-bearing project. It links to the account-wide machine-readable portfolio index, visibility policy, coverage audit and schema registry instead of duplicating PROJECT_STATUS.json."
       }
     ],
     "unexplained_missing": []
+  },
+  "presentation_policy": {
+    "standard": "https://github.com/Hawkar-usls/Janus/blob/main/docs/PUBLIC_REPOSITORY_PRESENTATION_STANDARD.md",
+    "visibility_catalog": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-visibility.json",
+    "institutional_affiliation_implied": false
   },
   "schemas": {
     "registry": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/registry.json",
     "project_status": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.project-status.v1.schema.json",
     "portfolio_index": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.public-portfolio-index.v1.schema.json",
     "metadata_coverage": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.public-metadata-coverage.v1.schema.json",
+    "portfolio_visibility": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.portfolio-visibility.v1.schema.json",
     "portfolio_classes": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/portfolio-classes.json"
   },
-  "interpretation": "Coverage describes public metadata availability only. It is not evidence that scientific claims are true, novel, independently replicated or peer reviewed."
+  "interpretation": "Coverage describes public metadata availability and presentation policy only. It is not evidence that scientific claims are true, novel, independently replicated or peer reviewed."
 }
