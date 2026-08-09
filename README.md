@@ -11,6 +11,8 @@ Janus is a small Python gateway for routing chat-style requests between configur
 
 It is a **supporting engineering project**, not one of the account's flagship research results.
 
+Machine-readable status: [`PROJECT_STATUS.json`](PROJECT_STATUS.json)
+
 ## Scope
 
 The repository explores:
