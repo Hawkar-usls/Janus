@@ -1,0 +1,24 @@
+{
+  "registry_id": "hawkar.portfolio-classes.v1",
+  "last_reviewed": "2026-08-09",
+  "classes": {
+    "flagship_research": "Primary research repository intended for external technical or mathematical review. Internal verification does not imply peer review or world novelty.",
+    "flagship_research_engineering": "Primary experimental engineering repository with evidence-bearing measurements in a stated tested scope.",
+    "flagship_engineering": "Primary engineering repository intended for technical review; not presented as a scientific breakthrough by classification alone.",
+    "creative_technology": "Original creative/interactive technology separated from scientific evidence claims.",
+    "engineering_prototype": "Original implementation prototype; capability and production claims are limited to explicitly documented tests.",
+    "interaction_prototype": "Human-computer interaction prototype; clinical, regulatory or performance claims require separate evidence.",
+    "interface_simulation_prototype": "Interface/simulation work that does not imply operational deployment or real-world authority.",
+    "creative_embedded_game": "Embedded game/creative firmware; game terminology is not a scientific AI claim.",
+    "exploratory_hypothesis_tool": "Software for generating/ranking hypotheses; output is not experimental validation.",
+    "creative_social_protocol": "Voluntary creative/social protocol; not scientific evidence or authority over AI systems, people or funds.",
+    "archival_meta_registry": "Archive of historical hypotheses, records, metaphors and corrections; object presence is not endorsement or validation.",
+    "legacy_experimental_sandbox": "Historical experimental code retained for lineage; not a current flagship evidence source.",
+    "legacy_integration_snapshot": "Historical integration state superseded by newer public entry points.",
+    "supporting_interface_prototype": "Supporting UI/tooling repository with no independent scientific authority.",
+    "creative_application": "Creative/entertainment application; symbolic or narrative output is not predictive or professional authority.",
+    "legacy_health_information_prototype": "Historical health-information software; not a diagnostic, treatment or emergency-triage system.",
+    "legacy_application": "Historical application/game repository; not part of the evidence-bearing research portfolio.",
+    "upstream_derived_working_copy": "Repository based on another public project. Base authorship is not claimed; Hawkar-specific work should be evaluated from an explicit diff against the corresponding upstream revision."
+  }
+}
