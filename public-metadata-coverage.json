@@ -9,9 +9,9 @@
     "repository_url": "https://github.com/Hawkar-usls/Hawkar-usls",
     "readme_url": "https://github.com/Hawkar-usls/Hawkar-usls/blob/main/README.md",
     "canonical_source_url": "https://github.com/Hawkar-usls/Janus/blob/main/PROFILE_README_SOURCE.md",
-    "profile_readme_commit": "c06de37a602134983e57bf8d30068718cde1f912",
-    "canonical_source_commit": "262404485eb9770441ee17e9b5d87bde98e5251a",
-    "git_blob_sha1": "cf64ad680fc06ddf4a950e68ff214c410fef3067",
+    "profile_readme_commit": "48dc06d8e23b4a80ef256f9ea96858d6e2e70664",
+    "canonical_source_commit": "7249f992361652b2a6948899f13c50f89f0f9c05",
+    "git_blob_sha1": "ae64214dcb52cd968edc3ab4db0368b3e38464a9",
     "content_identity": "MATCH",
     "role": "presentation_and_navigation_surface",
     "evidence_bearing_project": false
@@ -49,6 +49,7 @@
   },
   "presentation_policy": {
     "standard": "https://github.com/Hawkar-usls/Janus/blob/main/docs/PUBLIC_REPOSITORY_PRESENTATION_STANDARD.md",
+    "human_repository_catalog": "https://github.com/Hawkar-usls/Janus/blob/main/docs/REPOSITORY_CATALOG.md",
     "visibility_catalog": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-visibility.json",
     "institutional_affiliation_implied": false
   },
