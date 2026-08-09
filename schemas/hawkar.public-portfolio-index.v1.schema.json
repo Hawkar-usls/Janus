@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.public-portfolio-index.v1.schema.json",
+  "title": "Hawkar Public Portfolio Index v1",
+  "description": "Machine-readable classification of the public Hawkar-usls repository portfolio.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "owner",
+    "last_reviewed",
+    "purpose",
+    "policy",
+    "preferred_review_order",
+    "projects"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "hawkar.public-portfolio-index.v1"
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "purpose": {
+      "type": "string"
+    },
+    "policy": {
+      "type": "object"
+    },
+    "preferred_review_order": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["repository", "url", "portfolio_class"],
+        "properties": {
+          "repository": {"type": "string", "minLength": 1},
+          "url": {"type": "string", "format": "uri"},
+          "portfolio_class": {"type": "string", "minLength": 1},
+          "scope": {"type": "string"},
+          "current_boundary": {"type": "string"},
+          "review_gate": {"type": "string", "format": "uri"},
+          "upstream": {"type": "string", "format": "uri"},
+          "base_authorship_claimed": {"type": "boolean"}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": false
+}
