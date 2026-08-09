@@ -4,7 +4,9 @@
   "repository": "https://github.com/Hawkar-usls/Janus",
   "portfolio_class": "engineering_prototype",
   "last_reviewed": "2026-08-09",
-  "summary": "Supporting local/cloud LLM gateway and application-integration experiment.",
+  "maturity": "ACTIVE_PROTOTYPE",
+  "completion_status": "PROTOTYPE",
+  "summary": "Supporting local/cloud LLM gateway, application-integration experiment, and account-wide public metadata hub.",
   "not_established": [
     "production uptime guarantee",
     "security certification",
@@ -14,5 +16,7 @@
     "historical priority over other LLM gateways"
   ],
   "flagship_research": false,
-  "portfolio_index": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json"
+  "portfolio_index": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json",
+  "visibility_policy": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-visibility.json",
+  "presentation_standard": "https://github.com/Hawkar-usls/Janus/blob/main/docs/PUBLIC_REPOSITORY_PRESENTATION_STANDARD.md"
 }
