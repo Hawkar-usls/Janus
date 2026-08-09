@@ -58,7 +58,8 @@
     "portfolio_index": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.public-portfolio-index.v1.schema.json",
     "metadata_coverage": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.public-metadata-coverage.v1.schema.json",
     "portfolio_visibility": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.portfolio-visibility.v1.schema.json",
-    "portfolio_classes": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/portfolio-classes.json"
+    "portfolio_classes": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/portfolio-classes.json",
+    "repository_maturity": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/maturity-classes.json"
   },
   "interpretation": "Coverage describes public metadata availability and presentation policy only. It is not evidence that scientific claims are true, novel, independently replicated or peer reviewed."
 }
