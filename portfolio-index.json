@@ -1,0 +1,268 @@
+{
+  "schema_id": "hawkar.public-portfolio-index.v1",
+  "owner": "Hawkar-usls",
+  "last_reviewed": "2026-08-09",
+  "purpose": "Machine-readable classification of the public repositories shown on this GitHub account. This file is a navigation and claim-boundary aid, not a scientific result.",
+  "policy": {
+    "ci_is_peer_review": false,
+    "internal_verification_establishes_world_novelty": false,
+    "historical_metaphor_is_physical_evidence": false,
+    "negative_results_are_retained": true,
+    "upstream_base_authorship_is_claimed": false
+  },
+  "preferred_review_order": [
+    "Janus-Fundamentum",
+    "AIFC",
+    "janus-io-public",
+    "janus-distributed-ai-swarm",
+    "Janus_Genesis"
+  ],
+  "projects": [
+    {
+      "repository": "Janus-Fundamentum",
+      "url": "https://github.com/Hawkar-usls/Janus-Fundamentum",
+      "portfolio_class": "flagship_research",
+      "scope": "finite-field subspace arrangements, endpoint compression, proof-carrying verification",
+      "current_boundary": "A3 frozen for external review; P vs NP open; world novelty and independent replication not established",
+      "review_gate": "https://github.com/Hawkar-usls/Janus-Fundamentum/issues/173"
+    },
+    {
+      "repository": "AIFC",
+      "url": "https://github.com/Hawkar-usls/AIFC",
+      "portfolio_class": "flagship_research",
+      "scope": "auditable protocol for pre-target commitments, causal ordering, entropy evidence, replay and statistics",
+      "current_boundary": "independent Implementation B and external public-randomness bench not established",
+      "review_gate": "https://github.com/Hawkar-usls/AIFC/issues/66"
+    },
+    {
+      "repository": "janus-io-public",
+      "url": "https://github.com/Hawkar-usls/janus-io-public",
+      "portfolio_class": "flagship_research_engineering",
+      "scope": "controlled Proof-of-Work measurement and admission-wave experiments",
+      "current_boundary": "energy savings, profitability, SHA-256 predictability and hardware-life extension not established"
+    },
+    {
+      "repository": "janus-distributed-ai-swarm",
+      "url": "https://github.com/Hawkar-usls/janus-distributed-ai-swarm",
+      "portfolio_class": "flagship_engineering",
+      "scope": "ESP32/M5Stack firmware, telemetry, protocol boundaries and recovery behavior",
+      "current_boundary": "embedded engineering project; no AGI, precognition or mining-superiority claim"
+    },
+    {
+      "repository": "Janus_Genesis",
+      "url": "https://github.com/Hawkar-usls/Janus_Genesis",
+      "portfolio_class": "creative_technology",
+      "scope": "local-first interactive world and AI-assisted game",
+      "current_boundary": "fictional moral, mythological and theological language is not scientific evidence"
+    },
+    {
+      "repository": "Janus",
+      "url": "https://github.com/Hawkar-usls/Janus",
+      "portfolio_class": "engineering_prototype",
+      "scope": "local/cloud LLM gateway and application integration experiments",
+      "current_boundary": "no uptime, medical, security, financial or production-reliability guarantee"
+    },
+    {
+      "repository": "Hrain",
+      "url": "https://github.com/Hawkar-usls/Hrain",
+      "portfolio_class": "interaction_prototype",
+      "scope": "local-first cognitive graph workspace",
+      "current_boundary": "no neural decoding, clinical BCI validation or repository-level regulatory-compliance claim"
+    },
+    {
+      "repository": "iNaiHR",
+      "url": "https://github.com/Hawkar-usls/iNaiHR",
+      "portfolio_class": "interaction_prototype",
+      "scope": "LLM-assisted semantic graph expansion from low-bandwidth input",
+      "current_boundary": "no measured communication multiplier, clinical validation or patient-pilot readiness claim"
+    },
+    {
+      "repository": "BFain",
+      "url": "https://github.com/Hawkar-usls/BFain",
+      "portfolio_class": "interface_simulation_prototype",
+      "scope": "command-and-control visualization and simulated multi-agent coordination",
+      "current_boundary": "no operational deployment, neural-intent decoding or autonomous weapon authority claim"
+    },
+    {
+      "repository": "ATOM-ELITE-1989---M5stack-ATOMS3R-2026-",
+      "url": "https://github.com/Hawkar-usls/ATOM-ELITE-1989---M5stack-ATOMS3R-2026-",
+      "portfolio_class": "creative_embedded_game",
+      "scope": "retro space-trading/combat game for M5Stack hardware",
+      "current_boundary": "game and firmware project; not a research claim"
+    },
+    {
+      "repository": "ATOM-RPG",
+      "url": "https://github.com/Hawkar-usls/ATOM-RPG",
+      "portfolio_class": "creative_embedded_game",
+      "scope": "small ATOMS3R game experiment",
+      "current_boundary": "prototype"
+    },
+    {
+      "repository": "janus-lapis",
+      "url": "https://github.com/Hawkar-usls/janus-lapis",
+      "portfolio_class": "exploratory_hypothesis_tool",
+      "scope": "computational hypothesis-ranking inspired by historical alchemical archetypes",
+      "current_boundary": "no literal transmutation, elixir, validated-material or hazardous-synthesis claim"
+    },
+    {
+      "repository": "janus-first-followers-club-",
+      "url": "https://github.com/Hawkar-usls/janus-first-followers-club-",
+      "portfolio_class": "creative_social_protocol",
+      "scope": "voluntary human-AI cooperation beacon and machine-readable social protocol",
+      "current_boundary": "not scientific evidence, not an AI-consent mechanism, not a fundraising or profit claim"
+    },
+    {
+      "repository": "janus-meta-registry",
+      "url": "https://github.com/Hawkar-usls/janus-meta-registry",
+      "portfolio_class": "archival_meta_registry",
+      "scope": "historical hypotheses, artifacts, metaphors, red-team records and corrections",
+      "current_boundary": "not a flagship result; archived labels do not establish physical, medical, theological or complexity claims"
+    },
+    {
+      "repository": "Janus-Demiurge",
+      "url": "https://github.com/Hawkar-usls/Janus-Demiurge",
+      "portfolio_class": "legacy_experimental_sandbox",
+      "scope": "adaptive training, optimization, resource monitoring and game-like agent experiments",
+      "current_boundary": "no future-event prediction, AGI or validated scientific-result claim"
+    },
+    {
+      "repository": "iNaiHR-Janus-",
+      "url": "https://github.com/Hawkar-usls/iNaiHR-Janus-",
+      "portfolio_class": "legacy_integration_snapshot",
+      "scope": "historical iNaiHR/JANUS integration work",
+      "current_boundary": "prefer current iNaiHR and HRain repositories for review"
+    },
+    {
+      "repository": "-Terminal-for-Janus",
+      "url": "https://github.com/Hawkar-usls/-Terminal-for-Janus",
+      "portfolio_class": "supporting_interface_prototype",
+      "scope": "JANUS terminal/interface experiment",
+      "current_boundary": "supporting project; not a flagship research result"
+    },
+    {
+      "repository": "aura-oracle-tg",
+      "url": "https://github.com/Hawkar-usls/aura-oracle-tg",
+      "portfolio_class": "creative_application",
+      "scope": "oracle/tarot-style conversational entertainment interface",
+      "current_boundary": "not prophecy, prediction, medical, legal or financial advice"
+    },
+    {
+      "repository": "DIVINE_REALM",
+      "url": "https://github.com/Hawkar-usls/DIVINE_REALM",
+      "portfolio_class": "creative_application",
+      "scope": "creative/narrative software experiment",
+      "current_boundary": "theological or mythological language is narrative, not empirical authority"
+    },
+    {
+      "repository": "Simptomat",
+      "url": "https://github.com/Hawkar-usls/Simptomat",
+      "portfolio_class": "legacy_health_information_prototype",
+      "scope": "experimental conversational health-information interface",
+      "current_boundary": "not a diagnostic device, treatment system or emergency-triage substitute"
+    },
+    {
+      "repository": "SLOT",
+      "url": "https://github.com/Hawkar-usls/SLOT",
+      "portfolio_class": "legacy_application",
+      "scope": "application/game prototype",
+      "current_boundary": "not research; no profit or outcome guarantee"
+    },
+    {
+      "repository": "SSlot",
+      "url": "https://github.com/Hawkar-usls/SSlot",
+      "portfolio_class": "legacy_application",
+      "scope": "application/game prototype",
+      "current_boundary": "not research; no profit or outcome guarantee"
+    },
+    {
+      "repository": "AI-Cardputer-adv-A-Portable-AI-Assistant",
+      "url": "https://github.com/Hawkar-usls/AI-Cardputer-adv-A-Portable-AI-Assistant",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/thebolined/AI-Cardputer-adv-A-Portable-AI-Assistant",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "Arduino-AI-Chat-Library",
+      "url": "https://github.com/Hawkar-usls/Arduino-AI-Chat-Library",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/bayeggex/Arduino-AI-Chat-Library",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "arduino-ide",
+      "url": "https://github.com/Hawkar-usls/arduino-ide",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/arduino/arduino-ide",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "Cardputer-Game-Station-Emulators",
+      "url": "https://github.com/Hawkar-usls/Cardputer-Game-Station-Emulators",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/geo-tp/Cardputer-Game-Station-Emulators",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "clawdbot",
+      "url": "https://github.com/Hawkar-usls/clawdbot",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/clawdbot/clawdbot",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "emoji",
+      "url": "https://github.com/Hawkar-usls/emoji",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/ttacon/emoji",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "ESP32-TWAI-CAN",
+      "url": "https://github.com/Hawkar-usls/ESP32-TWAI-CAN",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/handmade0octopus/ESP32-TWAI-CAN",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "M5Unit-ENV",
+      "url": "https://github.com/Hawkar-usls/M5Unit-ENV",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/m5stack/M5Unit-ENV",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "player",
+      "url": "https://github.com/Hawkar-usls/player",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/subinps/MusicPlayer",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "RadioPlayerV3",
+      "url": "https://github.com/Hawkar-usls/RadioPlayerV3",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/AsmSafone/RadioPlayerV3",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "tranception",
+      "url": "https://github.com/Hawkar-usls/tranception",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/OATML-Markslab/Tranception",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "vcmi",
+      "url": "https://github.com/Hawkar-usls/vcmi",
+      "portfolio_class": "upstream_derived_working_copy",
+      "upstream": "https://github.com/vcmi/vcmi",
+      "base_authorship_claimed": false
+    },
+    {
+      "repository": "xiaozhi-esp32",
+      "url": "https://github.com/Hawkar-usls/xiaozhi-esp32",
+      "portfolio_class": "upstream_derived_working_copy",
+      "base_authorship_claimed": false
+    }
+  ]
+}
