@@ -3,6 +3,18 @@
   "last_reviewed": "2026-08-09",
   "owner": "Hawkar-usls",
   "public_repository_count": 36,
+  "profile_surface": {
+    "repository": "Hawkar-usls/Hawkar-usls",
+    "repository_url": "https://github.com/Hawkar-usls/Hawkar-usls",
+    "readme_url": "https://github.com/Hawkar-usls/Hawkar-usls/blob/main/README.md",
+    "canonical_source_url": "https://github.com/Hawkar-usls/Janus/blob/main/PROFILE_README_SOURCE.md",
+    "profile_readme_commit": "b479a5f2afdb99e2d1d6ee9ddf310dbf2f6fe967",
+    "canonical_source_commit": "5742aa940dd31f88f6031c614d3b0a55dd4355a5",
+    "git_blob_sha1": "aa6cdc87569f8fa5877868d0459c10a3f0abb17d",
+    "content_identity": "MATCH",
+    "role": "presentation_and_navigation_surface",
+    "evidence_bearing_project": false
+  },
   "portfolio_index_coverage": {
     "classified_project_repositories": 35,
     "profile_metadata_surfaces": 1,
