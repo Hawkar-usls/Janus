@@ -2,15 +2,17 @@
   "audit_id": "hawkar.public-metadata-coverage.v1",
   "last_reviewed": "2026-08-09",
   "owner": "Hawkar-usls",
-  "public_repository_count": 35,
+  "public_repository_count": 36,
   "portfolio_index_coverage": {
-    "covered": 35,
-    "total": 35,
-    "unclassified": []
+    "classified_project_repositories": 35,
+    "profile_metadata_surfaces": 1,
+    "total_public_repositories": 36,
+    "unclassified_project_repositories": [],
+    "note": "The dedicated GitHub profile README repository is a presentation/metadata surface and is intentionally not classified as a research or engineering project in portfolio-index.json."
   },
   "project_status_coverage": {
     "with_PROJECT_STATUS_json": 33,
-    "total": 35,
+    "total_public_repositories": 36,
     "intentional_exceptions": [
       {
         "repository": "Janus-Fundamentum",
@@ -23,6 +25,11 @@
         "reason": "Internal assurance line is stopped pending independent Implementation B / external bench; this documentation pass intentionally did not add another internal metadata commit.",
         "central_status_source": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json",
         "review_gate": "https://github.com/Hawkar-usls/AIFC/issues/66"
+      },
+      {
+        "repository_role": "github_profile_readme",
+        "canonical_repository_name": "Hawkar-usls",
+        "reason": "The profile repository is a presentation surface, not an evidence-bearing project. It links to the account-wide machine-readable portfolio index, coverage audit and schema registry instead of duplicating PROJECT_STATUS.json."
       }
     ],
     "unexplained_missing": []
