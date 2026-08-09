@@ -48,12 +48,15 @@ Keep API keys, Wi-Fi credentials, private endpoints and local deployment data ou
 - **Research:** [Janus-Fundamentum](https://github.com/Hawkar-usls/Janus-Fundamentum), [AIFC](https://github.com/Hawkar-usls/AIFC), [janus-io-public](https://github.com/Hawkar-usls/janus-io-public)
 - **Embedded engineering:** [janus-distributed-ai-swarm](https://github.com/Hawkar-usls/janus-distributed-ai-swarm)
 - **Creative technology:** [Janus_Genesis](https://github.com/Hawkar-usls/Janus_Genesis)
-- **Machine-readable account index:** [`portfolio-index.json`](portfolio-index.json)
-- **Profile README source:** [`PROFILE_README_SOURCE.md`](PROFILE_README_SOURCE.md)
 
-## Status
+## Public metadata
 
-This repository is retained as a compact gateway/integration project. Scientific claims should be evaluated in the dedicated research repositories above, not inferred from this codebase.
+- [`portfolio-index.json`](portfolio-index.json) — account-wide classification and claim boundaries.
+- [`public-metadata-coverage.json`](public-metadata-coverage.json) — coverage audit for all public repositories.
+- [`schemas/`](schemas/) — JSON Schemas and `portfolio_class` vocabulary.
+- [`PROFILE_README_SOURCE.md`](PROFILE_README_SOURCE.md) — prepared GitHub profile front page.
+
+Metadata validity describes structure and declared boundaries; it does not establish scientific truth, novelty or peer review.
 
 ---
 
