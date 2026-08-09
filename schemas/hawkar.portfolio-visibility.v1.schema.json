@@ -3,7 +3,7 @@
   "$id": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.portfolio-visibility.v1.schema.json",
   "title": "Hawkar Portfolio Visibility v1",
   "type": "object",
-  "required": ["schema_id", "owner", "last_reviewed", "purpose", "github_ui_state", "policy", "repositories"],
+  "required": ["schema_id", "owner", "last_reviewed", "purpose", "github_ui_state", "summary", "policy", "repositories"],
   "properties": {
     "schema_id": {"const": "hawkar.portfolio-visibility.v1"},
     "owner": {"type": "string", "minLength": 1},
@@ -16,6 +16,23 @@
         "pins_observed_by_connector": {"type": "boolean"},
         "archive_state_mutation_available_to_connector": {"type": "boolean"},
         "visibility_recommendations_are_not_observed_ui_state": {"type": "boolean"}
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "object",
+      "required": ["total_public_repositories", "profile_surfaces", "recommended_pins", "featured_research_or_engineering", "featured_creative_technology", "public_active_nonfeatured", "public_work_in_progress", "archival_reference", "legacy_archive_candidates", "upstream_reference_repositories"],
+      "properties": {
+        "total_public_repositories": {"type": "integer", "minimum": 0},
+        "profile_surfaces": {"type": "integer", "minimum": 0},
+        "recommended_pins": {"type": "integer", "minimum": 0},
+        "featured_research_or_engineering": {"type": "integer", "minimum": 0},
+        "featured_creative_technology": {"type": "integer", "minimum": 0},
+        "public_active_nonfeatured": {"type": "integer", "minimum": 0},
+        "public_work_in_progress": {"type": "integer", "minimum": 0},
+        "archival_reference": {"type": "integer", "minimum": 0},
+        "legacy_archive_candidates": {"type": "integer", "minimum": 0},
+        "upstream_reference_repositories": {"type": "integer", "minimum": 0}
       },
       "additionalProperties": false
     },
