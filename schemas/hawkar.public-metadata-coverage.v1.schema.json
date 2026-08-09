@@ -65,9 +65,10 @@
     },
     "presentation_policy": {
       "type": "object",
-      "required": ["standard", "visibility_catalog", "institutional_affiliation_implied"],
+      "required": ["standard", "human_repository_catalog", "visibility_catalog", "institutional_affiliation_implied"],
       "properties": {
         "standard": {"type": "string", "format": "uri"},
+        "human_repository_catalog": {"type": "string", "format": "uri"},
         "visibility_catalog": {"type": "string", "format": "uri"},
         "institutional_affiliation_implied": {"type": "boolean"}
       },
