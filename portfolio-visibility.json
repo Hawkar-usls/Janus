@@ -8,6 +8,18 @@
     "archive_state_mutation_available_to_connector": false,
     "visibility_recommendations_are_not_observed_ui_state": true
   },
+  "summary": {
+    "total_public_repositories": 36,
+    "profile_surfaces": 1,
+    "recommended_pins": 5,
+    "featured_research_or_engineering": 4,
+    "featured_creative_technology": 1,
+    "public_active_nonfeatured": 4,
+    "public_work_in_progress": 7,
+    "archival_reference": 1,
+    "legacy_archive_candidates": 5,
+    "upstream_reference_repositories": 13
+  },
   "policy": {
     "featured_requires_primary_public_value": true,
     "unfinished_projects_must_disclose_incomplete_status": true,
