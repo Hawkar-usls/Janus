@@ -14,22 +14,15 @@
     "projects"
   ],
   "properties": {
-    "schema_id": {
-      "const": "hawkar.public-portfolio-index.v1"
-    },
-    "owner": {
-      "type": "string",
-      "minLength": 1
-    },
-    "last_reviewed": {
-      "type": "string",
-      "format": "date"
-    },
-    "purpose": {
-      "type": "string"
-    },
-    "policy": {
-      "type": "object"
+    "schema_id": {"const": "hawkar.public-portfolio-index.v1"},
+    "schema_registry": {"type": "string", "format": "uri"},
+    "owner": {"type": "string", "minLength": 1},
+    "last_reviewed": {"type": "string", "format": "date"},
+    "purpose": {"type": "string"},
+    "policy": {"type": "object"},
+    "class_definitions": {
+      "type": "object",
+      "additionalProperties": {"type": "string"}
     },
     "preferred_review_order": {
       "type": "array",
