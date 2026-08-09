@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.project-status.v1.schema.json",
+  "title": "Hawkar Public Project Status v1",
+  "description": "Minimal shared schema for machine-readable public project classification and claim boundaries across Hawkar-usls repositories.",
+  "type": "object",
+  "required": [
+    "schema_id",
+    "project",
+    "repository",
+    "portfolio_class",
+    "last_reviewed"
+  ],
+  "properties": {
+    "schema_id": {
+      "const": "hawkar.project-status.v1"
+    },
+    "project": {
+      "type": "string",
+      "minLength": 1
+    },
+    "repository": {
+      "type": "string",
+      "format": "uri"
+    },
+    "portfolio_class": {
+      "type": "string",
+      "minLength": 1
+    },
+    "last_reviewed": {
+      "type": "string",
+      "format": "date"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "implemented": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "implemented_scope": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "implemented_or_explored": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "not_established": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "not_claimed": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "flagship_research": {
+      "type": "boolean"
+    },
+    "upstream": {
+      "type": "string",
+      "format": "uri"
+    },
+    "base_authorship_claimed_by_hawkar": {
+      "type": "boolean"
+    },
+    "evaluation_rule": {
+      "type": "string"
+    }
+  },
+  "additionalProperties": true
+}
