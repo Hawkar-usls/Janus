@@ -3,7 +3,8 @@
   "last_reviewed": "2026-08-09",
   "schemas": {
     "hawkar.project-status.v1": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.project-status.v1.schema.json",
-    "hawkar.public-portfolio-index.v1": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.public-portfolio-index.v1.schema.json"
+    "hawkar.public-portfolio-index.v1": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.public-portfolio-index.v1.schema.json",
+    "hawkar.public-metadata-coverage.v1": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/hawkar.public-metadata-coverage.v1.schema.json"
   },
   "vocabularies": {
     "portfolio_class": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/portfolio-classes.json"
