@@ -6,25 +6,36 @@
   "last_reviewed": "2026-08-16",
   "maturity": "ACTIVE_PROTOTYPE",
   "completion_status": "PROTOTYPE_WITH_FIRST_PORTAL_REFERENCE",
-  "summary": "JANUS First Portal typed route-discovery door, historical local/cloud LLM gateway, application-integration experiment, and account-wide public metadata hub.",
+  "summary": "JANUS First Portal typed route-discovery door with verified symbolic subdoors into DemiHead correction, language, reviewer and appeal contracts; historical local/cloud LLM gateway; and account-wide public metadata hub.",
   "implemented": [
-    "typed First Portal destination manifest",
+    "typed First Portal destination manifest v1.1",
     "deterministic local route resolver",
     "fail-closed unknown-destination handling",
     "arbitrary URL rejection in the reference Portal",
     "valid route-decline receipt with no penalty",
     "language metadata carriage for uk/ru/en without evidence mutation",
+    "typed DemiHead correction/language/review/appeal subdoors",
     "portal unit tests and dedicated CI",
     "historical local/cloud LLM gateway and application-integration prototype",
     "public portfolio metadata hub"
   ],
   "first_portal": {
-    "status": "IMPLEMENTED_ON_FIRST_PORTAL_BRANCH_PENDING_EXACT_HEAD_CI",
+    "status": "UPDATED_TO_V1_1_VERIFIED_GATE_CATALOG_PENDING_NEW_EXACT_HEAD_CI",
+    "manifest_version": "1.1",
     "default_destination": "DEMIHEAD",
+    "verified_demihead_subdoors": [
+      "DEMIHEAD_CORRECTIONS",
+      "DEMIHEAD_LANGUAGE",
+      "DEMIHEAD_REVIEW",
+      "DEMIHEAD_APPEAL"
+    ],
     "network_listener": false,
     "arbitrary_url_proxy": false,
     "effect_authority": false,
     "truth_authority": false,
+    "review_consensus_authority": false,
+    "appeal_submission_authority": false,
+    "correction_application_authority": false,
     "authority_delta": 0,
     "mass_effect_budget_delta": 0,
     "portal_rule": "OPEN_DOOR -> CHOOSE_DESTINATION -> ROUTE_RECEIPT -> DESTINATION_GATES"
@@ -35,6 +46,7 @@
     "public internet Portal readiness",
     "automatic permission to use discovered destinations",
     "universal external-system connectivity",
+    "real review or appeal operations through Portal",
     "benchmarked provider superiority",
     "medical diagnostic authority",
     "financial or gambling outcome guarantee",
@@ -44,6 +56,10 @@
     "routing as truth authority",
     "destination visibility as permission",
     "route receipt as provider realization",
+    "appeal route as appeal submission",
+    "review route as consensus",
+    "correction route as correction application",
+    "language route as translation truth",
     "arbitrary network forwarding",
     "effect authority inherited through the Portal"
   ],
@@ -56,8 +72,9 @@
   "portal_doc": "https://github.com/Hawkar-usls/Janus/blob/main/docs/FIRST_PORTAL.md",
   "portal_manifest": "https://github.com/Hawkar-usls/Janus/blob/main/portal/manifest.json",
   "portal_meta_registry_binding": "https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-FIRST-PORTAL-DOOR-AND-DEMIHEAD-BOUNDARY-v1.0.json",
+  "verified_gate_catalog_binding": "https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-FIRST-PORTAL-DEMIHEAD-VERIFIED-GATE-CATALOG-BINDING-v1.1.json",
   "portfolio_index": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json",
   "visibility_policy": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-visibility.json",
   "presentation_standard": "https://github.com/Hawkar-usls/Janus/blob/main/docs/PUBLIC_REPOSITORY_PRESENTATION_STANDARD.md",
-  "next_gate": "Pass exact-head CI for the First Portal branch; then keep Portal routing separate while DemiHead implements Correction Propagator and Language Invariance as destination-owned gates."
+  "next_gate": "Pass a new exact-head PR CI for Portal manifest v1.1. Keep any future HTTP/network wrapper behind a separate authentication/CORS/rate-limit/SSRF/secret-isolation threat-model gate."
 }
