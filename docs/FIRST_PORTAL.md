@@ -31,7 +31,9 @@ The new Portal stores only typed destination metadata and produces deterministic
 
 ## Destination manifest
 
-[`../portal/manifest.json`](../portal/manifest.json) currently exposes bounded symbolic destinations:
+[`../portal/manifest.json`](../portal/manifest.json) exposes bounded symbolic destinations.
+
+General doors:
 
 - `DEMIHEAD` — Guardian Mesh evidence/routing head;
 - `GENESIS` — Genesis constitutional/creative runtime;
@@ -39,6 +41,22 @@ The new Portal stores only typed destination metadata and produces deterministic
 - `INAIHR` — semantic decomposition interface;
 - `META_REGISTRY` — provenance and policy memory;
 - `LOCAL_MODEL` — symbolic deployment-resolved local model route.
+
+After the corresponding DemiHead contracts passed exact-head software CI, the Portal catalog gained four more explicit subdoors:
+
+- `DEMIHEAD_CORRECTIONS` — correction-propagation route;
+- `DEMIHEAD_LANGUAGE` — protected `uk/ru/en` semantic-invariance route;
+- `DEMIHEAD_REVIEW` — reviewer readiness and disagreement-preservation route;
+- `DEMIHEAD_APPEAL` — append-only Human Appeal route.
+
+These are route-discovery entries only:
+
+```text
+CORRECTION_ROUTE != CORRECTION_APPLICATION
+LANGUAGE_ROUTE != TRANSLATION_TRUTH
+REVIEW_ROUTE != REVIEW_CONSENSUS
+APPEAL_ROUTE != APPEAL_SUBMISSION
+```
 
 The catalog is extensible. “Anywhere” means adding a reviewed typed destination to the manifest, not forwarding arbitrary URLs.
 
@@ -72,11 +90,16 @@ Resolve the default door:
 python portal/portal.py
 ```
 
-Resolve a language-carrying route receipt:
+Resolve a protected subdoor:
 
 ```bash
-python portal/portal.py --resolve DEMIHEAD --language uk
+python portal/portal.py --resolve DEMIHEAD_CORRECTIONS
+python portal/portal.py --resolve DEMIHEAD_LANGUAGE --language uk
+python portal/portal.py --resolve DEMIHEAD_REVIEW
+python portal/portal.py --resolve DEMIHEAD_APPEAL
 ```
+
+Resolving `DEMIHEAD_APPEAL` does not file an appeal. Resolving `DEMIHEAD_REVIEW` does not create consensus.
 
 Decline routing:
 
@@ -114,6 +137,17 @@ PORTAL_CARRIES_ROUTE
 DEMIHEAD_APPLIES_CORRECTION_GATES
 ```
 
+## Review and appeal boundaries
+
+The Portal can expose the road toward review or appeal, but does not manufacture either operation:
+
+```text
+PORTAL_ROUTE != REVIEW_CONSENSUS
+PORTAL_ROUTE != APPEAL_SUBMISSION
+```
+
+The review gate owns package binding and `DISAGREEMENT` semantics. The appeal gate owns exact decision binding and append-only appeal history.
+
 ## Security boundary
 
 The reference Portal has no listener, no provider credentials, no arbitrary URL forwarding and no external side effects.
@@ -124,4 +158,4 @@ The legacy `janus_core.py` must not silently become that wrapper merely because 
 
 ## Claim ceiling
 
-The current implementation establishes deterministic typed route discovery only. It does not establish production security, public internet readiness, destination uptime, provider availability, or permission to execute effects at any destination.
+The current implementation establishes deterministic typed route discovery only. It does not establish production security, public internet readiness, destination uptime, provider availability, real review/appeal operations, or permission to execute effects at any destination.
