@@ -3,17 +3,43 @@
   "project": "Janus",
   "repository": "https://github.com/Hawkar-usls/Janus",
   "portfolio_class": "engineering_prototype",
-  "last_reviewed": "2026-08-09",
+  "last_reviewed": "2026-08-16",
   "maturity": "ACTIVE_PROTOTYPE",
-  "completion_status": "PROTOTYPE",
-  "summary": "Supporting local/cloud LLM gateway, application-integration experiment, and account-wide public metadata hub.",
+  "completion_status": "PROTOTYPE_WITH_TYPED_NEXUS_HABITAT_REFERENCE",
+  "summary": "Supporting local/cloud LLM gateway, application-integration experiment, account-wide public metadata hub, and thin typed entry surface toward the bounded JANUS Nexus Habitat coordination layer.",
+  "implemented": [
+    "public project and portfolio metadata surface",
+    "historical local/cloud gateway prototype",
+    "typed architectural reference from Janus Portal role toward JANUS_NEXUS_HABITAT_V1"
+  ],
+  "nexus_habitat_reference": {
+    "contract": "JANUS_NEXUS_HABITAT_V1",
+    "reference_repository": "https://github.com/Hawkar-usls/Demi_Head",
+    "reference_document": "https://github.com/Hawkar-usls/Demi_Head/blob/main/docs/NEXUS_HABITAT.md",
+    "meta_registry_record": "https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-NEXUS-HABITAT-COORDINATION-SPINE-v1.0.json",
+    "janus_role": "PORTAL",
+    "live_cross_repository_delivery": false,
+    "authority_delta": 0,
+    "mass_effect_budget_delta": 0,
+    "external_effect_authority_from_routing": false
+  },
   "not_established": [
     "production uptime guarantee",
     "security certification",
     "benchmarked provider superiority",
     "medical diagnostic authority",
     "financial or gambling outcome guarantee",
-    "historical priority over other LLM gateways"
+    "historical priority over other LLM gateways",
+    "production Nexus Habitat transport",
+    "live inter-repository delivery through Nexus Habitat",
+    "automatic provider realization from a typed route",
+    "external-effect authority from Portal or Nexus connectivity"
+  ],
+  "not_claimed": [
+    "routing as truth",
+    "connectivity as authority",
+    "autonomous high-impact execution",
+    "universal destination availability"
   ],
   "flagship_research": false,
   "portfolio_index": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json",
