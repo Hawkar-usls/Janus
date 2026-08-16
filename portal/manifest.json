@@ -1,7 +1,7 @@
 {
   "schema": "janus.portal.manifest.v1",
   "portal_id": "JANUS_FIRST_PORTAL",
-  "version": "1.0",
+  "version": "1.1",
   "mode": "REFERENCE_ROUTE_DISCOVERY_ONLY",
   "default_destination": "DEMIHEAD",
   "supported_presentation_languages": ["uk", "ru", "en"],
@@ -13,7 +13,11 @@
     "ANYWHERE != ARBITRARY_ENDPOINT",
     "PORTAL_LATENCY != TRUTH_PRIORITY",
     "PORTAL_FAILURE != USER_LOCK_IN",
-    "DECLINE_ROUTE_IS_VALID"
+    "DECLINE_ROUTE_IS_VALID",
+    "APPEAL_ROUTE != APPEAL_SUBMISSION",
+    "REVIEW_ROUTE != REVIEW_CONSENSUS",
+    "CORRECTION_ROUTE != CORRECTION_APPLICATION",
+    "LANGUAGE_ROUTE != TRANSLATION_TRUTH"
   ],
   "destinations": [
     {
@@ -23,6 +27,46 @@
       "route_ref": "repo:Hawkar-usls/Demi_Head",
       "effect_scope": "LOCAL_REFERENCE_BY_DEFAULT",
       "description": "Guardian Mesh evidence navigation, bounded routing and release-control head.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "DEMIHEAD_CORRECTIONS",
+      "title": "DemiHead Corrections",
+      "class": "CORRECTION_PROPAGATION_ROUTE",
+      "route_ref": "service:DEMIHEAD_CORRECTIONS",
+      "effect_scope": "SYMBOLIC_ROUTE_TO_EXPLICIT_LINEAGE_GATE",
+      "description": "Door to the explicit correction-propagation contract. The Portal does not apply corrections.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "DEMIHEAD_LANGUAGE",
+      "title": "DemiHead Language Invariance",
+      "class": "LANGUAGE_INVARIANCE_ROUTE",
+      "route_ref": "service:DEMIHEAD_LANGUAGE",
+      "effect_scope": "SYMBOLIC_ROUTE_TO_PROTECTED_SEMANTIC_GATE",
+      "description": "Door to protected uk/ru/en semantic-invariance checks. The Portal does not decide translation truth.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "DEMIHEAD_REVIEW",
+      "title": "DemiHead Reviewer Gate",
+      "class": "REVIEWER_DISAGREEMENT_ROUTE",
+      "route_ref": "service:DEMIHEAD_REVIEW",
+      "effect_scope": "SYMBOLIC_ROUTE_TO_REVIEW_COLLECTION_GATE",
+      "description": "Door to fail-closed reviewer readiness and exact-unanimity disagreement preservation. The Portal does not create consensus.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "DEMIHEAD_APPEAL",
+      "title": "DemiHead Human Appeal",
+      "class": "HUMAN_APPEAL_ROUTE",
+      "route_ref": "service:DEMIHEAD_APPEAL",
+      "effect_scope": "SYMBOLIC_ROUTE_TO_APPEND_ONLY_APPEAL_GATE",
+      "description": "Door to the append-only Human Appeal contract. Routing does not file, decide or resolve an appeal.",
       "portal_grants_effect_authority": false,
       "high_impact": false
     },
