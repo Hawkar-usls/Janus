@@ -26,6 +26,35 @@ class PortalTests(unittest.TestCase):
         self.assertEqual(receipt["authority_delta"], 0)
         self.assertEqual(receipt["mass_effect_budget_delta"], 0)
 
+    def test_verified_demihead_subdoors_resolve_without_effect_authority(self):
+        expected = {
+            "DEMIHEAD_CORRECTIONS": "service:DEMIHEAD_CORRECTIONS",
+            "DEMIHEAD_LANGUAGE": "service:DEMIHEAD_LANGUAGE",
+            "DEMIHEAD_REVIEW": "service:DEMIHEAD_REVIEW",
+            "DEMIHEAD_APPEAL": "service:DEMIHEAD_APPEAL",
+        }
+        for destination_id, route_ref in expected.items():
+            receipt = portal.resolve_route(self.manifest, destination_id, "uk")
+            self.assertEqual(receipt["status"], "ROUTE_RESOLVED_REFERENCE_ONLY")
+            self.assertEqual(receipt["route"]["route_ref"], route_ref)
+            self.assertFalse(receipt["effect_authorized"])
+            self.assertFalse(receipt["provider_realized"])
+            self.assertFalse(receipt["permission_inferred"])
+            self.assertEqual(receipt["authority_delta"], 0)
+            self.assertEqual(receipt["mass_effect_budget_delta"], 0)
+
+    def test_appeal_route_is_not_appeal_submission(self):
+        receipt = portal.resolve_route(self.manifest, "DEMIHEAD_APPEAL", "en")
+        self.assertEqual(receipt["route"]["destination_id"], "DEMIHEAD_APPEAL")
+        self.assertFalse(receipt["effect_authorized"])
+        self.assertEqual(receipt["truth_claim"], "NOT_MADE")
+        self.assertIn("APPEAL_ROUTE != APPEAL_SUBMISSION", receipt["laws"])
+
+    def test_review_route_is_not_consensus(self):
+        receipt = portal.resolve_route(self.manifest, "DEMIHEAD_REVIEW")
+        self.assertFalse(receipt["effect_authorized"])
+        self.assertIn("REVIEW_ROUTE != REVIEW_CONSENSUS", receipt["laws"])
+
     def test_unknown_destination_fails_closed(self):
         receipt = portal.resolve_route(self.manifest, "SOMEWHERE_ELSE")
         self.assertEqual(receipt["status"], "UNKNOWN_DESTINATION_FAIL_CLOSED")
