@@ -15,7 +15,7 @@
 
 ## First Portal
 
-The new reference Portal intentionally stays smaller than the historical `janus_core.py` monolith:
+The reference Portal intentionally stays smaller than the historical `janus_core.py` monolith:
 
 ```text
 OPEN DOOR
@@ -33,11 +33,35 @@ ANYWHERE != ARBITRARY_ENDPOINT
 
 The Portal is implemented in [`portal/`](portal/) as a deterministic typed destination manifest and route resolver. It performs no network call, stores no provider credentials and grants no destination effect authority.
 
-Current reference destinations include `DEMIHEAD`, `GENESIS`, `HRAIN`, `INAIHR`, `META_REGISTRY` and a symbolic `LOCAL_MODEL` route. The catalog is extensible: “anywhere” means adding a reviewed typed destination, not proxying an arbitrary URL.
+General destinations include `DEMIHEAD`, `GENESIS`, `HRAIN`, `INAIHR`, `META_REGISTRY` and a symbolic `LOCAL_MODEL` route.
+
+The Portal also exposes four short typed doors to exact-head-tested DemiHead reference contracts:
+
+```text
+DEMIHEAD_CORRECTIONS  -> explicit correction lineage
+DEMIHEAD_LANGUAGE     -> protected uk/ru/en semantics
+DEMIHEAD_REVIEW       -> reviewer readiness / DISAGREEMENT
+DEMIHEAD_APPEAL       -> append-only Human Appeal
+```
+
+These are **doors, not effects**:
+
+```text
+CORRECTION_ROUTE != CORRECTION_APPLICATION
+LANGUAGE_ROUTE != TRANSLATION_TRUTH
+REVIEW_ROUTE != REVIEW_CONSENSUS
+APPEAL_ROUTE != APPEAL_SUBMISSION
+```
+
+The catalog is extensible: “anywhere” means adding a reviewed typed destination, not proxying an arbitrary URL.
 
 ```bash
 python portal/portal.py --list
 python portal/portal.py --resolve DEMIHEAD --language uk
+python portal/portal.py --resolve DEMIHEAD_CORRECTIONS
+python portal/portal.py --resolve DEMIHEAD_LANGUAGE --language ru
+python portal/portal.py --resolve DEMIHEAD_REVIEW
+python portal/portal.py --resolve DEMIHEAD_APPEAL
 python portal/portal.py --self-test
 ```
 
@@ -74,7 +98,7 @@ MEDICAL_DIAGNOSIS_AUTHORITY = FALSE
 FINANCIAL_OR_GAMBLING_OUTCOME_GUARANTEE = FALSE
 ```
 
-Applications connected through this gateway or discovered through the Portal keep their own claim boundaries. Their presence does not turn the Portal into a medical, financial, safety, scientific, civic, or effect authority.
+Applications connected through this gateway or discovered through the Portal keep their own claim boundaries. Their presence does not turn the Portal into a medical, financial, safety, scientific, civic, review, appeal, or effect authority.
 
 ## Public metadata
 
