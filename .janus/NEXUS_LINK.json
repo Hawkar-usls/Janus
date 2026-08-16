@@ -1,0 +1,21 @@
+{
+  "schema": "janus.nexus.runtime_link.v1",
+  "contract": "JANUS_NEXUS_HABITAT_V1",
+  "repository": "Hawkar-usls/Janus",
+  "mode": "TYPED_PORTAL_REFERENCE",
+  "heads": [
+    "PORTAL"
+  ],
+  "role": "TYPED_DESTINATION_ROUTER",
+  "emits": [
+    "ROUTE_RECEIPT"
+  ],
+  "live_cross_repository_transport": false,
+  "arbitrary_url_proxy": false,
+  "route_receipt_is_delivery": false,
+  "routing_is_truth": false,
+  "external_effect_authority": false,
+  "authority_delta": 0,
+  "mass_effect_budget_delta": 0,
+  "write_back_default": "DENY"
+}
