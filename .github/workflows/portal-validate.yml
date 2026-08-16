@@ -1,0 +1,35 @@
+name: Validate First Portal
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  portal:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Validate portal manifest and self-test
+        run: python portal/portal.py --self-test --output /tmp/portal-self-test.json
+
+      - name: Resolve default DemiHead door
+        run: python portal/portal.py --output /tmp/portal-default-route.json
+
+      - name: Resolve multilingual route metadata
+        run: |
+          python portal/portal.py --resolve DEMIHEAD --language uk --output /tmp/portal-uk.json
+          python portal/portal.py --resolve DEMIHEAD --language ru --output /tmp/portal-ru.json
+          python portal/portal.py --resolve DEMIHEAD --language en --output /tmp/portal-en.json
+
+      - name: Run portal unit tests
+        run: python -m unittest discover -s tests -v

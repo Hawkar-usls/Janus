@@ -1,0 +1,124 @@
+{
+  "schema": "janus.portal.manifest.v1",
+  "portal_id": "JANUS_FIRST_PORTAL",
+  "version": "1.1",
+  "mode": "REFERENCE_ROUTE_DISCOVERY_ONLY",
+  "default_destination": "DEMIHEAD",
+  "supported_presentation_languages": ["uk", "ru", "en"],
+  "laws": [
+    "PORTAL_ROUTE != WORLD_EFFECT",
+    "PORTAL_DISCOVERY != AUTHORITY",
+    "DESTINATION_VISIBILITY != DESTINATION_PERMISSION",
+    "ROUTE_RECEIPT != PROVIDER_REALIZATION",
+    "ANYWHERE != ARBITRARY_ENDPOINT",
+    "PORTAL_LATENCY != TRUTH_PRIORITY",
+    "PORTAL_FAILURE != USER_LOCK_IN",
+    "DECLINE_ROUTE_IS_VALID",
+    "APPEAL_ROUTE != APPEAL_SUBMISSION",
+    "REVIEW_ROUTE != REVIEW_CONSENSUS",
+    "CORRECTION_ROUTE != CORRECTION_APPLICATION",
+    "LANGUAGE_ROUTE != TRANSLATION_TRUTH"
+  ],
+  "destinations": [
+    {
+      "id": "DEMIHEAD",
+      "title": "JANUS DemiHead",
+      "class": "GUARDIAN_EVIDENCE_HEAD",
+      "route_ref": "repo:Hawkar-usls/Demi_Head",
+      "effect_scope": "LOCAL_REFERENCE_BY_DEFAULT",
+      "description": "Guardian Mesh evidence navigation, bounded routing and release-control head.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "DEMIHEAD_CORRECTIONS",
+      "title": "DemiHead Corrections",
+      "class": "CORRECTION_PROPAGATION_ROUTE",
+      "route_ref": "service:DEMIHEAD_CORRECTIONS",
+      "effect_scope": "SYMBOLIC_ROUTE_TO_EXPLICIT_LINEAGE_GATE",
+      "description": "Door to the explicit correction-propagation contract. The Portal does not apply corrections.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "DEMIHEAD_LANGUAGE",
+      "title": "DemiHead Language Invariance",
+      "class": "LANGUAGE_INVARIANCE_ROUTE",
+      "route_ref": "service:DEMIHEAD_LANGUAGE",
+      "effect_scope": "SYMBOLIC_ROUTE_TO_PROTECTED_SEMANTIC_GATE",
+      "description": "Door to protected uk/ru/en semantic-invariance checks. The Portal does not decide translation truth.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "DEMIHEAD_REVIEW",
+      "title": "DemiHead Reviewer Gate",
+      "class": "REVIEWER_DISAGREEMENT_ROUTE",
+      "route_ref": "service:DEMIHEAD_REVIEW",
+      "effect_scope": "SYMBOLIC_ROUTE_TO_REVIEW_COLLECTION_GATE",
+      "description": "Door to fail-closed reviewer readiness and exact-unanimity disagreement preservation. The Portal does not create consensus.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "DEMIHEAD_APPEAL",
+      "title": "DemiHead Human Appeal",
+      "class": "HUMAN_APPEAL_ROUTE",
+      "route_ref": "service:DEMIHEAD_APPEAL",
+      "effect_scope": "SYMBOLIC_ROUTE_TO_APPEND_ONLY_APPEAL_GATE",
+      "description": "Door to the append-only Human Appeal contract. Routing does not file, decide or resolve an appeal.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "GENESIS",
+      "title": "JANUS Genesis",
+      "class": "CONSTITUTIONAL_CREATIVE_RUNTIME",
+      "route_ref": "repo:Hawkar-usls/Janus_Genesis",
+      "effect_scope": "DESTINATION_DEFINED",
+      "description": "Genesis lineage, constitutional runtime and typed capability contracts.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "HRAIN",
+      "title": "HRain",
+      "class": "HUMAN_VISIBLE_GRAPH_INTERFACE",
+      "route_ref": "repo:Hawkar-usls/Hrain",
+      "effect_scope": "DESTINATION_DEFINED",
+      "description": "Human-visible local-first graph and inspection surface.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "INAIHR",
+      "title": "iNaiHR",
+      "class": "SEMANTIC_DECOMPOSITION_INTERFACE",
+      "route_ref": "repo:Hawkar-usls/iNaiHR",
+      "effect_scope": "DESTINATION_DEFINED",
+      "description": "Inspectable semantic decomposition and graph expansion surface.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "META_REGISTRY",
+      "title": "JANUS Meta Registry",
+      "class": "PROVENANCE_POLICY_MEMORY",
+      "route_ref": "repo:Hawkar-usls/janus-meta-registry",
+      "effect_scope": "READ_REFERENCE",
+      "description": "Machine-readable lineage, corrections, policy memory and experimental receipts.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    },
+    {
+      "id": "LOCAL_MODEL",
+      "title": "Local Model Provider",
+      "class": "MODEL_PROVIDER_ROUTE",
+      "route_ref": "service:LOCAL_MODEL",
+      "effect_scope": "MODEL_RESPONSE_ONLY_UNLESS_SEPARATE_EFFECT_GATE_EXISTS",
+      "description": "Symbolic route to a deployment-resolved local model provider. No endpoint or credential is stored here.",
+      "portal_grants_effect_authority": false,
+      "high_impact": false
+    }
+  ]
+}
