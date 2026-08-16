@@ -3,20 +3,61 @@
   "project": "Janus",
   "repository": "https://github.com/Hawkar-usls/Janus",
   "portfolio_class": "engineering_prototype",
-  "last_reviewed": "2026-08-09",
+  "last_reviewed": "2026-08-16",
   "maturity": "ACTIVE_PROTOTYPE",
-  "completion_status": "PROTOTYPE",
-  "summary": "Supporting local/cloud LLM gateway, application-integration experiment, and account-wide public metadata hub.",
+  "completion_status": "PROTOTYPE_WITH_FIRST_PORTAL_REFERENCE",
+  "summary": "JANUS First Portal typed route-discovery door, historical local/cloud LLM gateway, application-integration experiment, and account-wide public metadata hub.",
+  "implemented": [
+    "typed First Portal destination manifest",
+    "deterministic local route resolver",
+    "fail-closed unknown-destination handling",
+    "arbitrary URL rejection in the reference Portal",
+    "valid route-decline receipt with no penalty",
+    "language metadata carriage for uk/ru/en without evidence mutation",
+    "portal unit tests and dedicated CI",
+    "historical local/cloud LLM gateway and application-integration prototype",
+    "public portfolio metadata hub"
+  ],
+  "first_portal": {
+    "status": "IMPLEMENTED_ON_FIRST_PORTAL_BRANCH_PENDING_EXACT_HEAD_CI",
+    "default_destination": "DEMIHEAD",
+    "network_listener": false,
+    "arbitrary_url_proxy": false,
+    "effect_authority": false,
+    "truth_authority": false,
+    "authority_delta": 0,
+    "mass_effect_budget_delta": 0,
+    "portal_rule": "OPEN_DOOR -> CHOOSE_DESTINATION -> ROUTE_RECEIPT -> DESTINATION_GATES"
+  },
   "not_established": [
     "production uptime guarantee",
     "security certification",
+    "public internet Portal readiness",
+    "automatic permission to use discovered destinations",
+    "universal external-system connectivity",
     "benchmarked provider superiority",
     "medical diagnostic authority",
     "financial or gambling outcome guarantee",
     "historical priority over other LLM gateways"
   ],
+  "not_claimed": [
+    "routing as truth authority",
+    "destination visibility as permission",
+    "route receipt as provider realization",
+    "arbitrary network forwarding",
+    "effect authority inherited through the Portal"
+  ],
+  "legacy_boundary": {
+    "janus_core_is_first_portal_contract": false,
+    "reason": "Historical janus_core.py combines multiple unrelated trust domains and network routes in one process; it remains lineage/backend material rather than the new thin Portal boundary.",
+    "future_http_wrapper_requires_separate_security_review": true
+  },
   "flagship_research": false,
+  "portal_doc": "https://github.com/Hawkar-usls/Janus/blob/main/docs/FIRST_PORTAL.md",
+  "portal_manifest": "https://github.com/Hawkar-usls/Janus/blob/main/portal/manifest.json",
+  "portal_meta_registry_binding": "https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/JANUS-FIRST-PORTAL-DOOR-AND-DEMIHEAD-BOUNDARY-v1.0.json",
   "portfolio_index": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json",
   "visibility_policy": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-visibility.json",
-  "presentation_standard": "https://github.com/Hawkar-usls/Janus/blob/main/docs/PUBLIC_REPOSITORY_PRESENTATION_STANDARD.md"
+  "presentation_standard": "https://github.com/Hawkar-usls/Janus/blob/main/docs/PUBLIC_REPOSITORY_PRESENTATION_STANDARD.md",
+  "next_gate": "Pass exact-head CI for the First Portal branch; then keep Portal routing separate while DemiHead implements Correction Propagator and Language Invariance as destination-owned gates."
 }
