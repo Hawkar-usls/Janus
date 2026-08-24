@@ -5,7 +5,7 @@ import os
 from datetime import datetime, timezone
 from typing import Any
 
-from mcp.server.fastmcp import FastMCP
+from mcp.server import MCPServer
 
 from .core import checkpoint_document, safe_slug, topa_packet
 from .github_api import GitHubAPI
@@ -21,7 +21,7 @@ MAX_TEXT_BYTES = max(1024, int(os.getenv("JANUS_MAX_TEXT_BYTES", "120000")))
 
 ALLOWED_REPOS = {REGISTRY_REPO, TOPA_REPO, COSMOS_REPO, CHECKPOINT_REPO}
 
-mcp = FastMCP(
+mcp = MCPServer(
     "JANUS MCP Gateway",
     instructions=(
         "JANUS research gateway. Preserve provenance and claim boundaries. "
