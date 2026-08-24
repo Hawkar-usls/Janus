@@ -1,0 +1,60 @@
+{
+  "schema": "janus.organism.v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "version": "1.0.0",
+  "status": "ACTIVE_FEDERATED_ARCHITECTURE",
+  "canonical_repository": "Hawkar-usls/Janus",
+  "canonical_path": "organism/JANUS_ORGANISM_v1.json",
+  "design": {
+    "model": "FEDERATED_ORGANISM_NOT_MONOLITH",
+    "principle": "SPECIALIZATION_WITH_TYPED_INTERFACES",
+    "membership_policy": "A JANUS repository joins by declaring .janus/JANUS_ORGANISM_LINK.json against this manifest.",
+    "ambient_privilege_inheritance": false,
+    "cross_repo_write_default": "DENY",
+    "arbitrary_shell_transport": false,
+    "arbitrary_url_proxy": false
+  },
+  "constitutional_laws": [
+    "REPOSITORY_MEMBERSHIP != TRUTH",
+    "MODEL_OUTPUT != EVIDENCE",
+    "SYMBOLIC_OUTPUT != EMPIRICAL_EVIDENCE",
+    "RANKING != VALIDATION",
+    "DISPATCH != AUTHORITY",
+    "MULTIPLE_AGENTS != INDEPENDENT_SOURCES",
+    "HASH_OR_SIGNATURE != TRUTH_OF_CONTENT",
+    "NEGATIVE_RESULTS_AND_DISAGREEMENT_ARE_PRESERVED",
+    "EXTERNAL_EFFECT_REQUIRES_EXPLICIT_CAPABILITY_AND_PERMISSION",
+    "WRITE_BACK_DEFAULT = DENY"
+  ],
+  "members": {
+    "gateway": {"repo": "Hawkar-usls/Janus", "role": "NERVOUS_SYSTEM_GATEWAY", "authority": "ROUTING_AND_METADATA_ONLY", "evidence_authority": false, "emits": ["TYPED_ROUTE", "MCP_TOOL_RESULT", "CHECKPOINT_RECEIPT"], "consumes": ["ORGAN_REQUEST", "ORGAN_RESULT", "PROVENANCE_REFERENCE"]},
+    "memory": {"repo": "Hawkar-usls/janus-meta-registry", "role": "LONG_TERM_MEMORY_AND_PROVENANCE", "authority": "ARCHIVAL_PROVENANCE", "evidence_authority": false, "emits": ["ARCHIVAL_RECORD", "PROVENANCE_PATH", "SUPERSESSION_RECORD"], "consumes": ["CHECKPOINT", "NEGATIVE_RESULT", "CORRECTION", "LINEAGE"]},
+    "proof_spine": {"repo": "Hawkar-usls/Janus-Fundamentum", "role": "FORMAL_PROOF_AND_FALSIFICATION_SPINE", "authority": "SCOPED_FORMAL_RESULTS_ONLY", "evidence_authority": true, "emits": ["PROOF_STATUS", "COUNTEREXAMPLE", "OPEN_OBSTRUCTION", "NEGATIVE_RESULT"], "consumes": ["FORMAL_CLAIM", "CANDIDATE_INVARIANT", "REPLAYABLE_EVIDENCE"]},
+    "guardian_cortex": {"repo": "Hawkar-usls/Demi_Head", "role": "GUARDIAN_REVIEW_AND_EVIDENCE_CORTEX", "authority": "BOUNDED_REVIEW", "evidence_authority": false, "emits": ["BOUNDED_REVIEW", "SOURCE_ROOT_GRAPH", "DISAGREEMENT_RECEIPT", "HOLD"], "consumes": ["CLAIM", "SOURCE", "TELEMETRY", "SCOUT_REPORT"]},
+    "orchestrator": {"repo": "Hawkar-usls/Janus-Demiurge", "role": "SPIRAL_AGENT_CONTROL_PLANE", "authority": "DISPATCH_AND_RECONNAISSANCE", "evidence_authority": false, "emits": ["SCOUT_MISSION", "SCOUT_REPORT", "SPIRAL_LESSON", "CONSTRAINT"], "consumes": ["MISSION", "PRIOR_LESSON", "REPOSITORY_STATE"]},
+    "sensorimotor_mesh": {"repo": "Hawkar-usls/janus-distributed-ai-swarm", "role": "SENSORIMOTOR_AND_EMBEDDED_MESH", "authority": "LOCAL_DEVICE_AND_TELEMETRY_SCOPE", "evidence_authority": true, "emits": ["TELEMETRY", "HEARTBEAT", "DEVICE_STATE", "PROTOCOL_RECEIPT"], "consumes": ["BOUNDED_COMMAND", "CONFIG", "RECOVERY_POLICY"]},
+    "hypothesis_metabolism": {"repo": "Hawkar-usls/janus-lapis", "role": "HYPOTHESIS_RANKING_AND_CANDIDATE_METABOLISM", "authority": "EXPLORATORY_RANKING_ONLY", "evidence_authority": false, "emits": ["RANKED_HYPOTHESIS", "GATE_REJECTION", "CANDIDATE_SUMMARY"], "consumes": ["CANDIDATE_SET", "EVIDENCE_ANNOTATION", "REJECTION_FEEDBACK"]},
+    "symbolic_imagination": {"repo": "Hawkar-usls/aura-oracle-tg", "role": "SYMBOLIC_IMAGINATION_AND_CREATIVE_ADVISOR", "authority": "ZERO_EMPIRICAL_AUTHORITY", "evidence_authority": false, "emits": ["SYMBOLIC_PROMPT", "CREATIVE_HYPOTHESIS", "REFLECTION"], "consumes": ["HUMAN_PROMPT", "SYMBOLIC_CONTEXT"]},
+    "anomaly_lab": {"repo": "Hawkar-usls/TOPA", "role": "ANOMALY_TRIAGE_AND_FALSIFICATION_LAB", "authority": "FALSIFICATION_PACKET_ONLY", "evidence_authority": false, "emits": ["COMPETING_HYPOTHESES", "FALSIFIER", "UNRESOLVED", "CASE_PACKET"], "consumes": ["CLAIM", "PROVENANCE", "SENSOR_RECORD", "SOURCE_GRAPH"]},
+    "observatory": {"repo": "Hawkar-usls/Janus-Cosmos", "role": "COSMOS_OBSERVATORY_AND_SIGNAL_RESEARCH", "authority": "DOMAIN_EVIDENCE_WITHIN_EXPERIMENT_SCOPE", "evidence_authority": true, "emits": ["OBSERVATION", "EXPERIMENT_RECEIPT", "NEGATIVE_RESULT", "SIGNAL_CANDIDATE"], "consumes": ["TARGET", "PREREGISTRATION", "CONTROL", "RAW_DATA"]}
+  },
+  "flows": [
+    {"from": "symbolic_imagination", "to": ["hypothesis_metabolism", "anomaly_lab", "guardian_cortex"], "payload": ["SYMBOLIC_PROMPT", "CREATIVE_HYPOTHESIS"], "authority_delta": 0},
+    {"from": "hypothesis_metabolism", "to": ["proof_spine", "anomaly_lab", "guardian_cortex"], "payload": ["RANKED_HYPOTHESIS", "GATE_REJECTION"], "authority_delta": 0},
+    {"from": "orchestrator", "to": ["guardian_cortex", "proof_spine", "sensorimotor_mesh", "hypothesis_metabolism", "anomaly_lab", "observatory"], "payload": ["SCOUT_MISSION"], "authority_delta": 0},
+    {"from": "sensorimotor_mesh", "to": ["guardian_cortex", "memory", "gateway"], "payload": ["TELEMETRY", "HEARTBEAT", "DEVICE_STATE"], "authority_delta": 0},
+    {"from": "observatory", "to": ["anomaly_lab", "guardian_cortex", "memory"], "payload": ["OBSERVATION", "EXPERIMENT_RECEIPT", "NEGATIVE_RESULT"], "authority_delta": 0},
+    {"from": "anomaly_lab", "to": ["guardian_cortex", "proof_spine", "memory"], "payload": ["CASE_PACKET", "FALSIFIER", "UNRESOLVED"], "authority_delta": 0},
+    {"from": "proof_spine", "to": ["memory", "guardian_cortex", "gateway"], "payload": ["PROOF_STATUS", "COUNTEREXAMPLE", "OPEN_OBSTRUCTION"], "authority_delta": 0},
+    {"from": "guardian_cortex", "to": ["memory", "gateway", "orchestrator"], "payload": ["BOUNDED_REVIEW", "HOLD", "SOURCE_ROOT_GRAPH"], "authority_delta": 0},
+    {"from": "memory", "to": ["gateway", "orchestrator", "guardian_cortex", "proof_spine"], "payload": ["PROVENANCE_PATH", "SUPERSESSION_RECORD", "ARCHIVAL_RECORD"], "authority_delta": 0},
+    {"from": "gateway", "to": ["memory", "proof_spine", "guardian_cortex", "orchestrator", "sensorimotor_mesh", "hypothesis_metabolism", "symbolic_imagination", "anomaly_lab", "observatory"], "payload": ["TYPED_ROUTE"], "authority_delta": 0}
+  ],
+  "mcp": {
+    "host_repo": "Hawkar-usls/Janus",
+    "planned_tools": ["janus.organism_map", "janus.search_organ", "janus.read_organ"],
+    "write_tools": ["janus.freeze_gate", "janus.write_checkpoint"],
+    "write_scope": "Hawkar-usls/Janus:mcp-checkpoints",
+    "writes_to_member_repositories": false
+  }
+}
