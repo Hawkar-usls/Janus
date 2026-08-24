@@ -1,0 +1,22 @@
+{
+  "schema": "janus.link.v1",
+  "id": "JANUS_MCP_GATEWAY_V0_1",
+  "status": "ACTIVE_PROTOTYPE",
+  "path": "mcp_gateway/",
+  "endpoint_path": "/mcp",
+  "transport": "streamable-http",
+  "default_mode": "READ_ONLY",
+  "write_gate": "JANUS_ALLOW_WRITES=1",
+  "write_branch_default": "mcp-checkpoints",
+  "bound_repositories": [
+    "Hawkar-usls/janus-meta-registry",
+    "Hawkar-usls/TOPA",
+    "Hawkar-usls/Janus-Cosmos",
+    "Hawkar-usls/Janus"
+  ],
+  "claim_boundary": [
+    "SEARCH_MATCH != VALIDATED_CLAIM",
+    "TOPA PACKET != WORLD-TRUTH VERDICT",
+    "ARTIFACT != INDEPENDENT REPLICATION"
+  ]
+}
