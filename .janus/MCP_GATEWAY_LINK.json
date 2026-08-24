@@ -1,12 +1,13 @@
 {
   "schema": "janus.link.v1",
-  "id": "JANUS_MCP_GATEWAY_V0_2_ORGANISM",
+  "id": "JANUS_MCP_GATEWAY_V0_3_ORGANISM_V1_1",
   "status": "ACTIVE_PROTOTYPE",
   "path": "mcp_gateway/",
   "endpoint_path": "/mcp",
   "transport": "streamable-http",
   "organism_id": "JANUS_FEDERATED_ORGANISM",
   "organism_manifest": "organism/JANUS_ORGANISM_v1.json",
+  "organism_version": "1.1.0",
   "default_mode": "READ_ONLY",
   "write_gate": "JANUS_ALLOW_WRITES=1",
   "write_branch_default": "mcp-checkpoints",
@@ -14,14 +15,32 @@
     "Hawkar-usls/Janus",
     "Hawkar-usls/janus-meta-registry",
     "Hawkar-usls/Janus-Fundamentum",
+    "Hawkar-usls/AIFC",
     "Hawkar-usls/Demi_Head",
     "Hawkar-usls/Janus-Demiurge",
+    "Hawkar-usls/-Terminal-for-Janus",
+    "Hawkar-usls/Hrain",
+    "Hawkar-usls/iNaiHR",
+    "Hawkar-usls/janus-io-public",
     "Hawkar-usls/janus-distributed-ai-swarm",
     "Hawkar-usls/janus-lapis",
     "Hawkar-usls/aura-oracle-tg",
     "Hawkar-usls/TOPA",
-    "Hawkar-usls/Janus-Cosmos"
+    "Hawkar-usls/Janus-Cosmos",
+    "Hawkar-usls/Janus_Genesis",
+    "Hawkar-usls/The-Voice-of-Janus",
+    "Hawkar-usls/Echo-Pyramid",
+    "Hawkar-usls/SCOBY-D0",
+    "Hawkar-usls/Fast-CAT-SHAiTan",
+    "Hawkar-usls/janus-first-followers-club-"
   ],
+  "private_bound_organs": {
+    "somatosensory_skin": {
+      "repository_name_published": false,
+      "locator_env": "JANUS_PRIVATE_SOMATOSENSORY_REPO",
+      "default_enabled": false
+    }
+  },
   "organism_tools": [
     "janus.organism_map",
     "janus.search_organ",
@@ -34,6 +53,9 @@
     "SYMBOLIC_OUTPUT != EMPIRICAL_EVIDENCE",
     "RANKING != VALIDATION",
     "DISPATCH != AUTHORITY",
+    "COMMAND != EVIDENCE",
+    "SIMULATION != WORLD_EVIDENCE",
+    "MEASUREMENT != MECHANISM",
     "ARTIFACT != INDEPENDENT_REPLICATION"
   ]
 }
