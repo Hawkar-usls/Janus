@@ -1,0 +1,19 @@
+{
+  "schema": "janus.organism.member_link.v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "canonical_manifest": "Hawkar-usls/Janus:organism/JANUS_ORGANISM_v1.json",
+  "member_repository": "Hawkar-usls/Janus",
+  "organ_key": "gateway",
+  "role": "NERVOUS_SYSTEM_GATEWAY",
+  "interface": "MCP_AND_TYPED_REPOSITORY_LINKS",
+  "authority": "ROUTING_AND_METADATA_ONLY",
+  "evidence_authority": false,
+  "authority_delta": 0,
+  "cross_repo_write_default": "DENY",
+  "member_write_authority": false,
+  "claim_boundary": [
+    "ROUTING != TRUTH",
+    "TOOL_RESULT != INDEPENDENT_EVIDENCE",
+    "MEMBERSHIP != PRIVILEGE"
+  ]
+}

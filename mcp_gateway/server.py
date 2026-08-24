@@ -9,6 +9,7 @@ from mcp.server import MCPServer
 
 from .core import checkpoint_document, safe_slug, topa_packet
 from .github_api import GitHubAPI
+from .organism_tools import install_organism_tools
 
 GITHUB_OWNER = os.getenv("JANUS_GITHUB_OWNER", "Hawkar-usls")
 REGISTRY_REPO = os.getenv("JANUS_REGISTRY_REPO", f"{GITHUB_OWNER}/janus-meta-registry")
@@ -55,11 +56,12 @@ def health() -> dict[str, Any]:
     """Return gateway configuration without exposing secrets."""
     return {
         "service": "JANUS MCP Gateway",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "transport": "streamable-http",
         "write_enabled": ALLOW_WRITES,
         "write_branch": WRITE_BRANCH,
         "repos": {"registry": REGISTRY_REPO, "topa": TOPA_REPO, "cosmos": COSMOS_REPO, "checkpoint": CHECKPOINT_REPO},
+        "organism": "JANUS_FEDERATED_ORGANISM",
         "github_token_present": bool(os.getenv("GITHUB_TOKEN")),
     }
 
@@ -131,6 +133,9 @@ def write_checkpoint(project: str, summary: str, state: str, evidence: list[str]
     path = f"mcp/checkpoints/progress/{stamp}-{safe_slug(project, 'project')}.json"
     result = api.put_file(CHECKPOINT_REPO, path, json.dumps(doc, ensure_ascii=False, indent=2) + "\n", f"MCP checkpoint: {project}", WRITE_BRANCH)
     return {"checkpoint": doc, "write": result}
+
+
+install_organism_tools(mcp, api, _clip, CHECKPOINT_REPO)
 
 
 if __name__ == "__main__":
