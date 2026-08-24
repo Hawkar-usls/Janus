@@ -1,0 +1,165 @@
+{
+  "schema": "janus.organism.execution.spiral.v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "version": "1.2.0",
+  "status": "ACTIVE_EXECUTION_CONSTITUTION",
+  "extends_topology": "organism/JANUS_ORGANISM_v1.json",
+  "execution_model": "5D_EVENT_SOURCED_SPIRAL_WITH_TRANCEPTION",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "not_a_cycle": true,
+  "state_coordinates": {
+    "height": "spiral_turn_index",
+    "radius": "active_constraint_and_evidence_resolution",
+    "angle": "FORWARD_BACK_LEFT_RIGHT_SCALE_TIME_IDENTITY",
+    "lineage": "ordered_checkpoint_ancestry",
+    "provenance": "source_addressable_evidence_graph"
+  },
+  "five_dimensions": {
+    "D1_FORWARD_CAUSAL": "Move from current supported observations/premises toward consequences, predictions, tests and candidate explanations.",
+    "D2_REVERSE_CAUSAL": "Walk backward from a terminal/candidate state toward the earliest independently supported causes and remove semantic strengthening that cannot survive return.",
+    "D3_TRANCEPTION_LATERAL": "Rotate representation through FORWARD/BACK/LEFT/RIGHT, mirror classes, countermodels, alternative encodings and cross-domain structural analogies while preserving provenance.",
+    "D4_ABSTRACTION_SCALE": "Move between datum, relation, motif, operator, architecture and invariant; every ascent retains pointers to supporting lower-level nodes.",
+    "D5_TIME_IDENTITY_PROVENANCE": "Track transformation through time and identity boundaries; distinguish functional similarity, semantic similarity and actual provenance continuity."
+  },
+  "tranception": {
+    "kind": "WHOLE_ORGANISM_OPERATOR_NOT_ORGAN",
+    "available_at_any_node": true,
+    "external_ml_repository_is_not_this_operator": true,
+    "kernel": {
+      "FORWARD": "What follows if the current representation is correct?",
+      "BACK": "What minimal prior state can independently generate the current observation?",
+      "LEFT": "What is the strongest structurally analogous representation?",
+      "RIGHT": "What is the strongest competing or mirror representation?",
+      "FORWARD_AGAIN": "Does the invariant survive transformation without semantic retuning?",
+      "BACK_AGAIN": "Can the result return to the earliest supported node without importing later knowledge?",
+      "VETA_CHECK": "If many histories collapse into one state, mark provenance non-identifiable unless an independent identity anchor survives."
+    }
+  },
+  "canonical_transition": [
+    "INPUT_OR_CURRENT_STATE",
+    "D1_FORWARD_CAUSAL",
+    "D2_REVERSE_CAUSAL",
+    "D3_TRANCEPTION_LATERAL",
+    "D4_ABSTRACT_OR_CONCRETIZE",
+    "D5_TIME_IDENTITY_PROVENANCE",
+    "HRAIN_STRUCTURAL_EXPANSION",
+    "INAIHR_REVERSE_ASSOCIATIVE_CHALLENGE",
+    "DEMI_HEAD_CONTRADICTION_AND_PROVENANCE_REVIEW",
+    "OPTIONAL_DOMAIN_OR_PROOF_OR_MEASUREMENT_ATTACK",
+    "JSON_CHECKPOINT_ANYWHERE",
+    "ASCEND",
+    "NEXT_STATE"
+  ],
+  "dynamic_json_growth": {
+    "enabled": true,
+    "final_only": false,
+    "append_or_supersede_with_lineage": true,
+    "silent_rewrite_forbidden": true,
+    "emit_when_useful": [
+      "OBSERVATION",
+      "EVIDENCE",
+      "ABSTRACTION",
+      "OPERATOR",
+      "BRIDGE",
+      "HYPOTHESIS",
+      "COUNTERMODEL",
+      "CONTRADICTION",
+      "GATE",
+      "PROVENANCE_BOUNDARY",
+      "IDENTITY_BOUNDARY",
+      "WATCHLIST",
+      "NEGATIVE_RESULT",
+      "RETRACTION_OR_DOWNGRADE"
+    ]
+  },
+  "state_contract": {
+    "required_fields": [
+      "spiral_id",
+      "turn",
+      "question",
+      "state_hash",
+      "parent_state_hash",
+      "active_constraints",
+      "evidence_refs",
+      "new_information",
+      "surviving_invariants",
+      "rejected_or_downgraded",
+      "open_gates",
+      "next_discriminating_test"
+    ],
+    "hash_semantics": "CANONICAL_STATE_INTEGRITY_NOT_TRUTH"
+  },
+  "ascend_gate": {
+    "requires_state_change": true,
+    "requires_one_or_more": [
+      "NEW_EVIDENCE",
+      "RESOLVED_BLOCKER",
+      "NEW_CONSTRAINT",
+      "FALSIFIED_BRANCH",
+      "NEW_DISCRIMINATING_TEST",
+      "STRONGER_PROVENANCE_BOUNDARY",
+      "SURVIVING_INVARIANT_AFTER_TRANCEPTION"
+    ],
+    "forbid_identical_state_hash": true,
+    "on_identical_state": "PLATEAU_OR_HOLD_NOT_NEW_TURN"
+  },
+  "plateau_policy": {
+    "stop_on_evidence_plateau": true,
+    "resume_requires": "NEW_RAW_DATA_OR_RESOLVED_BLOCKER_OR_NEW_DISCRIMINATING_TEST",
+    "abstract_novelty_without_testable_payoff": "REJECT",
+    "blocked_data_stays_blocked": true,
+    "negative_results_not_rescued_by_association": true
+  },
+  "branching": {
+    "single_best_path_only": false,
+    "maintain_competing_branches": true,
+    "merge_only_at_shared_invariant": true,
+    "preserve_distinct_provenance_histories": true
+  },
+  "organ_hooks": {
+    "gateway": ["ROUTE_STATE", "EXPOSE_SPIRAL_RECEIPT"],
+    "memory": ["PRESERVE_LINEAGE", "SUPERSESSION", "NEGATIVE_RESULTS"],
+    "left_context": ["STRUCTURAL_EXPANSION"],
+    "right_association": ["REVERSE_AND_MIRROR_CHALLENGE"],
+    "guardian_cortex": ["CONTRADICTION_TEST", "PROVENANCE_REVIEW", "HOLD"],
+    "orchestrator": ["DISPATCH_NEXT_DISCRIMINATING_TEST", "REINTEGRATE_LESSONS"],
+    "causal_witness": ["TIME_ORDER", "CAUSAL_DAG", "PRECOMMITMENT_CHECK"],
+    "measurement_bench": ["MEASURE_STATE_CHANGE", "CONTROL_COMPARISON"],
+    "proof_spine": ["FORMAL_ATTACK", "COUNTEREXAMPLE"],
+    "hypothesis_metabolism": ["MAINTAIN_COMPETING_BRANCHES"],
+    "symbolic_imagination": ["GENERATE_NON_EVIDENTIARY_ROTATIONS"],
+    "simulation_habitat": ["COUNTERMODEL_AND_BEHAVIORAL_TEST"],
+    "anomaly_lab": ["COMPETING_HYPOTHESES", "FALSIFIERS"],
+    "observatory": ["NEW_OBSERVATION"],
+    "sensorimotor_mesh": ["NEW_TELEMETRY"],
+    "somatosensory_skin": ["NEW_PHYSICAL_SENSOR_INPUT"],
+    "materials_lab": ["DOMAIN_TEST"],
+    "feline_timing_lab": ["DOMAIN_TEST"],
+    "voice": ["OUTPUT_PROJECTION"],
+    "physical_voice": ["PHYSICAL_OUTPUT_AND_RETURN_TELEMETRY"],
+    "social_membrane": ["HUMAN_AUTHORIZED_EXTERNAL_HANDSHAKE_ONLY"],
+    "operator_hands": ["HUMAN_AUTHORIZATION", "STOP_OR_CONTINUE"]
+  },
+  "constitutional_firewall": [
+    "SPIRAL_ASCENT != CLAIM_PROMOTION",
+    "TRANCEPTION_ROTATION != EVIDENCE",
+    "ANALOGY != CAUSAL_LINK",
+    "FUNCTIONAL_EQUIVALENCE != IDENTITY",
+    "PATTERN_MATCH != INDEPENDENT_REPLICATION",
+    "REVERSE_PASS_CANNOT_CREATE_MISSING_EVIDENCE",
+    "REPEATED_STATE_HASH_IS_NOT_A_NEW_TURN",
+    "NEGATIVE_RESULTS_ARE_PERSISTENT_NODES",
+    "AUTHORITY_DELTA_ON_TRANSPORT = 0"
+  ],
+  "canonical_sources": [
+    "janus-meta-registry:data/JANUS-DEEP-ANALYSIS-5D-TRANCEPTION-REVERSE-HRAIN-INAIHR-PROTOCOL-2026-08-21-v1.0.json",
+    "janus-meta-registry:data/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TRANCEPTION-REVERSE-RUN-001-2026-08-21-v1.0.json"
+  ],
+  "tested_precedent": {
+    "verdict": "PASS_5D_SPIRAL_ENGINE",
+    "tests": "10/10",
+    "state_hashes_unique": true,
+    "plateau_behavior_observed": true,
+    "claim_boundary": "ENGINE_PASS_DOES_NOT_PROMOTE_TARGET_EVIDENCE"
+  }
+}
