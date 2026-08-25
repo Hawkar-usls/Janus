@@ -1,0 +1,126 @@
+{
+  "schema": "janus.organism.shared_instrument.v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "instrument_id": "JANUS_INFINITY_STONES_SCHEDULER",
+  "version": "1.0.0",
+  "date": "2026-08-25",
+  "status": "ACTIVE_ORGANISM_DIRECTIVE",
+  "canonical_registry_artifact": "Hawkar-usls/janus-meta-registry:data/JANUS-INFINITY-STONES-SCHEDULER-INSTRUMENT-v1.0.json",
+  "source_control": "C28_SCHEDULER_LATENCY",
+  "mission": "Exploit the informational value of observed scheduler materialization latency as a safe black-box measurement feature: sense it, contrast it, characterize it, compensate for it operationally, and preserve it as temporal provenance.",
+  "stones": {
+    "MIND": "SCHEDULER_STATE_SENSOR",
+    "SPACE": "INDEPENDENT_TRIGGER_CONTRAST",
+    "REALITY": "BLACK_BOX_CHARACTERIZATION_EXPERIMENT",
+    "POWER": "PREDICTIVE_COMPENSATION_AND_RESILIENCE",
+    "TIME": "TEMPORAL_PROVENANCE_LAYER"
+  },
+  "organism_activation": {
+    "mode": "SHARED_CAPABILITY_WITH_TYPED_ROUTING",
+    "broadcast_payload": "TEMPORAL_CONTEXT_PACKET",
+    "applies_when": [
+      "an experiment is schedule-triggered",
+      "a result depends on wall-clock ordering",
+      "a task has an execution-time SLA or desired window",
+      "two trigger paths are compared",
+      "scheduler latency is used as an anomaly signal"
+    ],
+    "required_packet_fields": [
+      "expected_or_declared_time_utc",
+      "platform_materialization_time_utc_if_applicable",
+      "executor_start_time_utc",
+      "observation_time_utc",
+      "clock_quality_state",
+      "trigger_identity",
+      "workflow_or_experiment_identity",
+      "scheduler_class_if_applicable",
+      "compensation_applied",
+      "compensation_rule_id_if_applied"
+    ]
+  },
+  "routing": [
+    {
+      "from": "memory",
+      "to": ["gateway", "orchestrator", "guardian_cortex", "proof_spine", "causal_witness", "measurement_bench", "anomaly_lab"],
+      "payload": ["TEMPORAL_CONTEXT_PACKET", "SCHEDULER_SERIES_UPDATE"],
+      "authority_delta": 0
+    },
+    {
+      "from": "orchestrator",
+      "to": ["measurement_bench", "anomaly_lab", "hypothesis_metabolism", "proof_spine", "simulation_habitat", "observatory", "materials_lab", "feline_timing_lab", "sensorimotor_mesh"],
+      "payload": ["SCHEDULER_CHARACTERIZATION_MISSION", "TEMPORAL_CONTEXT_PACKET"],
+      "authority_delta": 0
+    },
+    {
+      "from": "measurement_bench",
+      "to": ["memory", "guardian_cortex", "causal_witness", "proof_spine"],
+      "payload": ["SCHEDULER_MEASUREMENT_RECEIPT", "TRIGGER_CONTRAST_RECEIPT", "NEGATIVE_RESULT"],
+      "authority_delta": 0
+    },
+    {
+      "from": "guardian_cortex",
+      "to": ["gateway", "memory", "orchestrator", "operator_hands"],
+      "payload": ["SCHEDULER_CLAIM_REVIEW", "HOLD"],
+      "authority_delta": 0
+    }
+  ],
+  "organ_bindings": {
+    "gateway": "Propagate TEMPORAL_CONTEXT_PACKET and never turn scheduling metadata into evidence authority.",
+    "memory": "Archive every valid scheduler sample, characterization receipt, compensation rule and null result append-only.",
+    "proof_spine": "Formalize thresholds, holdout rules, falsifiers and uncertainty statements.",
+    "causal_witness": "Use declared/materialized/executed/observed times when grading temporal or causal order.",
+    "guardian_cortex": "Enforce SCHEDULER_DRIFT != RECORD_DRIFT and reject unsupported root-cause claims.",
+    "orchestrator": "Dispatch matched characterization experiments and select bounded operational resilience actions.",
+    "operator_hands": "Authorize any external trigger or side-effecting failover path.",
+    "left_context": "Display structural timing context when a result is schedule-sensitive.",
+    "right_association": "May propose timing associations but must label them exploratory.",
+    "measurement_bench": "Own path-specific timing measurement and matched controls.",
+    "sensorimotor_mesh": "Contribute device-side timing or independent trigger telemetry when available and calibrated.",
+    "hypothesis_metabolism": "Rank competing scheduler hypotheses; ranking remains non-evidentiary.",
+    "symbolic_imagination": "May generate metaphors or candidate questions; zero empirical authority.",
+    "anomaly_lab": "Build competing hypotheses and falsifiers for latency regimes.",
+    "observatory": "Attach temporal provenance to time-sensitive observations and preserve scheduler anomalies separately.",
+    "simulation_habitat": "Test compensation policies and failure modes in simulation before operational adoption.",
+    "voice": "Preserve timing context when rendering time-sensitive reports; no scheduling authority.",
+    "physical_voice": "Return device receipts with local execution timestamps when used in timed experiments.",
+    "somatosensory_skin": "Attach calibrated sensor timestamps to physical events when privately bound.",
+    "materials_lab": "Attach temporal provenance to timed protocols and interventions.",
+    "feline_timing_lab": "Preserve acquisition/start timing separately from biological event timing.",
+    "social_membrane": "External cooperation about the phenomenon requires human-authorized messaging and may expose only reviewed claims."
+  },
+  "execution_lanes": {
+    "LANE_A_MEASURE": {
+      "stones": ["MIND", "TIME"],
+      "rule": "Never compensate the primary measurement channel; preserve raw timing behavior."
+    },
+    "LANE_B_CONTRAST": {
+      "stones": ["SPACE", "TIME"],
+      "rule": "Run distinguishable trigger paths with shared experiment identity and deduplication."
+    },
+    "LANE_C_CHARACTERIZE": {
+      "stones": ["REALITY", "MIND", "TIME"],
+      "rule": "Preregister factors and controls; preserve null results and avoid post-hoc threshold tuning."
+    },
+    "LANE_D_OPERATE": {
+      "stones": ["POWER", "SPACE", "TIME"],
+      "rule": "Operational compensation may use historical data but must be evaluated prospectively and logged."
+    }
+  },
+  "non_negotiable_boundaries": [
+    "SCHEDULER_DRIFT != RECORD_DRIFT",
+    "MEASUREMENT != MECHANISM",
+    "BLACK_BOX_PATTERN != INTERNAL_PLATFORM_ARCHITECTURE",
+    "DUAL_TRIGGER != INDEPENDENT_EMPIRICAL_SOURCE",
+    "PRIMARY_MEASUREMENT_CHANNEL_MUST_REMAIN_UNCOMPENSATED",
+    "NO_PLATFORM_DEGRADATION_OR_ABUSIVE_LOAD_GENERATION",
+    "EXTERNAL_EFFECT_REQUIRES_EXPLICIT_CAPABILITY_AND_PERMISSION",
+    "NEGATIVE_RESULTS_AND_DISAGREEMENT_ARE_PRESERVED"
+  ],
+  "completion_gates": [
+    "G1_30_VALID_C28_SAMPLES",
+    "G2_AUTHORIZED_DUAL_TRIGGER_RECEIPT",
+    "G3_PREREGISTERED_MULTI_FACTOR_CHARACTERIZATION",
+    "G4_HOLDOUT_VALIDATED_OPERATIONAL_COMPENSATION",
+    "G5_TEMPORAL_CONTEXT_PROPAGATION_ACROSS_TIME_SENSITIVE_ORGANS"
+  ]
+}
