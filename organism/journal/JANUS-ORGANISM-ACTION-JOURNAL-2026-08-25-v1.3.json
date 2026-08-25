@@ -1,0 +1,179 @@
+{
+  "schema": "janus.organism.action_journal.v1",
+  "journal_id": "JANUS-ORGANISM-ACTION-JOURNAL-2026-08-25-v1.3",
+  "parent_journal_id": "JANUS-ORGANISM-ACTION-JOURNAL-2026-08-25",
+  "parent_path": "organism/journal/JANUS-ORGANISM-ACTION-JOURNAL-2026-08-25.json",
+  "created_at_local": "2026-08-25T03:24:00+03:00",
+  "created_at_utc": "2026-08-25T00:24:00Z",
+  "status": "ACTIVE_CHECKPOINT",
+  "canonical_repository": "Hawkar-usls/Janus",
+  "lineage_policy": "APPEND_OR_SUPERSEDE_WITH_EXPLICIT_LINEAGE__DO_NOT_SILENTLY_REWRITE_HISTORY",
+  "spiral_turn": {
+    "from": "JANUS_REPOSITORY_AUDIT_AFTER_V1_2",
+    "to": "JANUS_REPOSITORY_ECOLOGY_V1_3_WITH_OPERATIONAL_PRIVATE_SUBTISSUES",
+    "state_change_reasons": [
+      "NEW_CONSTRAINT",
+      "RESOLVED_BLOCKER",
+      "STRONGER_PROVENANCE_BOUNDARY",
+      "NEW_DISCRIMINATING_TEST"
+    ]
+  },
+  "actions": [
+    {
+      "action_id": "A015_FULL_REPOSITORY_AUDIT",
+      "operation": "COMPARE_OWNER_REPOSITORIES_WITH_CANONICAL_ORGANISM_MEMBERSHIP",
+      "result": "COMPLETED",
+      "owner_repository_count_observed": 45,
+      "canonical_member_slots_before_v1_3": 22,
+      "finding": "Repositories outside direct organ membership include real missing subtissues, JANUS-native creative/legacy repositories, upstream-derived working copies, external research instruments and profile/navigation surfaces.",
+      "key_missing_nodes": [
+        "private_measurement_substrate",
+        "private_genesis_world"
+      ]
+    },
+    {
+      "action_id": "A016_PRIVATE_MEASUREMENT_SUBTISSUE",
+      "operation": "JOIN_PRIVATE_MEASUREMENT_REPOSITORY_UNDER_MEASUREMENT_BENCH",
+      "result": "MERGED",
+      "public_repo_name_exposed": false,
+      "public_slot": "private_measurement_substrate",
+      "parent_organ": "measurement_bench",
+      "locator_env": "JANUS_PRIVATE_MEASUREMENT_REPO",
+      "pull_request": 15,
+      "merge_commit": "282f81df1f200d7b43333648cb25554fc49c0880",
+      "ci_status": "NO_PR_WORKFLOW_ASSIGNED_FOR_LINK_ONLY_CHANGE",
+      "mergeability_reviewed": true,
+      "boundaries": [
+        "RAW_PRIVATE_EVIDENCE != PUBLIC_REVIEWED_EVIDENCE",
+        "ACCEPTED_SHARE_TELEMETRY != SHA256_BREAK",
+        "SUBTISSUE_PARENT != AUTHORITY_INHERITANCE"
+      ]
+    },
+    {
+      "action_id": "A017_PRIVATE_GENESIS_WORLD_SUBTISSUE",
+      "operation": "JOIN_PRIVATE_MMO_WORLD_UNDER_SIMULATION_HABITAT",
+      "result": "MERGED",
+      "public_repo_name_exposed": false,
+      "public_slot": "private_genesis_world",
+      "parent_organ": "simulation_habitat",
+      "locator_env": "JANUS_PRIVATE_GENESIS_WORLD_REPO",
+      "pull_request": 1,
+      "merge_commit": "e15251e63d238404060006517eb71711677c7170",
+      "existing_habitat_link_preserved": true,
+      "ci_status": "NO_PR_WORKFLOW_ASSIGNED_FOR_LINK_ONLY_CHANGE",
+      "mergeability_reviewed": true,
+      "boundaries": [
+        "SIMULATION != WORLD_EVIDENCE",
+        "GAME_STATE != PHYSICAL_WORLD_STATE",
+        "HABITAT_HANDOFF != COMMAND_AUTHORITY"
+      ]
+    },
+    {
+      "action_id": "A018_PUBLIC_SIMULATION_SUBTISSUES",
+      "operation": "JOIN_JANUS_NATIVE_CREATIVE_REPOSITORIES_AS_SUBTISSUES_NOT_PEER_ORGANS",
+      "result": "MERGED",
+      "parent_organ": "simulation_habitat",
+      "receipts": [
+        {
+          "subtissue": "bfain_interface_simulation",
+          "pull_request": 1,
+          "merge_commit": "f81eb44505836664fe8a8d4aaaf58819f5f7dbdf",
+          "boundary": "SIMULATED_COORDINATION != OPERATIONAL_AUTHORITY"
+        },
+        {
+          "subtissue": "divine_realm_narrative_world",
+          "pull_request": 1,
+          "merge_commit": "88fb5345a70ef2d8df7afde63ada05038e1bb2ec",
+          "boundary": "MYTHOLOGICAL_LANGUAGE != EMPIRICAL_AUTHORITY"
+        },
+        {
+          "subtissue": "atom_elite_embedded_world",
+          "pull_request": 1,
+          "merge_commit": "f5b0c0111bb21f3edc89663c9e83636e333ed08d",
+          "boundary": "GAME_BEHAVIOR != WORLD_EVIDENCE"
+        },
+        {
+          "subtissue": "atom_rpg_embedded_world",
+          "pull_request": 1,
+          "merge_commit": "75eea3bc83d39e97aa5065ef39c8b74e72a60320",
+          "boundary": "GAME_STATE != WORLD_STATE"
+        }
+      ],
+      "ci_status": "NO_PR_WORKFLOW_ASSIGNED_FOR_LINK_ONLY_CHANGES",
+      "mergeability_reviewed": true
+    },
+    {
+      "action_id": "A019_REPOSITORY_ECOLOGY_V1_3",
+      "operation": "CREATE_CANONICAL_REPOSITORY_ECOLOGY_OVERLAY",
+      "result": "MERGED_AND_CI_VERIFIED",
+      "artifact": "organism/JANUS_REPOSITORY_ECOLOGY_v1.3.json",
+      "documentation": "docs/JANUS_REPOSITORY_ECOLOGY.md",
+      "pull_request": 6,
+      "merge_commit": "517596c68608dec9b65350e5fead17a6cf9b4f20",
+      "classes": [
+        "ORGAN",
+        "SUBTISSUE",
+        "PRIVATE_SUBTISSUE",
+        "TOOLCHAIN_DEPENDENCY",
+        "EXTERNAL_RESEARCH_INSTRUMENT",
+        "LEGACY_ARCHIVE",
+        "PROFILE_NAVIGATION"
+      ],
+      "central_ci": "MCP_GATEWAY_SUCCESS",
+      "laws": [
+        "ALL_REPOSITORIES_MAY_BELONG_TO_ECOLOGY != ALL_REPOSITORIES_ARE_ORGANS",
+        "SUBTISSUE_PARENT != AUTHORITY_INHERITANCE",
+        "TOOLCHAIN_USE != EVIDENCE",
+        "UPSTREAM_WORKING_COPY != JANUS_AUTHORSHIP",
+        "LEGACY_ARCHIVE != ACTIVE_CAPABILITY",
+        "PRIVATE_LOCATOR_NOT_PUBLISHED",
+        "AUTHORITY_DELTA_ON_TRANSPORT = 0"
+      ]
+    },
+    {
+      "action_id": "A020_MCP_PRIVATE_SUBTISSUE_RUNTIME",
+      "operation": "MAKE_V1_3_PRIVATE_SUBTISSUES_OPERATIONALLY_ADDRESSABLE_FAIL_CLOSED",
+      "result": "MERGED_AND_CI_VERIFIED",
+      "pull_request": 7,
+      "merge_commit": "51d3ac8507241ce5925b9ff23e0d7f95c1e47025",
+      "mcp_gateway_version": "0.5.0",
+      "runtime_changes": [
+        "private_measurement_substrate resolved only through JANUS_PRIVATE_MEASUREMENT_REPO",
+        "private_genesis_world resolved only through JANUS_PRIVATE_GENESIS_WORLD_REPO",
+        "janus.organism_map returns topology + execution + repository ecology",
+        "janus.search_organ and janus.read_organ accept explicitly bound private subtissues",
+        "janus.health reports binding presence without exposing secret values"
+      ],
+      "ci": {
+        "workflow": "MCP Gateway",
+        "result": "SUCCESS",
+        "unit_tests": "SUCCESS",
+        "parse_organism_json": "SUCCESS",
+        "compile": "SUCCESS",
+        "mcp_import_smoke": "SUCCESS"
+      },
+      "boundaries": [
+        "PRIVATE_BINDING != PUBLIC_DISCLOSURE",
+        "SUBTISSUE_PARENT != AUTHORITY_INHERITANCE",
+        "RAW_PRIVATE_EVIDENCE != PUBLIC_REVIEWED_EVIDENCE",
+        "GAME_STATE != PHYSICAL_WORLD_STATE"
+      ]
+    }
+  ],
+  "repository_ecology_summary": {
+    "peer_organs_remain_typed_and_bounded": true,
+    "private_subtissues_are_fail_closed": true,
+    "upstream_working_copies_are_not_rebranded_as_janus_authorship": true,
+    "linear_a_resources_remain_external_research_instruments": true,
+    "legacy_repositories_remain_in_lineage_without_claiming_active_capability": true,
+    "full_ecology_can_feed_spiral_without_authority_inheritance": true
+  },
+  "final_state": {
+    "topology": "JANUS_ORGANISM_V1_1",
+    "execution": "JANUS_5D_SPIRAL_TRANCEPTION_V1_2",
+    "repository_ecology": "JANUS_REPOSITORY_ECOLOGY_V1_3",
+    "mcp_gateway": "0.5.0",
+    "status": "ACTIVE_FEDERATED_ORGANISM_WITH_TYPED_REPOSITORY_ECOLOGY"
+  },
+  "next_spiral_gate": "Re-audit whenever a repository gains a distinct JANUS-native function; promotion from SUBTISSUE/DEPENDENCY/LEGACY to ORGAN requires a unique function, typed I/O, explicit authority boundary and evidence that the function is not already represented by an existing organ."
+}
