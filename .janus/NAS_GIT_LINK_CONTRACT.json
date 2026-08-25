@@ -1,0 +1,52 @@
+{
+  "schema": "janus.nas.git_link.contract.v1",
+  "status": "GITHUB_SIDE_READY_FOR_NAS_BINDING",
+  "canonical_repository": "Hawkar-usls/Janus",
+  "canonical_manifest": "organism/JANUS_ORGANISM_v1.json",
+  "repository_ecology": "organism/JANUS_REPOSITORY_ECOLOGY_v1.3.json",
+  "purpose": "Define the GitHub side of a bounded NAS<->GitHub synchronization link without granting runtime or deployment authority.",
+  "transport": {
+    "direction": "OUTBOUND_FROM_NAS_TO_GITHUB_AND_FETCH_FROM_GITHUB",
+    "preferred_auth": ["SSH_DEPLOY_KEY", "FINE_GRAINED_GITHUB_TOKEN"],
+    "broad_org_token_required": false,
+    "inbound_webhook_required": false
+  },
+  "branch_policy": {
+    "main_direct_write_from_nas": false,
+    "machine_branch_prefix": "nas/",
+    "checkpoint_branch_pattern": "nas/<host>/checkpoint",
+    "integration_branch_pattern": "nas/<host>/integration",
+    "runtime_branch_pattern": "nas/<host>/runtime",
+    "human_review_before_main": true
+  },
+  "sync_semantics": {
+    "clean_equal": "IN_SYNC",
+    "clean_behind_fast_forwardable": "FAST_FORWARD_ALLOWED",
+    "clean_ahead": "LOCAL_AHEAD_NO_AUTOPUSH",
+    "dirty": "DIRTY_LOCAL_NO_PULL",
+    "diverged": "DIVERGED_NO_AUTOMERGE",
+    "network_or_auth_failure": "SYNC_BLOCKED_PRESERVE_LOCAL_TREE"
+  },
+  "publication_boundary": {
+    "allow": ["repository", "branch", "commit_sha", "sync_state", "test_state", "timestamp_utc", "aggregate_counts"],
+    "deny": ["secrets", "tokens", "credentials", "private_ip", "absolute_local_paths", "container_env_values", "telegram_metadata", "cookies", "sessions", "raw_runtime_logs", "databases", "wal_files"]
+  },
+  "authority": {
+    "git_sync": true,
+    "automatic_deploy": false,
+    "automatic_container_restart": false,
+    "automatic_code_execution": false,
+    "automatic_modules_live_promotion": false,
+    "automatic_main_merge": false,
+    "docker_socket": false
+  },
+  "laws": [
+    "SYNC_NE_EXECUTION_AUTHORITY",
+    "LOCAL_CHANGE_NE_AUTOMATIC_MAIN_MERGE",
+    "NAS_RUNTIME_STATE_NE_GITHUB_PUBLIC_STATE",
+    "DIRTY_TREE_NE_PULL_TARGET",
+    "DIVERGENCE_NE_AUTOMERGE_PERMISSION",
+    "CHECKPOINT_NE_TRUTH_AUTHORITY",
+    "AUTHORITY_DELTA_ON_TRANSPORT = 0"
+  ]
+}
