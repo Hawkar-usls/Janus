@@ -1,0 +1,46 @@
+name: NAS Git Link Contract
+
+on:
+  pull_request:
+    paths:
+      - '.janus/NAS_GIT_LINK_CONTRACT.json'
+      - 'nas_sync/**'
+      - '.github/workflows/nas-git-link.yml'
+  push:
+    branches:
+      - main
+      - 'nas/**'
+      - nas-git-link-v1
+    paths:
+      - '.janus/NAS_GIT_LINK_CONTRACT.json'
+      - 'nas_sync/**'
+      - '.github/workflows/nas-git-link.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile validator
+        run: python -m py_compile nas_sync/validate_checkpoint.py
+      - name: Unit tests
+        run: python -m unittest discover -s nas_sync/tests -v
+      - name: Validate example checkpoint
+        run: python nas_sync/validate_checkpoint.py nas_sync/examples/checkpoint.json
+      - name: Validate machine checkpoints if present
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find nas/checkpoints -type f -name '*.json' 2>/dev/null | sort || true)
+          if (( ${#files[@]} == 0 )); then
+            echo 'No machine checkpoints in this ref.'
+            exit 0
+          fi
+          python nas_sync/validate_checkpoint.py "${files[@]}"
