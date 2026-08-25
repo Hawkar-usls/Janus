@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Hawkar-usls/Janus/nas_sync/checkpoint.schema.json",
+  "title": "JANUS NAS Git Checkpoint",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "timestamp_utc",
+    "host_id",
+    "canonical_janus_sha",
+    "sync_status",
+    "repos"
+  ],
+  "properties": {
+    "schema": {"const": "janus.nas.checkpoint.v1"},
+    "timestamp_utc": {"type": "string", "format": "date-time"},
+    "host_id": {"type": "string", "pattern": "^[A-Za-z0-9._-]{1,64}$"},
+    "canonical_janus_sha": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
+    "sync_status": {"enum": ["PASS", "PARTIAL", "BLOCKED"]},
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "repos_in_sync": {"type": "integer", "minimum": 0},
+        "repos_dirty": {"type": "integer", "minimum": 0},
+        "repos_diverged": {"type": "integer", "minimum": 0},
+        "repos_blocked": {"type": "integer", "minimum": 0}
+      }
+    },
+    "repos": {
+      "type": "array",
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["repo", "branch", "local_head", "remote_head", "status"],
+        "properties": {
+          "repo": {"type": "string", "pattern": "^Hawkar-usls/[A-Za-z0-9_.-]+$"},
+          "branch": {"type": "string", "minLength": 1, "maxLength": 255},
+          "local_head": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+          "remote_head": {"type": ["string", "null"], "pattern": "^[0-9a-f]{40}$"},
+          "status": {"enum": ["IN_SYNC", "FAST_FORWARDED", "LOCAL_AHEAD", "DIRTY_LOCAL", "DIVERGED", "SYNC_BLOCKED", "NOT_PRESENT"]},
+          "tests": {"enum": ["PASS", "FAIL", "NOT_RUN", "NOT_AVAILABLE"]}
+        }
+      }
+    }
+  }
+}
