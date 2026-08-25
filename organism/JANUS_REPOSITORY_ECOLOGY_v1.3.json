@@ -1,0 +1,159 @@
+{
+  "schema": "janus.organism.repository_ecology.v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "version": "1.3.0",
+  "status": "ACTIVE_REPOSITORY_ECOLOGY",
+  "extends_topology": "organism/JANUS_ORGANISM_v1.json",
+  "extends_execution": "organism/JANUS_SPIRAL_TRANCEPTION_v1.2.json",
+  "purpose": "Classify the full Hawkar-usls repository landscape without promoting every repository to an equal organ or equal evidence authority.",
+  "laws": [
+    "ALL_REPOSITORIES_MAY_BELONG_TO_ECOLOGY != ALL_REPOSITORIES_ARE_ORGANS",
+    "SUBTISSUE_PARENT != AUTHORITY_INHERITANCE",
+    "TOOLCHAIN_USE != EVIDENCE",
+    "UPSTREAM_WORKING_COPY != JANUS_AUTHORSHIP",
+    "LEGACY_ARCHIVE != ACTIVE_CAPABILITY",
+    "PRIVATE_LOCATOR_NOT_PUBLISHED",
+    "AUTHORITY_DELTA_ON_TRANSPORT = 0"
+  ],
+  "classes": {
+    "ORGAN": "Canonical typed member in JANUS_ORGANISM_v1.json.",
+    "SUBTISSUE": "Repository subordinate to a canonical organ; it contributes a bounded function but does not become a peer authority.",
+    "PRIVATE_SUBTISSUE": "Fail-closed private repository subordinate to a canonical organ; public manifest stores only a slot and locator environment variable.",
+    "TOOLCHAIN_DEPENDENCY": "External/upstream-derived code used as infrastructure or a working copy; no JANUS base-authorship claim.",
+    "EXTERNAL_RESEARCH_INSTRUMENT": "External scholarly/data instrument whose provenance remains independent of JANUS.",
+    "LEGACY_ARCHIVE": "Historical JANUS-native prototype retained for lineage/replay, not assumed to be an active capability.",
+    "PROFILE_NAVIGATION": "Account/profile navigation surface, not a research organ."
+  },
+  "private_subtissues": {
+    "private_measurement_substrate": {
+      "repo": null,
+      "parent_organ": "measurement_bench",
+      "class": "PRIVATE_SUBTISSUE",
+      "locator_env": "JANUS_PRIVATE_MEASUREMENT_REPO",
+      "mcp_default": false,
+      "role": "RAW_MEASUREMENT_EVIDENCE_AND_INTERNAL_EXPERIMENT_STATE",
+      "authority": "PRIVATE_RAW_EVIDENCE_SCOPE_ONLY",
+      "emits": ["RAW_RUN_STATE", "PRIVATE_EVIDENCE_ARCHIVE", "CURATED_EXPORT_CANDIDATE"],
+      "consumes": ["EXPERIMENT_CONTRACT", "RAW_TELEMETRY", "CONTROL", "LOCAL_RUN_STATE"],
+      "boundaries": [
+        "RAW_PRIVATE_EVIDENCE != PUBLIC_REVIEWED_EVIDENCE",
+        "ACCEPTED_SHARE_TELEMETRY != SHA256_BREAK",
+        "SUBTISSUE_PARENT != AUTHORITY_INHERITANCE"
+      ]
+    },
+    "private_genesis_world": {
+      "repo": null,
+      "parent_organ": "simulation_habitat",
+      "class": "PRIVATE_SUBTISSUE",
+      "locator_env": "JANUS_PRIVATE_GENESIS_WORLD_REPO",
+      "mcp_default": false,
+      "role": "PRIVATE_PERSISTENT_SIMULATION_WORLD",
+      "authority": "SIMULATION_SCOPE_ONLY",
+      "emits": ["WORLD_STATE", "SIMULATION_TRACE", "BEHAVIORAL_COUNTEREXAMPLE", "PLAYER_HANDOFF"],
+      "consumes": ["SCENARIO", "AGENT_STATE", "HABITAT_HANDOFF", "HUMAN_INPUT"],
+      "boundaries": [
+        "SIMULATION != WORLD_EVIDENCE",
+        "GAME_STATE != PHYSICAL_WORLD_STATE",
+        "SUBTISSUE_PARENT != AUTHORITY_INHERITANCE"
+      ]
+    }
+  },
+  "public_subtissues": {
+    "bfain_interface_simulation": {
+      "repo": "Hawkar-usls/BFain",
+      "parent_organ": "simulation_habitat",
+      "class": "SUBTISSUE",
+      "role": "COMMAND_AND_CONTROL_VISUALIZATION_SIMULATION",
+      "authority": "SIMULATION_AND_INTERFACE_ONLY",
+      "boundary": "SIMULATED_COORDINATION != OPERATIONAL_AUTHORITY"
+    },
+    "divine_realm_narrative_world": {
+      "repo": "Hawkar-usls/DIVINE_REALM",
+      "parent_organ": "simulation_habitat",
+      "class": "SUBTISSUE",
+      "role": "NARRATIVE_AND_SYMBOLIC_WORLD",
+      "authority": "CREATIVE_SCOPE_ONLY",
+      "boundary": "MYTHOLOGICAL_LANGUAGE != EMPIRICAL_AUTHORITY"
+    },
+    "atom_elite_embedded_world": {
+      "repo": "Hawkar-usls/ATOM-ELITE-1989---M5stack-ATOMS3R-2026-",
+      "parent_organ": "simulation_habitat",
+      "class": "SUBTISSUE",
+      "role": "EMBEDDED_RETRO_GAME_WORLD",
+      "authority": "GAME_SCOPE_ONLY",
+      "boundary": "GAME_BEHAVIOR != WORLD_EVIDENCE"
+    },
+    "atom_rpg_embedded_world": {
+      "repo": "Hawkar-usls/ATOM-RPG",
+      "parent_organ": "simulation_habitat",
+      "class": "SUBTISSUE",
+      "role": "EMBEDDED_RPG_EXPERIMENT",
+      "authority": "GAME_SCOPE_ONLY",
+      "boundary": "GAME_STATE != WORLD_STATE"
+    }
+  },
+  "legacy_archives": {
+    "simptomat": {
+      "repo": "Hawkar-usls/Simptomat",
+      "class": "LEGACY_ARCHIVE",
+      "former_scope": "CONVERSATIONAL_HEALTH_INFORMATION_PROTOTYPE",
+      "boundary": "NOT_DIAGNOSTIC_DEVICE_OR_TREATMENT_SYSTEM"
+    },
+    "slot": {
+      "repo": "Hawkar-usls/SLOT",
+      "class": "LEGACY_ARCHIVE",
+      "former_scope": "APPLICATION_OR_GAME_PROTOTYPE",
+      "boundary": "LEGACY_APPLICATION != ACTIVE_RESEARCH_CAPABILITY"
+    },
+    "sslot": {
+      "repo": "Hawkar-usls/SSlot",
+      "class": "LEGACY_ARCHIVE",
+      "former_scope": "APPLICATION_OR_GAME_PROTOTYPE",
+      "boundary": "LEGACY_APPLICATION != ACTIVE_RESEARCH_CAPABILITY"
+    }
+  },
+  "toolchain_dependencies": {
+    "ai_cardputer_assistant": {"repo": "Hawkar-usls/AI-Cardputer-adv-A-Portable-AI-Assistant", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "arduino_ai_chat_library": {"repo": "Hawkar-usls/Arduino-AI-Chat-Library", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "arduino_ide": {"repo": "Hawkar-usls/arduino-ide", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "cardputer_game_station": {"repo": "Hawkar-usls/Cardputer-Game-Station-Emulators", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "clawdbot": {"repo": "Hawkar-usls/clawdbot", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "emoji": {"repo": "Hawkar-usls/emoji", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "esp32_twai_can": {"repo": "Hawkar-usls/ESP32-TWAI-CAN", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "m5unit_env": {"repo": "Hawkar-usls/M5Unit-ENV", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "player": {"repo": "Hawkar-usls/player", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "radio_player_v3": {"repo": "Hawkar-usls/RadioPlayerV3", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "tranception_ml": {"repo": "Hawkar-usls/tranception", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false, "boundary": "UPSTREAM_ML_REPOSITORY != JANUS_TRANCEPTION_OPERATOR"},
+    "vcmi": {"repo": "Hawkar-usls/vcmi", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false},
+    "xiaozhi_esp32": {"repo": "Hawkar-usls/xiaozhi-esp32", "class": "TOOLCHAIN_DEPENDENCY", "base_authorship_claimed": false}
+  },
+  "external_research_instruments": {
+    "linear_a_decipherment_programme": {
+      "repo": "Hawkar-usls/Linear-A-decipherment-programme",
+      "class": "EXTERNAL_RESEARCH_INSTRUMENT",
+      "organ": false,
+      "boundary": "UPSTREAM_ACADEMIC_AUTHORSHIP_AND_PROVENANCE_REMAIN_INDEPENDENT"
+    },
+    "linear_a_explorer": {
+      "repo": "Hawkar-usls/lineara.xyz",
+      "class": "EXTERNAL_RESEARCH_INSTRUMENT",
+      "organ": false,
+      "boundary": "EXTERNAL_CORPUS_AND_EXPLORER_PROVENANCE_REMAIN_INDEPENDENT"
+    }
+  },
+  "profile_navigation": {
+    "repo": "Hawkar-usls/Hawkar-usls",
+    "class": "PROFILE_NAVIGATION",
+    "organ": false
+  },
+  "ecology_flow": [
+    "TOOLCHAIN_DEPENDENCY -> ORGAN_OR_SUBTISSUE",
+    "PRIVATE_SUBTISSUE -> PARENT_ORGAN",
+    "SUBTISSUE -> PARENT_ORGAN",
+    "LEGACY_ARCHIVE -> MEMORY_FOR_LINEAGE_ONLY",
+    "EXTERNAL_RESEARCH_INSTRUMENT -> ORGAN_WITH_PROVENANCE_PRESERVED",
+    "PARENT_ORGAN -> SPIRAL_EXECUTION_CONSTITUTION"
+  ],
+  "admission_rule": "A repository can belong to JANUS ecology without becoming an organ. Promotion to ORGAN requires a distinct function, typed inputs/outputs, explicit authority boundary, and a reason not already represented by an existing organ.",
+  "next_review": "Re-audit owner repositories whenever a new repository appears or an existing legacy/dependency repository acquires a distinct active JANUS-native function."
+}
