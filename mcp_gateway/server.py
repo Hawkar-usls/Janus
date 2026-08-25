@@ -25,9 +25,10 @@ ALLOWED_REPOS = {REGISTRY_REPO, TOPA_REPO, COSMOS_REPO, CHECKPOINT_REPO}
 mcp = MCPServer(
     "JANUS MCP Gateway",
     instructions=(
-        "JANUS federated research gateway using a 5D event-sourced spiral with Tranception. "
+        "JANUS federated research gateway using a typed repository ecology and a 5D event-sourced spiral with Tranception. "
         "Return to a question only at a justified higher state; repeated states are plateau/hold. "
         "Preserve provenance and claim boundaries. Tranception rotation is not evidence and spiral ascent is not claim promotion. "
+        "Subtissue membership is not authority inheritance; private nodes require explicit fail-closed binding. "
         "Repository presence is not evidence of truth. Prefer read tools. "
         "Write tools are explicitly gated and must never be used to fabricate evidence."
     ),
@@ -58,7 +59,7 @@ def health() -> dict[str, Any]:
     """Return gateway configuration without exposing secrets."""
     return {
         "service": "JANUS MCP Gateway",
-        "version": "0.4.0",
+        "version": "0.5.0",
         "transport": "streamable-http",
         "write_enabled": ALLOW_WRITES,
         "write_branch": WRITE_BRANCH,
@@ -66,8 +67,14 @@ def health() -> dict[str, Any]:
         "organism": "JANUS_FEDERATED_ORGANISM",
         "organism_topology": "1.1.0",
         "execution_constitution": "1.2.0",
+        "repository_ecology": "1.3.0",
         "execution_model": "5D_EVENT_SOURCED_SPIRAL_WITH_TRANCEPTION",
         "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+        "private_binding_envs_present": {
+            "somatosensory_skin": bool(os.getenv("JANUS_PRIVATE_SOMATOSENSORY_REPO")),
+            "private_measurement_substrate": bool(os.getenv("JANUS_PRIVATE_MEASUREMENT_REPO")),
+            "private_genesis_world": bool(os.getenv("JANUS_PRIVATE_GENESIS_WORLD_REPO")),
+        },
         "github_token_present": bool(os.getenv("GITHUB_TOKEN")),
     }
 

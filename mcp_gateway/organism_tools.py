@@ -30,10 +30,12 @@ ORGAN_REPOS: dict[str, str] = {
     "social_membrane": "Hawkar-usls/janus-first-followers-club-",
 }
 
-# Private organ locators are never hard-coded into the public gateway source.
+# Private node locators are never hard-coded into the public gateway source.
 # A deployment must bind them explicitly and provide credentials that can read them.
 PRIVATE_ORGAN_ENVS: dict[str, str] = {
     "somatosensory_skin": "JANUS_PRIVATE_SOMATOSENSORY_REPO",
+    "private_measurement_substrate": "JANUS_PRIVATE_MEASUREMENT_REPO",
+    "private_genesis_world": "JANUS_PRIVATE_GENESIS_WORLD_REPO",
 }
 
 ORGAN_BOUNDARIES: dict[str, str] = {
@@ -56,6 +58,8 @@ ORGAN_BOUNDARIES: dict[str, str] = {
     "voice": "ACOUSTIC_MODEL != MEASURED_RESONANCE",
     "physical_voice": "DEVICE_OUTPUT != SCIENTIFIC_CLAIM",
     "somatosensory_skin": "SENSOR_OUTPUT != CALIBRATED_MEASUREMENT",
+    "private_measurement_substrate": "RAW_PRIVATE_EVIDENCE != PUBLIC_REVIEWED_EVIDENCE",
+    "private_genesis_world": "GAME_STATE != PHYSICAL_WORLD_STATE",
     "materials_lab": "MATERIAL_CANDIDATE != FIELD_VALIDATION",
     "feline_timing_lab": "CANDIDATE_GEOMETRY != BIOLOGICAL_EVENT_TRUTH",
     "social_membrane": "PUBLIC_HANDSHAKE != CONSENT_OR_AUTHORITY",
@@ -93,14 +97,14 @@ def _resolve_organ(organ: str) -> tuple[str, str]:
         private_repo = (os.getenv(env_name) or "").strip()
         if not private_repo:
             raise ValueError(
-                f"private JANUS organ {key!r} is not bound; set {env_name} explicitly on the MCP deployment"
+                f"private JANUS node {key!r} is not bound; set {env_name} explicitly on the MCP deployment"
             )
         if "/" not in private_repo or private_repo.startswith("/") or private_repo.endswith("/"):
             raise ValueError(f"invalid private JANUS repository locator in {env_name}")
         return key, private_repo
 
     allowed = sorted(set(ORGAN_REPOS) | set(PRIVATE_ORGAN_ENVS))
-    raise ValueError(f"unknown JANUS organ: {organ!r}; allowed={allowed}")
+    raise ValueError(f"unknown JANUS organ/subtissue: {organ!r}; allowed={allowed}")
 
 
 def _canonical_hash(value: Any) -> str:
@@ -228,15 +232,17 @@ def _parse_clipped_json(item: dict[str, Any], clip: Callable[[str], tuple[str, b
 
 
 def install_organism_tools(mcp: Any, api: Any, clip: Callable[[str], tuple[str, bool]], root_repo: str) -> None:
-    """Register read-only tools for the typed JANUS federated organism and its spiral execution model."""
+    """Register read-only tools for the typed JANUS federated organism, ecology and spiral execution model."""
 
     @mcp.tool(name="janus.organism_map")
     def organism_map() -> dict[str, Any]:
-        """Return JANUS topology plus the canonical spiral/Tranception execution constitution with provenance."""
+        """Return JANUS topology, repository ecology and spiral/Tranception execution constitution with provenance."""
         topology = api.get_file(root_repo, "organism/JANUS_ORGANISM_v1.json", "main")
         execution = api.get_file(root_repo, "organism/JANUS_SPIRAL_TRANCEPTION_v1.2.json", "main")
+        ecology = api.get_file(root_repo, "organism/JANUS_REPOSITORY_ECOLOGY_v1.3.json", "main")
         topology_content, topology_truncated = _parse_clipped_json(topology, clip)
         execution_content, execution_truncated = _parse_clipped_json(execution, clip)
+        ecology_content, ecology_truncated = _parse_clipped_json(ecology, clip)
         return {
             "organism": "JANUS_FEDERATED_ORGANISM",
             "topology": {
@@ -255,7 +261,15 @@ def install_organism_tools(mcp: Any, api: Any, clip: Callable[[str], tuple[str, 
                 "truncated": execution_truncated,
                 "content": execution_content,
             },
-            "boundary": "ORGANISM_MEMBERSHIP != AUTHORITY_INHERITANCE; SPIRAL_ASCENT != CLAIM_PROMOTION",
+            "ecology": {
+                "repo": ecology["repo"],
+                "path": ecology["path"],
+                "ref": ecology["ref"],
+                "sha": ecology["sha"],
+                "truncated": ecology_truncated,
+                "content": ecology_content,
+            },
+            "boundary": "ORGANISM_MEMBERSHIP != AUTHORITY_INHERITANCE; SUBTISSUE_PARENT != AUTHORITY_INHERITANCE; SPIRAL_ASCENT != CLAIM_PROMOTION",
         }
 
     @mcp.tool(name="janus.spiral_pass")
@@ -282,7 +296,7 @@ def install_organism_tools(mcp: Any, api: Any, clip: Callable[[str], tuple[str, 
 
     @mcp.tool(name="janus.search_organ")
     def search_organ(organ: str, query: str, max_results: int = 10, path_prefix: str | None = None) -> dict[str, Any]:
-        """Search one allowlisted JANUS organ by typed organ key; arbitrary repositories are not accepted."""
+        """Search one allowlisted JANUS organ or explicitly bound private subtissue; arbitrary repositories are not accepted."""
         key, repo = _resolve_organ(organ)
         return {
             "organ": key,
@@ -295,7 +309,7 @@ def install_organism_tools(mcp: Any, api: Any, clip: Callable[[str], tuple[str, 
 
     @mcp.tool(name="janus.read_organ")
     def read_organ(organ: str, path: str, ref: str = "main") -> dict[str, Any]:
-        """Read one text/JSON artifact from an allowlisted JANUS organ with exact repository/ref/SHA provenance."""
+        """Read one text/JSON artifact from an allowlisted JANUS organ or bound private subtissue with exact provenance."""
         key, repo = _resolve_organ(organ)
         item = api.get_file(repo, path, ref)
         item["content"], item["truncated"] = clip(item["content"])
