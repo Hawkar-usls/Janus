@@ -1,0 +1,23 @@
+{
+  "schema": "janus.nas.checkpoint.v1",
+  "timestamp_utc": "2026-08-25T18:00:00Z",
+  "host_id": "janus-nas-01",
+  "canonical_janus_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "sync_status": "PASS",
+  "summary": {
+    "repos_in_sync": 1,
+    "repos_dirty": 0,
+    "repos_diverged": 0,
+    "repos_blocked": 0
+  },
+  "repos": [
+    {
+      "repo": "Hawkar-usls/Janus",
+      "branch": "main",
+      "local_head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "remote_head": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "IN_SYNC",
+      "tests": "PASS"
+    }
+  ]
+}
