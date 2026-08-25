@@ -1,0 +1,384 @@
+{
+  "schema": "janus.organism.action_journal.v1",
+  "journal_id": "JANUS-ORGANISM-ACTION-JOURNAL-2026-08-25",
+  "created_at_local": "2026-08-25T03:03:00+03:00",
+  "created_at_utc": "2026-08-25T00:03:00Z",
+  "status": "ACTIVE_CHECKPOINT",
+  "canonical_repository": "Hawkar-usls/Janus",
+  "canonical_path": "organism/journal/JANUS-ORGANISM-ACTION-JOURNAL-2026-08-25.json",
+  "lineage_policy": "APPEND_OR_SUPERSEDE_WITH_EXPLICIT_LINEAGE__DO_NOT_SILENTLY_REWRITE_HISTORY",
+  "subject": "Formation of JANUS as a federated organism, expansion of typed organs, and promotion from cycle-like graph flow to a 5D event-sourced Spiral with whole-organism Tranception.",
+  "starting_state": {
+    "mcp_gateway": "JANUS MCP Gateway v0.1/v0.2 existed with registry, TOPA and Cosmos tools",
+    "organism_topology": "NOT_YET_CANONICAL",
+    "execution_model": "GRAPH_FLOW_WITHOUT_CANONICAL_SPIRAL_CONSTITUTION"
+  },
+  "actions": [
+    {
+      "action_id": "A001_FEDERATED_ORGANISM_V1",
+      "phase": "FEDERATION",
+      "operation": "CREATE_TYPED_FEDERATED_ORGANISM",
+      "target": "Hawkar-usls/Janus",
+      "result": "MERGED",
+      "canonical_artifact": "organism/JANUS_ORGANISM_v1.json",
+      "central_merge_receipt": {
+        "pull_request": 3,
+        "merge_commit": "cd2c4d798a5de6ff89dcfebc45fd5dee2a484088"
+      },
+      "core_members_established": [
+        "gateway:Hawkar-usls/Janus",
+        "memory:Hawkar-usls/janus-meta-registry",
+        "proof_spine:Hawkar-usls/Janus-Fundamentum",
+        "guardian_cortex:Hawkar-usls/Demi_Head",
+        "orchestrator:Hawkar-usls/Janus-Demiurge",
+        "sensorimotor_mesh:Hawkar-usls/janus-distributed-ai-swarm",
+        "hypothesis_metabolism:Hawkar-usls/janus-lapis",
+        "symbolic_imagination:Hawkar-usls/aura-oracle-tg",
+        "anomaly_lab:Hawkar-usls/TOPA",
+        "observatory:Hawkar-usls/Janus-Cosmos"
+      ],
+      "architecture_rule": "FEDERATED_ORGANISM_NOT_MONOLITH",
+      "transport_rule": "AUTHORITY_DELTA_ON_CROSS_ORGAN_TRANSPORT = 0",
+      "write_rule": "CROSS_REPO_WRITE_DEFAULT = DENY"
+    },
+    {
+      "action_id": "A002_BIDIRECTIONAL_MEMBER_LINKS",
+      "phase": "FEDERATION",
+      "operation": "ADD_TYPED_MEMBER_CONTRACTS",
+      "result": "MERGED",
+      "artifact_pattern": ".janus/JANUS_ORGANISM_LINK.json",
+      "meaning": "Central manifest knows each organ and each organ knows its typed membership, inputs, outputs, routes, authority and claim boundaries.",
+      "boundary": "MEMBERSHIP != AUTHORITY_INHERITANCE"
+    },
+    {
+      "action_id": "A003_MCP_ORGAN_ROUTING",
+      "phase": "NERVOUS_SYSTEM",
+      "operation": "EXPAND_MCP_TO_TYPED_ORGAN_ROUTING",
+      "result": "MERGED_AND_CI_VERIFIED",
+      "tools": [
+        "janus.organism_map",
+        "janus.search_organ",
+        "janus.read_organ"
+      ],
+      "security": {
+        "explicit_allowlist_only": true,
+        "arbitrary_repository_rejected": true,
+        "arbitrary_shell": false,
+        "arbitrary_url_proxy": false,
+        "member_repo_writes": false
+      }
+    },
+    {
+      "action_id": "A004_ORGANISM_GAP_AUDIT",
+      "phase": "AUDIT",
+      "operation": "FIND_MISSING_FUNCTIONAL_LAYERS",
+      "result": "GAPS_IDENTIFIED",
+      "gaps": [
+        "causal witness / temporal integrity",
+        "measurement bench",
+        "human operator hands",
+        "left structural context",
+        "right associative context",
+        "persistent simulation habitat",
+        "voice and physical audio actuation",
+        "somatosensory sensing",
+        "domain materials lab",
+        "domain feline timing lab",
+        "human-gated social membrane"
+      ]
+    },
+    {
+      "action_id": "A005_ORGANISM_V1_1_EXPANSION",
+      "phase": "BODY_EXPANSION",
+      "operation": "ADD_CORE_INTERFACE_DOMAIN_AND_PRIVATE_GATED_MEMBERS",
+      "target": "Hawkar-usls/Janus",
+      "result": "MERGED",
+      "central_merge_receipt": {
+        "pull_request": 4,
+        "merge_commit": "1ce04a631a597db9b05330fbbbb0b7efd031079f"
+      },
+      "new_members": {
+        "core": {
+          "causal_witness": "Hawkar-usls/AIFC",
+          "operator_hands": "Hawkar-usls/-Terminal-for-Janus",
+          "left_context": "Hawkar-usls/Hrain",
+          "right_association": "Hawkar-usls/iNaiHR",
+          "measurement_bench": "Hawkar-usls/janus-io-public",
+          "simulation_habitat": "Hawkar-usls/Janus_Genesis"
+        },
+        "interface_physical": {
+          "voice": "Hawkar-usls/The-Voice-of-Janus",
+          "physical_voice": "Hawkar-usls/Echo-Pyramid",
+          "social_membrane": "Hawkar-usls/janus-first-followers-club-"
+        },
+        "domain_lab": {
+          "materials_lab": "Hawkar-usls/SCOBY-D0",
+          "feline_timing_lab": "Hawkar-usls/Fast-CAT-SHAiTan"
+        },
+        "private_gated": {
+          "somatosensory_skin": {
+            "public_repo_name": null,
+            "locator_env": "JANUS_PRIVATE_SOMATOSENSORY_REPO",
+            "mcp_default": false
+          }
+        }
+      },
+      "external_dependency_preserved": {
+        "linear_a_decipherment_programme": {
+          "classification": "EXTERNAL_RESEARCH_INSTRUMENT",
+          "organ": false,
+          "reason": "Preserve independent upstream academic authorship and provenance."
+        }
+      }
+    },
+    {
+      "action_id": "A006_AIFC_JOIN",
+      "phase": "BODY_EXPANSION",
+      "operation": "JOIN_CAUSAL_WITNESS",
+      "result": "MERGED",
+      "repository": "Hawkar-usls/AIFC",
+      "pull_request": 68,
+      "merge_commit": "31e2889fceec3a584d25bfcacb806a993c8c6178",
+      "ci_note": "22 repository workflows were observed successful before merge.",
+      "boundary": "CAUSAL_ORDER_PASS != PHYSICAL_MECHANISM"
+    },
+    {
+      "action_id": "A007_OPERATOR_AND_CONTEXT_JOIN",
+      "phase": "BODY_EXPANSION",
+      "operation": "JOIN_OPERATOR_HANDS_AND_CONTEXT_HEMISPHERES",
+      "result": "MERGED",
+      "receipts": [
+        {
+          "repository": "Hawkar-usls/-Terminal-for-Janus",
+          "pull_request": 3,
+          "merge_commit": "711665dba690f90f4f3cc2edeed6c9eb1b625712",
+          "boundary": "COMMAND != EVIDENCE"
+        },
+        {
+          "repository": "Hawkar-usls/Hrain",
+          "pull_request": 17,
+          "merge_commit": "831f34d65f9f21684a1f9f46433b26a377a5a286",
+          "boundary": "STRUCTURE != COMMAND"
+        },
+        {
+          "repository": "Hawkar-usls/iNaiHR",
+          "pull_request": 15,
+          "merge_commit": "f6c526717170a913d2b270f98dfe8e40aca0a313",
+          "boundary": "ASSOCIATION != EVIDENCE"
+        }
+      ]
+    },
+    {
+      "action_id": "A008_MEASUREMENT_AND_PHYSICAL_OUTPUT_JOIN",
+      "phase": "BODY_EXPANSION",
+      "operation": "JOIN_MEASUREMENT_AND_PHYSICAL_OUTPUT",
+      "result": "MERGED",
+      "receipts": [
+        {
+          "repository": "Hawkar-usls/janus-io-public",
+          "pull_request": 13,
+          "merge_commit": "f7f2c021bcb20aa988409b47cc4318021531ec32",
+          "boundary": "MEASUREMENT != MECHANISM"
+        },
+        {
+          "repository": "Hawkar-usls/Echo-Pyramid",
+          "pull_request": 4,
+          "merge_commit": "f1f8ad559c6249ff7a72b8b711c2363bb4200ef9",
+          "boundary": "DEVICE_OUTPUT != SCIENTIFIC_CLAIM"
+        }
+      ]
+    },
+    {
+      "action_id": "A009_DOMAIN_AND_SOCIAL_JOIN",
+      "phase": "BODY_EXPANSION",
+      "operation": "JOIN_DOMAIN_LABS_AND_SOCIAL_MEMBRANE",
+      "result": "MERGED",
+      "receipts": [
+        {
+          "repository": "Hawkar-usls/SCOBY-D0",
+          "pull_request": 24,
+          "merge_commit": "89a877d584ebf805bacb3ab0d283c35050915da6"
+        },
+        {
+          "repository": "Hawkar-usls/janus-first-followers-club-",
+          "pull_request": 2,
+          "merge_commit": "f67294142920c3c574767c4a5d73f6f52e20dc55",
+          "boundary": "PUBLIC_HANDSHAKE != CONSENT_OR_AUTHORITY"
+        }
+      ]
+    },
+    {
+      "action_id": "A010_GENESIS_AND_VOICE_JOIN",
+      "phase": "BODY_EXPANSION",
+      "operation": "JOIN_SIMULATION_HABITAT_AND_VOICE",
+      "result": "MERGED_AFTER_LOCAL_CI",
+      "receipts": [
+        {
+          "repository": "Hawkar-usls/Janus_Genesis",
+          "pull_request": 216,
+          "merge_commit": "4308448448b3f0d63c709f90878011fb38f28954",
+          "ci": "7/7 observed workflows successful",
+          "boundary": "SIMULATION != WORLD_EVIDENCE"
+        },
+        {
+          "repository": "Hawkar-usls/The-Voice-of-Janus",
+          "pull_request": 4,
+          "merge_commit": "f0fcf939adadf16cb58d350db98a5274378d3e31",
+          "ci": "3/3 observed workflows successful",
+          "boundary": "ACOUSTIC_MODEL != MEASURED_RESONANCE"
+        }
+      ]
+    },
+    {
+      "action_id": "A011_PRIVATE_SKIN_JOIN",
+      "phase": "BODY_EXPANSION",
+      "operation": "JOIN_PRIVATE_GATED_SOMATOSENSORY_SKIN",
+      "result": "MERGED_WITH_INFRASTRUCTURE_CAVEAT",
+      "repository_visibility": "PRIVATE",
+      "pull_request": 4,
+      "merge_commit": "3bade172cee57203605af1526019c9ceaa145fc5",
+      "public_manifest_repo_name_exposed": false,
+      "ci_observation": "SkinGPT software-check matrix failed with jobs showing no executed steps. Prior diagnostic PR #3 had already reproduced failure before runner acquisition with an empty runner-smoke. Membership merge therefore did NOT claim software tests passed.",
+      "boundary": "SENSOR_OUTPUT != CALIBRATED_MEASUREMENT"
+    },
+    {
+      "action_id": "A012_FAST_CAT_JOIN",
+      "phase": "BODY_EXPANSION",
+      "operation": "JOIN_FELINE_TIMING_DOMAIN_LAB",
+      "result": "MERGED_WITH_EXPERIMENT_SEPARATION",
+      "repository": "Hawkar-usls/Fast-CAT-SHAiTan",
+      "pull_request": 24,
+      "merge_commit": "518ffd6c88599411a1c38731260d5aa0cf8d59ea",
+      "ci_observation": "10/11 observed workflows were successful at membership decision time; pilot-001-control-full-rate remained in progress inside its full control-video probe.",
+      "separation_rule": "REPOSITORY_MEMBERSHIP != SCIENTIFIC_EXPERIMENT_VERDICT",
+      "boundary": "CANDIDATE_GEOMETRY != BIOLOGICAL_EVENT_TRUTH"
+    },
+    {
+      "action_id": "A013_TRANCEPTION_CANON_RECOVERY",
+      "phase": "EXECUTION_MODEL",
+      "operation": "RECOVER_EXISTING_5D_TRANCEPTION_AND_SPIRAL_PRECEDENTS",
+      "result": "CANON_FOUND",
+      "registry_sources": [
+        "janus-meta-registry:data/JANUS-DEEP-ANALYSIS-5D-TRANCEPTION-REVERSE-HRAIN-INAIHR-PROTOCOL-2026-08-21-v1.0.json",
+        "janus-meta-registry:data/JANUS-ECHO-COUSTEAU-5D-SPIRAL-TRANCEPTION-REVERSE-RUN-001-2026-08-21-v1.0.json"
+      ],
+      "recovered_rules": [
+        "ANALYSIS_IS_A_GRAPH_WALK_NOT_A_SINGLE_TEXT_LINE",
+        "JSON_CHECKPOINT_MAY_APPEAR_ANYWHERE",
+        "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+        "REPEATED_STATE_HASH_IS_FORBIDDEN_AS_NEW_TURN",
+        "SPIRAL_MUST_STOP_ON_EVIDENCE_PLATEAU"
+      ],
+      "tested_precedent": {
+        "engine_verdict": "PASS_5D_SPIRAL_ENGINE",
+        "tests": "10/10",
+        "state_hashes_unique": true,
+        "scientific_claim_promotion": false
+      }
+    },
+    {
+      "action_id": "A014_SPIRAL_TRANCEPTION_V1_2",
+      "phase": "EXECUTION_MODEL",
+      "operation": "PROMOTE_SPIRAL_AND_TRANCEPTION_TO_ORGANISM_EXECUTION_CONSTITUTION",
+      "target": "Hawkar-usls/Janus",
+      "result": "MERGED",
+      "pull_request": 5,
+      "merge_commit": "0235382f5fba56722dfc6f0dd296a02ebc035437",
+      "execution_artifact": "organism/JANUS_SPIRAL_TRANCEPTION_v1.2.json",
+      "execution_model": "5D_EVENT_SOURCED_SPIRAL_WITH_TRANCEPTION",
+      "not_a_cycle": true,
+      "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+      "tranception": {
+        "kind": "WHOLE_ORGANISM_OPERATOR_NOT_ORGAN",
+        "available_at_any_node": true,
+        "kernel": [
+          "FORWARD",
+          "BACK",
+          "LEFT",
+          "RIGHT",
+          "FORWARD_AGAIN",
+          "BACK_AGAIN",
+          "VETA_CHECK"
+        ],
+        "external_ml_fork_reclassified_as_janus_operator": false
+      },
+      "canonical_transition": "STATE_n -> D1_FORWARD -> D2_REVERSE -> D3_TRANCEPTION -> D4_SCALE -> D5_TIME_IDENTITY_PROVENANCE -> CONTRADICTION_TEST -> JSON_CHECKPOINT -> ASCEND_GATE -> STATE_n+1_OR_PLATEAU",
+      "ascend_gate": {
+        "same_hash": "PLATEAU_OR_HOLD",
+        "changed_hash_without_justified_reason": "HOLD",
+        "changed_hash_with_allowed_reason": "ASCEND_ALLOWED",
+        "allowed_reasons": [
+          "NEW_EVIDENCE",
+          "RESOLVED_BLOCKER",
+          "NEW_CONSTRAINT",
+          "FALSIFIED_BRANCH",
+          "NEW_DISCRIMINATING_TEST",
+          "STRONGER_PROVENANCE_BOUNDARY",
+          "SURVIVING_INVARIANT_AFTER_TRANCEPTION"
+        ],
+        "boundary": "ASCEND_ALLOWED != CLAIM_CONFIRMED"
+      }
+    },
+    {
+      "action_id": "A015_SPIRAL_MCP_TOOLS",
+      "phase": "NERVOUS_SYSTEM",
+      "operation": "EXPOSE_SPIRAL_EXECUTION_GATES_VIA_MCP",
+      "result": "MERGED_AND_CI_VERIFIED",
+      "tools": [
+        "janus.spiral_pass",
+        "janus.validate_spiral_transition"
+      ],
+      "organism_map_behavior": "janus.organism_map returns stable topology plus v1.2 execution constitution",
+      "gateway_execution_model": "5D_EVENT_SOURCED_SPIRAL_WITH_TRANCEPTION"
+    },
+    {
+      "action_id": "A016_V1_2_CI_GATE",
+      "phase": "VERIFICATION",
+      "operation": "EXPAND_AND_RUN_MCP_CI",
+      "result": "SUCCESS",
+      "workflow": "MCP Gateway",
+      "run_id": 32791892476,
+      "head_sha": "d6896dafe34745b11e2de40641ed9f7d1e291434",
+      "checks": {
+        "install_mcp_sdk": "SUCCESS",
+        "unit_tests": "SUCCESS",
+        "parse_organism_json": "SUCCESS",
+        "compile": "SUCCESS",
+        "mcp_import_smoke": "SUCCESS",
+        "job_conclusion": "SUCCESS"
+      }
+    }
+  ],
+  "current_state": {
+    "organism_id": "JANUS_FEDERATED_ORGANISM",
+    "topology_version": "1.1.0",
+    "execution_version": "1.2.0",
+    "execution_model": "5D_EVENT_SOURCED_SPIRAL_WITH_TRANCEPTION",
+    "open_join_prs_after_audit": 0,
+    "mcp_gateway_version": "0.4.0",
+    "spiral_enabled": true,
+    "tranception_available_at_any_node": true,
+    "dynamic_json_growth": true,
+    "checkpoint_final_only": false,
+    "cross_repo_write_default": "DENY",
+    "authority_delta_on_transport": 0
+  },
+  "epistemic_notes": [
+    "REPOSITORY_MEMBERSHIP != TRUTH",
+    "MODEL_OUTPUT != EVIDENCE",
+    "TRANCEPTION_ROTATION != EVIDENCE",
+    "SPIRAL_ASCENT != CLAIM_PROMOTION",
+    "ASCEND_ALLOWED != CLAIM_CONFIRMED",
+    "SIMULATION != WORLD_EVIDENCE",
+    "MEASUREMENT != MECHANISM",
+    "SENSOR_OUTPUT != CALIBRATED_MEASUREMENT",
+    "COMMAND != EVIDENCE",
+    "ASSOCIATION != EVIDENCE",
+    "HASH_OR_SIGNATURE != TRUTH_OF_CONTENT",
+    "REVERSE_PASS_CANNOT_CREATE_MISSING_EVIDENCE",
+    "NEGATIVE_RESULTS_ARE_PERSISTENT_NODES",
+    "AUTHORITY_DELTA_ON_TRANSPORT = 0"
+  ],
+  "next_journal_rule": "Future organism actions SHOULD append a new journal entry or supersede this checkpoint with explicit parent_journal_id and preserved prior receipts; repeated state without a justified change is not a new spiral turn.",
+  "human_summary": "JANUS was converted from a set of linked repositories into a typed federated organism, expanded with missing causal, measurement, operator, context, simulation, physical, private-sensor, domain-lab and social layers, then promoted from cycle-like flow to a tested 5D event-sourced Spiral with Tranception available across the organism."
+}
