@@ -25,7 +25,9 @@ ALLOWED_REPOS = {REGISTRY_REPO, TOPA_REPO, COSMOS_REPO, CHECKPOINT_REPO}
 mcp = MCPServer(
     "JANUS MCP Gateway",
     instructions=(
-        "JANUS research gateway. Preserve provenance and claim boundaries. "
+        "JANUS federated research gateway using a 5D event-sourced spiral with Tranception. "
+        "Return to a question only at a justified higher state; repeated states are plateau/hold. "
+        "Preserve provenance and claim boundaries. Tranception rotation is not evidence and spiral ascent is not claim promotion. "
         "Repository presence is not evidence of truth. Prefer read tools. "
         "Write tools are explicitly gated and must never be used to fabricate evidence."
     ),
@@ -56,12 +58,16 @@ def health() -> dict[str, Any]:
     """Return gateway configuration without exposing secrets."""
     return {
         "service": "JANUS MCP Gateway",
-        "version": "0.2.0",
+        "version": "0.4.0",
         "transport": "streamable-http",
         "write_enabled": ALLOW_WRITES,
         "write_branch": WRITE_BRANCH,
         "repos": {"registry": REGISTRY_REPO, "topa": TOPA_REPO, "cosmos": COSMOS_REPO, "checkpoint": CHECKPOINT_REPO},
         "organism": "JANUS_FEDERATED_ORGANISM",
+        "organism_topology": "1.1.0",
+        "execution_constitution": "1.2.0",
+        "execution_model": "5D_EVENT_SOURCED_SPIRAL_WITH_TRANCEPTION",
+        "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
         "github_token_present": bool(os.getenv("GITHUB_TOKEN")),
     }
 
@@ -109,7 +115,7 @@ def read_cosmos(path: str, ref: str = "main") -> dict[str, Any]:
     """Read one Janus-Cosmos artifact from an explicit branch/ref with SHA provenance."""
     item = api.get_file(COSMOS_REPO, path, ref)
     item["content"], item["truncated"] = _clip(item["content"])
-    item["boundary"] = "ARTIFACT != INDEPENDENT REPLICATION"
+    item["boundary"] = "ARTIFACT != INDEPENDENT_REPLICATION"
     return item
 
 
