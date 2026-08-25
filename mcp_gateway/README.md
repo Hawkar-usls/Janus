@@ -1,12 +1,38 @@
 # JANUS MCP Gateway
 
-A narrow Model Context Protocol (MCP) surface over JANUS research repositories.
+A narrow Model Context Protocol (MCP) surface over the JANUS federated organism.
+
+The organism uses a **5D event-sourced spiral**, not a closed cycle:
+
+```text
+STATE_n
+  -> FORWARD
+  -> REVERSE
+  -> TRANCEPTION_ROTATE
+  -> SCALE
+  -> TIME / IDENTITY / PROVENANCE
+  -> CONTRADICTION TEST
+  -> CHECKPOINT
+  -> ASCEND
+  -> STATE_n+1
+```
+
+Canonical law:
+
+```text
+RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE
+```
 
 ## Tools
 
 | Tool | Mode | Purpose |
 |---|---|---|
 | `janus.health` | read | configuration / capability check |
+| `janus.organism_map` | read | topology + spiral/Tranception execution constitution |
+| `janus.spiral_pass` | read | build a deterministic 5D spiral packet for the host model |
+| `janus.validate_spiral_transition` | read | fail-closed gate for repeated/unjustified state transitions |
+| `janus.search_organ` | read | search an allowlisted JANUS organ by typed organ key |
+| `janus.read_organ` | read | read one organ artifact by path + ref with provenance |
 | `janus.search_registry` | read | search `janus-meta-registry` with provenance |
 | `janus.read_registry` | read | read one registry artifact by path + ref |
 | `janus.run_topa` | read | build a falsification-first TOPA packet and attach the canonical foundation |
@@ -16,6 +42,21 @@ A narrow Model Context Protocol (MCP) surface over JANUS research repositories.
 | `janus.write_checkpoint` | **write, locked** | persist a progress checkpoint |
 
 The gateway does **not** expose shell execution, arbitrary URLs, arbitrary repositories, secret values, or model-generated truth claims.
+
+## Spiral and Tranception boundary
+
+`janus.spiral_pass` creates a structured analysis packet; it does not perform the analysis or fabricate evidence.
+
+`janus.validate_spiral_transition` permits ascent only when the state hash changes **and** a recognized state-change reason exists. A repeated hash is a plateau/hold, not another turn.
+
+```text
+TRANCEPTION_ROTATION != EVIDENCE
+SPIRAL_ASCENT != CLAIM_PROMOTION
+REPEATED_STATE_HASH_IS_NOT_A_NEW_TURN
+ASCEND_ALLOWED != CLAIM_CONFIRMED
+```
+
+Tranception is a whole-organism representation operator available at any node. It is not a repository organ and is not the same thing as the external protein-fitness software project that shares the name.
 
 ## Run locally
 
@@ -57,4 +98,6 @@ SEARCH_MATCH != VALIDATED_CLAIM
 ARCHIVED_SOURCE != TRUSTED_SOURCE
 TOPA PACKET != WORLD-TRUTH VERDICT
 ARTIFACT != INDEPENDENT REPLICATION
+TRANCEPTION_ROTATION != EVIDENCE
+SPIRAL_ASCENT != CLAIM_PROMOTION
 ```
