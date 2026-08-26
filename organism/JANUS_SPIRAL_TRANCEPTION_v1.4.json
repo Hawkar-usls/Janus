@@ -1,0 +1,38 @@
+{
+  "schema": "janus.organism.execution.spiral.extension.v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "version": "1.4.0",
+  "status": "ACTIVE_EXECUTION_EXTENSION",
+  "extends": "organism/JANUS_SPIRAL_TRANCEPTION_v1.3.json",
+  "applies_route_refinement": "organism/JANUS_ORGANISM_ROUTE_REFINEMENT_2026-08-26_SIMPTOMAT_v1.json",
+  "purpose": "Advance the health-domain spiral from high-level organ connectivity to explicit payload-compatible routing between Simptomat, DemiHead, janus-lapis and janus-io-public.",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "route_aware_spiral": [
+    "HUMAN_HEALTH_QUESTION_OR_SYMPTOM",
+    "SIMPTOMAT_DIFFERENTIAL_UPDATE",
+    "DEMIHEAD_NATIVE_V2_11_REVIEW",
+    "IF_HYPOTHESIS_METABOLISM_USE_LAPIS_ADAPTER_TO_CANDIDATE_SET_EVIDENCE_REJECTION",
+    "REINTEGRATE_LAPIS_RANKING_AS_EXPLORATORY_FEEDBACK_NOT_CLINICAL_PROBABILITY",
+    "IF_EXTERNAL_MEASUREMENT_NEEDED_CREATE_PROPOSAL_ONLY",
+    "EXPLICIT_MEASUREMENT_CONTRACT_GATE",
+    "ONLY_THEN_MEASUREMENT_BENCH_EXPERIMENT_CONTRACT_CONTROL_CALIBRATION",
+    "REINTEGRATE_MEASUREMENT_RECEIPT_OR_NEGATIVE_RESULT",
+    "NEXT_DISCRIMINATING_QUESTION_OR_UPDATED_EXTERNAL_HANDOFF",
+    "CONSENT_GATED_CHECKPOINT",
+    "ASCEND_ONLY_IF_STATE_CHANGED"
+  ],
+  "compatibility_gates": {
+    "demihead": "NATIVE_TYPED_NEXUS_V2_11",
+    "lapis": "ADAPTER_REQUIRED",
+    "measurement_bench": "EXPERIMENT_CONTRACT_GATE_REQUIRED",
+    "memory": "EXPLICIT_PERSISTENCE_CONSENT_REQUIRED"
+  },
+  "forbidden_shortcuts": [
+    "DIAGNOSTIC_PACKET_AS_LAPIS_NATIVE_INPUT",
+    "NEXT_CONFIRMATION_STEP_AS_EXPERIMENT_CONTRACT",
+    "LAPIS_SCORE_AS_CLINICAL_PROBABILITY",
+    "MEASUREMENT_RECEIPT_AS_AUTOMATIC_DIAGNOSIS",
+    "ROUTE_EXISTENCE_AS_RUNTIME_DELIVERY_PROOF"
+  ],
+  "claim_ceiling": "Type-compatible internal topology and adapter/gate contracts are established in repository scope. Production runtime delivery, clinical validation and medical diagnostic authority remain not established."
+}
