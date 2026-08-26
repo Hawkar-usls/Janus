@@ -1,0 +1,51 @@
+name: simptomat-organ-admission
+
+on:
+  push:
+    paths:
+      - 'organism/JANUS_ORGANISM_DELTA_2026-08-26_SIMPTOMAT_v1.json'
+      - 'organism/JANUS_SPIRAL_TRANCEPTION_v1.3.json'
+      - 'organism/JANUS_REPOSITORY_ECOLOGY_v1.4.json'
+      - '.github/workflows/simptomat-organ-admission.yml'
+  pull_request:
+    paths:
+      - 'organism/JANUS_ORGANISM_DELTA_2026-08-26_SIMPTOMAT_v1.json'
+      - 'organism/JANUS_SPIRAL_TRANCEPTION_v1.3.json'
+      - 'organism/JANUS_REPOSITORY_ECOLOGY_v1.4.json'
+      - '.github/workflows/simptomat-organ-admission.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate admission topology
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          delta = json.loads(Path('organism/JANUS_ORGANISM_DELTA_2026-08-26_SIMPTOMAT_v1.json').read_text())
+          spiral = json.loads(Path('organism/JANUS_SPIRAL_TRANCEPTION_v1.3.json').read_text())
+          ecology = json.loads(Path('organism/JANUS_REPOSITORY_ECOLOGY_v1.4.json').read_text())
+
+          assert delta['admit_member']['organ_key'] == 'diagnostic_reasoning'
+          assert delta['admit_member']['repo'] == 'Hawkar-usls/Simptomat'
+          assert delta['admit_member']['authority'] == 'RESEARCH_DIAGNOSTIC_HYPOTHESIS_ONLY'
+          assert delta['admit_member']['evidence_authority'] is False
+          assert delta['privacy_and_safety']['ambient_route_enabled'] is False
+          assert delta['privacy_and_safety']['cross_repo_write_default'] == 'DENY'
+          assert all(flow['authority_delta'] == 0 for flow in delta['add_flows'])
+          assert spiral['applies_admission_delta'].endswith('SIMPTOMAT_v1.json')
+          assert 'diagnostic_reasoning' in spiral['added_organ_hook']
+          assert ecology['promotion']['from_class'] == 'LEGACY_ARCHIVE'
+          assert ecology['promotion']['to_class'] == 'ORGAN'
+          assert ecology['historical_preservation']['silent_rewrite_forbidden'] is True
+          print('PASS: Simptomat organ admission topology is internally consistent')
+          PY
