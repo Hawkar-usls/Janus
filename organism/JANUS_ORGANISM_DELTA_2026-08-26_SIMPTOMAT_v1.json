@@ -1,0 +1,98 @@
+{
+  "schema": "janus.organism.admission_delta.v1",
+  "delta_id": "JANUS_ORGANISM_DELTA_2026-08-26_SIMPTOMAT_v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "created_at": "2026-08-26",
+  "status": "ACTIVE_ADMISSION_DELTA",
+  "applies_to": {
+    "manifest": "organism/JANUS_ORGANISM_v1.json",
+    "observed_version": "1.1.0"
+  },
+  "reason": "Simptomat was previously classified as legacy, but has acquired a distinct active JANUS-native function: consent-first adaptive differential-diagnostic reasoning and calibration with typed inputs/outputs, privacy gates, falsifiable hypothesis ranking and a bidirectional DemiHead Nexus v2.11 contract.",
+  "admit_member": {
+    "organ_key": "diagnostic_reasoning",
+    "repo": "Hawkar-usls/Simptomat",
+    "class": "DOMAIN_LAB",
+    "mcp_default": false,
+    "role": "CONSENT_FIRST_HEALTH_DIFFERENTIAL_REASONING_AND_CALIBRATION_LAB",
+    "authority": "RESEARCH_DIAGNOSTIC_HYPOTHESIS_ONLY",
+    "evidence_authority": false,
+    "emits": [
+      "DIAGNOSTIC_REASONING_PACKET",
+      "RANKED_DIAGNOSTIC_HYPOTHESIS",
+      "CONTRADICTION_LEDGER",
+      "UNCERTAINTY_LEDGER",
+      "NEXT_DISCRIMINATING_QUESTION",
+      "NEXT_CONFIRMATION_STEP",
+      "URGENT_ESCALATION_SIGNAL",
+      "CONSENTED_CALIBRATION_RECEIPT"
+    ],
+    "consumes": [
+      "SELF_REPORTED_SYMPTOM_PACKET",
+      "EVIDENCE_ANNOTATION",
+      "REJECTION_FEEDBACK",
+      "MEASUREMENT_RECEIPT",
+      "REFERENCE_LABEL_WITH_PROVENANCE",
+      "HUMAN_CONSENT"
+    ],
+    "member_link": "Hawkar-usls/Simptomat:.janus/JANUS_ORGANISM_LINK.json",
+    "demihead_nexus_contract": "Hawkar-usls/Demi_Head:contracts/NEXUS_V2_11_SIMPTOMAT_DIAGNOSTIC_REASONING_FROZEN_CONTRACT.json"
+  },
+  "add_flows": [
+    {
+      "from": "diagnostic_reasoning",
+      "to": ["guardian_cortex", "hypothesis_metabolism", "measurement_bench", "memory", "gateway"],
+      "payload": ["DIAGNOSTIC_REASONING_PACKET", "RANKED_DIAGNOSTIC_HYPOTHESIS", "CONTRADICTION_LEDGER", "NEXT_CONFIRMATION_STEP"],
+      "authority_delta": 0
+    },
+    {
+      "from": "guardian_cortex",
+      "to": ["diagnostic_reasoning"],
+      "payload": ["SIMPTOMAT_EPISTEMIC_REVIEW", "HOLD", "CONTRADICTION_REVIEW"],
+      "authority_delta": 0
+    },
+    {
+      "from": "hypothesis_metabolism",
+      "to": ["diagnostic_reasoning"],
+      "payload": ["RANKED_HYPOTHESIS", "GATE_REJECTION", "CANDIDATE_SUMMARY"],
+      "authority_delta": 0
+    },
+    {
+      "from": "measurement_bench",
+      "to": ["diagnostic_reasoning"],
+      "payload": ["MEASUREMENT_RECEIPT", "NEGATIVE_RESULT"],
+      "authority_delta": 0
+    },
+    {
+      "from": "diagnostic_reasoning",
+      "to": ["memory"],
+      "payload": ["CONSENTED_CALIBRATION_RECEIPT", "NEGATIVE_RESULT", "UNCERTAINTY_LEDGER"],
+      "authority_delta": 0,
+      "condition": "PERSISTENCE_SCOPE_REQUIRES_EXPLICIT_CONSENT"
+    }
+  ],
+  "privacy_and_safety": {
+    "ambient_route_enabled": false,
+    "explicit_health_route_required": true,
+    "raw_health_transcript_cross_repo_default": "DENY",
+    "direct_identifiers_cross_repo_default": "DENY",
+    "public_persistence_requires_explicit_consent": true,
+    "urgent_safety_signal_may_preempt_research_branching": true,
+    "cross_repo_write_default": "DENY"
+  },
+  "constitutional_laws": [
+    "DIAGNOSTIC_HYPOTHESIS != CLINICALLY_CONFIRMED_DIAGNOSIS",
+    "DEMIHEAD_REVIEW != CLINICAL_CONFIRMATION",
+    "RANKING != CERTAINTY",
+    "SELF_REPORT != CLINICAL_MEASUREMENT",
+    "CONSENT_TO_PROCESS != CONSENT_TO_PERSIST",
+    "ORGAN_ADMISSION != MEDICAL_VALIDATION",
+    "AUTHORITY_DELTA_ON_TRANSPORT = 0"
+  ],
+  "historical_transition": {
+    "previous_ecology_class": "LEGACY_ARCHIVE",
+    "new_ecology_class": "ORGAN",
+    "silent_history_rewrite": false,
+    "historical_audits_remain_valid_for_their_observed_date": true
+  }
+}

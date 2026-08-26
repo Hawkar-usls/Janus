@@ -1,0 +1,55 @@
+{
+  "schema": "janus.organism.repository_ecology.v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "version": "1.4.0",
+  "status": "ACTIVE_REPOSITORY_ECOLOGY",
+  "supersedes": "organism/JANUS_REPOSITORY_ECOLOGY_v1.3.json",
+  "extends_topology": "organism/JANUS_ORGANISM_v1.json",
+  "admission_delta": "organism/JANUS_ORGANISM_DELTA_2026-08-26_SIMPTOMAT_v1.json",
+  "extends_execution": "organism/JANUS_SPIRAL_TRANCEPTION_v1.3.json",
+  "purpose": "Record the repository ecology after Simptomat's transition from historical legacy prototype to an active typed health-domain diagnostic-reasoning organ.",
+  "unchanged_laws": [
+    "ALL_REPOSITORIES_MAY_BELONG_TO_ECOLOGY != ALL_REPOSITORIES_ARE_ORGANS",
+    "SUBTISSUE_PARENT != AUTHORITY_INHERITANCE",
+    "TOOLCHAIN_USE != EVIDENCE",
+    "UPSTREAM_WORKING_COPY != JANUS_AUTHORSHIP",
+    "PRIVATE_LOCATOR_NOT_PUBLISHED",
+    "AUTHORITY_DELTA_ON_TRANSPORT = 0"
+  ],
+  "promotion": {
+    "repository": "Hawkar-usls/Simptomat",
+    "from_class": "LEGACY_ARCHIVE",
+    "to_class": "ORGAN",
+    "organ_key": "diagnostic_reasoning",
+    "organ_class": "DOMAIN_LAB",
+    "role": "CONSENT_FIRST_HEALTH_DIFFERENTIAL_REASONING_AND_CALIBRATION_LAB",
+    "reason": [
+      "active diagnostic-reasoning core exists",
+      "typed inputs and outputs exist",
+      "explicit privacy and consent boundary exists",
+      "DemiHead Nexus v2.11 bidirectional contract exists",
+      "distinct function is not already represented by another organ",
+      "calibration and claim ceilings are machine-readable"
+    ],
+    "authority": "RESEARCH_DIAGNOSTIC_HYPOTHESIS_ONLY",
+    "evidence_authority": false
+  },
+  "historical_preservation": {
+    "v1_3_legacy_classification_deleted": false,
+    "v1_3_remains_historical_snapshot": true,
+    "historical_meta_registry_audits_remain_valid_for_observed_date": true,
+    "silent_rewrite_forbidden": true
+  },
+  "active_organ_contracts": [
+    "Hawkar-usls/Simptomat:.janus/JANUS_ORGANISM_LINK.json",
+    "Hawkar-usls/Simptomat:protocols/SIMPTOMAT_DIAGNOSTIC_REASONING_CORE-v1.0.json",
+    "Hawkar-usls/Demi_Head:contracts/NEXUS_V2_11_SIMPTOMAT_DIAGNOSTIC_REASONING_FROZEN_CONTRACT.json"
+  ],
+  "boundaries": [
+    "ACTIVE_HEALTH_REASONING_ORGAN != CLINICIAN",
+    "ORGAN_PROMOTION != CLINICAL_VALIDATION",
+    "DEMIHEAD_INTEGRATION != REFERENCE_STANDARD",
+    "CONSENTED_CASE_ARCHIVE != POPULATION_VALIDATION"
+  ],
+  "next_review": "Re-audit topology after the first independent reference-labeled Simptomat cohort or any material runtime transport implementation."
+}

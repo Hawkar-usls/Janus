@@ -1,0 +1,99 @@
+{
+  "schema": "janus.organism.execution.spiral.extension.v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "version": "1.3.0",
+  "status": "ACTIVE_EXECUTION_EXTENSION",
+  "extends": "organism/JANUS_SPIRAL_TRANCEPTION_v1.2.json",
+  "applies_admission_delta": "organism/JANUS_ORGANISM_DELTA_2026-08-26_SIMPTOMAT_v1.json",
+  "purpose": "Add health-domain adaptive differential reasoning to the existing 5D event-sourced JANUS spiral without rewriting the v1.2 execution constitution.",
+  "spiral_law": "RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE",
+  "added_organ_hook": {
+    "diagnostic_reasoning": [
+      "MAINTAIN_LIVE_DIFFERENTIAL",
+      "PRESERVE_SUPPORT_CONTRADICTION_UNCERTAINTY",
+      "SELECT_NEXT_DISCRIMINATING_QUESTION",
+      "REQUEST_EXTERNAL_MEASUREMENT_WHEN_CONVERSATION_PLATEAUS",
+      "REINTEGRATE_BOUNDED_DEMIHEAD_REVIEW",
+      "PRESERVE_CONSENT_SCOPE",
+      "CALIBRATE_ONLY_WITH_ADMISSIBLE_CASE_STATE"
+    ]
+  },
+  "health_domain_transition": [
+    "HUMAN_HEALTH_QUESTION_OR_SYMPTOM",
+    "SIMPTOMAT_LIVE_DIFFERENTIAL",
+    "D1_FORWARD_CAUSAL__WHAT_FOLLOWS_IF_CANDIDATE_IS_TRUE",
+    "D2_REVERSE_CAUSAL__WHAT_PRIOR_FACTS_ARE_REQUIRED",
+    "D3_TRANCEPTION__STRONGEST_COMMON_AND_COMPETING_EXPLANATIONS",
+    "D4_SCALE__SYMPTOM_TO_SYNDROME_TO_DISEASE_CLASS_AND_BACK",
+    "D5_TIME_IDENTITY__NEW_PROGRESSIVE_CHANGE_VS_LONGSTANDING_BASELINE",
+    "DEMIHEAD_PRIVACY_PROVENANCE_CONTRADICTION_REVIEW",
+    "OPTIONAL_LAPIS_COMPETING_HYPOTHESIS_ATTACK",
+    "OPTIONAL_MEASUREMENT_BENCH_HANDOFF",
+    "SIMPTOMAT_REINTEGRATION",
+    "NEXT_DISCRIMINATING_QUESTION_OR_EXTERNAL_TEST",
+    "JSON_CHECKPOINT_IF_CONSENT_SCOPE_ALLOWS",
+    "ASCEND_IF_STATE_CHANGED"
+  ],
+  "diagnostic_state_contract": {
+    "required_fields": [
+      "target_question",
+      "ranked_differential",
+      "supporting_features",
+      "contradicting_features",
+      "uncertainties",
+      "baseline_vs_new_state",
+      "next_discriminating_question",
+      "next_confirmation_step",
+      "urgent_red_flags",
+      "claim_ceiling",
+      "consent_scope"
+    ],
+    "candidate_states": [
+      "SUPPORTED",
+      "COMPATIBLE",
+      "WEAKLY_COMPATIBLE",
+      "CONTRADICTED",
+      "INSUFFICIENT_DATA",
+      "ESCALATE_FOR_REAL_WORLD_EVALUATION"
+    ]
+  },
+  "ascend_gate_extension": {
+    "health_state_may_ascend_on": [
+      "NEW_SYMPTOM_OR_HISTORY_INFORMATION",
+      "FALSIFIED_DIAGNOSTIC_BRANCH",
+      "MATERIAL_RANKING_CHANGE",
+      "NEW_CONTRADICTION",
+      "NEW_DISCRIMINATING_QUESTION",
+      "EXTERNAL_MEASUREMENT_HANDOFF",
+      "NEW_REFERENCE_LABEL_WITH_PROVENANCE"
+    ],
+    "subjective_confidence_increase_alone": "NOT_A_STATE_CHANGE",
+    "repeated_same_answer": "PLATEAU_NOT_NEW_TURN"
+  },
+  "plateau_extension": {
+    "when_conversation_no_longer_discriminates": "HOLD_FOR_EXTERNAL_MEASUREMENT",
+    "invented_internal_measurement": "FORBIDDEN",
+    "more_model_tokens_without_new_evidence": "NOT_NEW_EVIDENCE"
+  },
+  "calibration_return": {
+    "enabled_only_with_consent": true,
+    "self_report_may_refine_branching": true,
+    "demihead_review_may_refine_epistemic_guards": true,
+    "self_report_is_reference_label": false,
+    "demihead_review_is_reference_label": false,
+    "independent_reference_label_may_update_performance_calibration": true,
+    "development_holdout_separation_required": true
+  },
+  "health_firewall": [
+    "DIAGNOSTIC_HYPOTHESIS != CLINICALLY_CONFIRMED_DIAGNOSIS",
+    "RANKED_FIRST != CERTAIN",
+    "DEMIHEAD_PASS != MEDICAL_TRUTH",
+    "MODEL_SCORE != CLINICAL_PROBABILITY_UNLESS_CALIBRATED",
+    "SELF_REPORT != CLINICAL_MEASUREMENT",
+    "URGENT_RED_FLAG_OVERRIDES_RESEARCH_INFORMATION_GAIN",
+    "CONSENT_SCOPE_MUST_SURVIVE_EVERY_SPIRAL_TURN",
+    "PRIVATE_HEALTH_DATA != PUBLIC_CHECKPOINT",
+    "AUTHORITY_DELTA_ON_TRANSPORT = 0"
+  ],
+  "claim_ceiling": "This extension establishes a typed JANUS health-reasoning spiral and internal review path only. It does not establish clinical validation, diagnostic accuracy, treatment authority, medical-device status, or production health deployment."
+}
