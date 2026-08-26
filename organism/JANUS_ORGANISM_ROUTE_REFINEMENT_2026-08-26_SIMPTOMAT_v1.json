@@ -1,0 +1,82 @@
+{
+  "schema": "janus.organism.route_refinement.v1",
+  "refinement_id": "JANUS_ORGANISM_ROUTE_REFINEMENT_2026-08-26_SIMPTOMAT_v1",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "created_at": "2026-08-26",
+  "status": "ACTIVE_ROUTE_REFINEMENT",
+  "refines": "organism/JANUS_ORGANISM_DELTA_2026-08-26_SIMPTOMAT_v1.json",
+  "reason": "Post-admission compatibility audit found that generic janus-lapis and janus-io-public member contracts accept different payload classes from the high-level Simptomat outputs named in the admission delta. This refinement inserts explicit adapters/gates instead of pretending direct type compatibility.",
+  "observed_peer_contracts": {
+    "hypothesis_metabolism": {
+      "repository": "Hawkar-usls/janus-lapis",
+      "consumes": ["CANDIDATE_SET", "EVIDENCE_ANNOTATION", "REJECTION_FEEDBACK"],
+      "emits": ["RANKED_HYPOTHESIS", "GATE_REJECTION", "CANDIDATE_SUMMARY"]
+    },
+    "measurement_bench": {
+      "repository": "Hawkar-usls/janus-io-public",
+      "consumes": ["RAW_TELEMETRY", "EXPERIMENT_CONTRACT", "CONTROL", "CALIBRATION"],
+      "emits": ["MEASUREMENT_RECEIPT", "MATCHED_CONTROL_RESULT", "NEGATIVE_RESULT", "OBSERVATION"]
+    }
+  },
+  "effective_routes": [
+    {
+      "from": "diagnostic_reasoning",
+      "to": "guardian_cortex",
+      "input": "DIAGNOSTIC_REASONING_PACKET",
+      "adapter": "NONE_TYPED_NEXUS_V2_11",
+      "authority_delta": 0
+    },
+    {
+      "from": "diagnostic_reasoning",
+      "to": "hypothesis_metabolism",
+      "source_state": "DIAGNOSTIC_REASONING_PACKET",
+      "adapter": "Hawkar-usls/Simptomat:integrations/JANUS_LAPIS_DIAGNOSTIC_ADAPTER-v1.0.json",
+      "emitted_peer_types": ["CANDIDATE_SET", "EVIDENCE_ANNOTATION", "REJECTION_FEEDBACK"],
+      "direct_unadapted_diagnostic_packet": "DENY",
+      "authority_delta": 0
+    },
+    {
+      "from": "hypothesis_metabolism",
+      "to": "diagnostic_reasoning",
+      "payload": ["RANKED_HYPOTHESIS", "GATE_REJECTION", "CANDIDATE_SUMMARY"],
+      "authority_delta": 0
+    },
+    {
+      "from": "diagnostic_reasoning",
+      "to": "measurement_bench",
+      "source_state": "NEXT_CONFIRMATION_STEP",
+      "direct_route": "DENY",
+      "handoff_contract": "Hawkar-usls/Simptomat:integrations/JANUS_MEASUREMENT_HANDOFF-v1.0.json",
+      "required_gate": "EXPLICIT_MEASUREMENT_CONTRACT_GATE",
+      "post_gate_peer_types": ["EXPERIMENT_CONTRACT", "CONTROL", "CALIBRATION"],
+      "authority_delta": 0
+    },
+    {
+      "from": "measurement_bench",
+      "to": "diagnostic_reasoning",
+      "payload": ["MEASUREMENT_RECEIPT", "MATCHED_CONTROL_RESULT", "NEGATIVE_RESULT", "OBSERVATION"],
+      "authority_delta": 0
+    },
+    {
+      "from": "diagnostic_reasoning",
+      "to": "memory",
+      "payload": ["CONSENTED_CALIBRATION_RECEIPT", "NEGATIVE_RESULT", "UNCERTAINTY_LEDGER"],
+      "condition": "PERSISTENCE_SCOPE_REQUIRES_EXPLICIT_CONSENT",
+      "authority_delta": 0
+    }
+  ],
+  "deprecated_interpretations": [
+    "DIAGNOSTIC_REASONING_PACKET_DIRECTLY_CONSUMED_BY_LAPIS",
+    "NEXT_CONFIRMATION_STEP_DIRECTLY_CONSUMED_BY_MEASUREMENT_BENCH",
+    "SUGGESTED_TEST_IS_EXECUTABLE_EXPERIMENT_CONTRACT"
+  ],
+  "laws": [
+    "TYPE_COMPATIBILITY_REQUIRES_EXPLICIT_ADAPTER_OR_NATIVE_SCHEMA",
+    "ADAPTER_TRANSFORM != NEW_EVIDENCE",
+    "NEXT_CONFIRMATION_STEP != EXPERIMENT_CONTRACT",
+    "LAPIS_RANKING != CLINICAL_VALIDATION",
+    "MEASUREMENT_RECEIPT != AUTOMATIC_DIAGNOSIS",
+    "ROUTE != AUTHORITY",
+    "AUTHORITY_DELTA_ON_TRANSPORT = 0"
+  ]
+}
