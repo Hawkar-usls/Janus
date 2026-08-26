@@ -1,7 +1,7 @@
 {
   "schema_id": "hawkar.public-portfolio-index.v1",
   "owner": "Hawkar-usls",
-  "last_reviewed": "2026-08-09",
+  "last_reviewed": "2026-08-26",
   "purpose": "Machine-readable classification of the public repositories shown on this GitHub account. This file is a navigation and claim-boundary aid, not a scientific result.",
   "policy": {
     "ci_is_peer_review": false,
@@ -52,15 +52,22 @@
       "repository": "Janus_Genesis",
       "url": "https://github.com/Hawkar-usls/Janus_Genesis",
       "portfolio_class": "creative_technology",
-      "scope": "local-first interactive world and AI-assisted game",
-      "current_boundary": "fictional moral, mythological and theological language is not scientific evidence"
+      "scope": "local-first interactive world, persistent Git Habitat and AI-assisted game/system lineage",
+      "current_boundary": "fictional moral, mythological and theological language is not scientific evidence; Habitat references do not grant command authority"
     },
     {
       "repository": "Janus",
       "url": "https://github.com/Hawkar-usls/Janus",
       "portfolio_class": "engineering_prototype",
-      "scope": "local/cloud LLM gateway and application integration experiments",
-      "current_boundary": "no uptime, medical, security, financial or production-reliability guarantee"
+      "scope": "local/cloud LLM gateway, public metadata hub and canonical federated-organism topology surface",
+      "current_boundary": "no uptime, medical, security, financial or production-reliability guarantee; routing and organ membership do not create authority"
+    },
+    {
+      "repository": "Demi_Head",
+      "url": "https://github.com/Hawkar-usls/Demi_Head",
+      "portfolio_class": "guardian_mesh_integration_prototype",
+      "scope": "bounded evidence accounting, provenance and contradiction review, Nexus typed routing, fail-closed integration and zero-authority Guardian Mesh reference head",
+      "current_boundary": "not an exclusive truth authority, clinician, production state integration or ambient external-effect controller; Nexus transport does not create authority"
     },
     {
       "repository": "Hrain",
@@ -115,8 +122,8 @@
       "repository": "janus-meta-registry",
       "url": "https://github.com/Hawkar-usls/janus-meta-registry",
       "portfolio_class": "archival_meta_registry",
-      "scope": "historical hypotheses, artifacts, metaphors, red-team records and corrections",
-      "current_boundary": "not a flagship result; archived labels do not establish physical, medical, theological or complexity claims"
+      "scope": "historical hypotheses, artifacts, metaphors, red-team records, corrections and current topology deltas",
+      "current_boundary": "registry presence is provenance rather than physical, medical, theological or complexity truth"
     },
     {
       "repository": "Janus-Demiurge",
@@ -156,9 +163,10 @@
     {
       "repository": "Simptomat",
       "url": "https://github.com/Hawkar-usls/Simptomat",
-      "portfolio_class": "legacy_health_information_prototype",
-      "scope": "experimental conversational health-information interface",
-      "current_boundary": "not a diagnostic device, treatment system or emergency-triage substitute"
+      "portfolio_class": "health_information_research_prototype",
+      "scope": "consent-first adaptive differential-diagnostic reasoning, ranked disease hypotheses, next-question/confirmation-step selection and pseudonymized calibration cases",
+      "organ_key": "diagnostic_reasoning",
+      "current_boundary": "may form research diagnostic hypotheses; clinical validation, diagnostic accuracy, calibrated clinical probabilities and medical-device status are not established; not a treatment or emergency-triage substitute"
     },
     {
       "repository": "SLOT",
