@@ -1,0 +1,45 @@
+name: simptomat-route-refinement
+
+on:
+  push:
+    paths:
+      - 'organism/JANUS_ORGANISM_ROUTE_REFINEMENT_2026-08-26_SIMPTOMAT_v1.json'
+      - 'organism/JANUS_SPIRAL_TRANCEPTION_v1.4.json'
+      - '.github/workflows/simptomat-route-refinement.yml'
+  pull_request:
+    paths:
+      - 'organism/JANUS_ORGANISM_ROUTE_REFINEMENT_2026-08-26_SIMPTOMAT_v1.json'
+      - 'organism/JANUS_SPIRAL_TRANCEPTION_v1.4.json'
+      - '.github/workflows/simptomat-route-refinement.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate route compatibility refinement
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          route = json.loads(Path('organism/JANUS_ORGANISM_ROUTE_REFINEMENT_2026-08-26_SIMPTOMAT_v1.json').read_text())
+          spiral = json.loads(Path('organism/JANUS_SPIRAL_TRANCEPTION_v1.4.json').read_text())
+          peers = route['observed_peer_contracts']
+          assert peers['hypothesis_metabolism']['consumes'] == ['CANDIDATE_SET', 'EVIDENCE_ANNOTATION', 'REJECTION_FEEDBACK']
+          assert peers['measurement_bench']['consumes'] == ['RAW_TELEMETRY', 'EXPERIMENT_CONTRACT', 'CONTROL', 'CALIBRATION']
+          lapis = next(x for x in route['effective_routes'] if x['to'] == 'hypothesis_metabolism' and x['from'] == 'diagnostic_reasoning')
+          assert lapis['emitted_peer_types'] == ['CANDIDATE_SET', 'EVIDENCE_ANNOTATION', 'REJECTION_FEEDBACK']
+          measure = next(x for x in route['effective_routes'] if x['to'] == 'measurement_bench' and x['from'] == 'diagnostic_reasoning')
+          assert measure['direct_route'] == 'DENY'
+          assert measure['required_gate'] == 'EXPLICIT_MEASUREMENT_CONTRACT_GATE'
+          assert measure['post_gate_peer_types'] == ['EXPERIMENT_CONTRACT', 'CONTROL', 'CALIBRATION']
+          assert all(x['authority_delta'] == 0 for x in route['effective_routes'])
+          assert spiral['applies_route_refinement'].endswith('SIMPTOMAT_v1.json')
+          print('PASS: Simptomat peer routes are explicitly type-compatible or gated')
+          PY
