@@ -7,6 +7,17 @@ s = s.replace(
     'uint8_t brightness=170;\nuint8_t visualSource=0;\nfloat visualGain=1.0f;\nuint32_t lastCatalogAttempt=0;\nString statusLine="RC2.1 READY";'
 )
 
+# M5Cardputer 1.1.1 on Cardputer ADV exposes fn + printable word and del,
+# but not the newer master-only esc/left/right/up/down/backspace booleans.
+# The physical ADV legends are decoded directly from the Fn layer:
+# Fn+` ESC, Fn+, LEFT, Fn+/ RIGHT, Fn+; UP, Fn+. DOWN.
+s = s.replace("  bool esc=ks.esc||rawFn(ks,'`')||rawFn(ks,'~');", "  bool esc=rawFn(ks,'`')||rawFn(ks,'~');")
+s = s.replace("  bool left=ks.left||rawFn(ks,',');", "  bool left=rawFn(ks,',');")
+s = s.replace("  bool right=ks.right||rawFn(ks,'/');", "  bool right=rawFn(ks,'/');")
+s = s.replace("  bool up=ks.up||rawFn(ks,';');", "  bool up=rawFn(ks,';');")
+s = s.replace("  bool down=ks.down||rawFn(ks,'.');", "  bool down=rawFn(ks,'.');")
+s = s.replace("      if(ks.backspace&&wifiTyped.length())wifiTyped.remove(wifiTyped.length()-1);", "      if(ks.del&&wifiTyped.length())wifiTyped.remove(wifiTyped.length()-1);")
+
 s = s.replace(
     '  static uint8_t visSource=0; static float visGain=1.0f;\n  if(mode==Mode::VIS){if(rise(left,prev.l))visSource=(visSource+3)%4;if(rise(right,prev.r))visSource=(visSource+1)%4;if(rise(up,prev.u))visGain=min(4.0f,visGain*1.2f);if(rise(down,prev.d))visGain=max(0.5f,visGain/1.2f);}',
     '  if(mode==Mode::VIS){if(rise(left,prev.l))visualSource=(visualSource+3)%4;if(rise(right,prev.r))visualSource=(visualSource+1)%4;if(rise(up,prev.u))visualGain=min(4.0f,visualGain*1.2f);if(rise(down,prev.d))visualGain=max(0.5f,visualGain/1.2f);}'
