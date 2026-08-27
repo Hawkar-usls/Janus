@@ -1,0 +1,63 @@
+name: ADV Elite RC2.1 ARM build
+
+on:
+  push:
+    branches:
+      - chatgpt/adv-elite-rc21-recovery
+    paths:
+      - '.github/workflows/adv-elite-rc21-build-arm.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  buildarm:
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 tools/patch_adv_rc21.py
+      - uses: arduino/setup-arduino-cli@v2
+        with:
+          version: 1.1.1
+      - name: Install core and libs
+        run: |
+          arduino-cli config init
+          arduino-cli config add board_manager.additional_urls https://static-cdn.m5stack.com/resource/arduino/package_m5stack_index.json
+          arduino-cli core update-index
+          arduino-cli core install m5stack:esp32@3.2.5
+          arduino-cli lib update-index
+          arduino-cli lib install M5Cardputer
+          arduino-cli lib install 'ArduinoJson@6.21.5'
+          arduino-cli lib install 'ESP8266Audio@1.9.7'
+          arduino-cli lib install M5UnitUnified
+          arduino-cli lib install M5Utility
+          arduino-cli lib install M5HAL
+          arduino-cli lib install 'BME68x Sensor library'
+          mkdir -p "$HOME/Arduino/libraries"
+          git clone --depth 1 https://github.com/m5stack/M5Unit-ENV.git "$HOME/Arduino/libraries/M5UnitENV"
+      - name: Compile
+        run: |
+          mkdir -p build
+          arduino-cli compile --fqbn m5stack:esp32:m5stack_cardputer --build-property build.partitions=huge_app --build-property upload.maximum_size=3145728 --output-dir build --warnings all firmware/ADV_Elite_RC2_1_RECOVERY
+      - name: Merge
+        run: |
+          python3 -m pip install 'esptool<5'
+          python3 -m esptool --chip esp32s3 merge_bin -o build/ADV_Elite_RC2_1_RECOVERY_FACTORY.bin 0x0000 build/ADV_Elite_RC2_1_RECOVERY.ino.bootloader.bin 0x8000 build/ADV_Elite_RC2_1_RECOVERY.ino.partitions.bin 0x10000 build/ADV_Elite_RC2_1_RECOVERY.ino.bin
+          sha256sum build/ADV_Elite_RC2_1_RECOVERY_FACTORY.bin build/ADV_Elite_RC2_1_RECOVERY.ino.bin > build/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ADV_Elite_RC2_1_RECOVERY_ARM
+          path: build/*
+      - name: Publish binaries
+        run: |
+          mkdir -p firmware/releases
+          cp build/ADV_Elite_RC2_1_RECOVERY_FACTORY.bin firmware/releases/ADV_Elite_RC2_1_RECOVERY_FACTORY.bin
+          cp build/ADV_Elite_RC2_1_RECOVERY.ino.bin firmware/releases/ADV_Elite_RC2_1_RECOVERY_APP.bin
+          cp build/SHA256SUMS.txt firmware/releases/ADV_Elite_RC2_1_RECOVERY_SHA256SUMS.txt
+          git config user.name 'JANUS Build Bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add firmware/releases
+          git commit -m 'Build ADV Elite RC2.1 recovery binaries [skip ci]' || exit 0
+          git push
