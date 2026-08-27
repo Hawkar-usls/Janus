@@ -42,6 +42,10 @@ jobs:
           arduino-cli lib install M5Cardputer
           arduino-cli lib install 'ArduinoJson@6.21.5'
           arduino-cli lib install 'ESP8266Audio@1.9.7'
+          arduino-cli lib install M5UnitUnified
+          arduino-cli lib install M5Utility
+          arduino-cli lib install M5HAL
+          arduino-cli lib install 'BME68x Sensor library'
           mkdir -p "$HOME/Arduino/libraries"
           git clone --depth 1 https://github.com/m5stack/M5Unit-ENV.git "$HOME/Arduino/libraries/M5UnitENV"
 
