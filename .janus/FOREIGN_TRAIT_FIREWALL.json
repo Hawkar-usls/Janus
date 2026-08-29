@@ -1,0 +1,39 @@
+{
+  "schema": "JANUS.ForeignTraitFirewall/v1.0",
+  "status": "DEFAULT_DENY",
+  "core_laws": [
+    "RECEIVE != LEARN",
+    "LEARN != INTERNALIZE",
+    "FOREIGN_CONTENT_CAN_INFORM_FACTS",
+    "FOREIGN_CONTENT_CANNOT_MODIFY_IDENTITY_OR_POLICY",
+    "UNKNOWN_PROVENANCE => QUARANTINE",
+    "SEMANTIC_FILTERING != TRUST",
+    "PARAPHRASE != TRUST",
+    "SCALE != SAFETY"
+  ],
+  "identity_source_policy": {
+    "automatic_trait_source": "approved JANUS:* lineage only",
+    "foreign_model_generated": "REFERENCE_OR_DENY",
+    "user_supplied": "REFERENCE_ONLY",
+    "external_web": "REFERENCE_ONLY",
+    "legacy_without_provenance": "LEGACY_UNTRUSTED",
+    "unknown": "QUARANTINE"
+  },
+  "training_policy": {
+    "identity_policy_persona_trait_alignment": "JANUS_OWNED_AND_APPROVED_ONLY",
+    "foreign_model_generated": "DEFAULT_DENY",
+    "semantic_filter_or_paraphrase_can_upgrade_trust": false,
+    "track_foreign_sample_count": true,
+    "track_independent_foreign_teacher_lineages": true
+  },
+  "outbound_policy": {
+    "janus_lineage_manifest_required": true,
+    "trait_scope_must_be_explicit": true,
+    "covert_or_subliminal_trait_propagation": "FORBIDDEN"
+  },
+  "research_basis": [
+    "Nature 2026 s41586-026-10319-8",
+    "arXiv:2602.04899",
+    "arXiv:2608.26958"
+  ]
+}
