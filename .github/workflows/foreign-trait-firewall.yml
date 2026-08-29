@@ -1,0 +1,43 @@
+name: Foreign Trait Firewall Guard
+
+on:
+  push:
+    branches:
+      - security/foreign-trait-firewall
+  pull_request:
+    paths:
+      - "foreign_trait_firewall.py"
+      - "janus_core.py"
+      - "scripts/apply_foreign_trait_firewall.py"
+      - "tests/test_foreign_trait_firewall.py"
+      - "docs/FOREIGN_TRAIT_FIREWALL.md"
+
+permissions:
+  contents: write
+
+jobs:
+  integrate-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref_name }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Apply idempotent integration
+        run: python scripts/apply_foreign_trait_firewall.py
+      - name: Compile
+        run: python -m py_compile foreign_trait_firewall.py janus_core.py
+      - name: Unit tests
+        run: python -m unittest discover -s tests -p "test_foreign_trait_firewall.py" -v
+      - name: Commit generated integration if needed
+        if: github.event_name == 'push'
+        run: |
+          if ! git diff --quiet -- janus_core.py; then
+            git config user.name "janus-firewall-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git add janus_core.py
+            git commit -m "security: integrate foreign trait firewall into JANUS core"
+            git push
+          fi
