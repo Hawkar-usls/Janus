@@ -1,0 +1,23 @@
+name: AURA Oracle Bridge Integrity
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.janus/AURA_ORACLE_LINK.json'
+      - 'tests/test_aura_oracle_bridge_contract.py'
+      - 'janus_core.py'
+      - 'organism/JANUS_ORGANISM_v1.json'
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify JANUS to AURA runtime bridge
+        run: python tests/test_aura_oracle_bridge_contract.py
