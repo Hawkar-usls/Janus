@@ -12,6 +12,7 @@ def main():
 
     assert link["organ_key"] == "symbolic_imagination"
     assert link["organ_repository"] == "Hawkar-usls/aura-oracle-tg"
+    assert link["execution_law"] == "AURA_UI -> JANUS_GATEWAY -> PYTHIA_ORACLE -> AURA_UI"
     assert link["module_authority_lane"] == "BRANCH_AND_VERIFY"
     assert link["direct_main_write"] is False
     assert link["autonomous_merge"] is False
