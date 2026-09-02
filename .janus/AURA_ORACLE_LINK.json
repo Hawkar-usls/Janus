@@ -1,0 +1,30 @@
+{
+  "schema": "janus.organ_runtime_link.v1",
+  "link_id": "JANUS_TO_AURA_ORACLE",
+  "organism_id": "JANUS_FEDERATED_ORGANISM",
+  "organ_key": "symbolic_imagination",
+  "gateway_repository": "Hawkar-usls/Janus",
+  "organ_repository": "Hawkar-usls/aura-oracle-tg",
+  "organ_pages": "https://hawkar-usls.github.io/aura-oracle-tg/",
+  "module_descriptor": "Hawkar-usls/aura-oracle-tg:.janus/JANUS_MODULE.json",
+  "bridge_contract": "Hawkar-usls/aura-oracle-tg:.janus/JANUS_ORACLE_BRIDGE.json",
+  "runtime": {
+    "implementation": "janus_core.py",
+    "state": {"method": "GET", "path": "/api/get_user_state"},
+    "cards": {"method": "POST", "path": "/api/generate_cards"},
+    "interpret": {"method": "POST", "path": "/api/interpret"},
+    "reading_store": "oracle_readings"
+  },
+  "execution_law": "AURA_UI -> JANUS_GATEWAY -> PYTHIA_ORACLE -> AURA_UI",
+  "module_authority_lane": "BRANCH_AND_VERIFY",
+  "direct_main_write": false,
+  "autonomous_merge": false,
+  "authority_delta": 0,
+  "evidence_authority": false,
+  "firewalls": [
+    "ORACLE_GUIDANCE != EMPIRICAL_PROOF",
+    "SYMBOLIC_OUTPUT != PREDICTION",
+    "AURA_OUTPUT != EVIDENCE",
+    "CONNECTIVITY != AUTHORITY"
+  ]
+}
