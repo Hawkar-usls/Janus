@@ -21,6 +21,7 @@ jobs:
           python -m compileall -q integrations/tranception_rowan/probe.py
           python -m unittest discover -s integrations/tranception_rowan/tests -v
           python -m json.tool integrations/tranception_rowan/discovery_manifest.json > /dev/null
+          python -m compileall -q integrations/tranception_rowan/assay_distribution.py
           python -m compileall -q integrations/tranception_rowan/dms_evidence.py
           python integrations/tranception_rowan/probe.py --arm wildtype --output "${RUNNER_TEMP}/tranception-wt-plan.json"
           python integrations/tranception_rowan/probe.py --arm K5A --output "${RUNNER_TEMP}/tranception-mut-plan.json"
@@ -78,5 +79,37 @@ jobs:
         with:
           name: bbc1-k5a-dms-provenance-${{ github.run_id }}
           path: ${{ runner.temp }}/bbc1-k5a-assay-evidence.json
+          retention-days: 7
+          if-no-files-found: error
+
+  population-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Independently download and audit the full SHA-pinned public BBC1 assay
+        run: |
+          python integrations/tranception_rowan/assay_distribution.py \
+            --output "${RUNNER_TEMP}/bbc1-assay-population.json"
+      - name: Verify evidence status and avoid provider claims
+        env:
+          AUDIT_FILE: ${{ runner.temp }}/bbc1-assay-population.json
+        run: |
+          python - <<'PY'
+          import os,json
+          d=json.load(open(os.environ["AUDIT_FILE"],encoding="utf-8"))
+          assert d["K5A"]["rank_ascending"] >= 1
+          assert d["rowan_model_prediction"]=="NOT_RUN"
+          assert d["tranception_model_prediction"]=="NOT_RUN"
+          assert d["row_count"]==d["unique_sequence_count"]
+          print("BBC1_ASSAY_POPULATION_INTEGRITY=PASS")
+          PY
+      - name: Publish pinned public descriptive report as CI evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: bbc1-full-public-assay-audit-${{ github.run_id }}
+          path: ${{ runner.temp }}/bbc1-assay-population.json
           retention-days: 7
           if-no-files-found: error
