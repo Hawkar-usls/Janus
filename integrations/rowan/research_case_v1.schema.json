@@ -79,9 +79,7 @@
         "method": {
           "enum": [
             "starling",
-            "chemprop_nevolianis2025",
-            "aimnet2_wagen2024",
-            "gxtb_wagen2026"
+            "chemprop_nevolianis2025"
           ]
         },
         "pka_range": {
