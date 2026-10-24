@@ -156,8 +156,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Reproduce published retrieval-vs-no-retrieval on official pinned ProteinGym Git blob
         run: |
-          python integrations/tranception_rowan/retrieval_paired_audit.py \\
-            --output "${RUNNER_TEMP}/tranception-retrieval-paired.json"
+          python integrations/tranception_rowan/retrieval_paired_audit.py --output "${RUNNER_TEMP}/tranception-retrieval-paired.json"
       - name: Verify source scope and non-execution evidence boundary
         env:
           RECEIPT: ${{ runner.temp }}/tranception-retrieval-paired.json
