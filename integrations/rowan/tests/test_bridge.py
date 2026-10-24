@@ -52,15 +52,27 @@ class FakeWorkflow:
         return FakeResult()
 
 
+class FakeUser:
+    weekly_credits = 18.5
+    credits = 120.0
+    enabled_workflows = ["pka", "basic_calculation"]
+    email = "not-for-receipt@example.invalid"
+
+
 class FakeSDK:
     called = None
+    pKaResult = FakeResult
+
+    def whoami(self):
+        return FakeUser()
 
     def submit_pka_workflow(self, **kwargs):
         self.called = kwargs
         return FakeWorkflow()
 
-    def retrieve_workflow(self, workflow_id):
+    def retrieve_workflow(self, workflow_id, *, result_type):
         assert workflow_id == FakeWorkflow.uuid
+        assert result_type is self.pKaResult
         return FakeWorkflow()
 
 
@@ -81,6 +93,15 @@ class BridgeTests(TestCase):
         with patch.dict(os.environ, {}, clear=True):
             with self.assertRaises(PermissionError):
                 bridge.operate(example_case(), "draft", sdk=FakeSDK())
+
+    def test_read_only_account_preflight_no_personal_data(self):
+        with patch.dict(os.environ, {"ROWAN_API_KEY": "test-non-secret"}):
+            r = bridge.operate(example_case(), "auth", sdk=FakeSDK())
+        self.assertEqual(r["event"], "ROWAN_ACCOUNT_CHECKED_NO_COMPUTATION")
+        self.assertEqual(r["provider"]["account"]["weekly_credits"], 18.5)
+        self.assertTrue(r["provider"]["account"]["pka_available"])
+        self.assertNotIn("email", str(r))
+        self.assertIsNone(r["workflow_uuid"])
 
     def test_submit_explicit_authorization(self):
         with patch.dict(os.environ, {"ROWAN_API_KEY": "test-non-secret"}):
