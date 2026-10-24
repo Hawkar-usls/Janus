@@ -16,7 +16,7 @@ jobs:
     timeout-minutes: 6
     steps:
       - uses: actions/checkout@v4
-      - name: Run 12 no-provider-calls provenance and safety tests
+      - name: Run no-provider-calls provenance and safety tests
         run: |
           python -m compileall -q integrations/tranception_rowan/probe.py
           python -m unittest discover -s integrations/tranception_rowan/tests -v
@@ -35,6 +35,8 @@ jobs:
           import inspect
           import rowan
           assert hasattr(rowan, "ProteinCofoldingResult")
+          assert hasattr(rowan, "CofoldingModel")
+          assert hasattr(rowan.CofoldingModel, "BOLTZ_2")
           assert hasattr(rowan, "whoami")
           sig = inspect.signature(rowan.submit_protein_cofolding_workflow)
           for arg in ("initial_protein_sequences", "model", "num_samples", "use_msa_server", "max_credits", "is_draft"):
