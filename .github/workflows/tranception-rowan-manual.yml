@@ -1,0 +1,90 @@
+name: Tranception Rowan single-arm research
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Account check, save draft, one spend-authorized model run, or retrieve existing
+        required: true
+        type: choice
+        default: auth
+        options: [auth, draft, submit, collect]
+      arm:
+        description: ProteinGym BBC1 control sequence arm
+        required: true
+        type: choice
+        default: wildtype
+        options: [wildtype, K5A]
+      max_credits:
+        description: Explicit per-job credit ceiling
+        required: true
+        type: choice
+        default: '1'
+        options: ['1', '2', '3', '5', '10']
+      credit_permission:
+        description: Select YES only for approved one-arm submit
+        required: true
+        type: choice
+        default: 'NO'
+        options: ['NO', 'YES']
+      workflow_uuid:
+        description: Existing Rowan UUID, required only for collect
+        required: false
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: janus-rowan-research-single-arm
+  cancel-in-progress: false
+jobs:
+  provider:
+    runs-on: ubuntu-latest
+    environment: rowan-research
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate input and credit authorization, no provider call
+        shell: bash
+        env:
+          MODE: ${{ inputs.mode }}
+          CREDIT_PERMISSION: ${{ inputs.credit_permission }}
+          WORKFLOW_UUID: ${{ inputs.workflow_uuid }}
+        run: |
+          if [[ "$MODE" == submit && "$CREDIT_PERMISSION" != YES ]]; then
+            echo 'Blocked: no explicit credit permission'; exit 2
+          fi
+          if [[ "$MODE" != submit && "$CREDIT_PERMISSION" == YES ]]; then
+            echo 'Blocked: credit permission only applies to submit'; exit 2
+          fi
+          if [[ "$MODE" == collect && -z "$WORKFLOW_UUID" ]]; then
+            echo 'Blocked: collect requires UUID'; exit 2
+          fi
+          if [[ "$MODE" != collect && -n "$WORKFLOW_UUID" ]]; then
+            echo 'Blocked: unexpected UUID'; exit 2
+          fi
+      - name: Install Rowan SDK
+        run: python -m pip install 'rowan-python>=3,<4'
+      - name: Execute one explicitly selected provider action
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          MODE: ${{ inputs.mode }}
+          ARM: ${{ inputs.arm }}
+          CREDIT_PERMISSION: ${{ inputs.credit_permission }}
+          MAX_CREDITS: ${{ inputs.max_credits }}
+          WORKFLOW_UUID: ${{ inputs.workflow_uuid }}
+        shell: bash
+        run: |
+          if [[ -z "$ROWAN_API_KEY" ]]; then
+            echo 'Blocked: ROWAN_API_KEY environment secret missing'; exit 2
+          fi
+          args=(--arm "$ARM" --mode "$MODE" --max-credits "$MAX_CREDITS" --output "$RUNNER_TEMP/tranception-rowan-receipt.json")
+          if [[ "$MODE" == submit ]]; then args+=(--authorize-credit-use); fi
+          if [[ "$MODE" == collect ]]; then args+=(--workflow-id "$WORKFLOW_UUID"); fi
+          python integrations/tranception_rowan/probe.py "${args[@]}"
+      - name: Keep draft/submit/collect receipt private for one day
+        if: success() && inputs.mode != 'auth'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tranception-rowan-${{ github.run_id }}
+          path: ${{ runner.temp }}/tranception-rowan-receipt.json
+          retention-days: 1
+          if-no-files-found: error
