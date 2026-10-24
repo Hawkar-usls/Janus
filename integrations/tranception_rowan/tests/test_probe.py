@@ -41,8 +41,13 @@ class FakeWorkflow:
         return FakeResult()
 
 
+class FakeModel:
+    BOLTZ_2 = "boltz_2"
+
+
 class FakeSDK:
     ProteinCofoldingResult = FakeResult
+    CofoldingModel = FakeModel
 
     def __init__(self):
         self.arguments = None
@@ -98,7 +103,7 @@ class TranceptionRowanTests(unittest.TestCase):
                 probe.execute(manifest, "K5A", "submit", sdk=FakeSDK())
 
     def test_limits_fail_closed(self):
-        for n in (0, 11, 2.0, True):
+        for n in (0, 16, 2.0, True):
             with self.assertRaises(ValueError):
                 probe.execute(manifest, "K5A", "plan", max_credits=n)
 
@@ -108,9 +113,9 @@ class TranceptionRowanTests(unittest.TestCase):
             r = probe.execute(manifest, "K5A", "draft", sdk=sdk)
         self.assertEqual(r["event"], "ROWAN_DRAFT_CREATED_NO_COMPUTATION")
         self.assertTrue(sdk.arguments["is_draft"])
-        self.assertEqual(sdk.arguments["model"], "boltz-2")
+        self.assertEqual(sdk.arguments["model"], "boltz_2")
         self.assertEqual(len(sdk.arguments["initial_protein_sequences"]), 1)
-        self.assertEqual(sdk.arguments["max_credits"], 1)
+        self.assertEqual(sdk.arguments["max_credits"], 10)
 
     def test_one_live_submit_requires_budget(self):
         sdk = FakeSDK()
@@ -129,6 +134,24 @@ class TranceptionRowanTests(unittest.TestCase):
         self.assertEqual(r["structural_confidence"]["avg_lddt"], 0.7)
         self.assertFalse(r["biological_fitness_inferred"])
         self.assertFalse(r["protein_fitness_measured"])
+
+    def test_auth_records_balance_as_unverified_not_fabricated(self):
+        with patch.dict(os.environ, {"ROWAN_API_KEY": "fake-unit-test-key"}):
+            r = probe.execute(manifest, "wildtype", "auth", sdk=FakeSDK())
+        self.assertEqual(r["provider_login"], "VERIFIED_BY_WHOAMI")
+        self.assertEqual(r["account_free_credit_status"], "NOT_ATTESTED")
+        self.assertFalse(r["free_credits_balance_verified"])
+        self.assertEqual(r["event"], "ROWAN_AUTH_CHECKED_NO_CHEMISTRY_JOB")
+
+    def test_bounded_fifteen_credit_ceiling_accepted(self):
+        r = probe.execute(manifest, "wildtype", "plan", max_credits=15)
+        self.assertEqual(r["max_credits"], 15)
+
+    def test_no_result_is_not_implicitly_a_fitness_claim(self):
+        with patch.dict(os.environ, {"ROWAN_API_KEY": "fake-unit-test-key"}):
+            r = probe.execute(manifest, "K5A", "draft", sdk=FakeSDK())
+        self.assertFalse(r["biological_fitness_inferred"])
+        self.assertIsNone(r["structural_confidence"])
 
     def test_wrong_protein_arm_fails(self):
         with self.assertRaises(ValueError):
