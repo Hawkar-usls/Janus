@@ -1,0 +1,48 @@
+name: Rowan bridge offline tests
+on:
+  push:
+    paths:
+      - "integrations/rowan/**"
+      - ".github/workflows/rowan-bridge-offline.yml"
+  pull_request:
+    paths:
+      - "integrations/rowan/**"
+      - ".github/workflows/rowan-bridge-offline.yml"
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate with Python built-ins only
+        run: |
+          python -m compileall -q integrations/rowan/janus_rowan_bridge.py integrations/rowan/janus_science_pipeline.py
+          python -m unittest discover -s integrations/rowan/tests -v
+          python -m json.tool integrations/rowan/research_case_v1.schema.json > /dev/null
+          python -m json.tool integrations/rowan/examples/phenol_case.json > /dev/null
+      - name: Confirm absence of remote Rowan executions in CI
+        run: |
+          test -z "${ROWAN_API_KEY:-}"
+  sdk-compatibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Install published Rowan SDK without any API key
+        run: python -m pip install 'rowan-python>=3,<4'
+      - name: Check public API signatures without network submissions
+        run: |
+          python - <<'PY'
+          import inspect
+          import rowan
+          assert hasattr(rowan, "pKaResult"), "pKaResult is not exported"
+          assert hasattr(rowan, "whoami")
+          submit = inspect.signature(rowan.submit_pka_workflow)
+          for name in ("initial_molecule", "method", "pka_range", "max_credits", "is_draft"):
+              assert name in submit.parameters, name
+          retrieve = inspect.signature(rowan.retrieve_workflow)
+          assert "result_type" in retrieve.parameters
+          assert "wait" in inspect.signature(rowan.Workflow.result).parameters
+          print("ROWAN_SDK_V3_SURFACE_COMPATIBLE=PASS")
+          PY
