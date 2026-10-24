@@ -1,0 +1,44 @@
+name: Tranception Rowan evidence and SDK checks
+on:
+  push:
+    paths:
+      - 'integrations/tranception_rowan/**'
+      - '.github/workflows/tranception-rowan-check.yml'
+  pull_request:
+    paths:
+      - 'integrations/tranception_rowan/**'
+      - '.github/workflows/tranception-rowan-check.yml'
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run 12 no-provider-calls provenance and safety tests
+        run: |
+          python -m compileall -q integrations/tranception_rowan/probe.py
+          python -m unittest discover -s integrations/tranception_rowan/tests -v
+          python -m json.tool integrations/tranception_rowan/discovery_manifest.json > /dev/null
+          python integrations/tranception_rowan/probe.py --arm wildtype --output "${RUNNER_TEMP}/tranception-wt-plan.json"
+          python integrations/tranception_rowan/probe.py --arm K5A --output "${RUNNER_TEMP}/tranception-mut-plan.json"
+  sdk-surface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Install public Rowan Python v3 only, no API credentials
+        run: python -m pip install 'rowan-python>=3,<4'
+      - name: Verify protein cofolding SDK signatures without submitting
+        run: |
+          python - <<'PY'
+          import inspect
+          import rowan
+          assert hasattr(rowan, "ProteinCofoldingResult")
+          assert hasattr(rowan, "whoami")
+          sig = inspect.signature(rowan.submit_protein_cofolding_workflow)
+          for arg in ("initial_protein_sequences", "model", "num_samples", "use_msa_server", "max_credits", "is_draft"):
+              assert arg in sig.parameters, arg
+          assert "result_type" in inspect.signature(rowan.retrieve_workflow).parameters
+          print("TRANCEPTION_ROWAN_SDK_SURFACE=PASS")
+          PY
