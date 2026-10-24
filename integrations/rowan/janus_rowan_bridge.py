@@ -14,6 +14,7 @@ import hashlib
 import importlib
 import json
 import os
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -49,6 +50,8 @@ def validate(case: dict) -> dict:
     if not isinstance(case, dict):
         raise ValueError("Case must be a JSON object")
     case_id = require_str(case, "case_id")
+    if not re.fullmatch(r"[A-Za-z0-9._-]{1,80}", case_id):
+        raise ValueError("case_id must be 1..80 ASCII letters/digits/._-")
     hypothesis = require_str(case, "hypothesis")
     alternative = require_str(case, "alternative")
     falsifier = require_str(case, "falsifier")
@@ -108,7 +111,7 @@ def base_receipt(case: dict, params: dict) -> dict:
             "api_docs": "https://docs.rowansci.com/api/python/v3/",
             "workflow_type": "pka",
             "method": params["method"],
-            "smiles": params["smiles"],
+            "smiles_sha256": hashlib.sha256(params["smiles"].encode("utf-8")).hexdigest(),
             "pka_range": params["pka_range"],
             "max_credits": params["max_credits"],
         },
@@ -145,7 +148,7 @@ def operate(case: dict, mode: str = "plan", *, authorize_spend: bool = False,
             method=params["method"],
             pka_range=tuple(params["pka_range"]),
             max_credits=params["max_credits"],
-            name="JANUS " + params["case_id"][:90],
+            name="JANUS " + params["case_id"],
             is_draft=(mode == "draft"),
         )
         receipt["event"] = (
@@ -157,6 +160,8 @@ def operate(case: dict, mode: str = "plan", *, authorize_spend: bool = False,
         # Reject unrelated jobs; keep the claim boundary explicit.
         if getattr(wf, "workflow_type", None) != "pka":
             raise ValueError("Retrieved Rowan workflow is not pka")
+        if getattr(wf, "name", None) != "JANUS " + params["case_id"]:
+            raise ValueError("Workflow name/case mismatch; refusing attribution")
         wf = wf.fetch_latest()
         receipt["event"] = "ROWAN_RESULT_PENDING"
         if wf.done():
