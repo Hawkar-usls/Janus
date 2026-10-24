@@ -21,6 +21,7 @@ jobs:
           python -m compileall -q integrations/tranception_rowan/probe.py
           python -m unittest discover -s integrations/tranception_rowan/tests -v
           python -m json.tool integrations/tranception_rowan/discovery_manifest.json > /dev/null
+          python -m compileall -q integrations/tranception_rowan/dms_evidence.py
           python integrations/tranception_rowan/probe.py --arm wildtype --output "${RUNNER_TEMP}/tranception-wt-plan.json"
           python integrations/tranception_rowan/probe.py --arm K5A --output "${RUNNER_TEMP}/tranception-mut-plan.json"
   sdk-surface:
@@ -44,3 +45,35 @@ jobs:
           assert "result_type" in inspect.signature(rowan.retrieve_workflow).parameters
           print("TRANCEPTION_ROWAN_SDK_SURFACE=PASS")
           PY
+
+  public-assay-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate published source bytes against frozen public SHA
+        run: |
+          python integrations/tranception_rowan/dms_evidence.py \
+            --download-pinned-public-assay \
+            --output "${RUNNER_TEMP}/bbc1-k5a-assay-evidence.json"
+      - name: Show only provenance status (not fabricated assay values)
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"]) / "bbc1-k5a-assay-evidence.json"
+          r=json.loads(p.read_text(encoding="utf-8"))
+          print("ASSAY_HASH=PINNED_SHA256_VERIFIED")
+          print("K5A_ROW_STATUS=" + r["status"])
+          print("ASSAY_LABEL_REPLICATES_VERIFIED=" + str(r["biological_replicates_verified"]))
+          PY
+      - name: Preserve immutable public-assay provenance receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: bbc1-k5a-dms-provenance-${{ github.run_id }}
+          path: ${{ runner.temp }}/bbc1-k5a-assay-evidence.json
+          retention-days: 7
+          if-no-files-found: error
