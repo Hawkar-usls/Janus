@@ -146,3 +146,37 @@ jobs:
           path: ${{ runner.temp }}/bbc1-published-tranception.json
           retention-days: 7
           if-no-files-found: error
+
+  retrieval-paired-official:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reproduce published retrieval-vs-no-retrieval on official pinned ProteinGym Git blob
+        run: |
+          python integrations/tranception_rowan/retrieval_paired_audit.py \\
+            --output "${RUNNER_TEMP}/tranception-retrieval-paired.json"
+      - name: Verify source scope and non-execution evidence boundary
+        env:
+          RECEIPT: ${{ runner.temp }}/tranception-retrieval-paired.json
+        run: |
+          python - <<'PY'
+          import json,os
+          with open(os.environ["RECEIPT"],encoding="utf-8") as f:
+              r=json.load(f)
+          assert r["population"]["total_assays"] >= 200
+          assert r["comparisons"]["L_PRIMARY"]["n_proteins"] >= 100
+          assert r["model_weights_rerun"] is False
+          assert r["rowan_job_uuid"] is None
+          assert r["bbc1_delta_rho"]["L_PRIMARY"] > 0.06
+          print("TRANCEPTION_PROTEIN_CLUSTERED_PAIR_GATE=PASS")
+          PY
+      - name: Save provenance-aware model ablation reanalysis receipt
+        uses: actions/upload-artifact@v4
+        with:
+          name: tranception-protein-clustered-retrieval-${{ github.run_id }}
+          path: ${{ runner.temp }}/tranception-retrieval-paired.json
+          retention-days: 7
+          if-no-files-found: error
