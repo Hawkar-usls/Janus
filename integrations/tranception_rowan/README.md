@@ -210,3 +210,23 @@ credentials, server calls or credits are used.
 Tranception scores and Rowan structural confidence are not interchangeable;
 the official 2069-mutant BBC1 evaluation remains a different cohort from the
 1084-single-mutant public derivative. TOPA independent assessment is still open.
+
+
+## Target Rowan folder routing (2026-10-25)
+
+The user specified the Rowan folder at
+`https://labs.rowansci.com/folder/70480946-24c3-4078-91d1-ad99009262bf`.
+All new BBC1 Rowan draft and submitted workflows now supply this **exact
+folder UUID** via Rowan v3's documented `folder_uuid` parameter; collecting
+an existing result requires both the frozen case name/type and matching
+`Workflow.parent_uuid`. Any foreign or moved workflow fails closed.
+This UUID references an existing folder and does not authorize making it
+public, creating child folders, deleting entries or exporting private data.
+
+Yaksa remote machine bootstrap: an isolated Python 3.14 environment under
+`%USERPROFILE%\\JANUS-rowan-research\\.venv` with `rowan-python 3.2.3`
+and a read-only folder inspector. Local secrets must be acquired through a
+hidden local input and per-user encrypted DPAPI storage outside the Git
+repository, not from an API key embedded into code, GitHub Actions logs or
+terminal command strings. Having a client installed does not establish
+account authentication or an actual provider computation.

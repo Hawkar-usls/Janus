@@ -22,6 +22,7 @@ MANIFEST = Path(__file__).with_name("discovery_manifest.json")
 AMINO = set("ACDEFGHIKLMNPQRSTVWY")
 SCHEMA = "janus.tranception.rowan.probe_receipt.v1"
 NAME_PREFIX = "JANUS-TRANCEPTION-ROWAN-BBC1-"
+TARGET_ROWAN_FOLDER_UUID = "70480946-24c3-4078-91d1-ad99009262bf"
 
 
 def digest(data: Any) -> str:
@@ -85,6 +86,7 @@ def execute(manifest: dict, arm: str, mode: str, *,
         "source_assay": case["reference"],
         "source_blob_sha": case["reference_blob_sha"],
         "max_credits": max_credits,
+        "target_folder_uuid": TARGET_ROWAN_FOLDER_UUID,
         "free_credits_balance_verified": False,
         "credits_charged_reported": None,
         "workflow_uuid": None,
@@ -130,6 +132,7 @@ def execute(manifest: dict, arm: str, mode: str, *,
             use_msa_server=True,
             max_credits=max_credits,
             name=case["id"],
+            folder_uuid=TARGET_ROWAN_FOLDER_UUID,
             is_draft=(mode == "draft"),
         )
         receipt["event"] = (
@@ -137,9 +140,12 @@ def execute(manifest: dict, arm: str, mode: str, *,
             else "ROWAN_SUBMITTED_RESULT_PENDING")
     else:
         wf = api.retrieve_workflow(workflow_id, result_type=api.ProteinCofoldingResult)
-        if wf.name != case["id"] or wf.workflow_type != "protein_cofolding":
+        if (wf.name != case["id"] or wf.workflow_type != "protein_cofolding"
+                or getattr(wf, "parent_uuid", None) != TARGET_ROWAN_FOLDER_UUID):
             raise ValueError("Wrong case name or wrong workflow type")
         wf = wf.fetch_latest()
+        if getattr(wf, "parent_uuid", None) != TARGET_ROWAN_FOLDER_UUID:
+            raise ValueError("Workflow moved outside approved Rowan folder")
         receipt["event"] = "ROWAN_RESULT_PENDING"
         if wf.done():
             result = wf.result(wait=False)
