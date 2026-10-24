@@ -12,8 +12,8 @@ on:
         description: Requires YES for submit; no other action may spend credits
         required: true
         type: choice
-        default: NO
-        options: [NO, YES]
+        default: 'NO'
+        options: ['NO', 'YES']
       workflow_uuid:
         description: Existing Rowan job UUID (for collect only)
         required: false
