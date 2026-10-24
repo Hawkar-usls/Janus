@@ -34,7 +34,7 @@ Use `model="boltz-2"`, one diffusion sample and one sequence per run. Store the 
     python integrations/tranception_rowan/probe.py --arm wildtype --mode plan --output /tmp/bbc1-wt-plan.json
     python integrations/tranception_rowan/probe.py --arm K5A --mode plan --output /tmp/bbc1-k5a-plan.json
 
-**Check account**, only if a trusted runtime has a `ROWAN_API_KEY` (no computation):
+**Check account**, only if a trusted runtime has a `ROWAN_API_KEY` (no computation). The account check establishes successful authentication, NOT an independently validated free-credit balance:
 
     python integrations/tranception_rowan/probe.py --arm wildtype --mode auth --output /tmp/bbc1-auth.json
 
@@ -42,9 +42,9 @@ Use `model="boltz-2"`, one diffusion sample and one sequence per run. Store the 
 
     python integrations/tranception_rowan/probe.py --arm wildtype --mode draft --output /tmp/bbc1-wt-draft.json
 
-**Run a single provider calculation**, only with known available credits and explicit authorization (1-credit ceiling; may terminate without a result):
+**Run a single provider calculation**, only with an independently checked free-credit balance and explicit authorization (10-credit ceiling; may terminate without a result):
 
-    python integrations/tranception_rowan/probe.py --arm wildtype --mode submit --max-credits 1 --authorize-credit-use --output /tmp/bbc1-wt-submit.json
+    python integrations/tranception_rowan/probe.py --arm wildtype --mode submit --max-credits 10 --authorize-credit-use --output /tmp/bbc1-wt-submit.json
 
 Collect:
 
@@ -66,3 +66,17 @@ Repeat the same operations for K5A with separate file paths. No automatic batchi
 10. Meta Registry scientific promotion — **FORBIDDEN UNTIL GATES 5–9 PASS**.
 
 The test script does NOT treat a compiler/lint/unit-test PASS as evidence that a Rowan computation was actually performed. Existing `ROWAN_API_KEY` shared in a chat has not been copied into GitHub code or logs.
+
+## Confirmed cost and budget boundary (2026-10-25)
+
+Rowan's public FAQ reports that a protein co-folding job **typically uses around 10 credits**; actual usage depends on size and options:
+https://rowansci.co/blog/credits-faq
+
+Therefore, the previous one-credit cap might cut off Boltz-2 before completion. The new suggested single-job ceiling is **10 credits**, with the CLI enforcing 1–15 credits (and the GitHub on-demand workflow defaulting to 10). **The credit cap is a limit, not a price estimate or a promise of completion**.
+
+Rowan credits are spent in this order: weekly user → weekly organization → purchased user → purchased organization. This integration makes **no credit purchases** but a successful Rowan computation could still consume already purchased credits if free credits are insufficient. Rowan's `whoami()` confirms authentication, but we do not currently have a verified, authoritative SDK balance endpoint and we will not invent an available balance:
+https://docs.rowansci.com/tutorials/account/credits-and-billing
+
+Before the first submit, verify the **free** balance in Rowan Account → Billing. Keep the existing project key in a secured runtime, not in code, YAML, console logs, or GitHub commit history. The read-only auth workflow now uploads a one-day private result artifact containing no secret, username, or email.
+
+A completed provider job has not been performed until a real Rowan workflow UUID and verified cloud result exist. The compiled/mock CI run only checks software mechanics. The Meta Registry evidence status remains OPEN.
