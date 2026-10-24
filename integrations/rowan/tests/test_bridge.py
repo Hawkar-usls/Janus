@@ -153,6 +153,13 @@ class BridgeTests(TestCase):
         with self.assertRaises(ValueError):
             bridge.operate(case)
 
+    def test_3d_method_requires_separate_adapter(self):
+        case = example_case()
+        for method in ("aimnet2_wagen2024", "gxtb_wagen2026"):
+            case["workflow"]["method"] = method
+            with self.assertRaises(ValueError):
+                bridge.operate(case)
+
     def test_hash_stable_on_key_order(self):
         case = example_case()
         reverse = dict(reversed(list(case.items())))
