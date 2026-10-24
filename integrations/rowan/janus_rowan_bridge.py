@@ -20,10 +20,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-METHODS = {
-    "starling", "chemprop_nevolianis2025",
-    "aimnet2_wagen2024", "gxtb_wagen2026",
-}
+# Input contract is SMILES-only; 3D-only methods need a separate typed adapter.
+METHODS = {"starling", "chemprop_nevolianis2025"}
 SCHEMA = "janus.rowan.research_receipt.v1"
 MAX_CREDIT_CAP = 10  # Upper policy cap; explicit lower per-case ceiling required.
 
@@ -74,7 +72,7 @@ def validate(case: dict) -> dict:
         raise ValueError("v0.1 only supports pka; never silently substitute workflows")
     method = workflow.get("method", "starling")
     if method not in METHODS:
-        raise ValueError("Unrecognized pKa method")
+        raise ValueError("Method requires 3D input or is not supported in SMILES bridge")
     rng = workflow.get("pka_range", [2, 12])
     if (not isinstance(rng, list) or len(rng) != 2
             or any(type(v) is not int for v in rng)
