@@ -80,3 +80,44 @@ https://docs.rowansci.com/tutorials/account/credits-and-billing
 Before the first submit, verify the **free** balance in Rowan Account → Billing. Keep the existing project key in a secured runtime, not in code, YAML, console logs, or GitHub commit history. The read-only auth workflow now uploads a one-day private result artifact containing no secret, username, or email.
 
 A completed provider job has not been performed until a real Rowan workflow UUID and verified cloud result exist. The compiled/mock CI run only checks software mechanics. The Meta Registry evidence status remains OPEN.
+
+
+## Independent ProteinGym DMS-label binding (2026-10-25)
+
+The `dms_evidence.py` evidence gate checks a **publicly processed** BBC1
+single-substitution TSV against a pinned SHA256 checksum published in
+`genbio-ai/ProteinGYM-DMS`. This is a third-party processed derivative, not
+the primary unmodified instrument/lab data; investigate labeling transforms and
+original references before quantitative fitness claims.
+
+Source: https://huggingface.co/datasets/genbio-ai/ProteinGYM-DMS/blob/cc6b0b56553e694dbf27dc84c6b37a8686e64b85/singles_substitutions/BBC1_YEAST_Tsuboyama_2023_1TG0.tsv
+Expected sha256: `ca355a655381c95fe899d61a406251e0cd17d68bbabe287651d526fdeb821f87`.
+
+The public data job attempts to retrieve **exactly that pinned public dataset**
+without Rowan credentials or credit usage. It accepts no external numbers until
+the complete SHA256 matches, then selects the exact 64-residue K5A sequence.
+No substitutions, estimates, or label interpolation are permitted. A missing
+K5A is reported as an explicit negative outcome, never as a synthesized label.
+
+For offline-only use after downloading from the cited source:
+
+    python integrations/tranception_rowan/dms_evidence.py \
+      --assay-tsv /secure/local/BBC1_YEAST_Tsuboyama_2023_1TG0.tsv \
+      --output /secure/local/k5a-processed-label-receipt.json
+
+Or explicitly download a public immutable revision through CI:
+
+    python integrations/tranception_rowan/dms_evidence.py \
+      --download-pinned-public-assay \
+      --output /tmp/k5a-public-label-receipt.json
+
+Any `processed_label` is a published *experimental assay-derived number*,
+not an observed Rowan prediction, Tranception result, or demonstrated causal
+mutation mechanism. Fold_id is metadata for benchmark splits; 2 sequences
+cannot justify correlation or statistical validation of a general model.
+TOPA review of raw assay design, biological replicates, and transforms
+remains required.
+
+The publicly downloaded TSV is NOT committed, and checksum verification
+will fail closed on data drift or network errors. No keys or private account
+data are involved.
