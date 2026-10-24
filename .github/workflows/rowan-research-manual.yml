@@ -1,0 +1,83 @@
+name: Rowan research on-demand
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Read-only auth, remote draft, one bounded submission, or collect
+        required: true
+        type: choice
+        default: auth
+        options: [auth, draft, submit, collect]
+      allow_credit_spend:
+        description: Requires YES for submit; no other action may spend credits
+        required: true
+        type: choice
+        default: NO
+        options: [NO, YES]
+      workflow_uuid:
+        description: Existing Rowan job UUID (for collect only)
+        required: false
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: janus-rowan-single-job
+  cancel-in-progress: false
+jobs:
+  rowan:
+    runs-on: ubuntu-latest
+    environment: rowan-research
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Preflight choice and authorization
+        env:
+          RUN_ACTION: ${{ inputs.action }}
+          CREDIT_PERMISSION: ${{ inputs.allow_credit_spend }}
+          WORKFLOW_UUID: ${{ inputs.workflow_uuid }}
+        shell: bash
+        run: |
+          if [[ "$RUN_ACTION" == submit && "$CREDIT_PERMISSION" != YES ]]; then
+            echo 'BLOCKED: explicit YES credit authorization required'; exit 2
+          fi
+          if [[ "$RUN_ACTION" != submit && "$CREDIT_PERMISSION" == YES ]]; then
+            echo 'BLOCKED: credit permission only meaningful for submit'; exit 2
+          fi
+          if [[ "$RUN_ACTION" == collect && -z "$WORKFLOW_UUID" ]]; then
+            echo 'BLOCKED: collect requires an existing workflow UUID'; exit 2
+          fi
+          if [[ "$RUN_ACTION" != collect && -n "$WORKFLOW_UUID" ]]; then
+            echo 'BLOCKED: unexpected workflow UUID'; exit 2
+          fi
+      - name: Configure SDK
+        run: python -m pip install 'rowan-python>=3,<4'
+      - name: Run one requested action, never auto-publish
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          RUN_ACTION: ${{ inputs.action }}
+          CREDIT_PERMISSION: ${{ inputs.allow_credit_spend }}
+          WORKFLOW_UUID: ${{ inputs.workflow_uuid }}
+        shell: bash
+        run: |
+          if [[ -z "$ROWAN_API_KEY" ]]; then
+            echo 'BLOCKED: secret ROWAN_API_KEY missing from rowan-research environment'; exit 2
+          fi
+          args=()
+          case "$RUN_ACTION" in
+            auth) args=(--mode auth) ;;
+            draft) args=(--mode draft) ;;
+            submit) args=(--mode submit --authorize-credit-use) ;;
+            collect) args=(--mode collect --workflow-id "$WORKFLOW_UUID") ;;
+            *) echo 'Invalid mode'; exit 2 ;;
+          esac
+          python integrations/rowan/janus_science_pipeline.py \
+            --case integrations/rowan/examples/phenol_case.json \
+            --output-dir "$RUNNER_TEMP/janus-rowan-run" "${args[@]}"
+      - name: Preserve non-auth receipts as short-lived workflow artifacts
+        if: success() && inputs.action != 'auth'
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-rowan-research-${{ github.run_id }}
+          path: ${{ runner.temp }}/janus-rowan-run/
+          retention-days: 1
+          if-no-files-found: error
