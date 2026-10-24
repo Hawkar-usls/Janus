@@ -178,3 +178,35 @@ not accuracy percentage, a new experiment, a Rowan structural comparison,
 or evidence that a specific K5A is accurately predicted. The next
 **live Rowan** gate still requires protected account credentials and a
 checked credit balance; the CI run is read-only and free.
+
+
+## 2026-10-25 — paired retrieval ablation on published ProteinGym results
+
+File: `retrieval_paired_audit.py`. Reuses the original ProteinGym **pinned
+Git blob**, not downloaded unaudited benchmark transcriptions.
+
+**Preregistered primary test:** within the same assay, subtract Spearman rho
+of `Tranception L no retrieval` from `Tranception L`. A positive difference
+means the *historically published* rank correlation was higher with retrieval
+for that assay. To avoid overcounting multiple assays for a single protein,
+group by **UniProt ID**, average the paired deltas per protein, and calculate
+the across-protein mean and median. Deterministic nonparametric bootstrap
+samples those protein-level means 2,000 times, seed 20261025, returning
+the 2.5th and 97.5th percentiles. Missing scores are excluded per model,
+with denominators always reported. The S/M variants and per-selection-type
+subgroups are exploratory, not additional confirmatory tests.
+
+    python integrations/tranception_rowan/retrieval_paired_audit.py \
+      --output /tmp/tranception-bbc1-217-assays-retrieval.json
+
+**Evidence limits:** reanalysis of already-published assay-level coefficients,
+not new protein predictions, causal proof of retrieval benefit, or biochemical
+discoveries. UniProt clustering does not eliminate evolutionary relatedness
+or dataset sharing among proteins. Bootstrap percentiles describe across-protein
+variation under protein-exchangeability assumptions and do not account for
+within-assay experimental uncertainty or re-training variability. No Rowan
+credentials, server calls or credits are used.
+
+Tranception scores and Rowan structural confidence are not interchangeable;
+the official 2069-mutant BBC1 evaluation remains a different cohort from the
+1084-single-mutant public derivative. TOPA independent assessment is still open.
