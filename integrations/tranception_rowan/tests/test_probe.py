@@ -29,6 +29,7 @@ class FakeWorkflow:
     uuid = "00000000-0000-4000-8000-000000000005"
     name = "JANUS-TRANCEPTION-ROWAN-BBC1-K5A"
     workflow_type = "protein_cofolding"
+    parent_uuid = "70480946-24c3-4078-91d1-ad99009262bf"
 
     def fetch_latest(self):
         return self
@@ -152,6 +153,25 @@ class TranceptionRowanTests(unittest.TestCase):
             r = probe.execute(manifest, "K5A", "draft", sdk=FakeSDK())
         self.assertFalse(r["biological_fitness_inferred"])
         self.assertIsNone(r["structural_confidence"])
+
+    def test_target_folder_bound_for_single_arm(self):
+        sdk = FakeSDK()
+        with patch.dict(os.environ, {"ROWAN_API_KEY": "fake-unit-test-key"}):
+            r = probe.execute(manifest, "K5A", "draft", sdk=sdk)
+        self.assertEqual(sdk.arguments["folder_uuid"], probe.TARGET_ROWAN_FOLDER_UUID)
+        self.assertEqual(r["target_folder_uuid"], probe.TARGET_ROWAN_FOLDER_UUID)
+
+    def test_collect_rejects_workflow_from_wrong_folder(self):
+        class WrongFolderSDK(FakeSDK):
+            def retrieve_workflow(self, workflow_id, *, result_type):
+                wf = super().retrieve_workflow(workflow_id, result_type=result_type)
+                wf.parent_uuid = "00000000-0000-4000-8000-000000000000"
+                return wf
+
+        with patch.dict(os.environ, {"ROWAN_API_KEY": "fake-unit-test-key"}):
+            with self.assertRaises(ValueError):
+                probe.execute(manifest, "K5A", "collect",
+                              workflow_id=FakeWorkflow.uuid, sdk=WrongFolderSDK())
 
     def test_wrong_protein_arm_fails(self):
         with self.assertRaises(ValueError):
