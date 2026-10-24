@@ -132,7 +132,7 @@ def operate(case: dict, mode: str = "plan", *, authorize_spend: bool = False,
     receipt = base_receipt(case, params)
     if mode == "plan":
         return receipt
-    if mode not in {"draft", "submit", "collect"}:
+    if mode not in {"auth", "draft", "submit", "collect"}:
         raise ValueError("Unknown mode")
     if mode == "submit" and not authorize_spend:
         raise PermissionError("Submission blocked: --authorize-credit-use required")
@@ -142,6 +142,18 @@ def operate(case: dict, mode: str = "plan", *, authorize_spend: bool = False,
         raise PermissionError("ROWAN_API_KEY is required for remote operations")
 
     api = sdk if sdk is not None else importlib.import_module("rowan")
+    if mode == "auth":
+        # Read-only credentials and credit check. Never persist personal account data.
+        user = api.whoami()
+        enabled = list(getattr(user, "enabled_workflows", []) or [])
+        receipt["event"] = "ROWAN_ACCOUNT_CHECKED_NO_COMPUTATION"
+        receipt["provider"]["account"] = {
+            "auth": "SUCCESS",
+            "pka_available": "pka" in enabled,
+            "weekly_credits": getattr(user, "weekly_credits", None),
+            "credits": getattr(user, "credits", None),
+        }
+        return receipt
     if mode in {"draft", "submit"}:
         wf = api.submit_pka_workflow(
             initial_molecule=params["smiles"],
@@ -156,7 +168,7 @@ def operate(case: dict, mode: str = "plan", *, authorize_spend: bool = False,
             if mode == "draft" else "ROWAN_SUBMITTED_RESULT_UNVERIFIED"
         )
     else:
-        wf = api.retrieve_workflow(workflow_id)
+        wf = api.retrieve_workflow(workflow_id, result_type=api.pKaResult)
         # Reject unrelated jobs; keep the claim boundary explicit.
         if getattr(wf, "workflow_type", None) != "pka":
             raise ValueError("Retrieved Rowan workflow is not pka")
@@ -186,6 +198,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--output", type=Path, required=True,
                    help="Write-once JSON receipt; never auto-publishes")
     group = p.add_mutually_exclusive_group()
+    group.add_argument("--check-auth", action="store_true",
+                       help="Read-only API account and available credit check")
     group.add_argument("--create-draft", action="store_true")
     group.add_argument("--submit", action="store_true")
     group.add_argument("--collect", action="store_true")
@@ -196,8 +210,8 @@ def main(argv: list[str] | None = None) -> int:
         p.error("Output exists: refusing to overwrite receipt or resubmit")
     if args.authorize_credit_use and not args.submit:
         p.error("--authorize-credit-use applies only to --submit")
-    mode = ("draft" if args.create_draft else "submit" if args.submit
-            else "collect" if args.collect else "plan")
+    mode = ("auth" if args.check_auth else "draft" if args.create_draft
+            else "submit" if args.submit else "collect" if args.collect else "plan")
     try:
         with args.case.open(encoding="utf-8") as f:
             case = json.load(f)
