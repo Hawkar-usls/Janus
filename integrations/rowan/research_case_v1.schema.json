@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Hawkar-usls/Janus/blob/main/integrations/rowan/research_case_v1.schema.json",
+  "title": "JANUS Rowan bounded pKa research case v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "source",
+    "hypothesis",
+    "alternative",
+    "falsifier",
+    "molecule",
+    "workflow"
+  ],
+  "properties": {
+    "case_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9._-]{1,80}$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "system",
+        "reference"
+      ],
+      "properties": {
+        "system": {
+          "enum": [
+            "TOPA",
+            "AURA",
+            "JANUS"
+          ]
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "hypothesis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "alternative": {
+      "type": "string",
+      "minLength": 1
+    },
+    "falsifier": {
+      "type": "string",
+      "minLength": 1
+    },
+    "molecule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "smiles"
+      ],
+      "properties": {
+        "smiles": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048
+        }
+      }
+    },
+    "workflow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "max_credits"
+      ],
+      "properties": {
+        "type": {
+          "const": "pka"
+        },
+        "method": {
+          "enum": [
+            "starling",
+            "chemprop_nevolianis2025",
+            "aimnet2_wagen2024",
+            "gxtb_wagen2026"
+          ]
+        },
+        "pka_range": {
+          "type": "array",
+          "prefixItems": [
+            {
+              "type": "integer",
+              "minimum": -30,
+              "maximum": 49
+            },
+            {
+              "type": "integer",
+              "minimum": -29,
+              "maximum": 50
+            }
+          ],
+          "items": false,
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "max_credits": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        }
+      }
+    }
+  }
+}
