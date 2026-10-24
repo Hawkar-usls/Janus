@@ -121,3 +121,27 @@ remains required.
 The publicly downloaded TSV is NOT committed, and checksum verification
 will fail closed on data drift or network errors. No keys or private account
 data are involved.
+
+
+## Full BBC1 assay population distribution gate
+
+A new **no-Rowan, no-Tranception** audit reads the *same* pinned SHA256
+public processed BBC1 TSV and computes descriptive statistics over **all**
+published entries. It preserves the exact K5A sequence and original
+benchmark fold assignments, rejects non-finite processed labels and duplicate
+sequences, and reports median, lower/upper deciles, five-fold counts,
+rank and percent below K5A. No selection based on desired outcomes.
+
+    python integrations/tranception_rowan/assay_distribution.py \
+      --output /tmp/bbc1-assay-population.json
+
+CI downloads the public dataset (less than 1MB), verifies its SHA256,
+runs an independent full population audit, and saves a machine-readable
+receipt. These distribution values are only **processed DMS labels**, not
+calorimetry, energy, structural confidence or Tranception scores. Interpretation
+depends on raw assay protocol and transformation review. The K5A variant
+is one example in the wider assay, not a statistical validation of Rowan.
+
+Next real model gate remains Rowan credential access and approval of a
+free-credit budget; raw model responses/UUID are required before comparing
+predictions. TOPA remains an independent scientific gate.
