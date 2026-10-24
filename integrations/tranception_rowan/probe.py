@@ -13,6 +13,7 @@ import json
 import os
 import re
 import sys
+import math
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -65,11 +66,11 @@ def prepare(manifest: dict, arm: str) -> dict:
 
 
 def execute(manifest: dict, arm: str, mode: str, *,
-            max_credits: int = 1, authorize_credit_use: bool = False,
+            max_credits: int = 10, authorize_credit_use: bool = False,
             workflow_id: str | None = None, sdk: Any = None) -> dict:
     case = prepare(manifest, arm)
-    if type(max_credits) is not int or not 1 <= max_credits <= 10:
-        raise ValueError("max_credits must be an integer in range 1..10")
+    if type(max_credits) is not int or not 1 <= max_credits <= 15:
+        raise ValueError("max_credits must be an integer in range 1..15")
     receipt = {
         "schema_id": SCHEMA,
         "recorded_at_utc": datetime.now(timezone.utc).isoformat(),
@@ -84,6 +85,8 @@ def execute(manifest: dict, arm: str, mode: str, *,
         "source_assay": case["reference"],
         "source_blob_sha": case["reference_blob_sha"],
         "max_credits": max_credits,
+        "free_credits_balance_verified": False,
+        "credits_charged_reported": None,
         "workflow_uuid": None,
         "event": "OFFLINE_PLAN_ONLY",
         "structural_confidence": None,
@@ -111,13 +114,18 @@ def execute(manifest: dict, arm: str, mode: str, *,
     if mode == "auth":
         user = api.whoami()
         receipt["event"] = "ROWAN_AUTH_CHECKED_NO_CHEMISTRY_JOB"
+        # Do not assert free balance from unverified SDK/account fields.
+        receipt["account_credit_balance_verification"] = "REQUIRES_ROWAN_BILLING_PAGE"
+        receipt["account_free_credit_status"] = "NOT_ATTESTED"
+        receipt["provider_login"] = "VERIFIED_BY_WHOAMI"
         receipt["protein_cofolding_available"] = "protein_cofolding" in (
             getattr(user, "enabled_workflows", []) or [])
         return receipt
     if mode in {"draft", "submit"}:
         wf = api.submit_protein_cofolding_workflow(
             initial_protein_sequences=[case["sequence"]],
-            model="boltz-2",
+            model=api.CofoldingModel.BOLTZ_2 if hasattr(api, "CofoldingModel")
+                  else "boltz_2",
             num_samples=1,
             use_msa_server=True,
             max_credits=max_credits,
@@ -136,13 +144,23 @@ def execute(manifest: dict, arm: str, mode: str, *,
         if wf.done():
             result = wf.result(wait=False)
             scores = getattr(result, "scores", None)
+            # Only persist bounded, finite, model confidence metrics.
+            ptm = getattr(scores, "ptm", None)
+            lddt = getattr(scores, "avg_lddt", None)
+            for value in (ptm, lddt):
+                if value is not None and (type(value) not in (int, float)
+                        or not math.isfinite(value) or not 0 <= value <= 1):
+                    raise ValueError("Invalid confidence returned by provider")
             receipt["structural_confidence"] = {
-                "ptm": getattr(scores, "ptm", None),
-                "avg_lddt": getattr(scores, "avg_lddt", None),
+                "ptm": ptm,
+                "avg_lddt": lddt,
                 "kind": "STRUCTURE_CONFIDENCE_NOT_MUTATION_FITNESS",
             }
             receipt["event"] = "ROWAN_STRUCTURE_PREDICTION_COLLECTED_UNVERIFIED"
     receipt["workflow_uuid"] = str(wf.uuid)
+    charge = getattr(wf, "credits_charged", None)
+    if charge is not None and type(charge) in (int, float) and math.isfinite(charge) and charge >= 0:
+        receipt["credits_charged_reported"] = charge
     return receipt
 
 
@@ -152,7 +170,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--arm", choices=["wildtype", "K5A"], required=True)
     p.add_argument("--mode", choices=["plan", "auth", "draft", "submit", "collect"],
                    default="plan")
-    p.add_argument("--max-credits", type=int, default=1)
+    p.add_argument("--max-credits", type=int, default=10)
     p.add_argument("--authorize-credit-use", action="store_true")
     p.add_argument("--workflow-id")
     p.add_argument("--output", type=Path, required=True)
