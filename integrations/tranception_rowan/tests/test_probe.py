@@ -115,7 +115,7 @@ class TranceptionRowanTests(unittest.TestCase):
         self.assertTrue(sdk.arguments["is_draft"])
         self.assertEqual(sdk.arguments["model"], "boltz_2")
         self.assertEqual(len(sdk.arguments["initial_protein_sequences"]), 1)
-        self.assertEqual(sdk.arguments["max_credits"], 1)
+        self.assertEqual(sdk.arguments["max_credits"], 10)
 
     def test_one_live_submit_requires_budget(self):
         sdk = FakeSDK()
