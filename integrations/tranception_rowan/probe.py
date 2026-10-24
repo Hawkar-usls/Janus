@@ -111,7 +111,7 @@ def execute(manifest: dict, arm: str, mode: str, *,
     if mode == "auth":
         user = api.whoami()
         receipt["event"] = "ROWAN_AUTH_CHECKED_NO_CHEMISTRY_JOB"
-        receipt["pka_available"] = "pka" in (
+        receipt["protein_cofolding_available"] = "protein_cofolding" in (
             getattr(user, "enabled_workflows", []) or [])
         return receipt
     if mode in {"draft", "submit"}:
