@@ -37,6 +37,7 @@ class FakeResult:
 class FakeWorkflow:
     uuid = "00000000-0000-4000-8000-000000000001"
     workflow_type = "pka"
+    name = "JANUS JANUS-ROWAN-DEMO-PHENOL-001"
     status = "COMPLETED_OK"
     credits_charged = 0.1
 
@@ -73,6 +74,8 @@ class BridgeTests(TestCase):
         self.assertEqual(r["research"]["topa_review"], "REQUIRED")
         self.assertFalse(r["meta_registry"]["auto_published"])
         self.assertEqual(len(r["input_sha256"]), 64)
+        self.assertNotIn("smiles", r["provider"])
+        self.assertEqual(len(r["provider"]["smiles_sha256"]), 64)
 
     def test_remote_requires_credentials(self):
         with patch.dict(os.environ, {}, clear=True):
