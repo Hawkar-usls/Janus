@@ -1,7 +1,9 @@
 # JANUS × Rowan × TOPA × Meta Registry — bounded research bridge v0.1
 
 Status: research prototype in Draft PR, not production or scientific validation.
-Currently implemented: Rowan microscopic pKa only. Docking, co-folding, FEP, molecular
+Currently implemented: Rowan microscopic pKa with SMILES-only methods (starling,
+chemprop_nevolianis2025). Other pKa methods require actual 3D structures
+and a separate typed adapter. Docking, co-folding, FEP, molecular
 dynamics, screening and TOPA/Meta Registry automatic writes are not implemented.
 
 ## Scientific chain and authority
