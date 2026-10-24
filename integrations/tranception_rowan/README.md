@@ -145,3 +145,36 @@ is one example in the wider assay, not a statistical validation of Rowan.
 Next real model gate remains Rowan credential access and approval of a
 free-credit budget; raw model responses/UUID are required before comparing
 predictions. TOPA remains an independent scientific gate.
+
+
+## Official historical Tranception benchmark — separate population
+
+The official ProteinGym code repository contains a published **per-assay
+Spearman** table. For BBC1, it quotes 2,069 mutants and model coefficients.
+The `published_tranception_baseline.py` script fetches the GitHub **Git blob**
+by its frozen 40-character blob SHA (not a plain file SHA-256), recomputes
+the exact Git object hash, reads the only BBC1 row and records Tranception S,
+M, L (with and without retrieval) and TranceptEVE model score columns.
+
+Source: https://github.com/OATML-Markslab/ProteinGym/blob/main/benchmarks/DMS_zero_shot/substitutions/Spearman/DMS_substitutions_Spearman_DMS_level.csv
+
+    python integrations/tranception_rowan/published_tranception_baseline.py \
+      --output /tmp/bbc1-published-historical-tranception.json
+
+This does **NOT run Tranception model weights**; it verifies previously
+published aggregate evaluation only. Specifically, the official benchmark
+reported 2,069 mutants for BBC1 whereas the distinct pinned
+`genbio-ai/ProteinGYM-DMS/singles_substitutions` file contained only
+1,084 unique **single** substitutions. For a 64-residue protein, even
+exhaustive canonical single amino-acid substitution space has a maximum
+of 64 × 19 = 1,216 distinct substitution sequences. Therefore 2,069
+cannot refer to exactly that canonical single-substitution-only space.
+We do not speculate which additional variant classes or preprocessing
+steps are included until original benchmark version/provenance is verified.
+Never compare these two aggregate groups as if same `n`.
+
+A reported Spearman rho is a rank association across that historical assay,
+not accuracy percentage, a new experiment, a Rowan structural comparison,
+or evidence that a specific K5A is accurately predicted. The next
+**live Rowan** gate still requires protected account credentials and a
+checked credit balance; the CI run is read-only and free.

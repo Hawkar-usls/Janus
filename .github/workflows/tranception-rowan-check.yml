@@ -113,3 +113,36 @@ jobs:
           path: ${{ runner.temp }}/bbc1-assay-population.json
           retention-days: 7
           if-no-files-found: error
+
+  historical-tranception-baseline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Re-read official pinned Git blob containing published Tranception BBC1 benchmark
+        run: |
+          python integrations/tranception_rowan/published_tranception_baseline.py \
+            --output "${RUNNER_TEMP}/bbc1-published-tranception.json"
+      - name: Assert publication values, not new Tranception execution
+        env:
+          RECEIPT: ${{ runner.temp }}/bbc1-published-tranception.json
+        run: |
+          python - <<'PY'
+          import os,json
+          r=json.load(open(os.environ["RECEIPT"],encoding="utf-8"))
+          assert r["number_of_mutants_reported_in_official_benchmark"] == 2069
+          assert r["spearman_rho"]["Tranception L"] == 0.365
+          assert r["spearman_rho"]["Tranception L no retrieval"] == 0.299
+          assert r["model_weights_executed_by_janus"] is False
+          assert r["rowan_computation_executed"] is False
+          print("OFFICIAL_TRANCEPTION_BBC1_BASELINE=VERIFIED_PRECOMPUTED_ONLY")
+          PY
+      - name: Save machine-readable upstream performance provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: tranception-bbc1-published-baseline-${{ github.run_id }}
+          path: ${{ runner.temp }}/bbc1-published-tranception.json
+          retention-days: 7
+          if-no-files-found: error
