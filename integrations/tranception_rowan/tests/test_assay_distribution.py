@@ -26,7 +26,7 @@ def bytes_fixture(rows):
 
 class AuditTests(unittest.TestCase):
     def test_score_distribution_and_rank(self):
-        alt = wt[:7] + "A" + wt[8:]
+        alt = wt[:7] + "G" + wt[8:]
         self.assertNotEqual(alt, wt)
         raw, sha = bytes_fixture([(mut, -1, 0), (alt, 2, 2)])
         r = mod.analyze(raw, manifest, sha256=sha)
@@ -39,7 +39,7 @@ class AuditTests(unittest.TestCase):
         self.assertFalse(r["rowan_model_prediction"] == "RUN")
 
     def test_missing_k5a_rejected(self):
-        alt = wt[:7] + "A" + wt[8:]
+        alt = wt[:7] + "G" + wt[8:]
         raw, sha = bytes_fixture([(alt, 2, 2)])
         with self.assertRaises(mod.SourceIntegrityError):
             mod.analyze(raw, manifest, sha256=sha)
@@ -82,7 +82,7 @@ class AuditTests(unittest.TestCase):
             mod.analyze(raw, manifest, sha256=sha)
 
     def test_three_way_rank_accounting(self):
-        alt1 = wt[:7] + "A" + wt[8:]
+        alt1 = wt[:7] + "G" + wt[8:]
         alt2 = wt[:8] + "F" + wt[9:]
         self.assertNotIn(alt2, (alt1, wt, mut))
         raw, sha = bytes_fixture([(alt1, 1, 0), (mut, 2, 1), (alt2, 3, 2)])
