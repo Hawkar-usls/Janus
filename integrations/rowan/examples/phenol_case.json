@@ -1,0 +1,22 @@
+{
+  "case_id": "JANUS-ROWAN-DEMO-PHENOL-001",
+  "source": {
+    "system": "TOPA",
+    "reference": "https://github.com/Hawkar-usls/TOPA"
+  },
+  "hypothesis": "A Rowan model may estimate phenol pKa near independent experimental values",
+  "alternative": "Solvent, model training, and method choice may cause systematic error",
+  "falsifier": "Compare prediction to independently sourced measured aqueous phenol pKa",
+  "molecule": {
+    "smiles": "c1ccccc1O"
+  },
+  "workflow": {
+    "type": "pka",
+    "method": "starling",
+    "pka_range": [
+      2,
+      12
+    ],
+    "max_credits": 1
+  }
+}
