@@ -33,6 +33,25 @@ Run from repository root. This default mode is entirely OFFLINE:
       --case integrations/rowan/examples/phenol_case.json \
       --output /tmp/rowan-plan.json
 
+Generate the complete three-file provenance chain in an absent output directory:
+
+    python integrations/rowan/janus_science_pipeline.py \
+      --case integrations/rowan/examples/phenol_case.json \
+      --output-dir /tmp/janus-rowan-phenol-one-run
+
+This produces rowan.receipt.json, topa.review-request.json, and
+meta-registry.candidate.json, with integrity hashes linking all three.
+NO automatic TOPA approval and NO automatic Registry publication.
+
+Check the Rowan account and credits, without creating or running a job:
+
+    python integrations/rowan/janus_science_pipeline.py \
+      --case integrations/rowan/examples/phenol_case.json \
+      --output-dir /tmp/janus-rowan-account-check --mode auth
+
+This uses rowan.whoami(), reporting only credit totals and pKa availability,
+not username, email, or API key. Authentication must already be configured.
+
 Create a remote Rowan draft (requires a key, does not execute calculations):
 
     pip install rowan-python
@@ -82,6 +101,10 @@ protocol/method and conditions, error analysis and provenance review.
 - Executing a calculation requires BOTH submit and authorize-credit-use flags.
 - No uncontrolled batch jobs, webhook posting, autonomous retry or scheduling.
 - No automatic archival/publication, diagnosis, treatment or clinical authority.
+- The three-file pipeline is a local output adapter; it does NOT call TOPA or
+  Meta Registry remotely. A reviewer must examine it before any publication.
+- The GitHub Actions SDK-compatibility job checks signatures with no account
+  credentials or paid calculations; it does not validate real API connectivity.
 - Never construe prediction as evidence of causation, efficacy or novelty.
 - Outputs are write-once. If remote submission succeeds but the process fails
   before receipt creation, audit the Rowan account before retrying to avoid
@@ -101,3 +124,13 @@ needed to test a single benign phenol pKa prediction. Compare against an indepen
 experimental measurement and uncertainties, request TOPA review, then separately
 approve archival into Meta Registry. Each future provider workflow requires
 dedicated costs, evidence rules, and permissions.
+
+## Available GitHub Actions operations
+
+Workflow Rowan research on-demand (manual workflow_dispatch, after a reviewed
+merge to the default branch) supports read-only auth, draft, single submit,
+and collection. It uses only a secured ROWAN_API_KEY environment secret
+in the rowan-research environment, never a plaintext repository variable.
+Default is read-only auth; execution requires explicit two-factor run inputs.
+The workflow cannot use keys pasted into a ChatGPT conversation and does not
+provision GitHub Secrets; the environment must be configured out of band.
