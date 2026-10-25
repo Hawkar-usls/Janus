@@ -26,6 +26,7 @@ def bands(prefix: str, amount: Any) -> dict[str, str]:
         prefix+"_PRESENT": "YES" if n is not None else "NO",
         prefix+"_GE_10": "YES" if n is not None and n >= 10 else "NO_OR_UNKNOWN",
         prefix+"_GE_20": "YES" if n is not None and n >= 20 else "NO_OR_UNKNOWN",
+        prefix+"_GE_30": "YES" if n is not None and n >= 30 else "NO_OR_UNKNOWN",
         prefix+"_GE_100": "YES" if n is not None and n >= 100 else "NO_OR_UNKNOWN",
         prefix+"_GE_450": "YES" if n is not None and n >= 450 else "NO_OR_UNKNOWN",
         prefix+"_LE_500": "YES" if n is not None and n <= 500 else "NO_OR_UNKNOWN",

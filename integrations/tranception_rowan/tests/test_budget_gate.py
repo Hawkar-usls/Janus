@@ -29,6 +29,19 @@ class Tests(unittest.TestCase):
         self.assertEqual(m.evaluate(u)["PERSONAL_NONWEEKLY_GE_20"],"NO_OR_UNKNOWN")
     def test_bool_is_not_numeric_balance(self):
         self.assertIsNone(m.finite_nonnegative(True))
+    def test_exact_preregistered_30_weekly_credit_threshold_without_raw_values(self):
+        for weekly,expected in ((29.99,"NO_OR_UNKNOWN"),(30,"YES"),(30.01,"YES")):
+            account=SimpleNamespace(weekly_credits=None,credits=499,
+                        individual_subscription=None,
+                        organization=SimpleNamespace(weekly_credits=weekly,credits=499))
+            bands=m.evaluate(account)
+            self.assertEqual(bands["ORG_WEEKLY_GE_30"],expected)
+            self.assertEqual(bands["provider_computation"],"NOT_ATTEMPTED")
+            self.assertEqual(bands["credit_spending"],"NOT_ATTEMPTED")
+            self.assertNotIn(str(weekly),list(bands.values()))
+        unknown=m.evaluate(SimpleNamespace(organization=SimpleNamespace()))
+        self.assertEqual(unknown["ORG_WEEKLY_GE_30"],"NO_OR_UNKNOWN")
+
     def test_no_workflow_job_or_paid_call(self):
         u=SimpleNamespace(weekly_credits=20,credits=490,individual_subscription=None,organization=None)
         x=m.evaluate(u)
