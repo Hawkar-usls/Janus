@@ -1,0 +1,47 @@
+name: JANUS Rowan BBC1 Budgeted Autopilot
+
+on:
+  schedule:
+    - cron: '37 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+
+jobs:
+  bounded-science:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned Rowan Python SDK
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
+      - name: Only one preregistered BBC1 case, only safely available weekly credits
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_ROWAN_APPROVED_WEEKLY_RUN: 'TRUE'
+        run: python integrations/tranception_rowan/rowan_bbc1_autopilot.py
+      - name: Check provider result state without additional billing
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_ROWAN_RECEIPT_PATH: ${{ runner.temp }}/rowan-bbc1-structure-status.json
+        run: python integrations/tranception_rowan/rowan_bbc1_collect.py
+      - name: Preserve sanitized status for scientific provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: bbc1-rowan-public-safe-status-${{ github.run_id }}
+          path: ${{ runner.temp }}/rowan-bbc1-structure-status.json
+          retention-days: 14
+          if-no-files-found: error
