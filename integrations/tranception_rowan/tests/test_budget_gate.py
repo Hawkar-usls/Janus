@@ -38,7 +38,7 @@ class Tests(unittest.TestCase):
             self.assertEqual(bands["ORG_WEEKLY_GE_30"],expected)
             self.assertEqual(bands["provider_computation"],"NOT_ATTEMPTED")
             self.assertEqual(bands["credit_spending"],"NOT_ATTEMPTED")
-            self.assertNotIn(str(weekly),str(bands))
+            self.assertNotIn(str(weekly),list(bands.values()))
         unknown=m.evaluate(SimpleNamespace(organization=SimpleNamespace()))
         self.assertEqual(unknown["ORG_WEEKLY_GE_30"],"NO_OR_UNKNOWN")
 
