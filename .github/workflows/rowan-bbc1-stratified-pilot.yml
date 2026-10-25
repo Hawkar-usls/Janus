@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: janus-rowan-science-submit-and-collect
@@ -28,6 +29,10 @@ jobs:
           python-version: '3.12'
       - name: Install pinned Rowan SDK
         run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
+      - name: Require durable Meta Registry ACK for previous completed pilot run
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python integrations/tranception_rowan/rowan_meta_ack_gate.py
       - name: Execute at most one frozen mutant with weekly credits only
         env:
           ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
