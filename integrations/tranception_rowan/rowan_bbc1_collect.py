@@ -12,7 +12,8 @@ import math
 import os
 from pathlib import Path
 from probe import prepare,TARGET_ROWAN_FOLDER_UUID
-from rowan_bbc1_autopilot import CASES,existing_by_name,BudgetHold
+from rowan_bbc1_autopilot import CASES,existing_by_name,BudgetHold,CREDIT_CAP
+from budget_gate import finite_nonnegative
 
 ROOT=Path(__file__).resolve().parent
 
@@ -39,7 +40,10 @@ def collect(api,manifest):
             raise BudgetHold("WORKFLOW_MOVED_FROM_APPROVED_FOLDER")
         uid=str(getattr(w,"uuid",""))
         identity_hash=hashlib.sha256(uid.encode()).hexdigest()[:16] if uid else "MISSING"
-        item={"arm":case["arm"],"status":"PENDING_OR_FAILED", "provider_uuid_hash":identity_hash}
+        charge=finite_nonnegative(getattr(w,"credits_charged",None))
+        item={"arm":case["arm"],"status":"PENDING_OR_FAILED", "provider_uuid_hash":identity_hash,
+              "provider_credits_charged":charge, "credit_cap":CREDIT_CAP,
+              "charge_over_cap_review":charge is not None and charge>CREDIT_CAP}
         try:
             if w.done():
                 result=w.result(wait=False)
@@ -52,8 +56,15 @@ def collect(api,manifest):
         except Exception:
             item["status"]="RESULT_UNREADABLE_REQUIRES_MANUAL_REVIEW"
         rows.append(item)
+    paired={}
+    if len(rows)==2 and all(r.get("status")=="ROWAN_RESULT_RETURNED_NO_FITNESS_CLAIM" for r in rows):
+        for field in ("ptm","avg_lddt"):
+            before,after=rows[0].get(field),rows[1].get(field)
+            if before is not None and after is not None:
+                paired["K5A_minus_wildtype_"+field]=round(after-before,6)
     return {
-        "schema":"janus.rowan.bbc1.provider_structural_status.v1",
+        "schema":"janus.rowan.bbc1.provider_structural_status.v2",
+        "paired_confidence_deltas_not_fitness":paired,
         "source_kind":"REAL_PROVIDER_READ_ONLY_STATUS",
         "case_order":list(CASES),
         "entries":rows,
@@ -74,6 +85,10 @@ def main()->int:
         print("JANUS_ROWAN_COLLECT=READ_OR_IDENTITY_ERROR");return 3
     for i in r["entries"]:
         print("JANUS_ROWAN_COLLECT_ARM="+i["arm"]+"_STATUS="+i["status"])
+        if i.get("provider_credits_charged") is not None:
+            print("JANUS_ROWAN_COLLECT_"+i["arm"]+"_PROVIDER_CREDITS="+repr(i["provider_credits_charged"]))
+        if i.get("charge_over_cap_review"):
+            print("JANUS_ROWAN_COLLECT_"+i["arm"]+"_CREDIT_CAP_ALERT=TRUE")
         if i.get("ptm") is not None:
             print("JANUS_ROWAN_COLLECT_"+i["arm"]+"_PTM="+repr(i["ptm"]))
         if i.get("avg_lddt") is not None:
