@@ -40,3 +40,23 @@ remain mandatory before any biological interpretation.
 
 Automatic expansion beyond these eight cases is NOT authorized.
 GitHub schedule is best effort, not a continuously running research agent.
+
+
+RESULT COLLECTION, WITHOUT NEW PROVIDER COMPUTATION:
+The same allowlisted S2 workflow keeps the existing daily 07:17 UTC
+submission opportunity. The added 00:09, 04:09, 08:09, 12:09,
+16:09, and 20:09 UTC schedules execute **collector only**:
+`rowan_bbc1_s2_collect.py` reads already-existing workflow status
+and writes an independently verifiable public-safe receipt. It does
+not submit or retry any workflow, and it does not use billable provider
+computation. A manual workflow_dispatch defaults to `collect_only`.
+Only the original daily submission schedule or an explicit
+`submit_and_collect` dispatch may enter the existing weekly-only
+credit gate; the same Meta Registry durable ACK is required first.
+
+Every successful collector run has the *same pinned S2 source identity*
+and GitHub Actions artifact protocol as the old daily run, so the
+existing Meta Registry observer can ingest it without another data
+source or scientific promotion. The Meta Registry archivist checks at
+minute 31 each hour. GitHub schedules remain best-effort, and a late
+archive prevents **paid submissions**, not read-only collection.
