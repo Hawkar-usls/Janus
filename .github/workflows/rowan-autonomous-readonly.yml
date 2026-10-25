@@ -1,0 +1,39 @@
+name: JANUS Rowan Read-Only Watch
+
+on:
+  schedule:
+    - cron: '23 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-rowan-readonly-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - name: Checkout vetted main code only
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Install isolated Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install reviewed Rowan SDK version
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
+
+      - name: Read-only Rowan authorization and folder check
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+        run: python integrations/tranception_rowan/github_rowan_readonly.py
