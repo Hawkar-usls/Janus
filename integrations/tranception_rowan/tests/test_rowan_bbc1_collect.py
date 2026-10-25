@@ -52,6 +52,25 @@ class Tests(unittest.TestCase):
         r=m.collect(API([Job(case1,done=True,ptm=float("nan"),lddt=1.4)]),manifest)
         self.assertIsNone(r["entries"][0]["ptm"])
         self.assertIsNone(r["entries"][0]["avg_lddt"])
+    def test_realistic_two_arm_delta_and_provider_charge(self):
+        first=Job(case1,done=True,ptm=.927,lddt=.963)
+        second=Job(case2,done=True,ptm=.927,lddt=.973)
+        first.credits_charged=6.5
+        second.credits_charged=7.0
+        result=m.collect(API([first,second]),manifest)
+        self.assertEqual(result["paired_confidence_deltas_not_fitness"]["K5A_minus_wildtype_avg_lddt"],.01)
+        self.assertEqual(result["paired_confidence_deltas_not_fitness"]["K5A_minus_wildtype_ptm"],0)
+        self.assertFalse(result["entries"][0]["charge_over_cap_review"])
+        self.assertEqual(result["entries"][1]["provider_credits_charged"],7.0)
+        self.assertFalse(result["protein_fitness_validated"])
+    def test_unknown_and_over_cap_provider_charge(self):
+        first=Job(case1,done=True,ptm=.8,lddt=.9)
+        first.credits_charged=12.0
+        result=m.collect(API([first]),manifest)
+        self.assertTrue(result["entries"][0]["charge_over_cap_review"])
+        self.assertEqual(result["entries"][0]["credit_cap"],10)
+        self.assertIsNone(result["entries"][1].get("provider_credits_charged"))
+
     def test_foreign_moved_job_blocks(self):
         with self.assertRaises(m.BudgetHold):
             m.collect(API([Job(case1,moved=True)]),manifest)
