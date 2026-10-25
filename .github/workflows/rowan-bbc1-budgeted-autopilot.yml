@@ -33,3 +33,15 @@ jobs:
           ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
           JANUS_ROWAN_APPROVED_WEEKLY_RUN: 'TRUE'
         run: python integrations/tranception_rowan/rowan_bbc1_autopilot.py
+      - name: Check provider result state without additional billing
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_ROWAN_RECEIPT_PATH: ${{ runner.temp }}/rowan-bbc1-structure-status.json
+        run: python integrations/tranception_rowan/rowan_bbc1_collect.py
+      - name: Preserve sanitized status for scientific provenance
+        uses: actions/upload-artifact@v4
+        with:
+          name: bbc1-rowan-public-safe-status-${{ github.run_id }}
+          path: ${{ runner.temp }}/rowan-bbc1-structure-status.json
+          retention-days: 14
+          if-no-files-found: error
