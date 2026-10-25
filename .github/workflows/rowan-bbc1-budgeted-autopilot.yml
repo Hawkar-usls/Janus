@@ -45,3 +45,15 @@ jobs:
           path: ${{ runner.temp }}/rowan-bbc1-structure-status.json
           retention-days: 14
           if-no-files-found: error
+      - name: Zero-credit private structural Kabsch comparison
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_BBC1_GEOMETRY_RECEIPT: ${{ runner.temp }}/bbc1-geometry.json
+        run: python integrations/tranception_rowan/rowan_bbc1_geometry.py
+      - name: Keep geometry summary without uploading PDB coordinates
+        uses: actions/upload-artifact@v4
+        with:
+          name: bbc1-safe-geometry-${{ github.run_id }}
+          path: ${{ runner.temp }}/bbc1-geometry.json
+          retention-days: 7
+          if-no-files-found: warn
