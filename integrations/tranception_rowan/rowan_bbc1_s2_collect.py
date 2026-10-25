@@ -82,7 +82,8 @@ def collect(api,manifest,blob):
         receipts.append(item)
     paired=[x for x in receipts if x["provider_state"]=="PROVIDER_RESULT_RETURNED"
             and x.get("ptm") is not None and x.get("avg_lddt") is not None]
-    ready=len(paired)==len(samples) and wt_score.get("state")=="PROVIDER_RESULT_RETURNED"
+    ready=(len(paired)==len(samples) and wt_score.get("state")=="PROVIDER_RESULT_RETURNED"
+           and all(wt_score.get(name) is not None for name in ("ptm","avg_lddt")))
     assoc={"ptm":None,"avg_lddt":None}
     if ready:
         assoc={name:corr_spearman([x["processed_label"] for x in paired],
