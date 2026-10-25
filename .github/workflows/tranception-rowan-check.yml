@@ -181,3 +181,28 @@ jobs:
           path: ${{ runner.temp }}/tranception-retrieval-paired.json
           retention-days: 7
           if-no-files-found: error
+
+  pilot-source-preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate pinned 1084-row source and freeze eight eligible mutant identities
+        run: |
+          python - <<'PY'
+          import json,sys
+          from pathlib import Path
+          sys.path.insert(0,"integrations/tranception_rowan")
+          from dms_evidence import get_pinned_dataset
+          from rowan_bbc1_s2_pilot import select
+          p=Path("integrations/tranception_rowan")
+          manifest=json.loads((p/"discovery_manifest.json").read_text(encoding="utf-8"))
+          chosen=select(get_pinned_dataset(),manifest)
+          assert len(chosen)==8
+          assert len(set(x["position_1_based"] for x in chosen))==8
+          for x in chosen:
+              print("PILOT_PREREG="+str(x["quantile_target_percent"])+":"+x["mutation"])
+          print("PILOT_PINNED_PUBLIC_MUTANT_SELECTION=PASS")
+          PY
