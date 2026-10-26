@@ -1,0 +1,72 @@
+name: JANUS SCOBY Rowan Two Protein Research Pilots
+on:
+  workflow_dispatch:
+    inputs:
+      case:
+        type: choice
+        required: true
+        default: scoby_acsD
+        options:
+          - scoby_acsD
+          - placenta_fn1
+      action:
+        type: choice
+        required: true
+        default: collect
+        options:
+          - collect
+          - submit
+      authorize_weekly_credit_spend:
+        type: choice
+        required: true
+        default: "NO"
+        options:
+          - "NO"
+          - "YES"
+permissions:
+  contents: read
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+jobs:
+  one-source-pinned-scoby-protein:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Require explicit weekly credit permission
+        shell: bash
+        env:
+          ACTION: ${{ inputs.action }}
+          AUTH: ${{ inputs.authorize_weekly_credit_spend }}
+        run: |
+          if [[ "$ACTION" == submit && "$AUTH" != YES ]]; then echo 'HOLD_NO_EXPLICIT_CREDITS'; exit 2; fi
+          if [[ "$ACTION" == collect && "$AUTH" == YES ]]; then echo 'HOLD_NO_CREDIT_PERMISSION_FOR_COLLECTION'; exit 2; fi
+      - name: Source-pinned dual-target mock-only safeguards
+        run: python -m unittest discover -v -s integrations/tranception_rowan -p 'test_rowan_scoby_placenta_two_protein_pilots.py'
+      - name: Install source-pinned Rowan SDK
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
+      - name: Run exactly one distinct preregistered protein
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_SCOBY_ROWAN_CASE: ${{ inputs.case }}
+          JANUS_SCOBY_ROWAN_ACTION: ${{ inputs.action }}
+          JANUS_SCOBY_ROWAN_SPEND_AUTH: ${{ inputs.action == 'submit' && inputs.authorize_weekly_credit_spend == 'YES' && 'TRUE' || 'FALSE' }}
+          JANUS_SCOBY_ROWAN_RECEIPT: ${{ runner.temp }}/scoby-rowan-protein.json
+        run: python integrations/tranception_rowan/rowan_scoby_placenta_two_protein_pilots.py
+      - name: Preserve independent private source receipt
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-scoby-rowan-${{ inputs.case }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/scoby-rowan-protein.json
+          retention-days: 14
+          if-no-files-found: error
