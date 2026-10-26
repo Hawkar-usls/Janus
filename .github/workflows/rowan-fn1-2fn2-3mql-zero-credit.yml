@@ -1,0 +1,42 @@
+name: JANUS Rowan FN1 2FN2 isolated plus 3MQL Xray zero credit
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+
+jobs:
+  frozen-source-reference-benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned read-only structure dependencies
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'biopython==1.85' 'numpy<3'
+      - name: Test source identity, exact segment offset and zero-pay wall
+        run: python -m unittest discover -v -s integrations/tranception_rowan -p 'test_rowan_fn1_2fn2_3mql_zero_credit.py'
+      - name: Compare old Rowan FN1 to independent NMR & X-ray coordinates
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_FN1_ORTHOGONAL_RECEIPT: ${{ runner.temp }}/rowan-fn1-2fn2-3mql-readonly.json
+        run: python integrations/tranception_rowan/rowan_fn1_2fn2_3mql_zero_credit.py
+      - name: Archive sanitized exact-source audit JSON without coordinate leakage
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-fn1-2fn2-3mql-no-credit-${{ github.run_id }}
+          path: ${{ runner.temp }}/rowan-fn1-2fn2-3mql-readonly.json
+          retention-days: 14
+          if-no-files-found: error
