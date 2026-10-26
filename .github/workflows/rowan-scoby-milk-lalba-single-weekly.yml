@@ -1,0 +1,64 @@
+name: JANUS SCOBY Milk LALBA One Weekly Rowan Protein
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        type: choice
+        required: true
+        default: collect
+        options: [collect, submit]
+      authorize_weekly_credit_spend:
+        type: choice
+        required: true
+        default: "NO"
+        options: ["NO", "YES"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+
+jobs:
+  single-source-pinned-mature-lalba:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Require explicit weekly-credit authorization for one job
+        shell: bash
+        env:
+          ACTION: ${{ inputs.action }}
+          AUTH: ${{ inputs.authorize_weekly_credit_spend }}
+        run: |
+          if [[ "$ACTION" == submit && "$AUTH" != YES ]]; then echo "HOLD_NO_SPEND_APPROVAL";exit 2;fi
+          if [[ "$ACTION" == collect && "$AUTH" == YES ]]; then echo "HOLD_COLLECT_MUST_BE_READ_ONLY";exit 2;fi
+      - name: Source and fail closed budget tests
+        run: python -m unittest discover -v -s integrations/tranception_rowan -p 'test_rowan_scoby_milk_lalba_single.py'
+      - name: Install pinned Rowan SDK
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
+      - name: Rowan single milk-protein operation, never whole SCOBY
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_SCOBY_LALBA_CASE: milk_lalba_mature
+          JANUS_SCOBY_LALBA_ACTION: ${{ inputs.action }}
+          JANUS_SCOBY_LALBA_SPEND_AUTH: ${{ inputs.action == 'submit' && inputs.authorize_weekly_credit_spend == 'YES' && 'TRUE' || 'FALSE' }}
+          JANUS_SCOBY_LALBA_RECEIPT: ${{ runner.temp }}/janus-rowan-milk-lalba-sanitized.json
+        run: python integrations/tranception_rowan/rowan_scoby_milk_lalba_single.py
+      - name: Preserve no-secret immutable receipt
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-rowan-milk-lalba-${{ github.run_id }}
+          path: ${{ runner.temp }}/janus-rowan-milk-lalba-sanitized.json
+          retention-days: 14
+          if-no-files-found: error
