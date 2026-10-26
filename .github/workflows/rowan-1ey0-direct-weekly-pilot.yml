@@ -1,0 +1,73 @@
+name: JANUS Rowan 1EY0 Direct Weekly API Pilot
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: Submit one 1EY0 WT BOLTZ_2 job or read existing (no new spend)
+        required: true
+        type: choice
+        default: collect
+        options:
+          - collect
+          - submit
+      authorize_weekly_credit_spend:
+        description: Explicitly YES for max 10 weekly credits; no purchased/unknown pool
+        required: true
+        type: choice
+        default: "NO"
+        options:
+          - "NO"
+          - "YES"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+
+jobs:
+  one-wt-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Require explicit authorization for every credit spend
+        shell: bash
+        env:
+          ACTION: ${{ inputs.action }}
+          AUTH: ${{ inputs.authorize_weekly_credit_spend }}
+        run: |
+          if [[ "$ACTION" == submit && "$AUTH" != YES ]]; then
+            echo "HOLD: user authorization required"; exit 2
+          fi
+          if [[ "$ACTION" != submit && "$AUTH" == YES ]]; then
+            echo "HOLD: no billing authorization in collect mode"; exit 2
+          fi
+      - name: Test no-paid-credit, one-job, source and duplicate gates
+        run: python -m unittest discover -v -s integrations/tranception_rowan -p 'test_rowan_1ey0_weekly_api.py'
+      - name: Install pinned Rowan Python SDK
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
+      - name: Submit or collect source-pinned ONE 1EY0 WT
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_ROWAN_1EY0_ACTION: ${{ inputs.action }}
+          JANUS_ROWAN_1EY0_WEEKLY_AUTH: ${{ inputs.action == 'submit' && inputs.authorize_weekly_credit_spend == 'YES' && 'TRUE' || 'FALSE' }}
+          JANUS_ROWAN_1EY0_RECEIPT: ${{ runner.temp }}/janus-rowan-1ey0-direct-api-receipt.json
+        run: python integrations/tranception_rowan/rowan_1ey0_weekly_api.py
+      - name: Preserve private workflow and credit receipt
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rowan-1ey0-direct-weekly-${{ github.run_id }}
+          path: ${{ runner.temp }}/janus-rowan-1ey0-direct-api-receipt.json
+          retention-days: 14
+          if-no-files-found: error
