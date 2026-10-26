@@ -74,6 +74,36 @@ def check_folder(api):
     if str(getattr(folder,"uuid",None))!=TARGET_ROWAN_FOLDER_UUID:
         raise Hold("APPROVED_FOLDER_IDENTITY_DRIFT")
 
+def read_existing_result_without_new_credits(workflow):
+    """Fetch source-bound private provider result; zero provider submissions."""
+    try:
+        latest=workflow.fetch_latest()
+        if str(getattr(latest,"parent_uuid",None))!=TARGET_ROWAN_FOLDER_UUID:
+            raise Hold("COLLECT_FOLDER_IDENTITY_DRIFT")
+        if str(getattr(latest,"name",None))!=NAME:
+            raise Hold("COLLECT_CASE_IDENTITY_DRIFT")
+        if not latest.done():
+            return {"provider_result_state":"PENDING_OR_IN_PROGRESS",
+                    "new_provider_jobs_by_collector":0}
+        data=latest.result(wait=False)
+        scores=getattr(data,"scores",None)
+        ptm=finite_nonnegative(getattr(scores,"ptm",None))
+        lddt=finite_nonnegative(getattr(scores,"avg_lddt",None))
+        amount=finite_nonnegative(getattr(latest,"credits_charged",None))
+        if ptm is None or lddt is None or ptm>1 or lddt>1:
+            return {"provider_result_state":"PROVIDER_COMPLETED_SCORES_NOT_VERIFIED",
+                    "new_provider_jobs_by_collector":0,
+                    "credits_charged":amount}
+        return {"provider_result_state":"PROVIDER_RESULT_RETURNED",
+                "ptm":ptm,"avg_lddt":lddt,
+                "credits_charged":amount,
+                "new_provider_jobs_by_collector":0}
+    except Hold:
+        raise
+    except Exception:
+        return {"provider_result_state":"PROVIDER_RESULT_UNREADABLE",
+                "new_provider_jobs_by_collector":0}
+
 def process(api,action,approve):
     check_static()
     if action not in ALLOWED:raise Hold("UNSUPPORTED_ACTION")
@@ -111,6 +141,8 @@ def process(api,action,approve):
                 "existing_uuid":uid,"case_name":NAME,
                 "workflow_state":str(getattr(job,"status",None)),
                 "credit_source_gate":source,"new_jobs":1,"credit_spend_cap":CAP}
+    if action=="collect" and previous is not None:
+        result.update(read_existing_result_without_new_credits(previous))
     result.update({
        "schema_id":"janus.rowan.external_1ey0_direct_api_weekly_source_job.v1",
        "input_sequence_sha256":WT_SHA256,"input_length":136,
