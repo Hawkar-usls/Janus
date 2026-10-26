@@ -1,0 +1,42 @@
+name: JANUS Rowan FN1 all-NMR 1E88 1E8B zero credits
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+
+jobs:
+  fn1-21-nmr-structure-reads-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned source-reading SDK and numeric parser
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'biopython==1.85' 'numpy<3'
+      - name: Test exact target identity, all-model accounting and non-submit firewalls
+        run: python -m unittest discover -v -s integrations/tranception_rowan -p 'test_rowan_fn1_1e88_1e8b_nmr_readonly.py'
+      - name: Read prior FN1 Rowan coordinates and evaluate 21 frozen NMR models
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_FN1_NMR_RECEIPT: ${{ runner.temp }}/rowan-fn1-all-nmr-no-spend.json
+        run: python integrations/tranception_rowan/rowan_fn1_1e88_1e8b_nmr_readonly.py
+      - name: Retain auditable summaries; no coordinates, no provider secrets
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-rowan-fn1-nmr-21-no-spend-${{ github.run_id }}
+          path: ${{ runner.temp }}/rowan-fn1-all-nmr-no-spend.json
+          if-no-files-found: error
+          retention-days: 14
