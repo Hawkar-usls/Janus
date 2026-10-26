@@ -1,0 +1,63 @@
+name: JANUS Rowan 1EY0 T8A One Mutant Weekly
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        type: choice
+        required: true
+        default: collect
+        options: [collect, submit]
+      authorize_weekly_credit_spend:
+        type: choice
+        required: true
+        default: "NO"
+        options: ["NO","YES"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+
+jobs:
+  one-source-pinned-mutant:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Explicit weekly credit approval
+        env:
+          ACTION: ${{ inputs.action }}
+          AUTH: ${{ inputs.authorize_weekly_credit_spend }}
+        shell: bash
+        run: |
+          if [[ "$ACTION" == submit && "$AUTH" != YES ]]; then echo "HOLD_NO_CREDIT_PERMISSION";exit 2;fi
+          if [[ "$ACTION" == collect && "$AUTH" == YES ]]; then echo "HOLD_COLLECT_MUST_BE_READ_ONLY";exit 2;fi
+      - name: Mock-only source and credit safeguards
+        run: python -m unittest discover -v -s integrations/tranception_rowan -p 'test_rowan_1ey0_T8A_weekly_pair.py'
+      - name: Install pinned Rowan SDK
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
+      - name: One T8A provider operation (zero or one job)
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_ROWAN_1EY0_T8A_ACTION: ${{ inputs.action }}
+          JANUS_ROWAN_1EY0_T8A_CREDIT_APPROVED: ${{ inputs.action == 'submit' && inputs.authorize_weekly_credit_spend == 'YES' && 'TRUE' || 'FALSE' }}
+          JANUS_ROWAN_1EY0_T8A_RECEIPT: ${{ runner.temp }}/janus-rowan-1ey0-T8A-provider.json
+        run: python integrations/tranception_rowan/rowan_1ey0_T8A_weekly_pair.py
+      - name: Preserve source-bound sanitized receipt
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rowan-1ey0-T8A-weekly-${{ github.run_id }}
+          path: ${{ runner.temp }}/janus-rowan-1ey0-T8A-provider.json
+          retention-days: 14
+          if-no-files-found: error
