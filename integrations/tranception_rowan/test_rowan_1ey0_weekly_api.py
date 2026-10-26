@@ -2,7 +2,7 @@
 import unittest
 from types import SimpleNamespace as N
 from rowan_1ey0_weekly_api import (WT,WT_SHA256,digest,CAP,NAME,Hold,process,
- TARGET_ROWAN_FOLDER_UUID)
+ TARGET_ROWAN_FOLDER_UUID,read_existing_result_without_new_credits)
 def job(uid="case1",kind="protein_cofolding",folder=TARGET_ROWAN_FOLDER_UUID):
     return N(name=NAME,uuid=uid,workflow_type=kind,parent_uuid=folder,status="running")
 class Provider:
@@ -62,6 +62,40 @@ class Tests(unittest.TestCase):
         p=Provider();p.user.individual_subscription=N()
         with self.assertRaisesRegex(Hold,"SUBSCRIPTION_STATUS"):
             process(p,"submit",True)
+    def test_collect_returns_real_existing_scores_without_submitting(self):
+        class Completed:
+            name=NAME
+            parent_uuid=TARGET_ROWAN_FOLDER_UUID
+            credits_charged=7.25
+            def fetch_latest(self):return self
+            def done(self):return True
+            def result(self,wait=False):
+                return N(scores=N(ptm=.94,avg_lddt=.95))
+        z=read_existing_result_without_new_credits(Completed())
+        self.assertEqual(z["provider_result_state"],"PROVIDER_RESULT_RETURNED")
+        self.assertEqual(z["ptm"],.94)
+        self.assertEqual(z["avg_lddt"],.95)
+        self.assertEqual(z["credits_charged"],7.25)
+        self.assertEqual(z["new_provider_jobs_by_collector"],0)
+    def test_collect_incomplete_scores_fail_closed(self):
+        class Incomplete:
+            name=NAME
+            parent_uuid=TARGET_ROWAN_FOLDER_UUID
+            credits_charged=2
+            def fetch_latest(self):return self
+            def done(self):return True
+            def result(self,wait=False):
+                return N(scores=N(ptm=3.3,avg_lddt=.99))
+        z=read_existing_result_without_new_credits(Incomplete())
+        self.assertEqual(z["provider_result_state"],"PROVIDER_COMPLETED_SCORES_NOT_VERIFIED")
+    def test_collect_waits_for_existing_running_job(self):
+        class Running:
+            name=NAME
+            parent_uuid=TARGET_ROWAN_FOLDER_UUID
+            def fetch_latest(self):return self
+            def done(self):return False
+        z=read_existing_result_without_new_credits(Running())
+        self.assertEqual(z["provider_result_state"],"PENDING_OR_IN_PROGRESS")
     def test_no_fitness_or_mutants_claim(self):
         o=process(Provider(),"submit",True)
         self.assertFalse(o["fitness_validated"]);self.assertEqual(o["fireprot_210_mutations_submitted"],0)
