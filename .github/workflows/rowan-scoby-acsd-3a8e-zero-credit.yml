@@ -1,0 +1,43 @@
+name: JANUS SCOBY AcsD Rowan vs 3A8E Zero Credit
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+
+jobs:
+  original-structure-source-only:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install pinned read-only source and analysis dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'biopython==1.85' 'numpy<3'
+      - name: Verify structure alignment and zero-spend constraints
+        run: python -m unittest discover -v -s integrations/tranception_rowan -p 'test_rowan_scoby_acsd_rcsb_3a8e_readonly.py'
+      - name: Compare prior Rowan AcsD prediction against fixed 3A8E chain A
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          JANUS_ACSD_STRUCTURAL_READONLY_RECEIPT: ${{ runner.temp }}/acsd-rowan-vs-3a8e-zero-credit.json
+        run: python integrations/tranception_rowan/rowan_scoby_acsd_rcsb_3a8e_readonly.py
+      - name: Preserve sanitized analysis, not raw 3D coordinates
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-acsd-vs-3a8e-zero-credit-${{ github.run_id }}
+          path: ${{ runner.temp }}/acsd-rowan-vs-3a8e-zero-credit.json
+          retention-days: 14
+          if-no-files-found: error
