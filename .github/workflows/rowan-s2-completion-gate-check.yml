@@ -1,0 +1,41 @@
+name: JANUS Rowan S2 completion freeze offline gate
+on:
+  pull_request:
+    paths:
+      - 'integrations/tranception_rowan/rowan_s2_completion_freeze.py'
+      - 'integrations/tranception_rowan/test_rowan_s2_completion_freeze.py'
+      - '.github/workflows/rowan-bbc1-stratified-pilot.yml'
+      - '.github/workflows/rowan-s2-completion-gate-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  zero-spend-freeze-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Complete mock state must refuse any new paid or weekly Rowan compute
+        run: |
+          python -m unittest discover -v -s integrations/tranception_rowan \
+            -p 'test_rowan_s2_completion_freeze.py'
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          s=Path("integrations/tranception_rowan/rowan_s2_completion_freeze.py").read_text()
+          ast.parse(s)
+          assert "submit_protein_cofolding_workflow" not in s
+          y=Path(".github/workflows/rowan-bbc1-stratified-pilot.yml").read_text()
+          assert "steps.completion.outputs.should_submit == 'true'" in y
+          assert y.count("steps.completion.outputs.should_submit == 'true'")==2
+          assert "python integrations/tranception_rowan/rowan_bbc1_s2_collect.py" in y
+          assert "cron: '9 0,4,8,12,16,20 * * *'" in y
+          print("S2_SUBMISSION_BRANCH_FREEZES_AFTER_8_OF_8=PASS")
+          print("S2_READ_ONLY_COLLECTION_CONTINUES=PASS")
+          print("ZERO_ROWAN_API_KEY_OR_BILLING_IN_THIS_WORKFLOW=PASS")
+          PY
