@@ -42,13 +42,17 @@ jobs:
           python-version: '3.12'
       - name: Install pinned Rowan SDK
         run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
-      - name: Require durable Meta Registry ACK for previous completed pilot run
+      - name: Freeze completed eight-case S2 before any Rowan submit or ACK step
+        id: completion
         if: ${{ (github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect') }}
+        run: python integrations/tranception_rowan/rowan_s2_completion_freeze.py
+      - name: Require durable Meta Registry ACK for previous completed pilot run
+        if: ${{ ((github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect')) && steps.completion.outputs.should_submit == 'true' }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python integrations/tranception_rowan/rowan_meta_ack_gate.py
       - name: Execute at most one frozen mutant with weekly credits only
-        if: ${{ (github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect') }}
+        if: ${{ ((github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect')) && steps.completion.outputs.should_submit == 'true' }}
         env:
           ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
           JANUS_ROWAN_S2_APPROVED: 'TRUE'
