@@ -1,0 +1,124 @@
+name: JANUS Rowan Lapis Fundamentum zero-credit subscriber
+on:
+  workflow_run:
+    workflows: ['JANUS Rowan BBC1 Stratified Pilot S2']
+    types: [completed]
+  pull_request:
+    paths:
+      - 'integrations/tranception_rowan/rowan_autonomous_lapis_admission.py'
+      - 'integrations/tranception_rowan/test_rowan_autonomous_lapis_admission.py'
+      - '.github/workflows/rowan-lapis-fundamentum-autonomous-consumer.yml'
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: Completed real Rowan BBC1 S2 run ID
+        type: string
+        default: '40638479917'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: rowan-lapis-zero-spend-${{ github.event.workflow_run.id || github.run_id }}
+  cancel-in-progress: false
+jobs:
+  source-bound-readonly:
+    if: ${{ github.event_name != 'workflow_run' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_RUN_ID: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.id || github.event_name == 'workflow_dispatch' && inputs.source_run_id || '40638479917' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/janus-lapis
+          ref: 72daf0b4dce0467afad4f5f3ceaa813503923b30
+          path: lapis
+          persist-credentials: false
+      - uses: actions/checkout@v4
+        with:
+          repository: Hawkar-usls/Janus-Fundamentum
+          ref: ed297fee1a60d1c97232411990921b707633b809
+          path: receiver
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Unit tests with no Rowan credentials
+        run: |
+          python -m unittest discover -v -s integrations/tranception_rowan -p test_rowan_autonomous_lapis_admission.py
+          test -z "${ROWAN_API_KEY:-}"
+      - name: Verify exact originating GitHub main collector run and unique artifact
+        run: |
+          set -euo pipefail
+          [[ "$SOURCE_RUN_ID" =~ ^[0-9]{8,14}$ ]]
+          gh api "repos/Hawkar-usls/Janus/actions/runs/$SOURCE_RUN_ID" > "$RUNNER_TEMP/rowan-run.json"
+          gh api "repos/Hawkar-usls/Janus/actions/runs/$SOURCE_RUN_ID/artifacts?per_page=60" > "$RUNNER_TEMP/rowan-artifacts.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          r=Path(os.environ["RUNNER_TEMP"])
+          run=json.loads((r/"rowan-run.json").read_text())
+          a=json.loads((r/"rowan-artifacts.json").read_text())
+          sid=int(os.environ["SOURCE_RUN_ID"])
+          assert run["id"]==sid and run["name"]=="JANUS Rowan BBC1 Stratified Pilot S2"
+          assert run["head_branch"]=="main" and run["conclusion"]=="success"
+          assert run["event"] in ("schedule","workflow_dispatch")
+          matched=[x for x in a["artifacts"] if x.get("name")=="bbc1-pilot-eight-public-safe-"+str(sid) and not x.get("expired")]
+          assert len(matched)==1,("NON_UNIQUE_ROWAN_SOURCE_ARTIFACT_HOLD",len(matched))
+          assert 0<matched[0]["size_in_bytes"]<80000
+          print("ROWAN_REAL_SOURCE_IDENTITY=PASS")
+          PY
+          mkdir -p "$RUNNER_TEMP/original"
+          gh run download "$SOURCE_RUN_ID" --repo Hawkar-usls/Janus --name "bbc1-pilot-eight-public-safe-$SOURCE_RUN_ID" --dir "$RUNNER_TEMP/original"
+          python - <<'PY'
+          import json,os,sys
+          from pathlib import Path
+          sys.path.insert(0,"integrations/tranception_rowan")
+          from rowan_autonomous_lapis_admission import validate_collector
+          files=[f for f in (Path(os.environ["RUNNER_TEMP"])/"original").rglob("*") if f.is_file()]
+          assert len(files)==1 and files[0].suffix==".json" and files[0].stat().st_size<80000
+          assert validate_collector(json.loads(files[0].read_text()))
+          print("ROWAN_FROZEN_8_MUTANTS=PASS")
+          PY
+      - name: Genuine Lapis translation with same-content cache proof
+        run: |
+          set -euo pipefail
+          SOURCE="$(find "$RUNNER_TEMP/original" -name '*.json' -type f -print -quit)"
+          mkdir -p "$RUNNER_TEMP/lapis"
+          python lapis/tools/rowan_fundamentum_translate.py --input "$SOURCE" --outdir "$RUNNER_TEMP/lapis" --language ru | tee "$RUNNER_TEMP/first.log"
+          grep -q TRANSLATED_NEW "$RUNNER_TEMP/first.log"
+          python lapis/tools/rowan_fundamentum_translate.py --input "$SOURCE" --outdir "$RUNNER_TEMP/lapis" --language ru | tee "$RUNNER_TEMP/second.log"
+          grep -q CACHE_HIT_SAME_CONTENT "$RUNNER_TEMP/second.log"
+      - name: Independent Fundamentum receiver and mathematical/science authority boundary
+        run: |
+          set -euo pipefail
+          SOURCE="$(find "$RUNNER_TEMP/original" -name '*.json' -type f -print -quit)"
+          BUNDLE="$(find "$RUNNER_TEMP/lapis" -mindepth 1 -maxdepth 1 -type d -print -quit)"
+          python receiver/tools/verify_lapis_rowan_candidate.py --bundle "$BUNDLE" --source-receipt "$SOURCE" > "$RUNNER_TEMP/receiver.json"
+          python integrations/tranception_rowan/rowan_autonomous_lapis_admission.py --source "$SOURCE" --bundle "$BUNDLE" --run-id "$SOURCE_RUN_ID" --out "$RUNNER_TEMP/rowan-admission.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"])
+          receiver=json.loads((p/"receiver.json").read_text())
+          admission=json.loads((p/"rowan-admission.json").read_text())
+          assert receiver["status"]=="STRUCTURALLY_VALID_UNAUTHENTICATED"
+          assert admission["rowan_provider_jobs_started"]==0 and admission["credits_spent"]==0
+          assert admission["lapis_proof_authority"] is False and admission["p_vs_np"]=="OPEN"
+          print("ROWAN_LAPIS_FUNDAMENTUM_AUTO_CONSUMER=PASS_ZERO_SPEND")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rowan-lapis-auto-verdict-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/rowan-admission.json
+            ${{ runner.temp }}/receiver.json
+            ${{ runner.temp }}/lapis/*/candidate.json
+            ${{ runner.temp }}/lapis/*/algorithm_ir.json
+            ${{ runner.temp }}/lapis/*/manifest.json
+          if-no-files-found: error
+          retention-days: 14
