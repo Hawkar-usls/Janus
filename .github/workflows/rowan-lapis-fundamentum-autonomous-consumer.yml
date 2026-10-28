@@ -3,6 +3,12 @@ on:
   workflow_run:
     workflows: ['JANUS Rowan BBC1 Stratified Pilot S2']
     types: [completed]
+  schedule:
+    - cron: '11 */6 * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/rowan-lapis-fundamentum-autonomous-consumer.yml'
   pull_request:
     paths:
       - 'integrations/tranception_rowan/rowan_autonomous_lapis_admission.py'
@@ -51,6 +57,31 @@ jobs:
         run: |
           python -m unittest discover -v -s integrations/tranception_rowan -p test_rowan_autonomous_lapis_admission.py
           test -z "${ROWAN_API_KEY:-}"
+      - name: Resolve latest verified main Rowan source on scheduled and deployment catch-up
+        if: ${{ github.event_name == 'schedule' || github.event_name == 'push' }}
+        run: |
+          set -euo pipefail
+          gh api "repos/Hawkar-usls/Janus/actions/workflows/rowan-bbc1-stratified-pilot.yml/runs?per_page=30&branch=main&status=completed" > "$RUNNER_TEMP/rowan-history.json"
+          python - <<'PY'
+          import json,os
+          from pathlib import Path
+          raw=json.loads((Path(os.environ["RUNNER_TEMP"])/"rowan-history.json").read_text())
+          runs=raw.get("workflow_runs")
+          assert isinstance(runs,list) and 0<len(runs)<=30
+          eligible=[r for r in runs
+                    if r.get("head_branch")=="main"
+                    and r.get("status")=="completed"
+                    and r.get("conclusion")=="success"
+                    and r.get("event") in ("schedule","workflow_dispatch")
+                    and type(r.get("id")) is int and r["id"]>0]
+          assert eligible,"NO_ATTESTED_COMPLETED_ROWAN_MAIN_RUN_HOLD"
+          selected=max(eligible,key=lambda r:r["id"])
+          run=str(selected["id"])
+          with open(os.environ["GITHUB_ENV"],"a",encoding="utf-8") as output:
+              output.write("SOURCE_RUN_ID="+run+"\n")
+          print("ROWAN_LAPIS_CATCHUP_SOURCE_RUN="+run)
+          print("ROWAN_LAPIS_PROVIDER_ACTIONS=NO")
+          PY
       - name: Verify exact originating GitHub main collector run and unique artifact
         run: |
           set -euo pipefail
