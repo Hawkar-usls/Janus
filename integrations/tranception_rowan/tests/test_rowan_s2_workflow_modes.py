@@ -28,13 +28,25 @@ class RowanS2WorkflowModes(unittest.TestCase):
             ") || (github.event_name == 'workflow_dispatch' && " +
             "inputs.mode == 'submit_and_collect') }}"
         )
-        self.assertEqual(s.count(condition), 2)
+        # First condition is the new pre-submit completion freeze. Both
+        # downstream ACK and provider-submit steps additionally require its
+        # should_submit output, so an attested 8/8 can never reach billing.
+        guarded = (
+            "if: \u0024{{ ((github.event_name == 'schedule' && " + daily +
+            ") || (github.event_name == 'workflow_dispatch' && " +
+            "inputs.mode == 'submit_and_collect')) && " +
+            "steps.completion.outputs.should_submit == 'true' }}"
+        )
+        self.assertEqual(s.count(condition), 1)
+        self.assertEqual(s.count(guarded), 2)
+        self.assertIn("id: completion", s)
+        self.assertIn("python integrations/tranception_rowan/rowan_s2_completion_freeze.py", s)
         self.assertEqual(s.count("python integrations/tranception_rowan/rowan_meta_ack_gate.py"), 1)
         self.assertEqual(s.count("python integrations/tranception_rowan/rowan_bbc1_s2_pilot.py"), 1)
         ack = s.split("      - name: Require durable Meta Registry ACK for previous completed pilot run\n", 1)[1]
         submit = s.split("      - name: Execute at most one frozen mutant with weekly credits only\n", 1)[1]
-        self.assertTrue(ack.startswith("        " + condition + "\n"))
-        self.assertTrue(submit.startswith("        " + condition + "\n"))
+        self.assertTrue(ack.startswith("        " + guarded + "\n"))
+        self.assertTrue(submit.startswith("        " + guarded + "\n"))
         self.assertIn("JANUS_ROWAN_S2_APPROVED: 'TRUE'", submit)
 
     def test_six_readonly_collection_schedules_never_select_daily_submit(self):
