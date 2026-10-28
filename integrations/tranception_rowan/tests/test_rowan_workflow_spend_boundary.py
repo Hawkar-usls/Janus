@@ -49,7 +49,7 @@ class RowanWorkflowSpendBoundary(unittest.TestCase):
                 y = self.source(name)
                 self.assertIn("workflow_dispatch:", y)
                 self.assertNotIn("\n  schedule:", y)
-                self.assertIn("default: 'NO'", y)
+                self.assertRegex(y, r'default:\\s*[\"\\']?NO[\"\\']?')
                 self.assertIn("YES", y)
                 self.assertIn("submit", y)
                 self.assertIn("ROWAN_API_KEY", y)
