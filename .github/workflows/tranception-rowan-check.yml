@@ -4,10 +4,12 @@ on:
     paths:
       - 'integrations/tranception_rowan/**'
       - '.github/workflows/tranception-rowan-check.yml'
+      - '.github/workflows/rowan-*.yml'
   pull_request:
     paths:
       - 'integrations/tranception_rowan/**'
       - '.github/workflows/tranception-rowan-check.yml'
+      - '.github/workflows/rowan-*.yml'
 permissions:
   contents: read
 jobs:
