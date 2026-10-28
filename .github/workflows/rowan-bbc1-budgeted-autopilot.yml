@@ -28,11 +28,9 @@ jobs:
           python-version: '3.12'
       - name: Install pinned Rowan Python SDK
         run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
-      - name: Only one preregistered BBC1 case, only safely available weekly credits
-        env:
-          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
-          JANUS_ROWAN_APPROVED_WEEKLY_RUN: 'TRUE'
-        run: python integrations/tranception_rowan/rowan_bbc1_autopilot.py
+      # This workflow is deliberately collect-only on schedule AND manual dispatch.
+      # New submissions must use a separate explicit, per-run spend approval.
+      # Never set JANUS_ROWAN_APPROVED_WEEKLY_RUN from cron.
       - name: Check provider result state without additional billing
         env:
           ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}

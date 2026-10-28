@@ -11,8 +11,14 @@ on:
         options:
           - collect_only
           - submit_and_collect
+      authorize_weekly_credit_spend:
+        description: 'Mandatory explicit consent for any manual Rowan submission; never inferred from cron'
+        type: choice
+        required: true
+        default: 'NO'
+        options: ['NO', 'YES']
   schedule:
-    # One previously approved spend-gated submission opportunity each day.
+    # Former submission slot remains a read-only collection opportunity.
     - cron: '17 7 * * *'
     # Free provider-status reads only, spaced ahead of the hourly Meta Registry archivist.
     # 04:09 is the last collector before the 07:17 daily submission ACK gate.
@@ -44,15 +50,15 @@ jobs:
         run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
       - name: Freeze completed eight-case S2 before any Rowan submit or ACK step
         id: completion
-        if: ${{ (github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect') }}
+        if: ${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect' && inputs.authorize_weekly_credit_spend == 'YES') }}
         run: python integrations/tranception_rowan/rowan_s2_completion_freeze.py
       - name: Require durable Meta Registry ACK for previous completed pilot run
-        if: ${{ ((github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect')) && steps.completion.outputs.should_submit == 'true' }}
+        if: ${{ ((github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect' && inputs.authorize_weekly_credit_spend == 'YES')) && steps.completion.outputs.should_submit == 'true' }}
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: python integrations/tranception_rowan/rowan_meta_ack_gate.py
       - name: Execute at most one frozen mutant with weekly credits only
-        if: ${{ ((github.event_name == 'schedule' && github.event.schedule == '17 7 * * *') || (github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect')) && steps.completion.outputs.should_submit == 'true' }}
+        if: ${{ ((github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect' && inputs.authorize_weekly_credit_spend == 'YES')) && steps.completion.outputs.should_submit == 'true' }}
         env:
           ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
           JANUS_ROWAN_S2_APPROVED: 'TRUE'
