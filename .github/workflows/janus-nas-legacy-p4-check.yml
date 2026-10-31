@@ -1,0 +1,28 @@
+name: JANUS NAS Legacy ESP32-P4 Archive Static Check
+on:
+  pull_request:
+    paths:
+      - 'hardware/legacy/nas_p4_dual_swarm_v1_1/**'
+      - 'tests/test_nas_legacy_p4_static.py'
+      - '.github/workflows/janus-nas-legacy-p4-check.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'hardware/legacy/nas_p4_dual_swarm_v1_1/**'
+      - 'tests/test_nas_legacy_p4_static.py'
+      - '.github/workflows/janus-nas-legacy-p4-check.yml'
+permissions:
+  contents: read
+jobs:
+  structural-archive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check historical archive only
+        run: python -m unittest discover -s tests -p test_nas_legacy_p4_static.py -v
