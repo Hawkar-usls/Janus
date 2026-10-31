@@ -1,0 +1,49 @@
+{
+  "name": "JANUS_P4_DUAL_SWARM_CORE",
+  "version": "v1.1",
+  "target": "ESP32-P4",
+  "native_wifi": false,
+  "transport": {
+    "primary": "USB Serial JP4 frames",
+    "optional": "UART JP4 frames to ESP32-C6/S3 companion",
+    "uart_enabled_by_default": false,
+    "uart_rx_pin": 44,
+    "uart_tx_pin": 43,
+    "uart_baud": 115200
+  },
+  "roles": {
+    "P4_A": [
+      "HASH",
+      "SCOUT",
+      "INTENTION"
+    ],
+    "P4_B": [
+      "MIRROR",
+      "VERIFY",
+      "MEMORY"
+    ],
+    "P4_C": [
+      "COORDINATOR",
+      "RELAY"
+    ]
+  },
+  "mechanics": [
+    "dual role split",
+    "adaptive AUTO mode",
+    "SHA-256 compute stream",
+    "job seed and target_z",
+    "best_z proof events",
+    "JP4 peer heartbeat frames",
+    "FNV1a checksum on JP4 frames",
+    "mirror verification queue",
+    "anchor memory ring",
+    "blackboard score",
+    "intention score",
+    "Serial/UART bridge protocol"
+  ],
+  "files": [
+    "JANUS_P4_DUAL_SWARM_CORE_v1_1.ino",
+    "README_P4_DUAL_SWARM_CORE.txt",
+    "manifest.json"
+  ]
+}
