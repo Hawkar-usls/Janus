@@ -115,3 +115,9 @@ implements browser OAuth, protected per-account credentials, refresh/revocation
 and isolated text inference through Codex app-server. It is not exposed through
 MCP, does not modify the installed JANUS Habitat plugin and requires explicit
 local invocation and owner consent. The HTTP gateway binds loopback by default.
+
+The optional `python -m mcp_gateway.account_gateway` interface adds the official
+Google Antigravity account client, explicit provider selection and quota-only
+ChatGPT-to-Google fallback. See [account gateway setup](../docs/ACCOUNT_MODEL_GATEWAY.md).
+DeepSeek is explicitly disabled in the keyless pool because its documented API
+requires a key; an ordinary browser session is not presented as an API grant.
