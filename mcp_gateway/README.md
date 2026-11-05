@@ -39,6 +39,8 @@ RETURN_TO_QUESTION_AT_HIGHER_STATE__NEVER_RETURN_TO_IDENTICAL_STATE
 | `janus.query_cosmos` | read | search `Janus-Cosmos` |
 | `janus.read_cosmos` | read | read one Cosmos artifact by path + ref |
 | `janus.freeze_gate` | **write, locked** | freeze a gate checkpoint on the dedicated branch |
+| `janus.codex_cloud_handoff` | read-only | draft a task for owner-authorized Codex Cloud; no model or repo mutation |
+| `janus.codex_app_server_readiness` | read-only | report safe Sign in with ChatGPT / app-server prerequisites |
 | `janus.write_checkpoint` | **write, locked** | persist a progress checkpoint |
 
 The gateway does **not** expose shell execution, arbitrary URLs, arbitrary repositories, secret values, or model-generated truth claims.
@@ -101,3 +103,11 @@ ARTIFACT != INDEPENDENT REPLICATION
 TRANCEPTION_ROTATION != EVIDENCE
 SPIRAL_ASCENT != CLAIM_PROMOTION
 ```
+
+## Codex Cloud and ChatGPT account bridge
+
+The initial safe integration contract is documented in
+[`docs/JANUS_CODEX_CLOUD_AND_CHATGPT_GATEWAY.md`](../docs/JANUS_CODEX_CLOUD_AND_CHATGPT_GATEWAY.md).
+Codex Cloud environment setup and ChatGPT OAuth consent belong to the owner.
+The new gateway tools only build draft tasks and describe readiness; no account
+is signed in, no app-server is launched and no source code is auto-merged.

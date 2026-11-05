@@ -8,6 +8,8 @@ from typing import Any
 from mcp.server import MCPServer
 
 from .core import checkpoint_document, safe_slug, topa_packet
+from .codex_handoff import prepare_codex_cloud_task
+from .codex_app_server import app_server_readiness
 from .github_api import GitHubAPI
 from .organism_tools import install_organism_tools
 
@@ -124,6 +126,18 @@ def read_cosmos(path: str, ref: str = "main") -> dict[str, Any]:
     item["content"], item["truncated"] = _clip(item["content"])
     item["boundary"] = "ARTIFACT != INDEPENDENT_REPLICATION"
     return item
+
+
+@mcp.tool(name="janus.codex_cloud_handoff")
+def codex_cloud_handoff(task: str, paths: list[str] | None = None) -> dict[str, Any]:
+    """READ: prepare a scoped user-authorized Codex Cloud coding task, never execute it."""
+    return prepare_codex_cloud_task(task, paths)
+
+
+@mcp.tool(name="janus.codex_app_server_readiness")
+def codex_app_server_readiness() -> dict[str, Any]:
+    """READ: show SIWC/Codex app-server requirements, without sessions or tokens."""
+    return app_server_readiness()
 
 
 @mcp.tool(name="janus.freeze_gate")
