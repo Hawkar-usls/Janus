@@ -166,6 +166,6 @@ install_organism_tools(mcp, api, _clip, CHECKPOINT_REPO)
 
 
 if __name__ == "__main__":
-    host = os.getenv("MCP_HOST", "0.0.0.0")
+    host = os.getenv("MCP_HOST", "127.0.0.1")
     port = int(os.getenv("PORT", os.getenv("MCP_PORT", "8000")))
     mcp.run(transport="streamable-http", host=host, port=port, streamable_http_path="/mcp")
