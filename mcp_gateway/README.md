@@ -106,8 +106,12 @@ SPIRAL_ASCENT != CLAIM_PROMOTION
 
 ## Codex Cloud and ChatGPT account bridge
 
-The initial safe integration contract is documented in
+The integration and local setup are documented in
 [`docs/JANUS_CODEX_CLOUD_AND_CHATGPT_GATEWAY.md`](../docs/JANUS_CODEX_CLOUD_AND_CHATGPT_GATEWAY.md).
 Codex Cloud environment setup and ChatGPT OAuth consent belong to the owner.
-The new gateway tools only build draft tasks and describe readiness; no account
-is signed in, no app-server is launched and no source code is auto-merged.
+The gateway's MCP tools only build draft tasks and describe static readiness.
+The separate human-operated `python -m mcp_gateway.codex_bridge` client now
+implements browser OAuth, protected per-account credentials, refresh/revocation
+and isolated text inference through Codex app-server. It is not exposed through
+MCP, does not modify the installed JANUS Habitat plugin and requires explicit
+local invocation and owner consent. The HTTP gateway binds loopback by default.

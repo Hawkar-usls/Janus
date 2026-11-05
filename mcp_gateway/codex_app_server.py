@@ -1,8 +1,8 @@
 """Codex app-server integration contract for owner-authorized ChatGPT plan usage.
 
-This module contains NO OAuth token, user session, subprocess launcher, API
-client or GitHub writer. The OAuth PKCE and ID-token validation flow must be
-implemented and independently reviewed before live model requests are enabled.
+This public MCP contract never opens a token vault or launches a subprocess.
+The separate, explicitly invoked local client in codex_bridge owns OAuth and
+the isolated inference runtime. Its account state is not queried by this tool.
 """
 from __future__ import annotations
 
@@ -56,6 +56,10 @@ def app_server_readiness() -> dict[str, object]:
     return {
         "schema": "janus.codex.siwc_app_server_plan.v1",
         "status": "AUTHENTICATION_NOT_CONNECTED",
+        "status_source": "static_contract_not_account_probe",
+        "live_account_checked": False,
+        "local_client_module": "mcp_gateway.codex_bridge",
+        "local_status_command": "python -m mcp_gateway.codex_bridge status",
         "mode": "SIGN_IN_WITH_CHATGPT_USER_CONSENT",
         "requires_openai_oidc_pkce_and_jwks_validation": True,
         "requires_chatgpt_plan_usage_scope": "chatgpt.tokens.use.direct",
