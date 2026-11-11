@@ -147,6 +147,10 @@ class PublicEvidenceGatewayTests(unittest.TestCase):
         self.assertIsNone(r["sources"][0]["published_date"])
         self.assertEqual(r["sources"][0]["seen_at"], "20261111T123000Z")
         self.assertFalse(r["sources"][0]["seen_at_is_publication_time"])
+        self.assertEqual(r["sources"][0]["attribution"],
+                         "GDELT Project — https://www.gdeltproject.org/")
+        self.assertEqual(r["sources"][0]["coverage_limit"],
+                         "RECENT_NEWS_INDEX_NOT_GENERAL_WEB_SEARCH")
         self.assertFalse(r["independent_fact_verification"])
         self.assertIsNone(r["answer"])
         self.assertEqual(len(self.calls), 1)
@@ -228,6 +232,36 @@ class PublicEvidenceGatewayTests(unittest.TestCase):
             public_evidence_search("Кольца Сатурна", provider="arbitrary_url",
                                    public_query_approved=True, transport=self.provider)
         self.assertFalse(self.calls)
+
+    def test_non_json_gdelt_status_never_leaks_body(self):
+        from mcp_gateway.public_evidence import _get_json
+        from unittest.mock import MagicMock
+        class FakeReply:
+            status = 200
+            def __enter__(self): return self
+            def __exit__(self, *args): return False
+            def read(self, count): return b"Rate limited: internal provider information"
+        opener = MagicMock()
+        opener.open.return_value = FakeReply()
+        with patch("urllib.request.build_opener", return_value=opener):
+            with self.assertRaisesRegex(PublicProviderError, "^UPSTREAM_NON_JSON$"):
+                _get_json(API["gdelt"], {
+                    "query": "climate change", "mode": "artlist", "format": "json"
+                })
+        self.assertEqual(opener.open.call_args.kwargs["timeout"], 15)
+
+    def test_http_429_not_confused_with_no_news(self):
+        from mcp_gateway.public_evidence import _get_json
+        import urllib.error
+        from unittest.mock import MagicMock
+        opener = MagicMock()
+        opener.open.side_effect = urllib.error.HTTPError(
+            API["gdelt"], 429, "too many requests", {}, None)
+        with patch("urllib.request.build_opener", return_value=opener):
+            with self.assertRaisesRegex(PublicProviderError, "^HTTP_429$"):
+                _get_json(API["gdelt"], {
+                    "query": "climate change", "mode": "artlist", "format": "json"
+                })
 
     def test_exact_mcp_gateway_integration(self):
         from mcp_gateway.server import search_public_evidence
