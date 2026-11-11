@@ -24,6 +24,7 @@ from typing import Any, Callable
 API = {
     "wikipedia": "https://ru.wikipedia.org/w/api.php",
     "openalex": "https://api.openalex.org/works",
+    "gdelt": "https://api.gdeltproject.org/api/v2/doc/doc",
     "brave": "https://api.search.brave.com/res/v1/web/search",
 }
 MAX_QUERY = 300
@@ -178,7 +179,8 @@ def _record(provider: str, title: Any, url: Any, excerpt: Any, question: str,
         "title_overlap": title_overlap,
         "source_type": {"wikipedia": "ENCYCLOPEDIA_EXTRACT_CC_BY_SA",
                         "openalex": "SCHOLARLY_BIBLIOGRAPHIC_METADATA",
-                        "brave": "WEB_SEARCH_SNIPPET_UNVERIFIED"}[provider],
+                        "brave": "WEB_SEARCH_SNIPPET_UNVERIFIED",
+                        "gdelt": "GDELT_NEWS_INDEX_UNVERIFIED"}[provider],
         "independently_verified": False,
         "source_instructions_executed": False,
     }
@@ -239,6 +241,28 @@ def _openalex(question: str, transport: Callable, key: str | None) -> list[dict[
     return found
 
 
+def _gdelt(question: str, transport: Callable) -> list[dict[str, Any]]:
+    """Keyless, rate-limited news discovery; indexed/seen time is NOT publication time."""
+    data = transport(API["gdelt"], {
+        "query": question, "mode": "artlist", "maxrecords": str(MAX_RESULTS),
+        "format": "json", "timespan": "1week",
+    })
+    articles = data.get("articles", [])
+    if not isinstance(articles, list):
+        raise PublicProviderError("GDELT_SCHEMA")
+    results = []
+    for item in articles[:MAX_RESULTS]:
+        if not isinstance(item, dict):
+            continue
+        rec = _record("gdelt", item.get("title"), item.get("url"), "", question)
+        if rec:
+            rec["seen_at"] = _clean(item.get("seendate"), 32) or None
+            rec["seen_at_is_publication_time"] = False
+            rec["published_date"] = None
+            results.append(rec)
+    return results
+
+
 def _brave(question: str, transport: Callable, key: str) -> list[dict[str, Any]]:
     params = {"q": question, "count": str(MAX_RESULTS), "safesearch": "strict"}
     data = transport(API["brave"], params, {"X-Subscription-Token": key})
@@ -261,7 +285,7 @@ def public_evidence_search(
     transport: Callable | None = None
 ) -> dict[str, Any]:
     """Return provenance-bounded search results; never declare independent truth."""
-    if provider not in {"auto", "wikipedia", "openalex", "brave"}:
+    if provider not in {"auto", "wikipedia", "openalex", "gdelt", "brave"}:
         raise ValueError("UNRECOGNIZED_SEARCH_PROVIDER")
     answer = {
         "schema": "janus.mcp.public_evidence.v1",
@@ -290,15 +314,12 @@ def public_evidence_search(
              for w in ("сегодня", "вчера", "последн", "актуальн", "сейчас", "latest", "today")))
     if provider == "brave" and not key:
         return dict(answer, status="PROVIDER_KEY_REQUIRED")
-    # Timely facts require a real web index. Keyless encyclopedic lookup is
-    # allowed in explicit Wikipedia/OpenAlex mode but cannot verify today's news.
+    # Fresh queries use keyless GDELT news discovery. GDELT does NOT verify
+    # exact scores, publication times or facts. Brave is optional, never needed.
     providers = [provider] if provider != "auto" else (
-        ["brave"] if fresh and key else
-        [] if fresh else
+        ["gdelt"] + (["brave"] if key else []) if fresh else
         ["wikipedia", "openalex"] + (["brave"] if key else [])
     )
-    if not providers:
-        return dict(answer, status="CURRENT_SOURCE_PROVIDER_NOT_CONFIGURED")
     fetch = transport or _get_json
     results: list[dict[str, Any]] = []
     errors: dict[str, str] = {}
@@ -310,6 +331,8 @@ def public_evidence_search(
                 results.extend(_openalex(q, fetch, oa_key or None))
             elif p == "brave":
                 results.extend(_brave(q, fetch, key))
+            elif p == "gdelt":
+                results.extend(_gdelt(q, fetch))
         except PublicProviderError as error:
             errors[p] = str(error)[:80]  # Never include upstream body or keys.
     ordered = sorted(results, key=lambda x: (
