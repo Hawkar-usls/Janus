@@ -16,6 +16,8 @@ import ipaddress
 import json
 import os
 import re
+import threading
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -46,6 +48,29 @@ ENDS = ("иями", "ями", "ами", "ого", "ему", "ыми", "ими",
         "иях", "ах", "ях", "ов", "ев", "ей", "ия", "ий",
         "ые", "ие", "ой", "ая", "ое", "ом", "ем", "ым", "им",
         "а", "я", "ы", "и", "е", "у", "ю")
+
+
+# Best-effort *per process* DOC2 API pacer. Distributed deployment must add
+# a shared limiter at the trusted ingress; this local guard never evades HTTP429.
+_GDELT_LOCK = threading.Lock()
+_GDELT_NEXT_AT = 0.0
+GDELT_MIN_GAP_SECONDS = 6.0
+GDELT_429_BACKOFF_SECONDS = 60.0
+
+def _reserve_gdelt_slot(now: float | None = None) -> bool:
+    global _GDELT_NEXT_AT
+    with _GDELT_LOCK:
+        now = time.monotonic() if now is None else now
+        if now < _GDELT_NEXT_AT:
+            return False
+        _GDELT_NEXT_AT = now + GDELT_MIN_GAP_SECONDS
+        return True
+
+def _gdelt_backoff(now: float | None = None) -> None:
+    global _GDELT_NEXT_AT
+    with _GDELT_LOCK:
+        now = time.monotonic() if now is None else now
+        _GDELT_NEXT_AT = max(_GDELT_NEXT_AT, now + GDELT_429_BACKOFF_SECONDS)
 
 
 class PublicProviderError(RuntimeError):
@@ -130,6 +155,8 @@ def _get_json(endpoint: str, params: dict[str, str],
     # Fixed endpoint only: never send an arbitrary user/source URL to urllib.
     if endpoint not in API.values():
         raise PublicProviderError("ENDPOINT_NOT_ALLOWLISTED")
+    if endpoint == API["gdelt"] and not _reserve_gdelt_slot():
+        raise PublicProviderError("GDELT_COOLDOWN_ACTIVE")
     url = endpoint + "?" + urllib.parse.urlencode(params)
     req_headers = {"Accept": "application/json", "User-Agent": UA}
     if headers:
@@ -157,6 +184,8 @@ def _get_json(endpoint: str, params: dict[str, str],
                 raise PublicProviderError("INVALID_RESPONSE_ENVELOPE")
             return decoded
     except urllib.error.HTTPError as exc:
+        if endpoint == API["gdelt"] and exc.code == 429:
+            _gdelt_backoff()
         raise PublicProviderError("HTTP_" + str(exc.code)) from None
     except TimeoutError:
         raise PublicProviderError("PROVIDER_TIMEOUT") from None
