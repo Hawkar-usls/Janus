@@ -32,7 +32,7 @@ MAX_BYTES = 100_000
 TIMEOUT = 6
 UA = "JANUS-PublicEvidence/0.1 (+https://github.com/Hawkar-usls/Janus)"
 PRIVATE_RE = (
-    re.compile(r"(?i)\b(?:password|passwd|secret|api[_ -]?key|auth[_ -]?token|bearer|парол|ключ доступа)\b"),
+    re.compile(r"(?i)\b(?:password|passwd|secret|api[_ -]?key|auth[_ -]?token|bearer|парол[а-яё]*|ключ доступа)\b"),
     re.compile(r"(?i)\b[\w.+%-]+@[\w.-]+\.[a-z]{2,}\b"),
     re.compile(r"(?i)(?:https?://|ssh://|smb://|ftp://|\\\\|/home/|/mnt/|[a-z]:\\)"),
     re.compile(r"(?<!\d)(?:\d{1,3}\.){3}\d{1,3}(?!\d)"),
