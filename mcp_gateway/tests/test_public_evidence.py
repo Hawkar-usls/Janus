@@ -46,6 +46,24 @@ class PublicEvidenceGatewayTests(unittest.TestCase):
                     "publication_date": "2026-11-11",
                 }
             ]}
+        if endpoint == API["gdelt"]:
+            self.assertEqual(params["mode"], "artlist")
+            self.assertEqual(params["format"], "json")
+            self.assertEqual(params["maxrecords"], "4")
+            self.assertEqual(params["timespan"], "1week")
+            self.assertFalse(headers)
+            return {"articles": [
+                {
+                    "title": "Реал Мадрид: итоги футбольного матча",
+                    "url": "https://example.org/sports/madrid-results",
+                    "seendate": "20261111T123000Z",
+                },
+                {
+                    "title": "Misleading private URL",
+                    "url": "https://127.0.0.1/admin",
+                    "seendate": "20261111T140000Z",
+                },
+            ]}
         if endpoint == API["brave"]:
             self.assertEqual(headers, {"X-Subscription-Token": "FAKE-KEY-FOR-MOCK"})
             return {"web": {"results": [
@@ -117,15 +135,22 @@ class PublicEvidenceGatewayTests(unittest.TestCase):
         self.assertFalse(r["scientific_admission"])
         self.assertEqual(len(r["sources"]), 1)
 
-    def test_unsupported_live_fact_without_brave_does_not_invent(self):
+    def test_live_search_uses_gdelt_without_brave_key_but_does_not_invent_score(self):
         with patch.dict(os.environ, {"JANUS_PUBLIC_EVIDENCE_ENABLED": "1",
                                       "BRAVE_SEARCH_API_KEY": ""}):
             r = public_evidence_search("Как сыграл Реал Мадрид сегодня?",
                                       public_query_approved=True, transport=self.provider)
-        self.assertEqual(r["status"], "CURRENT_SOURCE_PROVIDER_NOT_CONFIGURED")
-        self.assertFalse(r["sources"])
+        self.assertEqual(r["status"], "FRESHNESS_NOT_INDEPENDENTLY_VERIFIED")
+        self.assertTrue(r["sources"])
+        self.assertEqual(r["sources"][0]["provider"], "gdelt")
+        self.assertEqual(r["sources"][0]["source_type"], "GDELT_NEWS_INDEX_UNVERIFIED")
+        self.assertIsNone(r["sources"][0]["published_date"])
+        self.assertEqual(r["sources"][0]["seen_at"], "20261111T123000Z")
+        self.assertFalse(r["sources"][0]["seen_at_is_publication_time"])
+        self.assertFalse(r["independent_fact_verification"])
         self.assertIsNone(r["answer"])
-        self.assertFalse(self.calls)
+        self.assertEqual(len(self.calls), 1)
+        self.assertEqual(self.calls[0][0], API["gdelt"])
 
     def test_brave_uses_runtime_secret_only_and_no_fabricated_result(self):
         with patch.dict(os.environ, {"JANUS_PUBLIC_EVIDENCE_ENABLED": "1",
@@ -134,9 +159,33 @@ class PublicEvidenceGatewayTests(unittest.TestCase):
                                       provider="auto", public_query_approved=True,
                                       transport=self.provider)
         self.assertEqual(r["status"], "FRESHNESS_NOT_INDEPENDENTLY_VERIFIED")
-        self.assertEqual(r["sources"][0]["provider"], "brave")
+        self.assertEqual({x["provider"] for x in r["sources"]}, {"brave", "gdelt"})
         self.assertIsNone(r["answer"])
         self.assertNotIn("FAKE-KEY-FOR-MOCK", str(r))
+        self.assertEqual(len(self.calls), 2)
+
+    def test_gdelt_rate_limit_is_unavailability_not_fake_negative(self):
+        def unavailable(endpoint, params, headers=None):
+            self.assertEqual(endpoint, API["gdelt"])
+            raise PublicProviderError("HTTP_429")
+        with patch.dict(os.environ, {"JANUS_PUBLIC_EVIDENCE_ENABLED": "1",
+                                      "BRAVE_SEARCH_API_KEY": ""}):
+            r = public_evidence_search("Реал Мадрид результаты матча сегодня",
+                                      public_query_approved=True, transport=unavailable)
+        self.assertEqual(r["status"], "PROVIDER_UNAVAILABLE")
+        self.assertEqual(r["provider_errors"], {"gdelt": "HTTP_429"})
+        self.assertIsNone(r["answer"])
+
+    def test_explicit_gdelt_provider_remains_scoped_to_news_sources(self):
+        with patch.dict(os.environ, {"JANUS_PUBLIC_EVIDENCE_ENABLED": "1",
+                                      "BRAVE_SEARCH_API_KEY": ""}):
+            r = public_evidence_search("Реал Мадрид результаты матча",
+                                      provider="gdelt", public_query_approved=True,
+                                      transport=self.provider)
+        self.assertTrue(r["sources"])
+        self.assertEqual(r["sources"][0]["provider"], "gdelt")
+        self.assertEqual(r["sources"][0]["excerpt"], "")
+        self.assertIsNone(r["answer"])
         self.assertEqual(len(self.calls), 1)
 
     def test_provider_failure_is_reported_not_a_negative_fact(self):
