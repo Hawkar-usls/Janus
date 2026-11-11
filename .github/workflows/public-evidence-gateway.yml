@@ -1,0 +1,73 @@
+name: JANUS MCP public evidence source smoke (read-only)
+on:
+  pull_request:
+    paths:
+      - 'mcp_gateway/public_evidence.py'
+      - 'mcp_gateway/server.py'
+      - 'mcp_gateway/tests/test_public_evidence.py'
+      - '.github/workflows/public-evidence-gateway.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-public-evidence-gateway-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  public-provider-smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    env:
+      JANUS_PUBLIC_EVIDENCE_ENABLED: '1'
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - name: Checkout without persisted git token
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install MCP gateway dependencies for server registration test
+        run: python -m pip install -r mcp_gateway/requirements.txt
+      - name: Unit tests (offline, mocked public providers)
+        run: |
+          python -m unittest discover -s mcp_gateway/tests -p test_public_evidence.py -v
+      - name: Actual keyless public provider API smoke (public hard-coded queries only)
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from mcp_gateway.public_evidence import public_evidence_search
+          questions=[
+             ('wikipedia','Кольца Сатурна'),
+             ('openalex','Quantum entanglement in physical systems'),
+             ('gdelt','climate change'),
+          ]
+          results=[]
+          for provider,question in questions:
+              answer=public_evidence_search(question,provider=provider,public_query_approved=True)
+              assert answer['scientific_admission'] is False
+              assert answer['external_writes'] is False
+              assert answer['answer'] is None
+              results.append({'provider':provider,'status':answer['status'],
+                              'source_count':len(answer['sources']),
+                              'provider_errors':answer['provider_errors']})
+          Path('artifacts').mkdir(exist_ok=True)
+          Path('artifacts/public-evidence-smoke.json').write_text(
+              json.dumps({'schema':'janus.mcp.public_evidence.smoke.v1',
+                          'run_type':'PUBLIC_LIVE_RESEARCH_NOT_BLIND',
+                          'results':results,'production_deployed':False},
+                         indent=2,ensure_ascii=False)+'\n')
+          print('PUBLIC_EVIDENCE_REAL_SMOKE',results)
+          assert all(x['status'] in (
+             'SOURCES_FOUND_REVIEW_REQUIRED', 'NO_RELEVANT_SOURCE',
+             'PROVIDER_UNAVAILABLE') for x in results)
+          PY
+      - name: Preserve public source diagnostics (never secrets)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: janus-mcp-public-evidence-research-only
+          path: artifacts/public-evidence-smoke.json
+          retention-days: 14
+          if-no-files-found: warn

@@ -11,6 +11,7 @@ from .core import checkpoint_document, safe_slug, topa_packet
 from .codex_handoff import prepare_codex_cloud_task
 from .codex_app_server import app_server_readiness
 from .github_api import GitHubAPI
+from .public_evidence import public_evidence_search
 from .organism_tools import install_organism_tools
 
 GITHUB_OWNER = os.getenv("JANUS_GITHUB_OWNER", "Hawkar-usls")
@@ -78,6 +79,13 @@ def health() -> dict[str, Any]:
             "private_genesis_world": bool(os.getenv("JANUS_PRIVATE_GENESIS_WORLD_REPO")),
         },
         "github_token_present": bool(os.getenv("GITHUB_TOKEN")),
+        "public_evidence": {
+            "enabled": os.getenv("JANUS_PUBLIC_EVIDENCE_ENABLED", "0").strip().lower() in {"1", "true", "yes", "on"},
+            "brave_search_key_present": bool(os.getenv("BRAVE_SEARCH_API_KEY")),
+            "openalex_api_key_present": bool(os.getenv("OPENALEX_API_KEY")),
+            "per_request_user_approval_required": True,
+            "automatic_production_answer_generation": False,
+        },
     }
 
 
@@ -94,6 +102,26 @@ def read_registry(path: str, ref: str = "main") -> dict[str, Any]:
     item["content"], item["truncated"] = _clip(item["content"])
     item["boundary"] = "ARCHIVED_SOURCE != TRUSTED_SOURCE"
     return item
+
+
+@mcp.tool(name="janus.search_public_evidence")
+def search_public_evidence(
+    question: str,
+    provider: str = "auto",
+    public_query_approved: bool = False,
+) -> dict[str, Any]:
+    """READ: search only PUBLIC questions using vetted provider APIs.
+
+    Requires JANUS_PUBLIC_EVIDENCE_ENABLED=1 on the server and explicit
+    public_query_approved=True per tool invocation. Providers: auto, wikipedia,
+    openalex, brave (Brave additionally requires BRAVE_SEARCH_API_KEY).
+    Never send NAS logs, private registry data, tokens or medical records.
+    Results are untrusted source metadata, not a scientifically accepted answer.
+    """
+    return public_evidence_search(
+        question, provider=provider,
+        public_query_approved=public_query_approved,
+    )
 
 
 @mcp.tool(name="janus.run_topa")

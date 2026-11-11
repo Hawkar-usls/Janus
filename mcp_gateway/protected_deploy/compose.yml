@@ -1,0 +1,57 @@
+# Opt-in research deployment template, NOT auto-deployed by GitHub Actions.
+# Host loopback only. Requires operator-owned local TLS and bcrypt auth files.
+services:
+  janus-mcp:
+    build:
+      context: ../..
+      dockerfile: mcp_gateway/Dockerfile
+    environment:
+      MCP_HOST: "0.0.0.0"
+      MCP_PORT: "8000"
+      JANUS_ALLOW_WRITES: "0"
+      JANUS_PUBLIC_EVIDENCE_ENABLED: "${JANUS_PUBLIC_EVIDENCE_ENABLED:-0}"
+      OPENALEX_API_KEY: "${OPENALEX_API_KEY:-}"
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=16m
+    pids_limit: 128
+    mem_limit: 512m
+    cpus: 1.0
+    expose:
+      - "8000"
+    networks:
+      - private
+    restart: "no"
+  ingress:
+    image: nginx:1.28-alpine
+    depends_on:
+      - janus-mcp
+    ports:
+      - "127.0.0.1:8443:8443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./secrets/cert.pem:/etc/nginx/tls/cert.pem:ro
+      - ./secrets/key.pem:/etc/nginx/tls/key.pem:ro
+      - ./secrets/users.htpasswd:/etc/nginx/auth/users.htpasswd:ro
+    read_only: true
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    tmpfs:
+      - /var/cache/nginx:rw,nosuid,size=16m
+      - /var/run:rw,nosuid,size=2m
+      - /tmp:rw,noexec,nosuid,size=8m
+    pids_limit: 96
+    mem_limit: 256m
+    cpus: 0.5
+    networks:
+      - private
+    restart: "no"
+networks:
+  private:
+    internal: false

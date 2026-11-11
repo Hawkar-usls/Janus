@@ -1,0 +1,45 @@
+name: JANUS MCP protected deployment dry-run only
+on:
+  pull_request:
+    paths:
+      - 'mcp_gateway/protected_deploy/**'
+      - 'mcp_gateway/tests/test_protected_deploy.py'
+      - '.github/workflows/protected-mcp-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-protected-gateway-preflight-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  dry-run:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - name: Checkout with no persisted credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Security contract tests, no host or NAS modification
+        run: python -m unittest discover -s mcp_gateway/tests -p test_protected_deploy.py -v
+      - name: Docker Compose syntax (no containers started)
+        run: docker compose -f mcp_gateway/protected_deploy/compose.yml config --quiet
+      - name: Nginx TLS/authentication syntax in isolated ephemeral container
+        run: |
+          set -euo pipefail
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          openssl req -x509 -nodes -newkey rsa:2048 -days 1 \
+            -subj "/CN=localhost" -keyout "$tmp/key.pem" -out "$tmp/cert.pem" >/dev/null 2>&1
+          printf 'janus:%s\n' "$(openssl passwd -6 'CI-SMOKE-ONLY-NEVER-PRODUCTION')" > "$tmp/users.htpasswd"
+          docker run --rm --network none --add-host janus-mcp:127.0.0.1 \
+            -v "$PWD/mcp_gateway/protected_deploy/nginx.conf:/etc/nginx/nginx.conf:ro" \
+            -v "$tmp/cert.pem:/etc/nginx/tls/cert.pem:ro" \
+            -v "$tmp/key.pem:/etc/nginx/tls/key.pem:ro" \
+            -v "$tmp/users.htpasswd:/etc/nginx/auth/users.htpasswd:ro" \
+            nginx:1.28-alpine nginx -t
+          echo 'JANUS_PROTECTED_MCP_DRYRUN_ONLY_NO_DEPLOYMENT'
