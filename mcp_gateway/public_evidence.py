@@ -137,20 +137,34 @@ def _get_json(endpoint: str, params: dict[str, str],
             raise PublicProviderError("INVALID_AUTH_HEADER")
         req_headers.update(headers)
     request = urllib.request.Request(url, method="GET", headers=req_headers)
+    # The GDELT DOC service can be slower than encyclopedic metadata APIs;
+    # a timeout is not evidence that the queried news does not exist.
+    timeout = 15 if endpoint == API["gdelt"] else TIMEOUT
     try:
-        with urllib.request.build_opener(NoRedirect).open(request, timeout=TIMEOUT) as reply:
+        with urllib.request.build_opener(NoRedirect).open(request, timeout=timeout) as reply:
             if reply.status != 200:
                 raise PublicProviderError("NON_200_HTTP")
             data = reply.read(MAX_BYTES + 1)
             if len(data) > MAX_BYTES:
                 raise PublicProviderError("RESPONSE_TOO_LARGE")
-            decoded = json.loads(data.decode("utf-8"))
+            try:
+                decoded = json.loads(data.decode("utf-8"))
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                # GDELT sometimes responds with non-JSON status text even on
+                # successful HTTP. Never include untrusted upstream body.
+                raise PublicProviderError("UPSTREAM_NON_JSON") from None
             if not isinstance(decoded, dict):
                 raise PublicProviderError("INVALID_RESPONSE_ENVELOPE")
             return decoded
     except urllib.error.HTTPError as exc:
         raise PublicProviderError("HTTP_" + str(exc.code)) from None
-    except (urllib.error.URLError, TimeoutError, UnicodeError, ValueError, OSError):
+    except TimeoutError:
+        raise PublicProviderError("PROVIDER_TIMEOUT") from None
+    except urllib.error.URLError as exc:
+        if "timed out" in str(exc.reason).lower():
+            raise PublicProviderError("PROVIDER_TIMEOUT") from None
+        raise PublicProviderError("TRANSPORT_FAILED") from None
+    except (UnicodeError, ValueError, OSError):
         raise PublicProviderError("TRANSPORT_FAILED") from None
 
 
@@ -259,6 +273,8 @@ def _gdelt(question: str, transport: Callable) -> list[dict[str, Any]]:
             rec["seen_at"] = _clean(item.get("seendate"), 32) or None
             rec["seen_at_is_publication_time"] = False
             rec["published_date"] = None
+            rec["attribution"] = "GDELT Project — https://www.gdeltproject.org/"
+            rec["coverage_limit"] = "RECENT_NEWS_INDEX_NOT_GENERAL_WEB_SEARCH"
             results.append(rec)
     return results
 
