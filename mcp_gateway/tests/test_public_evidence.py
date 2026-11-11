@@ -233,6 +233,17 @@ class PublicEvidenceGatewayTests(unittest.TestCase):
                                    public_query_approved=True, transport=self.provider)
         self.assertFalse(self.calls)
 
+    def test_gdelt_global_process_pacer_and_backoff(self):
+        from mcp_gateway import public_evidence as src
+        with patch.object(src, "_GDELT_NEXT_AT", 0.0):
+            self.assertTrue(src._reserve_gdelt_slot(now=100.0))
+            self.assertFalse(src._reserve_gdelt_slot(now=101.0))
+            self.assertFalse(src._reserve_gdelt_slot(now=105.99))
+            self.assertTrue(src._reserve_gdelt_slot(now=106.0))
+            src._gdelt_backoff(now=107.0)
+            self.assertFalse(src._reserve_gdelt_slot(now=166.99))
+            self.assertTrue(src._reserve_gdelt_slot(now=167.0))
+
     def test_non_json_gdelt_status_never_leaks_body(self):
         from mcp_gateway.public_evidence import _get_json
         from unittest.mock import MagicMock
@@ -243,7 +254,8 @@ class PublicEvidenceGatewayTests(unittest.TestCase):
             def read(self, count): return b"Rate limited: internal provider information"
         opener = MagicMock()
         opener.open.return_value = FakeReply()
-        with patch("urllib.request.build_opener", return_value=opener):
+        with patch("mcp_gateway.public_evidence._reserve_gdelt_slot", return_value=True), \
+             patch("urllib.request.build_opener", return_value=opener):
             with self.assertRaisesRegex(PublicProviderError, "^UPSTREAM_NON_JSON$"):
                 _get_json(API["gdelt"], {
                     "query": "climate change", "mode": "artlist", "format": "json"
@@ -257,11 +269,14 @@ class PublicEvidenceGatewayTests(unittest.TestCase):
         opener = MagicMock()
         opener.open.side_effect = urllib.error.HTTPError(
             API["gdelt"], 429, "too many requests", {}, None)
-        with patch("urllib.request.build_opener", return_value=opener):
+        with patch("mcp_gateway.public_evidence._reserve_gdelt_slot", return_value=True), \
+             patch("mcp_gateway.public_evidence._gdelt_backoff") as backoff, \
+             patch("urllib.request.build_opener", return_value=opener):
             with self.assertRaisesRegex(PublicProviderError, "^HTTP_429$"):
                 _get_json(API["gdelt"], {
                     "query": "climate change", "mode": "artlist", "format": "json"
                 })
+            backoff.assert_called_once()
 
     def test_exact_mcp_gateway_integration(self):
         from mcp_gateway.server import search_public_evidence
