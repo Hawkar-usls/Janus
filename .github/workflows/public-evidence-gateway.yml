@@ -41,6 +41,7 @@ jobs:
           questions=[
              ('wikipedia','Кольца Сатурна'),
              ('openalex','Quantum entanglement in physical systems'),
+             ('gdelt','climate change'),
           ]
           results=[]
           for provider,question in questions:
