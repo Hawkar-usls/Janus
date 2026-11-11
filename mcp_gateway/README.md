@@ -123,7 +123,7 @@ Both gates are required: server variable `JANUS_PUBLIC_EVIDENCE_ENABLED=1`, and 
 
 Example call: `janus.search_public_evidence(question='Что известно об атмосфере Сатурна?', provider='auto', public_query_approved=true)`.
 
-Providers: `auto`, `wikipedia`, `openalex`, `brave`. For nonfresh questions, auto queries the Wikimedia MediaWiki API and OpenAlex scholarly metadata. For time-sensitive questions it uses Brave if a token is configured, otherwise returns a clear unavailable-provider status. Brave API uses `BRAVE_SEARCH_API_KEY` and OpenAlex optionally uses `OPENALEX_API_KEY`, both injected into trusted server runtime (not GitHub source, forks or PR secrets).
+Providers: `auto`, `wikipedia`, `openalex`, `gdelt`, `brave`. For nonfresh questions, auto queries Wikimedia and OpenAlex scholarly metadata. For time-sensitive questions, auto uses keyless GDELT DOC 2.0 news search, and optionally also Brave if configured. GDELT is a news index, not a complete web search engine or a verified sports-score database. Dates labelled `seen_at` mean when GDELT saw an article, **not** its publication time. Fresh-event claims remain unverified until independently checked. Brave API uses `BRAVE_SEARCH_API_KEY` and OpenAlex optionally uses `OPENALEX_API_KEY`, both injected into trusted server runtime (not GitHub source, forks or PR secrets).
 
 ### Security and scientific limitations
 
@@ -139,7 +139,11 @@ Providers: `auto`, `wikipedia`, `openalex`, `brave`. For nonfresh questions, aut
 
 1. Review this draft PR and CI. No main branch, live MCP deployment or NAS container has been modified.
 2. On an authenticated trusted HTTPS host, deploy the reviewed gateway code and keep `JANUS_PUBLIC_EVIDENCE_ENABLED=0` until ingress access control, budgeting and consent checks are ready.
-3. Enable public search by setting `JANUS_PUBLIC_EVIDENCE_ENABLED=1`. To support broad/fresh results, configure `BRAVE_SEARCH_API_KEY` via a protected secret store; for scalable OpenAlex queries use its free optional key.
+3. Enable public search by setting `JANUS_PUBLIC_EVIDENCE_ENABLED=1`. For broader web coverage beyond GDELT news, optionally configure `BRAVE_SEARCH_API_KEY` via a protected secret store **only if the service is lawfully available in your region**. The key is not required for GDELT news discovery. For scalable OpenAlex queries use its free optional key.
 4. For each explicitly approved public question, call `janus.search_public_evidence` and use the returned citations only within their actual evidentiary scope.
 
 R2B/R2C/D research candidates and original scientific holdouts remain untouched. `SEARCH_SOURCE != VERIFIED_FACT`; `SOURCE_METADATA != PHYSICAL_REPLICATION`; `TOOL_REGISTERED != DEPLOYED`.
+
+### Regional Brave Search API access and keyless fallback
+
+Brave's published unavailable-jurisdictions list includes Ukraine. A `403` on the Brave dashboard therefore may reflect a service-availability restriction, not a JANUS problem. Never attempt to circumvent provider geographical restrictions. For account-specific confirmation contact Brave Search API support. JANUS no longer requires the Brave dashboard or key to discover recent public **news**: it uses GDELT DOC 2.0 (`https://api.gdeltproject.org/api/v2/doc/doc`) with fixed HTTPS endpoint, `mode=artlist`, `format=json`, `timespan=1week`, up to four records. Respect provider throttling (avoid polling more frequently than once per five seconds). The returned `seendate` is an index observation timestamp, not an event date or publication proof. Missing sources or rate-limits remain `UNKNOWN`, not `FALSE`.
