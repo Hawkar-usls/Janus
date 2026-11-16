@@ -11,33 +11,58 @@ on:
       - "scripts/apply_foreign_trait_firewall.py"
       - "tests/test_foreign_trait_firewall.py"
       - "docs/FOREIGN_TRAIT_FIREWALL.md"
+      - ".github/workflows/foreign-trait-firewall.yml"
 
+# Pull-request code must never get a write token or persisted credentials.
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  integrate-and-test:
-    runs-on: ubuntu-latest
+  integrate-and-test-readonly:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5 SHA
         with:
-          ref: ${{ github.head_ref || github.ref_name }}
-      - uses: actions/setup-python@v5
+          persist-credentials: false
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6 SHA
         with:
           python-version: "3.12"
-      - name: Apply idempotent integration
+      - name: Apply idempotent integration in detached read-only test workspace
         run: python scripts/apply_foreign_trait_firewall.py
       - name: Compile
         run: python -m py_compile foreign_trait_firewall.py janus_core.py
       - name: Unit tests
         run: python -m unittest discover -s tests -p "test_foreign_trait_firewall.py" -v
+
+  commit-generated-in-trusted-push-only:
+    needs: integrate-and-test-readonly
+    if: github.event_name == 'push' && github.ref == 'refs/heads/security/foreign-trait-firewall'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          ref: security/foreign-trait-firewall
+          persist-credentials: true
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: "3.12"
+      - name: Apply already-tested integration on trusted branch only
+        run: python scripts/apply_foreign_trait_firewall.py
       - name: Commit generated integration if needed
-        if: github.event_name == 'push'
+        shell: bash
         run: |
+          set -euo pipefail
           if ! git diff --quiet -- janus_core.py; then
             git config user.name "janus-firewall-bot"
             git config user.email "actions@users.noreply.github.com"
-            git add janus_core.py
+            git add -- janus_core.py
+            git diff --cached --check
             git commit -m "security: integrate foreign trait firewall into JANUS core"
-            git push
+            git push origin HEAD:refs/heads/security/foreign-trait-firewall
           fi
