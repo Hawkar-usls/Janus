@@ -47,7 +47,7 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install pinned Rowan SDK
-        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'stjames==0.0.289'
       - name: Freeze completed eight-case S2 before any Rowan submit or ACK step
         id: completion
         if: ${{ (github.event_name == 'workflow_dispatch' && inputs.mode == 'submit_and_collect' && inputs.authorize_weekly_credit_spend == 'YES') }}

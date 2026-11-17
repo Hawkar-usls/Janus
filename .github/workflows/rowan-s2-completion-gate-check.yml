@@ -39,3 +39,27 @@ jobs:
           print("S2_READ_ONLY_COLLECTION_CONTINUES=PASS")
           print("ZERO_ROWAN_API_KEY_OR_BILLING_IN_THIS_WORKFLOW=PASS")
           PY
+
+  sdk-import-zero-credit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install released SDK and upstream lockfile schema version
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'stjames==0.0.289'
+      - name: Verify SDK imports without API credentials or provider requests
+        run: |
+          test -z "${ROWAN_API_KEY:-}"
+          python -m pip check
+          python - <<'PY'
+          from importlib.metadata import version
+          from stjames import UmbrellaSamplingScanSettings
+          import rowan
+          assert version("rowan-python") == "3.2.3"
+          assert version("stjames") == "0.0.289"
+          assert callable(rowan.whoami)
+          assert callable(rowan.retrieve_workflow)
+          print("ROWAN_SDK_OFFLINE_IMPORT=PASS")
+          PY
