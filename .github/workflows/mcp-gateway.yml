@@ -7,6 +7,7 @@ on:
       - "organism/**"
       - "docs/JANUS_MCP_GATEWAY.md"
       - "docs/JANUS_SPIRAL_TRANCEPTION.md"
+      - "docs/JANUS_CODEX_CLOUD_AND_CHATGPT_GATEWAY.md"
       - ".janus/MCP_GATEWAY_LINK.json"
       - ".github/workflows/mcp-gateway.yml"
   push:
@@ -17,6 +18,7 @@ on:
       - "organism/**"
       - "docs/JANUS_MCP_GATEWAY.md"
       - "docs/JANUS_SPIRAL_TRANCEPTION.md"
+      - "docs/JANUS_CODEX_CLOUD_AND_CHATGPT_GATEWAY.md"
       - ".janus/MCP_GATEWAY_LINK.json"
       - ".github/workflows/mcp-gateway.yml"
 
@@ -25,9 +27,16 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
