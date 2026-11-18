@@ -34,7 +34,7 @@ jobs:
     timeout-minutes: 8
     steps:
       - name: Install public Rowan Python v3 only, no API credentials
-        run: python -m pip install 'rowan-python>=3,<4'
+        run: python -m pip install 'rowan-python==3.2.3' 'stjames==0.0.289'
       - name: Verify protein cofolding SDK signatures without submitting
         run: |
           python - <<'PY'

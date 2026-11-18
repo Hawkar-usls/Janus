@@ -55,7 +55,7 @@ jobs:
       - name: Test no-paid-credit, one-job, source and duplicate gates
         run: python -m unittest discover -v -s integrations/tranception_rowan -p 'test_rowan_1ey0_weekly_api.py'
       - name: Install pinned Rowan Python SDK
-        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3'
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'stjames==0.0.289'
       - name: Submit or collect source-pinned ONE 1EY0 WT
         env:
           ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
