@@ -1,0 +1,15 @@
+{
+  "schema": "janus.rowan.r1e.multisample.plan.v1",
+  "date": "2026-11-19",
+  "case": "JANUS-ROWAN-1EY0-R1E-WT-5S-20261119-R0",
+  "sample_count": 5,
+  "maximum_new_jobs": 1,
+  "max_credits": 10,
+  "weekly_floor": 30,
+  "control_run": "44517772207",
+  "single_WT_credits": 5.05,
+  "primary": "verify exactly five distinct structure ids and individual pTM and avg_lddt; actual credits per returned sample; compare cost to five hypothetical repetitions at observed 5.05",
+  "not_independent_seed_equivalence": true,
+  "no_auto_retry": true,
+  "no_scale_up": true
+}
