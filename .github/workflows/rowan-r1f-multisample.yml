@@ -1,0 +1,56 @@
+name: JANUS Rowan R1F bounded five-sample T8A
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        type: choice
+        options: [collect, submit]
+        default: collect
+        required: true
+      authorize_weekly_credit_spend:
+        type: choice
+        options: ["NO", "YES"]
+        default: "NO"
+        required: true
+permissions:
+  contents: read
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+jobs:
+  one-multisample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Offline safety tests
+        run: python -m unittest discover -s integrations/tranception_rowan/tests -p 'test_rowan_r1f_multisample.py' -v
+      - name: Install pinned SDK and check sample surface
+        run: |
+          python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'stjames==0.0.289'
+          python -c "import inspect,rowan; assert 'num_samples' in inspect.signature(rowan.submit_protein_cofolding_workflow).parameters; assert hasattr(rowan.ProteinCofoldingResult,'predictions'); print('R1F_SDK_SURFACE=PASS')"
+      - name: Execute exactly one explicit provider operation
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          R1F_ACTION: ${{ inputs.action }}
+          R1F_APPROVED: ${{ inputs.action == 'submit' && inputs.authorize_weekly_credit_spend == 'YES' && 'TRUE' || 'FALSE' }}
+          R1F_RECEIPT: ${{ runner.temp }}/rowan-r1f.json
+          R1F_EXPORT_DIR: ${{ runner.temp }}/r1f-five-pdbs
+        run: python integrations/tranception_rowan/rowan_r1f_multisample.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rowan-r1f-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/rowan-r1f.json
+            ${{ runner.temp }}/r1f-five-pdbs/
+          if-no-files-found: ignore
+          retention-days: 14

@@ -1,0 +1,12 @@
+{
+  "schema": "janus.rowan.r1f.multisample.plan.v1",
+  "case": "JANUS-ROWAN-1EY0-R1F-T8A-5S-20261119-R0",
+  "sample_count": 5,
+  "max_credits": 10,
+  "weekly_floor": 30,
+  "wt_collection": "44531233894",
+  "wt_export": "44532230528",
+  "mutant_single": "44518458966",
+  "primary": "difference of means; all 25 cross-ensemble CA RMSD and 10 within-arm pairs each, optimal proper rotation Kabsch, 136 sequence-position aligned CA, mutation T8A, no paired seed assumption",
+  "secondary": "per-sample costs and confidence dispersion; no external validation; no auto retry"
+}
