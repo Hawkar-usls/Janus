@@ -1,0 +1,31 @@
+name: JANUS Rowan R1G2 adaptive credit guard offline
+on:
+  pull_request:
+    paths:
+      - 'integrations/tranception_rowan/rowan_r1g2_*'
+      - 'integrations/tranception_rowan/rowan_r1g_panel.py'
+      - 'integrations/tranception_rowan/tests/test_rowan_r1g_panel.py'
+      - '.github/workflows/rowan-r1g2-credit-guard.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify risk routing and global deny
+        run: python -m unittest discover -s integrations/tranception_rowan/tests -p 'test_rowan_r1g_panel.py' -v
+      - name: Replay frozen history without Rowan access
+        run: python integrations/tranception_rowan/rowan_r1g2_credit_guard.py > "${RUNNER_TEMP}/r1g2-credit-risk.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r1g2-credit-risk-${{ github.run_id }}
+          path: ${{ runner.temp }}/r1g2-credit-risk.json
+          retention-days: 14
