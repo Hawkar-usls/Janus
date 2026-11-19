@@ -1,0 +1,37 @@
+name: JANUS Rowan R1E existing five PDB export
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+jobs:
+  read-only-export:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline coordinate validation tests
+        run: python -m unittest discover -s integrations/tranception_rowan/tests -p 'test_rowan_r1e_export_structures.py' -v
+      - name: Install pinned SDK
+        run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'stjames==0.0.289'
+      - name: Read existing structure coordinates only
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          R1E_EXPORT_DIR: ${{ runner.temp }}/r1e-five-pdbs
+        run: python integrations/tranception_rowan/rowan_r1e_export_structures.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r1e-five-pdbs-${{ github.run_id }}
+          path: ${{ runner.temp }}/r1e-five-pdbs/
+          if-no-files-found: error
+          retention-days: 14
