@@ -1,0 +1,142 @@
+{
+  "schema": "janus.rowan.r1g2.cost_history.v1",
+  "source_run": "44573281425",
+  "source_receipt_sha256": "f6a739f92edb16fcd63a62142a483a261159c3f6caa983519758ac48f6f63086",
+  "records": [
+    {
+      "id": "BBC1_WT_5",
+      "status": "Status.STOPPED",
+      "settings": {
+        "available": true,
+        "sequence_sha256": [
+          "2525c4c880a947f46b4d75c90e17d85e653fcf632fc7dc9d0c64a75625d36e61"
+        ],
+        "num_samples": 5,
+        "model": "boltz_2",
+        "use_msa_server": true,
+        "use_potentials": false,
+        "do_pose_refinement": false,
+        "compute_strain": false,
+        "use_templates_server": false
+      },
+      "hardware": "A100_80GB",
+      "elapsed_seconds": 205.16,
+      "credits": 10.26,
+      "requested_cap": 10
+    },
+    {
+      "id": "1EY0_WT_5",
+      "status": "Status.COMPLETED_OK",
+      "settings": {
+        "available": true,
+        "sequence_sha256": [
+          "94a6f4324114f9e643076e2bfcb727145d400345f4c5feff0607e5c1fb787be1"
+        ],
+        "num_samples": 5,
+        "model": "boltz_2",
+        "use_msa_server": true,
+        "use_potentials": false,
+        "do_pose_refinement": false,
+        "compute_strain": false,
+        "use_templates_server": false
+      },
+      "hardware": "A100_80GB",
+      "elapsed_seconds": 113.72,
+      "credits": 5.69,
+      "requested_cap": 10
+    },
+    {
+      "id": "1EY0_T8A_5",
+      "status": "Status.COMPLETED_OK",
+      "settings": {
+        "available": true,
+        "sequence_sha256": [
+          "1c9ea97ff41ea9f659d1712e422c2ea1f4aa3373463b1e17d3d682c156cddacb"
+        ],
+        "num_samples": 5,
+        "model": "boltz_2",
+        "use_msa_server": true,
+        "use_potentials": false,
+        "do_pose_refinement": false,
+        "compute_strain": false,
+        "use_templates_server": false
+      },
+      "hardware": "A100_80GB",
+      "elapsed_seconds": 129.9,
+      "credits": 6.49,
+      "requested_cap": 10
+    },
+    {
+      "id": "1EY0_WT_1",
+      "status": "Status.COMPLETED_OK",
+      "settings": {
+        "available": true,
+        "sequence_sha256": [
+          "94a6f4324114f9e643076e2bfcb727145d400345f4c5feff0607e5c1fb787be1"
+        ],
+        "num_samples": 1,
+        "model": "boltz_2",
+        "use_msa_server": true,
+        "use_potentials": false,
+        "do_pose_refinement": false,
+        "compute_strain": false,
+        "use_templates_server": false
+      },
+      "hardware": "A100_80GB",
+      "elapsed_seconds": 100.99,
+      "credits": 5.05,
+      "requested_cap": 10
+    },
+    {
+      "id": "1EY0_T8A_1",
+      "status": "Status.COMPLETED_OK",
+      "settings": {
+        "available": true,
+        "sequence_sha256": [
+          "1c9ea97ff41ea9f659d1712e422c2ea1f4aa3373463b1e17d3d682c156cddacb"
+        ],
+        "num_samples": 1,
+        "model": "boltz_2",
+        "use_msa_server": true,
+        "use_potentials": false,
+        "do_pose_refinement": false,
+        "compute_strain": false,
+        "use_templates_server": false
+      },
+      "hardware": "A100_80GB",
+      "elapsed_seconds": 72.11,
+      "credits": 3.61,
+      "requested_cap": 10
+    },
+    {
+      "id": "BBC1_WT_1_HISTORICAL_0",
+      "status": "Status.COMPLETED_OK",
+      "settings": {
+        "available": true,
+        "sequence_sha256": [
+          "2525c4c880a947f46b4d75c90e17d85e653fcf632fc7dc9d0c64a75625d36e61"
+        ],
+        "num_samples": 1,
+        "model": "boltz_2",
+        "use_msa_server": true,
+        "use_potentials": false,
+        "do_pose_refinement": false,
+        "compute_strain": false,
+        "use_templates_server": false
+      },
+      "hardware": "A100_80GB",
+      "elapsed_seconds": 93.17,
+      "credits": 4.66,
+      "requested_cap": 10
+    }
+  ],
+  "tariff_credits_per_minute": {
+    "A100_80GB": 3
+  },
+  "safety": {
+    "provider_cap_is_hard": false,
+    "provider_verified_overshoot_bound": null,
+    "submissions_allowed": false
+  },
+  "scope": "Six historical observations (five completed, one stopped/right-censored); no calibrated predictive interval."
+}

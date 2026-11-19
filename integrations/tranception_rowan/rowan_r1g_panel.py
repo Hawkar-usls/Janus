@@ -60,6 +60,7 @@ def read_case(api,job,case,name,seq,n):
 def run(api,action,approved,attempt,save,sleep=time.sleep):
     if action not in ("submit","collect") or (action=="collect" and approved):raise Hold("ACTION")
     if action=="submit" and (not approved or attempt!="1"):raise Hold("EXPLICIT_FIRST_ATTEMPT_REQUIRED")
+    if action=="submit":raise Hold("R1G2_HOLD_PROVIDER_CAP_UNBOUNDED")
     state={"schema":"janus.rowan.r1g.panel.receipt.v1","status":"RUNNING","model":"BOLTZ_2","use_msa_server":True,"max_total_cap":70,"new_jobs":0,"new_jobs_confirmed_complete":0,"cases":[],"provider_equivalence":False,"wetlab_validation":False,"label_access":False,"weights_changed":False,"seed_independence_verified":False,"github_run_id":os.getenv("GITHUB_RUN_ID")}
     save(state)
     charged_new=0
