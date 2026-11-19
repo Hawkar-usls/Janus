@@ -1,0 +1,33 @@
+name: JANUS Rowan R1G cap incident read-only witness
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+jobs:
+  witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'stjames==0.0.289'
+      - name: Read one existing case and preserve provider-reported financial metadata
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          R1G_INCIDENT_RECEIPT: ${{ runner.temp }}/r1g-incident.json
+        run: python integrations/tranception_rowan/rowan_r1g_cap_incident.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r1g-incident-${{ github.run_id }}
+          path: ${{ runner.temp }}/r1g-incident.json
+          retention-days: 14
