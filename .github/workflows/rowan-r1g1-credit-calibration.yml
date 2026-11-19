@@ -1,0 +1,37 @@
+name: JANUS Rowan R1G1 credit calibration read-only
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: janus-rowan-science-submit-and-collect
+  cancel-in-progress: false
+jobs:
+  witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: rowan-research
+      deployment: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Offline sanitation tests
+        run: python -m unittest discover -s integrations/tranception_rowan/tests -p 'test_rowan_r1g1_credit_calibration.py' -v
+      - run: python -m pip install --disable-pip-version-check --quiet 'rowan-python==3.2.3' 'stjames==0.0.289'
+      - name: Verify exact pinned SDK payload with mock transport only
+        run: python integrations/tranception_rowan/r1g1_sdk_payload_mock.py
+      - name: Read existing provider metadata only
+        env:
+          ROWAN_API_KEY: ${{ secrets.ROWAN_API_KEY }}
+          R1G1_RECEIPT: ${{ runner.temp }}/r1g1-credit-calibration.json
+        run: python integrations/tranception_rowan/rowan_r1g1_credit_calibration.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r1g1-credit-calibration-${{ github.run_id }}
+          path: ${{ runner.temp }}/r1g1-credit-calibration.json
+          retention-days: 14
