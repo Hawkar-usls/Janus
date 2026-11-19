@@ -1,0 +1,19 @@
+{
+  "schema": "janus.rowan.r1.cloud_pair.plan.v1",
+  "date": "2026-11-19",
+  "cases": [
+    "WT",
+    "T8A"
+  ],
+  "stable_prefix": "JANUS-ROWAN-1EY0-R1C-PAIRED-R1-20261119-",
+  "maximum_jobs": 2,
+  "maximum_credits_per_job": 10,
+  "maximum_planned_weekly_credits": 20,
+  "organization_weekly_floor_before_each_job": 30,
+  "require_explicit_manual_approval": true,
+  "technical_control_only": true,
+  "no_external_validation": true,
+  "source": "ROWAN-1EY0-T8A-SINGLE-MUTANT-STRUCTURAL-DELTA-PREREG-2026-10-26-v1",
+  "expanded_fireprot_design": "https://github.com/Hawkar-usls/janus-meta-registry/pull/616",
+  "next": "compare cloud repeat to historical Rowan and fixed local seed panel; no biological fitness claim; no automatic expansion"
+}
