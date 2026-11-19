@@ -1,0 +1,35 @@
+{
+  "schema": "janus.rowan.r1g.panel.v1",
+  "date": "2026-11-19",
+  "scope": "Technical cost and repeatability controls only; not blind stability validation; exclude 2LZM I3T and BBC1 selected controls from prospective holdout.",
+  "sources": {
+    "bbc1": {
+      "manifest_blob": "d2f86b2250c84bbc4bac42b8ffe6d48f30b9bcab",
+      "historical_audit": "https://github.com/Hawkar-usls/janus-meta-registry/blob/main/data/rowan/provenance/ROWAN-BBC1-ALL-EIGHT-MUTANTS-PUBLIC-MSA-TRANSFER-AUDIT-2026-10-26-v1.json"
+    },
+    "t4": {
+      "manifest_blob": "04f34cdac7be79b31e7dcf4f65c8bf94e067311c",
+      "rcsb": "https://data.rcsb.org/rest/v1/core/polymer_entity/2LZM/1",
+      "rcsb_canonical_sequence_sha256": "0619a8bdf08b15085930db9c8a635510324e67bfd558bb2f8d1654b896355133",
+      "mutant_sha256": "c5280e3fa313d52b1c12658e9b1118f8b65fab06887361f30c9181e78b7e1383"
+    }
+  },
+  "fixed_order": [
+    "BBC1_WT_5",
+    "BBC1_E27F_5",
+    "2LZM_WT_5",
+    "2LZM_I3T_5",
+    "BBC1_E42H_5",
+    "2LZM_WT_1",
+    "2LZM_I3T_1"
+  ],
+  "maximum_new_jobs": 7,
+  "maximum_total_credit_cap": 70,
+  "per_job_cap": 10,
+  "minimum_weekly_balance_before_submit": 40,
+  "protected_weekly_reserve": 30,
+  "max_poll_seconds_per_job": 150,
+  "one_pending_job_at_a_time": true,
+  "prior_1ey0": "https://github.com/Hawkar-usls/janus-meta-registry/pull/621",
+  "analysis": "mean, sample SD, leave-one-out mean ranges; ΔpTM and Δavg_lddt difference of means; compare cost/sample with historical BBC1 and contemporaneous 2LZM single jobs; no paired seed assumption; no labels accessed"
+}
