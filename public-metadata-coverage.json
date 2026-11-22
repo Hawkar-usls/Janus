@@ -1,31 +1,31 @@
 {
   "schema_id": "hawkar.public-metadata-coverage.v1",
   "audit_id": "hawkar.public-metadata-coverage.v1",
-  "last_reviewed": "2026-08-09",
+  "last_reviewed": "2026-11-22",
   "owner": "Hawkar-usls",
-  "public_repository_count": 36,
+  "public_repository_count": 49,
   "profile_surface": {
     "repository": "Hawkar-usls/Hawkar-usls",
     "repository_url": "https://github.com/Hawkar-usls/Hawkar-usls",
     "readme_url": "https://github.com/Hawkar-usls/Hawkar-usls/blob/main/README.md",
     "canonical_source_url": "https://github.com/Hawkar-usls/Janus/blob/main/PROFILE_README_SOURCE.md",
-    "profile_readme_commit": "48dc06d8e23b4a80ef256f9ea96858d6e2e70664",
+    "profile_readme_commit": "eda90f5b07714027b063e7217f9576d6844f4828",
     "canonical_source_commit": "7249f992361652b2a6948899f13c50f89f0f9c05",
-    "git_blob_sha1": "ae64214dcb52cd968edc3ab4db0368b3e38464a9",
-    "content_identity": "MATCH",
+    "git_blob_sha1": "143251de2d970b9a3a94b159a04e012070943376",
+    "content_identity": "MISMATCH",
     "role": "presentation_and_navigation_surface",
     "evidence_bearing_project": false
   },
   "portfolio_index_coverage": {
-    "classified_project_repositories": 35,
+    "classified_project_repositories": 48,
     "profile_metadata_surfaces": 1,
-    "total_public_repositories": 36,
+    "total_public_repositories": 49,
     "unclassified_project_repositories": [],
-    "note": "The dedicated GitHub profile README repository is a presentation/metadata surface and is intentionally not classified as a research or engineering project in portfolio-index.json."
+    "note": "49/49 PUBLIC covered including one profile surface; details audit/portfolio-2026-11-22/manifest.json."
   },
   "project_status_coverage": {
-    "with_PROJECT_STATUS_json": 33,
-    "total_public_repositories": 36,
+    "with_PROJECT_STATUS_json": 39,
+    "total_public_repositories": 49,
     "intentional_exceptions": [
       {
         "repository": "Janus-Fundamentum",
@@ -38,14 +38,18 @@
         "reason": "Internal assurance line is stopped pending independent Implementation B / external bench; documentation polish intentionally does not add another internal metadata commit.",
         "central_status_source": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json",
         "review_gate": "https://github.com/Hawkar-usls/AIFC/issues/66"
-      },
-      {
-        "repository_role": "github_profile_readme",
-        "canonical_repository_name": "Hawkar-usls",
-        "reason": "The profile repository is a presentation surface, not an evidence-bearing project. It links to the account-wide machine-readable portfolio index, visibility policy, coverage audit and schema registry instead of duplicating PROJECT_STATUS.json."
       }
     ],
-    "unexplained_missing": []
+    "unexplained_missing": [
+      "Echo-Pyramid",
+      "HotdRemake_ArcadePlugin",
+      "JANUS-MACHINE-MARKET",
+      "Janus-Portal",
+      "Linear-A-decipherment-programme",
+      "lineara.xyz",
+      "neuromorphic-vision-sensor",
+      "The-Voice-of-Janus"
+    ]
   },
   "presentation_policy": {
     "standard": "https://github.com/Hawkar-usls/Janus/blob/main/docs/PUBLIC_REPOSITORY_PRESENTATION_STANDARD.md",
@@ -62,5 +66,5 @@
     "portfolio_classes": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/portfolio-classes.json",
     "repository_maturity": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/maturity-classes.json"
   },
-  "interpretation": "Coverage describes public metadata availability and presentation policy only. It is not evidence that scientific claims are true, novel, independently replicated or peer reviewed."
+  "interpretation": "Snapshot dated 2026-11-22: 49 public repositories, 48 project records and one profile; root PROJECT_STATUS.json exists in 39. Profile README Git blob differs from canonical source; old MATCH was stale. All private names excluded. Metadata and CI are not scientific validation."
 }
