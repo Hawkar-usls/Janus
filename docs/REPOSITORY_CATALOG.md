@@ -76,6 +76,8 @@
 
 - [Hawkar-usls](https://github.com/Hawkar-usls/Hawkar-usls) is a profile/navigation repository, not a research project.
 - 49/49 default branch heads were captured by SHA from GitHub.
+- 49/49 README files were checked against their pinned default-branch commit SHA; full blob identities are in the five [README audit shards](../audit/portfolio-2026-11-22/readme-01.json) and manifest.
+- 35 existing root statuses carry historical August review dates and four lack an explicit review date; those dates were **not** rewritten or treated as fresh scientific revalidation.
 - 39/49 public repositories had a root `PROJECT_STATUS.json` at audit capture. Four new source-bound root status files are proposed through separate PRs. Two frozen research authorities rely on specialized documentation; four upstream forks remain intentionally unchanged. **No unexplained gaps**; see [reconciliation actions](../audit/portfolio-2026-11-22/reconciliation-actions.json).
 - In last-five-per-repository sample, **244 workflow runs** were returned: success 228, failure 10, in_progress 1, cancelled 3, skipped 2.
 - The published profile README and canonical `PROFILE_README_SOURCE.md` have been reconciled to the same verified Git blob **on this review branch**. Mainline takes effect only after PR #69 merges.
