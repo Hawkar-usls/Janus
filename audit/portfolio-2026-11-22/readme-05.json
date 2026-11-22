@@ -1,0 +1,88 @@
+{
+  "schema": "janus.portfolio.readme_audit.v1",
+  "snapshot": "2026-11-22",
+  "source": "pinned default branch commit",
+  "entries": [
+    {
+      "repository": "SCOBY-D0",
+      "source_ref": "fe59bd4cdfae918298fd7292ec84b964ff8fb7b0",
+      "readme_present": true,
+      "readme_blob_sha": "71f1783c0e0d71229a37d76fa42de3289168a460",
+      "readme_url": "https://github.com/Hawkar-usls/SCOBY-D0/blob/fe59bd4cdfae918298fd7292ec84b964ff8fb7b0/README.md",
+      "heading": "SCOBY-D0",
+      "byte_length": 6682
+    },
+    {
+      "repository": "Simptomat",
+      "source_ref": "5c1daed7f728d671ed2139b3448bd612ea0a4f58",
+      "readme_present": true,
+      "readme_blob_sha": "5be4000f5a4025f5c8efb8e96f0b8eeee7d413f3",
+      "readme_url": "https://github.com/Hawkar-usls/Simptomat/blob/5c1daed7f728d671ed2139b3448bd612ea0a4f58/README.md",
+      "heading": "Simptomat",
+      "byte_length": 19119
+    },
+    {
+      "repository": "SLOT",
+      "source_ref": "4476ed0e26dd281525e95788b447d8df9b2b842a",
+      "readme_present": true,
+      "readme_blob_sha": "01dfbe5629ef095fdaf330244d90c83cb6b1d758",
+      "readme_url": "https://github.com/Hawkar-usls/SLOT/blob/4476ed0e26dd281525e95788b447d8df9b2b842a/README.md",
+      "heading": "SLOT",
+      "byte_length": 1347
+    },
+    {
+      "repository": "SSlot",
+      "source_ref": "47dc1628c506d757f827f9ed9bfd774d15069b22",
+      "readme_present": true,
+      "readme_blob_sha": "54c6978e922332d79bfcd3ebe800570d697e80eb",
+      "readme_url": "https://github.com/Hawkar-usls/SSlot/blob/47dc1628c506d757f827f9ed9bfd774d15069b22/README.md",
+      "heading": "SSlot",
+      "byte_length": 2929
+    },
+    {
+      "repository": "The-Voice-of-Janus",
+      "source_ref": "21443c4314e61b11420389a7aafc4dad729109ab",
+      "readme_present": true,
+      "readme_blob_sha": "df9fd46f343e4400f9ba646bda7e2c3bc56bc9c5",
+      "readme_url": "https://github.com/Hawkar-usls/The-Voice-of-Janus/blob/21443c4314e61b11420389a7aafc4dad729109ab/README.md",
+      "heading": "The Voice of Janus",
+      "byte_length": 1954
+    },
+    {
+      "repository": "TOPA",
+      "source_ref": "0890172493d6ed0d3a62e79904c6a7593eb8a9f3",
+      "readme_present": true,
+      "readme_blob_sha": "222a5dae8f775e62ab24139a7a9cd97f14f4106f",
+      "readme_url": "https://github.com/Hawkar-usls/TOPA/blob/0890172493d6ed0d3a62e79904c6a7593eb8a9f3/README.md",
+      "heading": "TOPA",
+      "byte_length": 10831
+    },
+    {
+      "repository": "tranception",
+      "source_ref": "81bbd2449ec3dfcc532c741cf602a69d537dffeb",
+      "readme_present": true,
+      "readme_blob_sha": "c6265f5f80e4b65328cb805028ccec16010c8774",
+      "readme_url": "https://github.com/Hawkar-usls/tranception/blob/81bbd2449ec3dfcc532c741cf602a69d537dffeb/README.md",
+      "heading": "Tranception — upstream-derived working copy",
+      "byte_length": 1384
+    },
+    {
+      "repository": "vcmi",
+      "source_ref": "c20e3f5325eafc81b33a8367d37a20226ab78d2f",
+      "readme_present": true,
+      "readme_blob_sha": "4064bedc1ea6076127f1479166aff994bae3f042",
+      "readme_url": "https://github.com/Hawkar-usls/vcmi/blob/c20e3f5325eafc81b33a8367d37a20226ab78d2f/README.md",
+      "heading": "VCMI — upstream-derived working copy",
+      "byte_length": 1043
+    },
+    {
+      "repository": "xiaozhi-esp32",
+      "source_ref": "70ed850951acf1ebb9b7e1fda1bf878f80652637",
+      "readme_present": true,
+      "readme_blob_sha": "7db3b6b453e2ffc1bfdec505657e3f45f8a09586",
+      "readme_url": "https://github.com/Hawkar-usls/xiaozhi-esp32/blob/70ed850951acf1ebb9b7e1fda1bf878f80652637/README.md",
+      "heading": "XiaoZhi ESP32 — upstream-derived working copy",
+      "byte_length": 1126
+    }
+  ]
+}
