@@ -1,0 +1,51 @@
+{
+  "schema": "janus.portfolio.reconciliation_validation.v1",
+  "date": "2026-11-22",
+  "review_type": "INTERNAL_METADATA_CONSISTENCY_ONLY",
+  "scope": "PUBLIC_GITHUB_REPOSITORIES",
+  "outcome": "SELF_CHECK_PASS__MERGE_AND_EXTERNAL_REVIEW_PENDING",
+  "checks": {
+    "manifest_49_unique": true,
+    "index_48_unique": true,
+    "visibility_49_unique": true,
+    "readme_49_pinned": true,
+    "index_readme_matches": true,
+    "source_status_freshness_all": true,
+    "root_status_accounted": true,
+    "pending_four": true,
+    "deliberately_untouched_six": true,
+    "private_names_not_published": true,
+    "no_scientific_promotion": true,
+    "source_status_dates_not_falsely_promoted": true
+  },
+  "source_manifest_sha": "23bb44dd02d375eb701efe2cce05966bf06230e3",
+  "source_reconciliation_sha": "db79ff1a5fd1e3f077ee4b6ecaf010b928793b53",
+  "readme_shards": [
+    {
+      "path": "audit/portfolio-2026-11-22/readme-01.json",
+      "sha": "68a35deaefb0add5361678e31d2444052b83359f"
+    },
+    {
+      "path": "audit/portfolio-2026-11-22/readme-02.json",
+      "sha": "abcbbb4f7b75088334f7b090196bcd857270420d"
+    },
+    {
+      "path": "audit/portfolio-2026-11-22/readme-03.json",
+      "sha": "6042974b68549c9e8a0093d50eb1a02a15d62423"
+    },
+    {
+      "path": "audit/portfolio-2026-11-22/readme-04.json",
+      "sha": "ae755e57de6b1f1fb2ffd0f18d6243b5a8db230e"
+    },
+    {
+      "path": "audit/portfolio-2026-11-22/readme-05.json",
+      "sha": "c6e832ab71a834e9d6954b698692e127e7da33ca"
+    }
+  ],
+  "limitations": [
+    "Not an independent CI run or peer review.",
+    "No physical, medical or production claim was revalidated.",
+    "All proposed PRs remain pending and require normal review before mainline.",
+    "Private content is not stored here."
+  ]
+}
