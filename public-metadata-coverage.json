@@ -38,18 +38,45 @@
         "reason": "Internal assurance line is stopped pending independent Implementation B / external bench; documentation polish intentionally does not add another internal metadata commit.",
         "central_status_source": "https://github.com/Hawkar-usls/Janus/blob/main/portfolio-index.json",
         "review_gate": "https://github.com/Hawkar-usls/AIFC/issues/66"
+      },
+      {
+        "repository": "Echo-Pyramid",
+        "reason": "Source-bound status created in PR #11; not yet on default branch.",
+        "proposed_status_pr": "https://github.com/Hawkar-usls/Echo-Pyramid/pull/11"
+      },
+      {
+        "repository": "JANUS-MACHINE-MARKET",
+        "reason": "Source-bound status created in PR #91; not yet on default branch.",
+        "proposed_status_pr": "https://github.com/Hawkar-usls/JANUS-MACHINE-MARKET/pull/91"
+      },
+      {
+        "repository": "Janus-Portal",
+        "reason": "Source-bound status created in PR #27. Canonical project detail remains docs/STATUS.json.",
+        "proposed_status_pr": "https://github.com/Hawkar-usls/Janus-Portal/pull/27"
+      },
+      {
+        "repository": "The-Voice-of-Janus",
+        "reason": "Source-bound status created in PR #11; not yet on default branch.",
+        "proposed_status_pr": "https://github.com/Hawkar-usls/The-Voice-of-Janus/pull/11"
+      },
+      {
+        "repository": "HotdRemake_ArcadePlugin",
+        "reason": "Root status not created because this repository is an upstream-derived working copy; inspect current upstream baseline and verified local diffs instead."
+      },
+      {
+        "repository": "Linear-A-decipherment-programme",
+        "reason": "Root status not created because this repository is an upstream-derived working copy; inspect current upstream baseline and verified local diffs instead."
+      },
+      {
+        "repository": "lineara.xyz",
+        "reason": "Root status not created because this repository is an upstream-derived working copy; inspect current upstream baseline and verified local diffs instead."
+      },
+      {
+        "repository": "neuromorphic-vision-sensor",
+        "reason": "Root status not created because this repository is an upstream-derived working copy; inspect current upstream baseline and verified local diffs instead."
       }
     ],
-    "unexplained_missing": [
-      "Echo-Pyramid",
-      "HotdRemake_ArcadePlugin",
-      "JANUS-MACHINE-MARKET",
-      "Janus-Portal",
-      "Linear-A-decipherment-programme",
-      "lineara.xyz",
-      "neuromorphic-vision-sensor",
-      "The-Voice-of-Janus"
-    ]
+    "unexplained_missing": []
   },
   "presentation_policy": {
     "standard": "https://github.com/Hawkar-usls/Janus/blob/main/docs/PUBLIC_REPOSITORY_PRESENTATION_STANDARD.md",
@@ -66,5 +93,5 @@
     "portfolio_classes": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/portfolio-classes.json",
     "repository_maturity": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/maturity-classes.json"
   },
-  "interpretation": "2026-11-22 public audit: 49 repositories. Profile README and canonical copy now content-identical on this review branch, anchored to Git blob 143251de2d970b9a3a94b159a04e012070943376. Match becomes mainline authoritative only after review/merge. Scientific and production claims unchanged."
+  "interpretation": "Source-bound public portfolio audit 2026-11-22: 49 public, 39 root statuses on main at snapshot, 4 proposed root status PRs, 2 scientific non-root/frozen authority exceptions and 4 upstream forks intentionally untouched. No unexplained status gaps. Reconciliation actions: audit/portfolio-2026-11-22/reconciliation-actions.json. GitHub Profile README and canonical copy match in this proposal branch by identical blob SHA; main awaits merge. Private names absent; no scientific promotion."
 }
