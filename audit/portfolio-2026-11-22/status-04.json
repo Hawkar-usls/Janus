@@ -1,0 +1,93 @@
+{
+  "schema": "janus.portfolio.project_status_inventory.v1",
+  "date": "2026-11-22",
+  "scope": "public_only",
+  "entries": [
+    {
+      "name": "janus-lapis",
+      "exists": true,
+      "sha": "e1c9a9e517a0827a11898c240145c14db0ac1250",
+      "source_url": "https://github.com/Hawkar-usls/janus-lapis/blob/main/PROJECT_STATUS.json",
+      "project": "JANUS Lapis",
+      "last_reviewed": "2026-08-31",
+      "maturity": "WORK_IN_PROGRESS",
+      "status": null,
+      "completion_status": "INCOMPLETE",
+      "summary": "Computational hypothesis-ranking sandbox inspired by historical alchemical archetypes, carrying evidence-gated EXIT tracking, explicitly bounded cross-domain analogies, and a deterministic JSON-to-algorithm/code/sound translation lane."
+    },
+    {
+      "name": "JANUS-MACHINE-MARKET",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "janus-meta-registry",
+      "exists": true,
+      "sha": "6f0111603c62b48839ea5c04bfc1ee7a5e5847dc",
+      "source_url": "https://github.com/Hawkar-usls/janus-meta-registry/blob/main/PROJECT_STATUS.json",
+      "project": "JANUS Meta Registry",
+      "last_reviewed": "2026-08-15",
+      "maturity": "ARCHIVE",
+      "status": null,
+      "completion_status": "ARCHIVAL",
+      "summary": "Archive of historical hypotheses, structured artifacts, red-team records, technical snapshots, provenance notes, symbolic material and later corrections across JANUS projects."
+    },
+    {
+      "name": "Janus-Portal",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "Linear-A-decipherment-programme",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "lineara.xyz",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "M5Unit-ENV",
+      "exists": true,
+      "sha": "bbc02b784cbd942596588a3b6c98e3862d788347",
+      "source_url": "https://github.com/Hawkar-usls/M5Unit-ENV/blob/master/PROJECT_STATUS.json",
+      "project": "M5Unit-ENV working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "neuromorphic-vision-sensor",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "player",
+      "exists": true,
+      "sha": "3266122551e2cccabb98fa29ef2261eb55dabbd4",
+      "source_url": "https://github.com/Hawkar-usls/player/blob/master/PROJECT_STATUS.json",
+      "project": "Telegram voice-chat player working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "RadioPlayerV3",
+      "exists": true,
+      "sha": "ca4b99c41b0b6dfec9db9c972f71ac5814f876b3",
+      "source_url": "https://github.com/Hawkar-usls/RadioPlayerV3/blob/master/PROJECT_STATUS.json",
+      "project": "RadioPlayerV3 working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    }
+  ],
+  "warning": "Declared status is source metadata, not independently verified scientific or production readiness."
+}
