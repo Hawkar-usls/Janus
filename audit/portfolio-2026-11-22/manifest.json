@@ -20,14 +20,19 @@
       "skipped": 2
     },
     "error_count": 0,
-    "private_names_recorded": 0
+    "private_names_recorded": 0,
+    "readme_blobs_verified": 49,
+    "readme_files_missing": 0,
+    "project_status_historical_dates": 35,
+    "project_status_present_date_undeclared": 4
   },
   "disclaimers": [
     "No private repository names or data are published.",
     "Snapshot is point-in-time; repositories may change after capture.",
     "A status JSON file is self-declared project metadata, not independent validation.",
     "GitHub open_issues_count can include pull requests.",
-    "Recent Actions SUCCESS is not scientific verification; no claim or production promotion."
+    "Recent Actions SUCCESS is not scientific verification; no claim or production promotion.",
+    "README blob identities were checked against pinned default-branch commits; older PROJECT_STATUS review dates deliberately remain unchanged and should not be misread as recertification."
   ],
   "historical_record_note": "Preexisting 2026-08-09 portfolio declared 36 public repositories but listing today returns 49. Historical iNaiHR-Janus- not available in current owner listing; do not claim deleted.",
   "source_shards": [
@@ -90,6 +95,26 @@
     {
       "path": "audit/portfolio-2026-11-22/status-05.json",
       "git_blob_sha": "784079909ccc7d301369c22eaf998e95f9e6db0a"
+    },
+    {
+      "path": "audit/portfolio-2026-11-22/readme-01.json",
+      "git_blob_sha": "68a35deaefb0add5361678e31d2444052b83359f"
+    },
+    {
+      "path": "audit/portfolio-2026-11-22/readme-02.json",
+      "git_blob_sha": "abcbbb4f7b75088334f7b090196bcd857270420d"
+    },
+    {
+      "path": "audit/portfolio-2026-11-22/readme-03.json",
+      "git_blob_sha": "6042974b68549c9e8a0093d50eb1a02a15d62423"
+    },
+    {
+      "path": "audit/portfolio-2026-11-22/readme-04.json",
+      "git_blob_sha": "ae755e57de6b1f1fb2ffd0f18d6243b5a8db230e"
+    },
+    {
+      "path": "audit/portfolio-2026-11-22/readme-05.json",
+      "git_blob_sha": "c6e832ab71a834e9d6954b698692e127e7da33ca"
     }
   ],
   "repositories": [
