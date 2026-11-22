@@ -21,7 +21,7 @@
     "profile_metadata_surfaces": 1,
     "total_public_repositories": 49,
     "unclassified_project_repositories": [],
-    "note": "49/49 PUBLIC covered including one profile surface; details audit/portfolio-2026-11-22/manifest.json."
+    "note": "49/49 PUBLIC covered including one profile surface; details audit/portfolio-2026-11-22/manifest.json. All 49 README identities were verified against pinned HEAD SHA; 35 original project status review dates remain historical and four declared no review date."
   },
   "project_status_coverage": {
     "with_PROJECT_STATUS_json": 39,
@@ -93,5 +93,5 @@
     "portfolio_classes": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/portfolio-classes.json",
     "repository_maturity": "https://github.com/Hawkar-usls/Janus/blob/main/schemas/maturity-classes.json"
   },
-  "interpretation": "Source-bound public portfolio audit 2026-11-22: 49 public, 39 root statuses on main at snapshot, 4 proposed root status PRs, 2 scientific non-root/frozen authority exceptions and 4 upstream forks intentionally untouched. No unexplained status gaps. Reconciliation actions: audit/portfolio-2026-11-22/reconciliation-actions.json. GitHub Profile README and canonical copy match in this proposal branch by identical blob SHA; main awaits merge. Private names absent; no scientific promotion."
+  "interpretation": "Source-bound public portfolio audit 2026-11-22: 49 public, 39 root statuses on main at snapshot, 4 proposed root status PRs, 2 scientific non-root/frozen authority exceptions and 4 upstream forks intentionally untouched. No unexplained status gaps. Reconciliation actions: audit/portfolio-2026-11-22/reconciliation-actions.json. GitHub Profile README and canonical copy match in this proposal branch by identical blob SHA; main awaits merge. Private names absent; no scientific promotion. README source identity verified for all 49 PUBLIC repositories at original HEAD SHA, without claiming current science validation."
 }
