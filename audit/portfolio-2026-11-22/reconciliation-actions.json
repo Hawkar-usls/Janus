@@ -1,0 +1,105 @@
+{
+  "schema": "janus.portfolio.reconciliation_actions.v1",
+  "snapshot_date": "2026-11-22",
+  "owner": "Hawkar-usls",
+  "public_inventory": 49,
+  "previous_public_status_present": 39,
+  "pending_public_status_prs": [
+    {
+      "repo": "Echo-Pyramid",
+      "pr": 11,
+      "path": "PROJECT_STATUS.json",
+      "source": "README.md",
+      "pr_url": "https://github.com/Hawkar-usls/Echo-Pyramid/pull/11",
+      "status": "PROPOSED_NOT_MAIN"
+    },
+    {
+      "repo": "JANUS-MACHINE-MARKET",
+      "pr": 91,
+      "path": "PROJECT_STATUS.json",
+      "source": "README.md",
+      "pr_url": "https://github.com/Hawkar-usls/JANUS-MACHINE-MARKET/pull/91",
+      "status": "PROPOSED_NOT_MAIN"
+    },
+    {
+      "repo": "Janus-Portal",
+      "pr": 27,
+      "path": "PROJECT_STATUS.json",
+      "source": "docs/STATUS.json",
+      "pr_url": "https://github.com/Hawkar-usls/Janus-Portal/pull/27",
+      "status": "PROPOSED_NOT_MAIN"
+    },
+    {
+      "repo": "The-Voice-of-Janus",
+      "pr": 11,
+      "path": "PROJECT_STATUS.json",
+      "source": "README.md",
+      "pr_url": "https://github.com/Hawkar-usls/The-Voice-of-Janus/pull/11",
+      "status": "PROPOSED_NOT_MAIN"
+    }
+  ],
+  "intentional_public_exceptions": [
+    {
+      "repo": "AIFC",
+      "classification": "CANONICAL_NONROOT_STATUS",
+      "path": "docs/EVIDENCE_GRADES.md",
+      "reason": "Independent Implementation B and external physical-protocol bench remain open. No metadata-only mutation of frozen review surface."
+    },
+    {
+      "repo": "Janus-Fundamentum",
+      "classification": "CANONICAL_NONROOT_STATUS",
+      "path": "docs/CURRENT_RESEARCH_STATUS.md",
+      "reason": "Scientific A3 publication objects and C023 proof research have separate authority. No rewrite or status fabrication."
+    },
+    {
+      "repo": "HotdRemake_ArcadePlugin",
+      "classification": "UPSTREAM_DERIVED_NO_PROJECT_STATUS_MUTATION",
+      "reason": "Upstream-derived source copy; preserving upstream source without injecting JANUS metadata. Ownership-specific changes require source-diff attribution."
+    },
+    {
+      "repo": "Linear-A-decipherment-programme",
+      "classification": "UPSTREAM_DERIVED_NO_PROJECT_STATUS_MUTATION",
+      "reason": "Upstream-derived source copy; preserving upstream source without injecting JANUS metadata. Ownership-specific changes require source-diff attribution."
+    },
+    {
+      "repo": "lineara.xyz",
+      "classification": "UPSTREAM_DERIVED_NO_PROJECT_STATUS_MUTATION",
+      "reason": "Upstream-derived source copy; preserving upstream source without injecting JANUS metadata. Ownership-specific changes require source-diff attribution."
+    },
+    {
+      "repo": "neuromorphic-vision-sensor",
+      "classification": "UPSTREAM_DERIVED_NO_PROJECT_STATUS_MUTATION",
+      "reason": "Upstream-derived source copy; preserving upstream source without injecting JANUS metadata. Ownership-specific changes require source-diff attribution."
+    }
+  ],
+  "profile_alignment": {
+    "status": "BRANCH_CONTENT_MATCH__MAIN_PENDING_REVIEW",
+    "canonical": "Hawkar-usls/Janus/PROFILE_README_SOURCE.md",
+    "live": "Hawkar-usls/Hawkar-usls/README.md",
+    "content_git_blob": "143251de2d970b9a3a94b159a04e012070943376",
+    "link_to_main_pr": "https://github.com/Hawkar-usls/Janus/pull/69"
+  },
+  "private_inventory": {
+    "total": 3,
+    "private_status_prs_created": 3,
+    "policy": "NEVER_INCLUDE_PRIVATE_REPOSITORY_NAMES_OR_METADATA_IN_PUBLIC_INDEX",
+    "details": "Review inside connected account's private repositories only"
+  },
+  "counts": {
+    "all_accessible": 52,
+    "public": 49,
+    "private": 3,
+    "public_main_status_count_at_snapshot": 39,
+    "public_status_prs_open": 4,
+    "private_status_prs_open": 3,
+    "public_justified_nonroot_or_upstream_exceptions": 6,
+    "public_remaining_unaccounted": 0
+  },
+  "rules": [
+    "Existing scientific and production gates remain authoritative; status PRs are documentary only.",
+    "Pending branches are not mainline until reviewed and merged.",
+    "Historical snapshot documents repository state at capture, not after pending merges.",
+    "Do not modify upstream-derived source copies simply to force uniform status metadata.",
+    "No private filenames, repo names or per-project state are published here."
+  ]
+}
