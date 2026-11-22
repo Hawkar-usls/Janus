@@ -30,7 +30,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "76934f7bee9a21e10fc43c0f77e73cbee2824bfd",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "085af189ac77319b0ac1853348044c04cc983458",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-21",
+      "source_project_status_maturity": "ACTIVE_PROTOTYPE",
+      "source_project_status_completion": "INCOMPLETE_BUT_EXECUTABLE_CONTROL_PLANE_SPIRAL_MIGRATED",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "AI-Cardputer-adv-A-Portable-AI-Assistant",
@@ -44,7 +52,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "ffe32a300719a188073188b15eb83aaab2b4a539",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "053eaa0f299a3c955e0bcb19cacebef9b0cf8833",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "AIFC",
@@ -59,7 +75,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "11fcbbd01ac1a6e4e8ebfa5f838d096ef8988f30",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Arduino-AI-Chat-Library",
@@ -73,7 +97,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "c196c286f15dac7b0f6621baa65076a31fe79db3",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "8037f5b41218f3a2c8a73f865aa926154805e6d7",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "arduino-ide",
@@ -87,7 +119,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "4edda90b7cb2694e9aba126a03d57c6fe6636af1",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "64dba0a05eee24d9b0554ac5393de3b8d0821a44",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "ATOM-ELITE-1989---M5stack-ATOMS3R-2026-",
@@ -101,7 +141,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "0c622ef7d4902964bf7a59a7facc314e603c07fc",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "6b0d949993f33b993f576cbe2dc55cf3f5d01e86",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "ACTIVE_CREATIVE_PROTOTYPE",
+      "source_project_status_completion": "PROTOTYPE",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "ATOM-RPG",
@@ -115,7 +163,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "040fbccb60d3e942b761ef3e703f4af478c360d5",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "f1b6faa1cbf5c4702b7c750d61cd90316e570b1e",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "WORK_IN_PROGRESS",
+      "source_project_status_completion": "INCOMPLETE",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "aura-oracle-tg",
@@ -129,7 +185,15 @@
       "latest_ci_conclusion": null,
       "project_status_present": true,
       "project_status_source_sha": "99cc6ca23928dcfd5107bac9a13e72ec5fea7025",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "4708eba334ce7f1927f66ad36567a38297411640",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-26",
+      "source_project_status_maturity": "ACTIVE_PROTOTYPE",
+      "source_project_status_completion": "SEMANTIC_PREDICTIVE_SPIRAL_PLUS_FORTUNE_COOKIE_SEALED_ORACLE",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "BFain",
@@ -143,7 +207,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "2a668da084c042b171b05a3b461bc8a62ae9d4be",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "fe364acd7da6932109d48afbb8e33a80bf9645e6",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "WORK_IN_PROGRESS",
+      "source_project_status_completion": "INCOMPLETE",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Cardputer-Game-Station-Emulators",
@@ -157,7 +229,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "2603c0ebe0a14afc3235dfa994d6d5db7951e20a",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "70c7f015187f299a0ff98bf10139dcfcd6ab1967",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "clawdbot",
@@ -171,7 +251,15 @@
       "latest_ci_conclusion": "failure",
       "project_status_present": true,
       "project_status_source_sha": "76f6aee07ff3bffb3d3584f7358a1aa0f9b59d4b",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "bcf6beb29111d3e09662ca8f9530c9ac1696eb7c",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Demi_Head",
@@ -185,7 +273,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "d4691da34a91165287bc47370a11398314ed9c25",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "e2d6a3cad280eef00c0018b3266addedbd6c375f",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-16",
+      "source_project_status_maturity": "ACTIVE_PROTOTYPE",
+      "source_project_status_completion": "INCOMPLETE_BUT_EXECUTABLE_REFERENCE_PATH",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "DIVINE_REALM",
@@ -199,7 +295,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "cdf912b209806eea2d90e756ee2395d4c223a363",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "9ab497677b3821d745e0db646792ddacdae4cc6b",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-26",
+      "source_project_status_maturity": "WORK_IN_PROGRESS",
+      "source_project_status_completion": "ACTIVE_SPECIALIZED_SCIENCE_CHILD_PROTOTYPE",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Echo-Pyramid",
@@ -213,7 +317,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "bbeff22dd1a3c4ecac145dc0d6fe4795f65dd435",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "emoji",
@@ -227,7 +339,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "cad5010990c4aa0918c17114244530bde801815a",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "96e33c6c73f4bfc196966081b8c44e9f28c9d5f5",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "ESP32-TWAI-CAN",
@@ -241,7 +361,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "08769092a28c43cad3825691d65881356a59b6ae",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "9378edea2ed2209809d1e61423733125d831c134",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Fast-CAT-SHAiTan",
@@ -255,7 +383,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "f3faf15210e0f1918196817f50148f6c88bd358c",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "b7355e09e60796197aeb66ba0b4bce8911fd3ed2",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": "research_prototype",
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "DATE_UNDECLARED",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "HotdRemake_ArcadePlugin",
@@ -270,7 +406,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "bcf8461b5032fd954f6f538dc590f16bf2329139",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Hrain",
@@ -284,7 +428,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "20c1bc88c06ccd9ed1ec46e7980192af550bd055",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "369e916694bfdcabcf02af8542c233033c353879",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-28",
+      "source_project_status_maturity": "ACTIVE_PROTOTYPE",
+      "source_project_status_completion": "PROTOTYPE_WITH_NEXUS_HABITAT_AND_SPIDER_RESIDENCE",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "iNaiHR",
@@ -298,7 +450,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "dea310c7f522bb3f17e3776eeb9563b7259941bf",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "b80894f9418d220b6ecd9daab4d2603fdfcf0a32",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-16",
+      "source_project_status_maturity": "ACTIVE_PROTOTYPE",
+      "source_project_status_completion": "PROTOTYPE_WITH_NEXUS_HABITAT_TOOL",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Janus",
@@ -312,7 +472,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "450388916bc35b3af83f53bf869cb0d3c70d1538",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "3fd35ae92ee8eeb540767d227488db5d90c65646",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-26",
+      "source_project_status_maturity": "ACTIVE_PROTOTYPE",
+      "source_project_status_completion": "PROTOTYPE_WITH_TYPED_NEXUS_HABITAT_AND_FEDERATED_ORGANISM",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Janus_Genesis",
@@ -326,7 +494,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "a7b184d578fadaf1a1ef9861d3aa9dfe47de11ef",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "7fff36d2a11c437d0848e57d9945ab675eebb5d8",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "ACTIVE_CREATIVE_TECHNOLOGY",
+      "source_project_status_completion": "ONGOING_DEVELOPMENT",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Janus-Cosmos",
@@ -340,7 +516,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "22a9e158695edd50501f0da6e06c0b26a5864c2a",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "f59b98a4efd6250e72e9efcafb4fe1a5196d06fa",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "DATE_UNDECLARED",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Janus-Demiurge",
@@ -354,7 +538,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "44e208e789b78f088e632bca8f72aaa8329827c5",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "63499f6025863e69622150836cc1d37f681bb68a",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-25",
+      "source_project_status_maturity": "ACTIVE_CONTROL_PLANE",
+      "source_project_status_completion": "LIVE_SPIRAL_ITERATION",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "janus-distributed-ai-swarm",
@@ -368,7 +560,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "5a8df737e13272edb05ee4c49cbe3a9b951f0140",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "93e358738162984f86b9a9487c36fb4deb442b4b",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-27",
+      "source_project_status_maturity": "ACTIVE_ENGINEERING",
+      "source_project_status_completion": "ONGOING_DEVELOPMENT",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "janus-first-followers-club-",
@@ -382,7 +582,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "aa2f3d993fd390c8c8a8ca6afc3e9f5a3dfb6372",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "f7eefbc7b1b3529a87e70a7313db44065dba9a96",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "WORK_IN_PROGRESS",
+      "source_project_status_completion": "INCOMPLETE",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Janus-Fundamentum",
@@ -397,7 +605,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "144a6fd7b15689e54be98bf4d3d11a40acd5b72b",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Janus-HELIOS",
@@ -411,7 +627,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "91f90495eb13a773239bb886d416d4bf8e1e1c0f",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "11361585e8cfcd72409b2eec3fd8c34f683c4b35",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-31",
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "janus-io-public",
@@ -425,7 +649,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "417a1299a229e6fea326b776f4bb1663cde9e9cc",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "08bcc47cf82e5ebd95e51a22bd296fa1709b23a6",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-20",
+      "source_project_status_maturity": "ACTIVE_EXPERIMENTAL_RESEARCH",
+      "source_project_status_completion": "ONGOING_VALIDATION",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "janus-lapis",
@@ -439,7 +671,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "e1c9a9e517a0827a11898c240145c14db0ac1250",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "26393eace56d504de881db454f6a0f702db699f7",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-31",
+      "source_project_status_maturity": "WORK_IN_PROGRESS",
+      "source_project_status_completion": "INCOMPLETE",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "JANUS-MACHINE-MARKET",
@@ -453,7 +693,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "c158eb4d45f946297fcc2122579c0011330bba4d",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "janus-meta-registry",
@@ -467,7 +715,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "6f0111603c62b48839ea5c04bfc1ee7a5e5847dc",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "ecb96896bf7eb5fe6093bfb8bb5917e80930ab89",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-15",
+      "source_project_status_maturity": "ARCHIVE",
+      "source_project_status_completion": "ARCHIVAL",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Janus-Portal",
@@ -481,7 +737,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "64a73d18b216d8f040d97c60cd52366bd15c1ff0",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Linear-A-decipherment-programme",
@@ -496,7 +760,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "d0e15b6dfbcf22e6fbcafcdb1f9d9c5ffe311557",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "lineara.xyz",
@@ -511,7 +783,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "3da404091495ad61dfa58560a72544005a5868d6",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "M5Unit-ENV",
@@ -525,7 +805,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "bbc02b784cbd942596588a3b6c98e3862d788347",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "ce0dfc6ce2cc68903e4f87b8af31917767ef989e",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "neuromorphic-vision-sensor",
@@ -540,7 +828,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "6faf72ae0e5eef4306426add72011c7264bb02ef",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "player",
@@ -554,7 +850,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "3266122551e2cccabb98fa29ef2261eb55dabbd4",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "92c0a8d35c4dc27bd4efaf1d9baf3c4bdd57d8f9",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "RadioPlayerV3",
@@ -568,7 +872,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "ca4b99c41b0b6dfec9db9c972f71ac5814f876b3",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "47f7d873d54e28c76fcf6900e074c9b877f01950",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "SCOBY-D0",
@@ -582,7 +894,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "c18eee5cc9fb5e1f38ebc9bcbf6689c0ffdb2f7b",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "71f1783c0e0d71229a37d76fa42de3289168a460",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-24",
+      "source_project_status_maturity": "EARLY_R_AND_D",
+      "source_project_status_completion": "ACTIVE_MARINE_M1A_PLUS_EXTREMOPHILE_REENTRY_P0_PLUS_CROSS_DOMAIN_RESPONSE_SURFACE_P0",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "Simptomat",
@@ -597,7 +917,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "28856dea26af19ae35c93b00a979384be2da4910",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "5be4000f5a4025f5c8efb8e96f0b8eeee7d413f3",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-26",
+      "source_project_status_maturity": "ACTIVE_PROTOTYPE",
+      "source_project_status_completion": "WORK_IN_PROGRESS",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "SLOT",
@@ -611,7 +939,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "7466fa8fb4f3125a1fc5bbed528e7a7085432ab3",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "01dfbe5629ef095fdaf330244d90c83cb6b1d758",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "LEGACY",
+      "source_project_status_completion": "ARCHIVAL",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "SSlot",
@@ -625,7 +961,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "ba35ef6ff3a188a2a76ad3760a6ed5752daa9e5a",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "54c6978e922332d79bfcd3ebe800570d697e80eb",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-26",
+      "source_project_status_maturity": "WORK_IN_PROGRESS",
+      "source_project_status_completion": "ACTIVE_SPECIALIZED_TREASURY_CHILD_PROTOTYPE",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "The-Voice-of-Janus",
@@ -639,7 +983,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": false,
       "project_status_source_sha": null,
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "df9fd46f343e4400f9ba646bda7e2c3bc56bc9c5",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": null,
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "MISSING",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "TOPA",
@@ -653,7 +1005,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "01b155dd7540635a28fb75c1a12a9cbee92640dd",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "222a5dae8f775e62ab24139a7a9cd97f14f4106f",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": null,
+      "source_project_status_maturity": "ACTIVE_RESEARCH",
+      "source_project_status_completion": null,
+      "source_project_status_freshness": "DATE_UNDECLARED",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "tranception",
@@ -667,7 +1027,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "2e6a330d1d1a503880e7f47b52bb0cb367c2070a",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "c6265f5f80e4b65328cb805028ccec16010c8774",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "vcmi",
@@ -681,7 +1049,15 @@
       "latest_ci_conclusion": "success",
       "project_status_present": true,
       "project_status_source_sha": "25223342b89c9406b85bbc9993831833f2f04d10",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "4064bedc1ea6076127f1479166aff994bae3f042",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     },
     {
       "repository": "xiaozhi-esp32",
@@ -694,7 +1070,15 @@
       "latest_ci_conclusion": "failure",
       "project_status_present": true,
       "project_status_source_sha": "197f4412c50d4b233a69d1764725a753abf1bec7",
-      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json"
+      "current_snapshot": "audit/portfolio-2026-11-22/manifest.json",
+      "source_readme_blob_sha": "7db3b6b453e2ffc1bfdec505657e3f45f8a09586",
+      "source_readme_verified_at": "2026-11-22",
+      "source_readme_present": true,
+      "source_project_status_last_reviewed": "2026-08-09",
+      "source_project_status_maturity": "UPSTREAM_DERIVED",
+      "source_project_status_completion": "REFERENCE_COPY",
+      "source_project_status_freshness": "HISTORICAL_SOURCE_DATE",
+      "audit_semantic_boundary": "Repository metadata/README identity verified at pinned source commit; this is NOT a revalidation of scientific results or release readiness."
     }
   ]
 }
