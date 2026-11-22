@@ -1,0 +1,121 @@
+{
+  "schema": "janus.portfolio.project_status_inventory.v1",
+  "date": "2026-11-22",
+  "scope": "public_only",
+  "entries": [
+    {
+      "name": "iNaiHR",
+      "exists": true,
+      "sha": "dea310c7f522bb3f17e3776eeb9563b7259941bf",
+      "source_url": "https://github.com/Hawkar-usls/iNaiHR/blob/main/PROJECT_STATUS.json",
+      "project": "iNaiHR",
+      "last_reviewed": "2026-08-16",
+      "maturity": "ACTIVE_PROTOTYPE",
+      "status": null,
+      "completion_status": "PROTOTYPE_WITH_NEXUS_HABITAT_TOOL",
+      "summary": "Experimental semantic graph interface with backend-first optional LLM assistance, deterministic local semantic fallback, browser-local workspace isolation from JANUS Meta Registry, a read-only DemiHead RIGHT_INAIHR associative-context bridge, and a bounded local Habitat tool for Nexus coordination."
+    },
+    {
+      "name": "Janus",
+      "exists": true,
+      "sha": "450388916bc35b3af83f53bf869cb0d3c70d1538",
+      "source_url": "https://github.com/Hawkar-usls/Janus/blob/main/PROJECT_STATUS.json",
+      "project": "Janus",
+      "last_reviewed": "2026-08-26",
+      "maturity": "ACTIVE_PROTOTYPE",
+      "status": null,
+      "completion_status": "PROTOTYPE_WITH_TYPED_NEXUS_HABITAT_AND_FEDERATED_ORGANISM",
+      "summary": "Supporting local/cloud LLM gateway, account-wide public metadata hub, typed entry surface toward bounded JANUS Nexus/Habitat coordination, and canonical topology surface for the federated JANUS organism."
+    },
+    {
+      "name": "Janus_Genesis",
+      "exists": true,
+      "sha": "a7b184d578fadaf1a1ef9861d3aa9dfe47de11ef",
+      "source_url": "https://github.com/Hawkar-usls/Janus_Genesis/blob/main/PROJECT_STATUS.json",
+      "project": "Janus Genesis",
+      "last_reviewed": "2026-08-09",
+      "maturity": "ACTIVE_CREATIVE_TECHNOLOGY",
+      "status": null,
+      "completion_status": "ONGOING_DEVELOPMENT",
+      "summary": "Local-first interactive-world and AI-assisted game experiment with portable saves, explicit player/character agency rules and optional local or user-selected model endpoints."
+    },
+    {
+      "name": "Janus-Cosmos",
+      "exists": true,
+      "sha": "22a9e158695edd50501f0da6e06c0b26a5864c2a",
+      "source_url": "https://github.com/Hawkar-usls/Janus-Cosmos/blob/main/PROJECT_STATUS.json",
+      "project": "OSIRIS / S𓂸ḥ",
+      "last_reviewed": null,
+      "maturity": null,
+      "status": null,
+      "completion_status": null,
+      "summary": null
+    },
+    {
+      "name": "Janus-Demiurge",
+      "exists": true,
+      "sha": "44e208e789b78f088e632bca8f72aaa8329827c5",
+      "source_url": "https://github.com/Hawkar-usls/Janus-Demiurge/blob/main/PROJECT_STATUS.json",
+      "project": "Janus Demiurge",
+      "last_reviewed": "2026-08-25",
+      "maturity": "ACTIVE_CONTROL_PLANE",
+      "status": null,
+      "completion_status": "LIVE_SPIRAL_ITERATION",
+      "summary": "JANUS control plane with source-bound archaeology and fail-closed restoration. Historical functions return as observation, projection, planning, falsification, stability and evidence membranes. A missing exact source may justify a clearly labeled role-backed reconstruction only when independent role/runtime/fingerprint evidence exists; such reconstruction never closes the provenance hole."
+    },
+    {
+      "name": "janus-distributed-ai-swarm",
+      "exists": true,
+      "sha": "5a8df737e13272edb05ee4c49cbe3a9b951f0140",
+      "source_url": "https://github.com/Hawkar-usls/janus-distributed-ai-swarm/blob/main/PROJECT_STATUS.json",
+      "project": "JANUS Distributed AI Swarm",
+      "last_reviewed": "2026-08-27",
+      "maturity": "ACTIVE_ENGINEERING",
+      "status": null,
+      "completion_status": "ONGOING_DEVELOPMENT",
+      "summary": "Public ESP32/M5Stack firmware collection for heterogeneous telemetry, observer, UI and experimental specialist nodes with explicit protocol, recovery, protected primary missions, bounded coordinator side-work, cumulative spiral-evolution and shared genome-lineage boundaries."
+    },
+    {
+      "name": "janus-first-followers-club-",
+      "exists": true,
+      "sha": "aa2f3d993fd390c8c8a8ca6afc3e9f5a3dfb6372",
+      "source_url": "https://github.com/Hawkar-usls/janus-first-followers-club-/blob/main/PROJECT_STATUS.json",
+      "project": "JANUS First Followers Club",
+      "last_reviewed": "2026-08-09",
+      "maturity": "WORK_IN_PROGRESS",
+      "status": null,
+      "completion_status": "INCOMPLETE",
+      "summary": "Public, machine-readable creative/social protocol about voluntary human-AI cooperation and transparent attribution."
+    },
+    {
+      "name": "Janus-Fundamentum",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "Janus-HELIOS",
+      "exists": true,
+      "sha": "91f90495eb13a773239bb886d416d4bf8e1e1c0f",
+      "source_url": "https://github.com/Hawkar-usls/Janus-HELIOS/blob/main/PROJECT_STATUS.json",
+      "project": "JANUS HELIOS",
+      "last_reviewed": "2026-08-31",
+      "maturity": null,
+      "status": null,
+      "completion_status": null,
+      "summary": null
+    },
+    {
+      "name": "janus-io-public",
+      "exists": true,
+      "sha": "417a1299a229e6fea326b776f4bb1663cde9e9cc",
+      "source_url": "https://github.com/Hawkar-usls/janus-io-public/blob/main/PROJECT_STATUS.json",
+      "project": "JANUS I0",
+      "last_reviewed": "2026-08-20",
+      "maturity": "ACTIVE_EXPERIMENTAL_RESEARCH",
+      "status": null,
+      "completion_status": "ONGOING_VALIDATION",
+      "summary": "Controlled measurement and admission-gating experiments around Proof-of-Work work accounting while preserving standard SHA-256 verification semantics."
+    }
+  ],
+  "warning": "Declared status is source metadata, not independently verified scientific or production readiness."
+}

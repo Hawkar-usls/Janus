@@ -1,0 +1,97 @@
+{
+  "schema": "janus.portfolio.readme_audit.v1",
+  "snapshot": "2026-11-22",
+  "source": "pinned default branch commit",
+  "entries": [
+    {
+      "repository": "clawdbot",
+      "source_ref": "f9ebdd5bb61d6a42f85319a7fb5ed2cef285792c",
+      "readme_present": true,
+      "readme_blob_sha": "bcf6beb29111d3e09662ca8f9530c9ac1696eb7c",
+      "readme_url": "https://github.com/Hawkar-usls/clawdbot/blob/f9ebdd5bb61d6a42f85319a7fb5ed2cef285792c/README.md",
+      "heading": "Clawdbot — upstream-derived working copy",
+      "byte_length": 1161
+    },
+    {
+      "repository": "Demi_Head",
+      "source_ref": "91ef855a6f7119a733990c8f3adeb478e79beb05",
+      "readme_present": true,
+      "readme_blob_sha": "e2d6a3cad280eef00c0018b3266addedbd6c375f",
+      "readme_url": "https://github.com/Hawkar-usls/Demi_Head/blob/91ef855a6f7119a733990c8f3adeb478e79beb05/README.md",
+      "heading": "JANUS DemiHead",
+      "byte_length": 8968
+    },
+    {
+      "repository": "DIVINE_REALM",
+      "source_ref": "8f6dd9735825afadc6afac687bf97e65831fdcc3",
+      "readme_present": true,
+      "readme_blob_sha": "9ab497677b3821d745e0db646792ddacdae4cc6b",
+      "readme_url": "https://github.com/Hawkar-usls/DIVINE_REALM/blob/8f6dd9735825afadc6afac687bf97e65831fdcc3/README.md",
+      "heading": "DIVINE_REALM",
+      "byte_length": 3054
+    },
+    {
+      "repository": "Echo-Pyramid",
+      "source_ref": "6d8e25e4d79681002add89873c3be56e7a39d290",
+      "readme_present": true,
+      "readme_blob_sha": "bbeff22dd1a3c4ecac145dc0d6fe4795f65dd435",
+      "readme_url": "https://github.com/Hawkar-usls/Echo-Pyramid/blob/6d8e25e4d79681002add89873c3be56e7a39d290/README.md",
+      "heading": "Echo-Pyramid — JANUS physical voice body",
+      "byte_length": 10352
+    },
+    {
+      "repository": "emoji",
+      "source_ref": "28c58a41cd020f5d053f5ecef9b2f9d2e65a4573",
+      "readme_present": true,
+      "readme_blob_sha": "96e33c6c73f4bfc196966081b8c44e9f28c9d5f5",
+      "readme_url": "https://github.com/Hawkar-usls/emoji/blob/28c58a41cd020f5d053f5ecef9b2f9d2e65a4573/README.md",
+      "heading": "Go emoji library — upstream-derived working copy",
+      "byte_length": 935
+    },
+    {
+      "repository": "ESP32-TWAI-CAN",
+      "source_ref": "c18d5f5793af8a916b4223b228dd21a8fb76cf4c",
+      "readme_present": true,
+      "readme_blob_sha": "9378edea2ed2209809d1e61423733125d831c134",
+      "readme_url": "https://github.com/Hawkar-usls/ESP32-TWAI-CAN/blob/c18d5f5793af8a916b4223b228dd21a8fb76cf4c/README.md",
+      "heading": "ESP32-TWAI-CAN — upstream-derived working copy",
+      "byte_length": 1075
+    },
+    {
+      "repository": "Fast-CAT-SHAiTan",
+      "source_ref": "1c8225958c4198c931bc13cd6c4cbf40dec84e77",
+      "readme_present": true,
+      "readme_blob_sha": "b7355e09e60796197aeb66ba0b4bce8911fd3ed2",
+      "readme_url": "https://github.com/Hawkar-usls/Fast-CAT-SHAiTan/blob/1c8225958c4198c931bc13cd6c4cbf40dec84e77/README.md",
+      "heading": "Fast-CAT-SHAiTan",
+      "byte_length": 10425
+    },
+    {
+      "repository": "Hawkar-usls",
+      "source_ref": "bf7f7b99b56309128fd3f55c155fbccc42c4c29c",
+      "readme_present": true,
+      "readme_blob_sha": "143251de2d970b9a3a94b159a04e012070943376",
+      "readme_url": "https://github.com/Hawkar-usls/Hawkar-usls/blob/bf7f7b99b56309128fd3f55c155fbccc42c4c29c/README.md",
+      "heading": "Hawkar",
+      "byte_length": 8941
+    },
+    {
+      "repository": "HotdRemake_ArcadePlugin",
+      "source_ref": "51e858aa31d35805571f1957722bc92f565f18cf",
+      "readme_present": true,
+      "readme_blob_sha": "bcf8461b5032fd954f6f538dc590f16bf2329139",
+      "readme_url": "https://github.com/Hawkar-usls/HotdRemake_ArcadePlugin/blob/51e858aa31d35805571f1957722bc92f565f18cf/README.md",
+      "heading": "HotdRemake_ArcadePlugin",
+      "byte_length": 2070
+    },
+    {
+      "repository": "Hrain",
+      "source_ref": "7c90f2e78202fd83e1cec4828ab3766c9295a3d9",
+      "readme_present": true,
+      "readme_blob_sha": "369e916694bfdcabcf02af8542c233033c353879",
+      "readme_url": "https://github.com/Hawkar-usls/Hrain/blob/7c90f2e78202fd83e1cec4828ab3766c9295a3d9/README.md",
+      "heading": "HRain",
+      "byte_length": 5199
+    }
+  ]
+}

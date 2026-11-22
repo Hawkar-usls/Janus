@@ -1,0 +1,97 @@
+{
+  "schema": "janus.portfolio.readme_audit.v1",
+  "snapshot": "2026-11-22",
+  "source": "pinned default branch commit",
+  "entries": [
+    {
+      "repository": "-Terminal-for-Janus",
+      "source_ref": "cbf27a242a7abcd54d220364e51c4ca90c8d0b3a",
+      "readme_present": true,
+      "readme_blob_sha": "085af189ac77319b0ac1853348044c04cc983458",
+      "readme_url": "https://github.com/Hawkar-usls/-Terminal-for-Janus/blob/cbf27a242a7abcd54d220364e51c4ca90c8d0b3a/README.md",
+      "heading": "Terminal for Janus",
+      "byte_length": 4728
+    },
+    {
+      "repository": "AI-Cardputer-adv-A-Portable-AI-Assistant",
+      "source_ref": "a3d7e56f41f214b2e87eb3ee306828228bcd193c",
+      "readme_present": true,
+      "readme_blob_sha": "053eaa0f299a3c955e0bcb19cacebef9b0cf8833",
+      "readme_url": "https://github.com/Hawkar-usls/AI-Cardputer-adv-A-Portable-AI-Assistant/blob/a3d7e56f41f214b2e87eb3ee306828228bcd193c/README.md",
+      "heading": "AI Cardputer Assistant — upstream-derived working copy",
+      "byte_length": 1244
+    },
+    {
+      "repository": "AIFC",
+      "source_ref": "e349642eba1c5d2b39b841d85ce4be0e2836761e",
+      "readme_present": true,
+      "readme_blob_sha": "11fcbbd01ac1a6e4e8ebfa5f838d096ef8988f30",
+      "readme_url": "https://github.com/Hawkar-usls/AIFC/blob/e349642eba1c5d2b39b841d85ce4be0e2836761e/README.md",
+      "heading": "AIFC",
+      "byte_length": 16417
+    },
+    {
+      "repository": "Arduino-AI-Chat-Library",
+      "source_ref": "bc1c24fb496ea35be2f791e918188c3fc5046d3e",
+      "readme_present": true,
+      "readme_blob_sha": "8037f5b41218f3a2c8a73f865aa926154805e6d7",
+      "readme_url": "https://github.com/Hawkar-usls/Arduino-AI-Chat-Library/blob/bc1c24fb496ea35be2f791e918188c3fc5046d3e/README.md",
+      "heading": "Arduino AI Chat Library — upstream-derived working copy",
+      "byte_length": 1154
+    },
+    {
+      "repository": "arduino-ide",
+      "source_ref": "16652875cecb1a34d1415fa71d072ea2890f70cf",
+      "readme_present": true,
+      "readme_blob_sha": "64dba0a05eee24d9b0554ac5393de3b8d0821a44",
+      "readme_url": "https://github.com/Hawkar-usls/arduino-ide/blob/16652875cecb1a34d1415fa71d072ea2890f70cf/README.md",
+      "heading": "Arduino IDE 2.x — upstream-derived working copy",
+      "byte_length": 1109
+    },
+    {
+      "repository": "ATOM-ELITE-1989---M5stack-ATOMS3R-2026-",
+      "source_ref": "5a3f138120b5a516c6899c350c7da43f8877cc1a",
+      "readme_present": true,
+      "readme_blob_sha": "6b0d949993f33b993f576cbe2dc55cf3f5d01e86",
+      "readme_url": "https://github.com/Hawkar-usls/ATOM-ELITE-1989---M5stack-ATOMS3R-2026-/blob/5a3f138120b5a516c6899c350c7da43f8877cc1a/README.md",
+      "heading": "ATOM ELITE",
+      "byte_length": 2127
+    },
+    {
+      "repository": "ATOM-RPG",
+      "source_ref": "dafb3577b5f5aec6c5eb5965ccb7c9935edde7a2",
+      "readme_present": true,
+      "readme_blob_sha": "f1b6faa1cbf5c4702b7c750d61cd90316e570b1e",
+      "readme_url": "https://github.com/Hawkar-usls/ATOM-RPG/blob/dafb3577b5f5aec6c5eb5965ccb7c9935edde7a2/README.md",
+      "heading": "ATOM RPG",
+      "byte_length": 1332
+    },
+    {
+      "repository": "aura-oracle-tg",
+      "source_ref": "77f37a1f9c00b60ca447b81afb9928831fa37501",
+      "readme_present": true,
+      "readme_blob_sha": "4708eba334ce7f1927f66ad36567a38297411640",
+      "readme_url": "https://github.com/Hawkar-usls/aura-oracle-tg/blob/77f37a1f9c00b60ca447b81afb9928831fa37501/README.md",
+      "heading": "🔮 AURA Oracle",
+      "byte_length": 6137
+    },
+    {
+      "repository": "BFain",
+      "source_ref": "7f88b767090df2578b7c1aee2051564423f4a14b",
+      "readme_present": true,
+      "readme_blob_sha": "fe364acd7da6932109d48afbb8e33a80bf9645e6",
+      "readme_url": "https://github.com/Hawkar-usls/BFain/blob/7f88b767090df2578b7c1aee2051564423f4a14b/README.md",
+      "heading": "BFain",
+      "byte_length": 1698
+    },
+    {
+      "repository": "Cardputer-Game-Station-Emulators",
+      "source_ref": "3275fd644de8a48dfc9a9c2555a661252650b4a4",
+      "readme_present": true,
+      "readme_blob_sha": "70c7f015187f299a0ff98bf10139dcfcd6ab1967",
+      "readme_url": "https://github.com/Hawkar-usls/Cardputer-Game-Station-Emulators/blob/3275fd644de8a48dfc9a9c2555a661252650b4a4/README.md",
+      "heading": "Cardputer Game Station — upstream-derived working copy",
+      "byte_length": 1198
+    }
+  ]
+}

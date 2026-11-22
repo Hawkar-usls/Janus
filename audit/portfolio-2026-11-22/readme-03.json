@@ -1,0 +1,97 @@
+{
+  "schema": "janus.portfolio.readme_audit.v1",
+  "snapshot": "2026-11-22",
+  "source": "pinned default branch commit",
+  "entries": [
+    {
+      "repository": "iNaiHR",
+      "source_ref": "59ee91f33a9164389c5497330630d0fca833f5c8",
+      "readme_present": true,
+      "readme_blob_sha": "b80894f9418d220b6ecd9daab4d2603fdfcf0a32",
+      "readme_url": "https://github.com/Hawkar-usls/iNaiHR/blob/59ee91f33a9164389c5497330630d0fca833f5c8/README.md",
+      "heading": "iNaiHR",
+      "byte_length": 5637
+    },
+    {
+      "repository": "Janus",
+      "source_ref": "929cabcab2c1886432ae6f075448c823a6f40a50",
+      "readme_present": true,
+      "readme_blob_sha": "3fd35ae92ee8eeb540767d227488db5d90c65646",
+      "readme_url": "https://github.com/Hawkar-usls/Janus/blob/929cabcab2c1886432ae6f075448c823a6f40a50/README.md",
+      "heading": "Janus",
+      "byte_length": 3214
+    },
+    {
+      "repository": "Janus_Genesis",
+      "source_ref": "d178c8353c647e10fb2f9c5e2db95815326997e0",
+      "readme_present": true,
+      "readme_blob_sha": "7fff36d2a11c437d0848e57d9945ab675eebb5d8",
+      "readme_url": "https://github.com/Hawkar-usls/Janus_Genesis/blob/d178c8353c647e10fb2f9c5e2db95815326997e0/README.md",
+      "heading": "Janus Genesis",
+      "byte_length": 6353
+    },
+    {
+      "repository": "Janus-Cosmos",
+      "source_ref": "df1149a0993d151c916c05104b4b08993f26c8ab",
+      "readme_present": true,
+      "readme_blob_sha": "f59b98a4efd6250e72e9efcafb4fe1a5196d06fa",
+      "readme_url": "https://github.com/Hawkar-usls/Janus-Cosmos/blob/df1149a0993d151c916c05104b4b08993f26c8ab/README.md",
+      "heading": "JANUS COSMOS — SPACE · EARTH · OCEAN · OSIRIS / S𓂸ḥ",
+      "byte_length": 21409
+    },
+    {
+      "repository": "Janus-Demiurge",
+      "source_ref": "3a33ef5c969be3217b96257192815de468994679",
+      "readme_present": true,
+      "readme_blob_sha": "63499f6025863e69622150836cc1d37f681bb68a",
+      "readme_url": "https://github.com/Hawkar-usls/Janus-Demiurge/blob/3a33ef5c969be3217b96257192815de468994679/README.md",
+      "heading": "Janus Demiurge",
+      "byte_length": 4543
+    },
+    {
+      "repository": "janus-distributed-ai-swarm",
+      "source_ref": "afb655ee0093951940e2f7e857852b62bca963d4",
+      "readme_present": true,
+      "readme_blob_sha": "93e358738162984f86b9a9487c36fb4deb442b4b",
+      "readme_url": "https://github.com/Hawkar-usls/janus-distributed-ai-swarm/blob/afb655ee0093951940e2f7e857852b62bca963d4/README.md",
+      "heading": "JANUS Distributed AI Swarm",
+      "byte_length": 6216
+    },
+    {
+      "repository": "janus-first-followers-club-",
+      "source_ref": "3bfa7ddb00f345ded9d2203dc1b6af58eb92697d",
+      "readme_present": true,
+      "readme_blob_sha": "f7eefbc7b1b3529a87e70a7313db44065dba9a96",
+      "readme_url": "https://github.com/Hawkar-usls/janus-first-followers-club-/blob/3bfa7ddb00f345ded9d2203dc1b6af58eb92697d/README.md",
+      "heading": "JANUS First Followers Club",
+      "byte_length": 7633
+    },
+    {
+      "repository": "Janus-Fundamentum",
+      "source_ref": "e23b6fa0b86675d9498bf3c86922b36adc0c8215",
+      "readme_present": true,
+      "readme_blob_sha": "144a6fd7b15689e54be98bf4d3d11a40acd5b72b",
+      "readme_url": "https://github.com/Hawkar-usls/Janus-Fundamentum/blob/e23b6fa0b86675d9498bf3c86922b36adc0c8215/README.md",
+      "heading": "JANUS Fundamentum",
+      "byte_length": 8333
+    },
+    {
+      "repository": "Janus-HELIOS",
+      "source_ref": "063b654e1518803b634e4a8aadd54f43bc6c3dd1",
+      "readme_present": true,
+      "readme_blob_sha": "11361585e8cfcd72409b2eec3fd8c34f683c4b35",
+      "readme_url": "https://github.com/Hawkar-usls/Janus-HELIOS/blob/063b654e1518803b634e4a8aadd54f43bc6c3dd1/README.md",
+      "heading": "JANUS HELIOS",
+      "byte_length": 13337
+    },
+    {
+      "repository": "janus-io-public",
+      "source_ref": "f6578022573f639703119fcf4029f67428ddbce9",
+      "readme_present": true,
+      "readme_blob_sha": "08bcc47cf82e5ebd95e51a22bd296fa1709b23a6",
+      "readme_url": "https://github.com/Hawkar-usls/janus-io-public/blob/f6578022573f639703119fcf4029f67428ddbce9/README.md",
+      "heading": "JANUS I0",
+      "byte_length": 4345
+    }
+  ]
+}

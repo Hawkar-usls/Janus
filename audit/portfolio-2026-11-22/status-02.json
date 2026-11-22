@@ -1,0 +1,114 @@
+{
+  "schema": "janus.portfolio.project_status_inventory.v1",
+  "date": "2026-11-22",
+  "scope": "public_only",
+  "entries": [
+    {
+      "name": "clawdbot",
+      "exists": true,
+      "sha": "76f6aee07ff3bffb3d3584f7358a1aa0f9b59d4b",
+      "source_url": "https://github.com/Hawkar-usls/clawdbot/blob/main/PROJECT_STATUS.json",
+      "project": "Clawdbot working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "Demi_Head",
+      "exists": true,
+      "sha": "d4691da34a91165287bc47370a11398314ed9c25",
+      "source_url": "https://github.com/Hawkar-usls/Demi_Head/blob/main/PROJECT_STATUS.json",
+      "project": "JANUS DemiHead",
+      "last_reviewed": "2026-08-16",
+      "maturity": "ACTIVE_PROTOTYPE",
+      "status": null,
+      "completion_status": "INCOMPLETE_BUT_EXECUTABLE_REFERENCE_PATH",
+      "summary": "Local-first JANUS Guardian Mesh reference head combining bounded evidence accounting, native +/+ recenter routing, Third Wish catalog/reference activation, receipt-bound epistemic verification, Fundamentum witness-ledger commit protection, language invariance, correction propagation, exact-package human appeal, independent-root reviewer accounting, disagreement preservation, a pre-frozen 17-case synthetic adversarial truth-guard holdout, a provenance-aware HRain/iNaiHR bicameral bridge, release control, and civic-service safety architecture."
+    },
+    {
+      "name": "DIVINE_REALM",
+      "exists": true,
+      "sha": "cdf912b209806eea2d90e756ee2395d4c223a363",
+      "source_url": "https://github.com/Hawkar-usls/DIVINE_REALM/blob/main/PROJECT_STATUS.json",
+      "project": "DIVINE_REALM",
+      "last_reviewed": "2026-08-26",
+      "maturity": "WORK_IN_PROGRESS",
+      "status": null,
+      "completion_status": "ACTIVE_SPECIALIZED_SCIENCE_CHILD_PROTOTYPE",
+      "summary": "Telegram/Web DIVINE_REALM prototype specialized for scientific/public-good compute with real upstream research acceptance required before any impact claim. Universal route switching belongs to Janus-HELIOS."
+    },
+    {
+      "name": "Echo-Pyramid",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "emoji",
+      "exists": true,
+      "sha": "cad5010990c4aa0918c17114244530bde801815a",
+      "source_url": "https://github.com/Hawkar-usls/emoji/blob/master/PROJECT_STATUS.json",
+      "project": "Go emoji library working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "ESP32-TWAI-CAN",
+      "exists": true,
+      "sha": "08769092a28c43cad3825691d65881356a59b6ae",
+      "source_url": "https://github.com/Hawkar-usls/ESP32-TWAI-CAN/blob/master/PROJECT_STATUS.json",
+      "project": "ESP32-TWAI-CAN working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "Fast-CAT-SHAiTan",
+      "exists": true,
+      "sha": "f3faf15210e0f1918196817f50148f6c88bd358c",
+      "source_url": "https://github.com/Hawkar-usls/Fast-CAT-SHAiTan/blob/main/PROJECT_STATUS.json",
+      "project": "Fast-CAT-SHAiTan",
+      "last_reviewed": null,
+      "maturity": "research_prototype",
+      "status": null,
+      "completion_status": null,
+      "summary": null
+    },
+    {
+      "name": "Hawkar-usls",
+      "exists": true,
+      "sha": "615229f545f30bae7134c4bb3322029f7d9fa428",
+      "source_url": "https://github.com/Hawkar-usls/Hawkar-usls/blob/main/PROJECT_STATUS.json",
+      "project": "JANUS Semantic-Predictive Intelligence",
+      "last_reviewed": null,
+      "maturity": "ACTIVE_RESEARCH_ENGINEERING_PROTOTYPE",
+      "status": null,
+      "completion_status": null,
+      "summary": null
+    },
+    {
+      "name": "HotdRemake_ArcadePlugin",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "Hrain",
+      "exists": true,
+      "sha": "20c1bc88c06ccd9ed1ec46e7980192af550bd055",
+      "source_url": "https://github.com/Hawkar-usls/Hrain/blob/main/PROJECT_STATUS.json",
+      "project": "HRain",
+      "last_reviewed": "2026-08-28",
+      "maturity": "ACTIVE_PROTOTYPE",
+      "status": null,
+      "completion_status": "PROTOTYPE_WITH_NEXUS_HABITAT_AND_SPIDER_RESIDENCE",
+      "summary": "Local-first browser graph workspace with optional AI-assisted expansion, a read-only DemiHead LEFT_HRAIN structural-context bridge, a bounded local Habitat tool, and a permanent HRAiN SPIDER relationship-weaving residence. TOPA's default Detective profile activates both TOPA core and Spider while preserving core-only and Spider-standalone profiles."
+    }
+  ],
+  "warning": "Declared status is source metadata, not independently verified scientific or production readiness."
+}

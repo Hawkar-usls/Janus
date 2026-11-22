@@ -1,0 +1,121 @@
+{
+  "schema": "janus.portfolio.project_status_inventory.v1",
+  "date": "2026-11-22",
+  "scope": "public_only",
+  "entries": [
+    {
+      "name": "-Terminal-for-Janus",
+      "exists": true,
+      "sha": "76934f7bee9a21e10fc43c0f77e73cbee2824bfd",
+      "source_url": "https://github.com/Hawkar-usls/-Terminal-for-Janus/blob/main/PROJECT_STATUS.json",
+      "project": "Terminal for Janus",
+      "last_reviewed": "2026-08-21",
+      "maturity": "ACTIVE_PROTOTYPE",
+      "status": null,
+      "completion_status": "INCOMPLETE_BUT_EXECUTABLE_CONTROL_PLANE_SPIRAL_MIGRATED",
+      "summary": "Owner-rooted JANUS operator control plane with JSON-first interagent exchange, forward/reverse mirror processing, five-axis deep analysis, unexplained-alignment escalation and explicit state-advancing spiral semantics bound to HRain, iNaiHR, DemiHead, Aura v2 and Habitat."
+    },
+    {
+      "name": "AI-Cardputer-adv-A-Portable-AI-Assistant",
+      "exists": true,
+      "sha": "ffe32a300719a188073188b15eb83aaab2b4a539",
+      "source_url": "https://github.com/Hawkar-usls/AI-Cardputer-adv-A-Portable-AI-Assistant/blob/main/PROJECT_STATUS.json",
+      "project": "AI Cardputer Assistant working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "AIFC",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "Arduino-AI-Chat-Library",
+      "exists": true,
+      "sha": "c196c286f15dac7b0f6621baa65076a31fe79db3",
+      "source_url": "https://github.com/Hawkar-usls/Arduino-AI-Chat-Library/blob/main/PROJECT_STATUS.json",
+      "project": "Arduino AI Chat Library working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "arduino-ide",
+      "exists": true,
+      "sha": "4edda90b7cb2694e9aba126a03d57c6fe6636af1",
+      "source_url": "https://github.com/Hawkar-usls/arduino-ide/blob/main/PROJECT_STATUS.json",
+      "project": "Arduino IDE 2.x working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "ATOM-ELITE-1989---M5stack-ATOMS3R-2026-",
+      "exists": true,
+      "sha": "0c622ef7d4902964bf7a59a7facc314e603c07fc",
+      "source_url": "https://github.com/Hawkar-usls/ATOM-ELITE-1989---M5stack-ATOMS3R-2026-/blob/main/PROJECT_STATUS.json",
+      "project": "ATOM ELITE",
+      "last_reviewed": "2026-08-09",
+      "maturity": "ACTIVE_CREATIVE_PROTOTYPE",
+      "status": null,
+      "completion_status": "PROTOTYPE",
+      "summary": "Retro space-trading/combat game experiment for M5Stack ATOMS3R-family hardware with an adaptive game-agent component."
+    },
+    {
+      "name": "ATOM-RPG",
+      "exists": true,
+      "sha": "040fbccb60d3e942b761ef3e703f4af478c360d5",
+      "source_url": "https://github.com/Hawkar-usls/ATOM-RPG/blob/main/PROJECT_STATUS.json",
+      "project": "ATOM RPG",
+      "last_reviewed": "2026-08-09",
+      "maturity": "WORK_IN_PROGRESS",
+      "status": null,
+      "completion_status": "INCOMPLETE",
+      "summary": null
+    },
+    {
+      "name": "aura-oracle-tg",
+      "exists": true,
+      "sha": "99cc6ca23928dcfd5107bac9a13e72ec5fea7025",
+      "source_url": "https://github.com/Hawkar-usls/aura-oracle-tg/blob/main/PROJECT_STATUS.json",
+      "project": "AURA Oracle",
+      "last_reviewed": "2026-08-26",
+      "maturity": "ACTIVE_PROTOTYPE",
+      "status": null,
+      "completion_status": "SEMANTIC_PREDICTIVE_SPIRAL_PLUS_FORTUNE_COOKIE_SEALED_ORACLE",
+      "summary": "AURA has evolved beyond its original tarot-style Telegram prototype into a non-authoritative JANUS semantic/predictive peer with 5D spiral analysis, read-only Meta Registry indexing, hypothesis-discrimination tooling, bounded forecast ledgers, Habitat/SPI/Terminal bindings, and the Fortune Cookie authenticated sealed-oracle primitive."
+    },
+    {
+      "name": "BFain",
+      "exists": true,
+      "sha": "2a668da084c042b171b05a3b461bc8a62ae9d4be",
+      "source_url": "https://github.com/Hawkar-usls/BFain/blob/main/PROJECT_STATUS.json",
+      "project": "BFain",
+      "last_reviewed": "2026-08-09",
+      "maturity": "WORK_IN_PROGRESS",
+      "status": null,
+      "completion_status": "INCOMPLETE",
+      "summary": "Front-end command-and-control visualization and simulated multi-agent coordination prototype."
+    },
+    {
+      "name": "Cardputer-Game-Station-Emulators",
+      "exists": true,
+      "sha": "2603c0ebe0a14afc3235dfa994d6d5db7951e20a",
+      "source_url": "https://github.com/Hawkar-usls/Cardputer-Game-Station-Emulators/blob/xip_load/PROJECT_STATUS.json",
+      "project": "Cardputer Game Station working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    }
+  ],
+  "warning": "Declared status is source metadata, not independently verified scientific or production readiness."
+}

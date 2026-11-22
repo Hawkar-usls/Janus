@@ -1,0 +1,97 @@
+{
+  "schema": "janus.portfolio.readme_audit.v1",
+  "snapshot": "2026-11-22",
+  "source": "pinned default branch commit",
+  "entries": [
+    {
+      "repository": "janus-lapis",
+      "source_ref": "9192143eaa106a1a7bdbbd726488e9dd2fce51e5",
+      "readme_present": true,
+      "readme_blob_sha": "26393eace56d504de881db454f6a0f702db699f7",
+      "readme_url": "https://github.com/Hawkar-usls/janus-lapis/blob/9192143eaa106a1a7bdbbd726488e9dd2fce51e5/README.md",
+      "heading": "JANUS Lapis",
+      "byte_length": 4545
+    },
+    {
+      "repository": "JANUS-MACHINE-MARKET",
+      "source_ref": "8696a8baf181aaa98862080696f53419c1682a19",
+      "readme_present": true,
+      "readme_blob_sha": "c158eb4d45f946297fcc2122579c0011330bba4d",
+      "readme_url": "https://github.com/Hawkar-usls/JANUS-MACHINE-MARKET/blob/8696a8baf181aaa98862080696f53419c1682a19/README.md",
+      "heading": "JANUS MACHINE MARKET",
+      "byte_length": 14875
+    },
+    {
+      "repository": "janus-meta-registry",
+      "source_ref": "960486791898ddddd49f9f702bdbc5b5d6d07ff6",
+      "readme_present": true,
+      "readme_blob_sha": "ecb96896bf7eb5fe6093bfb8bb5917e80930ab89",
+      "readme_url": "https://github.com/Hawkar-usls/janus-meta-registry/blob/960486791898ddddd49f9f702bdbc5b5d6d07ff6/README.md",
+      "heading": "JANUS Meta Registry",
+      "byte_length": 7652
+    },
+    {
+      "repository": "Janus-Portal",
+      "source_ref": "10425c2927ea6efb70ab951206c4602923973338",
+      "readme_present": true,
+      "readme_blob_sha": "64a73d18b216d8f040d97c60cd52366bd15c1ff0",
+      "readme_url": "https://github.com/Hawkar-usls/Janus-Portal/blob/10425c2927ea6efb70ab951206c4602923973338/README.md",
+      "heading": "🌍 JANUS PORTAL",
+      "byte_length": 18064
+    },
+    {
+      "repository": "Linear-A-decipherment-programme",
+      "source_ref": "f09aed1be072b991427bd4dcf0bd99d9ebb6ae8b",
+      "readme_present": true,
+      "readme_blob_sha": "d0e15b6dfbcf22e6fbcafcdb1f9d9c5ffe311557",
+      "readme_url": "https://github.com/Hawkar-usls/Linear-A-decipherment-programme/blob/f09aed1be072b991427bd4dcf0bd99d9ebb6ae8b/README.md",
+      "heading": "Linear-A-decipherment-programme ",
+      "byte_length": 9832
+    },
+    {
+      "repository": "lineara.xyz",
+      "source_ref": "8caa3bd06edb64ddd837dd0c42a54038aefa387c",
+      "readme_present": true,
+      "readme_blob_sha": "3da404091495ad61dfa58560a72544005a5868d6",
+      "readme_url": "https://github.com/Hawkar-usls/lineara.xyz/blob/8caa3bd06edb64ddd837dd0c42a54038aefa387c/README.md",
+      "heading": "LinearA Explorer",
+      "byte_length": 18454
+    },
+    {
+      "repository": "M5Unit-ENV",
+      "source_ref": "5cf141669dc2daf2433cc8288c5f74853163268b",
+      "readme_present": true,
+      "readme_blob_sha": "ce0dfc6ce2cc68903e4f87b8af31917767ef989e",
+      "readme_url": "https://github.com/Hawkar-usls/M5Unit-ENV/blob/5cf141669dc2daf2433cc8288c5f74853163268b/README.md",
+      "heading": "M5Unit-ENV — upstream-derived working copy",
+      "byte_length": 1082
+    },
+    {
+      "repository": "neuromorphic-vision-sensor",
+      "source_ref": "4e8acc6620b5c195d15a37ecf684f625a6c1cfcc",
+      "readme_present": true,
+      "readme_blob_sha": "6faf72ae0e5eef4306426add72011c7264bb02ef",
+      "readme_url": "https://github.com/Hawkar-usls/neuromorphic-vision-sensor/blob/4e8acc6620b5c195d15a37ecf684f625a6c1cfcc/README.md",
+      "heading": "Neuromorphic Event-Based Vision Sensor",
+      "byte_length": 5982
+    },
+    {
+      "repository": "player",
+      "source_ref": "dca88b682a1dc188a4ef11b9340af21082f2f9a5",
+      "readme_present": true,
+      "readme_blob_sha": "92c0a8d35c4dc27bd4efaf1d9baf3c4bdd57d8f9",
+      "readme_url": "https://github.com/Hawkar-usls/player/blob/dca88b682a1dc188a4ef11b9340af21082f2f9a5/README.md",
+      "heading": "Telegram voice-chat player — upstream-derived working copy",
+      "byte_length": 1087
+    },
+    {
+      "repository": "RadioPlayerV3",
+      "source_ref": "e96725df6d52f00cb295f7bf68852fc6b7f9a4df",
+      "readme_present": true,
+      "readme_blob_sha": "47f7d873d54e28c76fcf6900e074c9b877f01950",
+      "readme_url": "https://github.com/Hawkar-usls/RadioPlayerV3/blob/e96725df6d52f00cb295f7bf68852fc6b7f9a4df/README.md",
+      "heading": "RadioPlayerV3 — upstream-derived working copy",
+      "byte_length": 1037
+    }
+  ]
+}
