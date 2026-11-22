@@ -1,0 +1,109 @@
+{
+  "schema": "janus.portfolio.project_status_inventory.v1",
+  "date": "2026-11-22",
+  "scope": "public_only",
+  "entries": [
+    {
+      "name": "SCOBY-D0",
+      "exists": true,
+      "sha": "c18eee5cc9fb5e1f38ebc9bcbf6689c0ffdb2f7b",
+      "source_url": "https://github.com/Hawkar-usls/SCOBY-D0/blob/main/PROJECT_STATUS.json",
+      "project": "SCOBY-D0",
+      "last_reviewed": "2026-08-24",
+      "maturity": "EARLY_R_AND_D",
+      "status": null,
+      "completion_status": "ACTIVE_MARINE_M1A_PLUS_EXTREMOPHILE_REENTRY_P0_PLUS_CROSS_DOMAIN_RESPONSE_SURFACE_P0",
+      "summary": "SCOBY-D0 remains led by the marine bacterial-cellulose sorbent program. The extremophile reentry track remains P0. The TOPA-bound cross-domain line now contains both a pairwise interface-equivalence test and a stronger four-family × three-zone source-invariant response-surface gate with an orthogonal non-nutritional interface reference and held-out source-blind versus source-aware prediction. No cross-domain BC effect has been measured."
+    },
+    {
+      "name": "Simptomat",
+      "exists": true,
+      "sha": "28856dea26af19ae35c93b00a979384be2da4910",
+      "source_url": "https://github.com/Hawkar-usls/Simptomat/blob/main/PROJECT_STATUS.json",
+      "project": "Simptomat",
+      "last_reviewed": "2026-08-26",
+      "maturity": "ACTIVE_PROTOTYPE",
+      "status": null,
+      "completion_status": "WORK_IN_PROGRESS",
+      "summary": "Consent-first adaptive differential-diagnostic reasoning organ in the JANUS federated organism; ranks disease hypotheses, proposes discriminating questions/confirmation steps, exchanges minimized typed review packets with DemiHead, adapts generic hypothesis packets for Lapis, gates real measurements behind explicit experiment contracts, and learns from consented calibration cases."
+    },
+    {
+      "name": "SLOT",
+      "exists": true,
+      "sha": "7466fa8fb4f3125a1fc5bbed528e7a7085432ab3",
+      "source_url": "https://github.com/Hawkar-usls/SLOT/blob/main/PROJECT_STATUS.json",
+      "project": "SLOT",
+      "last_reviewed": "2026-08-09",
+      "maturity": "LEGACY",
+      "status": null,
+      "completion_status": "ARCHIVAL",
+      "summary": null
+    },
+    {
+      "name": "SSlot",
+      "exists": true,
+      "sha": "ba35ef6ff3a188a2a76ad3760a6ed5752daa9e5a",
+      "source_url": "https://github.com/Hawkar-usls/SSlot/blob/main/PROJECT_STATUS.json",
+      "project": "SSlot",
+      "last_reviewed": "2026-08-26",
+      "maturity": "WORK_IN_PROGRESS",
+      "status": null,
+      "completion_status": "ACTIVE_SPECIALIZED_TREASURY_CHILD_PROTOTYPE",
+      "summary": "Telegram/Web slot prototype specialized for verified shared mining/economic compute flowing into a separate Compute Treasury / aggregate jackpot model. Universal route switching belongs to Janus-HELIOS."
+    },
+    {
+      "name": "The-Voice-of-Janus",
+      "exists": false,
+      "reason": "NOT_FOUND"
+    },
+    {
+      "name": "TOPA",
+      "exists": true,
+      "sha": "01b155dd7540635a28fb75c1a12a9cbee92640dd",
+      "source_url": "https://github.com/Hawkar-usls/TOPA/blob/main/PROJECT_STATUS.json",
+      "project": "TOPA",
+      "last_reviewed": null,
+      "maturity": "ACTIVE_RESEARCH",
+      "status": "ACTIVE_STRICT_SCIENCE_RESEARCH",
+      "completion_status": null,
+      "summary": null
+    },
+    {
+      "name": "tranception",
+      "exists": true,
+      "sha": "2e6a330d1d1a503880e7f47b52bb0cb367c2070a",
+      "source_url": "https://github.com/Hawkar-usls/tranception/blob/main/PROJECT_STATUS.json",
+      "project": "Tranception working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "vcmi",
+      "exists": true,
+      "sha": "25223342b89c9406b85bbc9993831833f2f04d10",
+      "source_url": "https://github.com/Hawkar-usls/vcmi/blob/develop/PROJECT_STATUS.json",
+      "project": "VCMI working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    },
+    {
+      "name": "xiaozhi-esp32",
+      "exists": true,
+      "sha": "197f4412c50d4b233a69d1764725a753abf1bec7",
+      "source_url": "https://github.com/Hawkar-usls/xiaozhi-esp32/blob/main/PROJECT_STATUS.json",
+      "project": "XiaoZhi ESP32 working copy",
+      "last_reviewed": "2026-08-09",
+      "maturity": "UPSTREAM_DERIVED",
+      "status": null,
+      "completion_status": "REFERENCE_COPY",
+      "summary": null
+    }
+  ],
+  "warning": "Declared status is source metadata, not independently verified scientific or production readiness."
+}
