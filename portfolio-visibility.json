@@ -1,24 +1,24 @@
 {
   "schema_id": "hawkar.portfolio-visibility.v1",
   "owner": "Hawkar-usls",
-  "last_reviewed": "2026-08-09",
-  "purpose": "Presentation and visibility recommendations for public repositories. This is portfolio metadata, not a scientific result and not a GitHub visibility mutation record.",
+  "last_reviewed": "2026-11-22",
+  "purpose": "Public repository visibility recommendations, not a GitHub settings mutation or scientific result.",
   "github_ui_state": {
     "pins_observed_by_connector": false,
     "archive_state_mutation_available_to_connector": false,
     "visibility_recommendations_are_not_observed_ui_state": true
   },
   "summary": {
-    "total_public_repositories": 36,
+    "total_public_repositories": 49,
     "profile_surfaces": 1,
     "recommended_pins": 5,
     "featured_research_or_engineering": 4,
     "featured_creative_technology": 1,
-    "public_active_nonfeatured": 4,
+    "public_active_nonfeatured": 16,
     "public_work_in_progress": 7,
     "archival_reference": 1,
-    "legacy_archive_candidates": 5,
-    "upstream_reference_repositories": 13
+    "legacy_archive_candidates": 2,
+    "upstream_reference_repositories": 17
   },
   "policy": {
     "featured_requires_primary_public_value": true,
@@ -28,42 +28,349 @@
     "archive_recommendation_does_not_delete_history": true
   },
   "repositories": [
-    {"repository":"Hawkar-usls","class":"PROFILE_SURFACE","recommended_action":"keep_public","recommended_pin":false,"reason":"Dedicated GitHub profile presentation surface; not an evidence-bearing project."},
-    {"repository":"Janus-Fundamentum","class":"FEATURED","recommended_action":"keep_public_and_pin","recommended_pin":true,"reason":"Primary mathematics / proof-carrying research surface; frozen for external review."},
-    {"repository":"AIFC","class":"FEATURED","recommended_action":"keep_public_and_pin","recommended_pin":true,"reason":"Primary protocol research surface; external Implementation B / bench remain open."},
-    {"repository":"janus-io-public","class":"FEATURED","recommended_action":"keep_public_and_pin","recommended_pin":true,"reason":"Primary controlled systems-measurement surface."},
-    {"repository":"janus-distributed-ai-swarm","class":"FEATURED","recommended_action":"keep_public_and_pin","recommended_pin":true,"reason":"Primary embedded/distributed engineering surface."},
-    {"repository":"Janus_Genesis","class":"FEATURED_CREATIVE","recommended_action":"keep_public_and_pin","recommended_pin":true,"reason":"Primary creative-technology project, explicitly separate from research evidence lines."},
-    {"repository":"Janus","class":"PUBLIC_ACTIVE","recommended_action":"keep_public_unpinned","recommended_pin":false,"reason":"Supporting gateway and account-wide metadata hub."},
-    {"repository":"Hrain","class":"PUBLIC_ACTIVE_PROTOTYPE","recommended_action":"keep_public_unpinned","recommended_pin":false,"reason":"Useful local-first interaction prototype; no clinical/BCI validation claim."},
-    {"repository":"iNaiHR","class":"PUBLIC_ACTIVE_PROTOTYPE","recommended_action":"keep_public_unpinned","recommended_pin":false,"reason":"Useful semantic-interface prototype; clinical/BCI performance remains unestablished."},
-    {"repository":"ATOM-ELITE-1989---M5stack-ATOMS3R-2026-","class":"PUBLIC_ACTIVE_CREATIVE","recommended_action":"keep_public_unpinned","recommended_pin":false,"reason":"Substantive embedded game/firmware project; not a research claim."},
-    {"repository":"BFain","class":"PUBLIC_WIP","recommended_action":"keep_public_unpinned","recommended_pin":false,"reason":"Incomplete interface/simulation concept; operational deployment and BCI integration are not established."},
-    {"repository":"-Terminal-for-Janus","class":"PUBLIC_WIP","recommended_action":"keep_public_unpinned_or_archive_if_inactive","recommended_pin":false,"reason":"Supporting interface prototype; incomplete and non-primary."},
-    {"repository":"ATOM-RPG","class":"PUBLIC_WIP","recommended_action":"keep_public_unpinned_or_archive_if_inactive","recommended_pin":false,"reason":"Small creative embedded prototype; incomplete."},
-    {"repository":"aura-oracle-tg","class":"PUBLIC_WIP_CREATIVE","recommended_action":"keep_public_unpinned_or_archive_if_inactive","recommended_pin":false,"reason":"Creative conversational experiment; no predictive authority."},
-    {"repository":"DIVINE_REALM","class":"PUBLIC_WIP_CREATIVE","recommended_action":"keep_public_unpinned_or_archive_if_inactive","recommended_pin":false,"reason":"Creative/narrative software experiment; incomplete as a product."},
-    {"repository":"janus-first-followers-club-","class":"PUBLIC_WIP_CREATIVE","recommended_action":"keep_public_unpinned","recommended_pin":false,"reason":"Creative/social protocol experiment; not scientific evidence or an authorization mechanism."},
-    {"repository":"janus-lapis","class":"PUBLIC_WIP_RESEARCH_TOOL","recommended_action":"keep_public_unpinned_or_archive_if_inactive","recommended_pin":false,"reason":"Exploratory hypothesis-ranking sandbox; no validated chemistry/material result."},
-    {"repository":"janus-meta-registry","class":"ARCHIVAL_REFERENCE","recommended_action":"keep_public_unpinned","recommended_pin":false,"reason":"Historical registry/provenance archive; not a single current scientific claim."},
-    {"repository":"iNaiHR-Janus-","class":"LEGACY_ARCHIVE_CANDIDATE","recommended_action":"archive_if_no_longer_needed_for_active_development","recommended_pin":false,"reason":"Superseded integration snapshot; current iNaiHR/HRain are preferred."},
-    {"repository":"Janus-Demiurge","class":"LEGACY_ARCHIVE_CANDIDATE","recommended_action":"archive_if_no_longer_needed_for_active_development","recommended_pin":false,"reason":"Legacy ML/optimization sandbox with historical terminology; not current research authority."},
-    {"repository":"Simptomat","class":"LEGACY_ARCHIVE_CANDIDATE","recommended_action":"archive_if_no_longer_needed_for_active_development","recommended_pin":false,"reason":"Historical health-information prototype; no diagnostic/clinical authority."},
-    {"repository":"SLOT","class":"LEGACY_ARCHIVE_CANDIDATE","recommended_action":"archive_if_no_longer_needed_for_active_development","recommended_pin":false,"reason":"Legacy application/game prototype; not current research."},
-    {"repository":"SSlot","class":"LEGACY_ARCHIVE_CANDIDATE","recommended_action":"archive_if_no_longer_needed_for_active_development","recommended_pin":false,"reason":"Legacy application/game prototype; not current research."},
-    {"repository":"AI-Cardputer-adv-A-Portable-AI-Assistant","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"Arduino-AI-Chat-Library","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"arduino-ide","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"Cardputer-Game-Station-Emulators","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"clawdbot","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"emoji","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"ESP32-TWAI-CAN","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"M5Unit-ENV","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"player","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"RadioPlayerV3","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"tranception","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived research-code copy; base research/code authorship is not claimed."},
-    {"repository":"vcmi","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."},
-    {"repository":"xiaozhi-esp32","class":"UPSTREAM_REFERENCE","recommended_action":"archive_if_not_actively_diffing_upstream","recommended_pin":false,"reason":"Upstream-derived working copy; base authorship is not claimed."}
+    {
+      "repository": "Hawkar-usls",
+      "class": "PROFILE_SURFACE",
+      "recommended_action": "keep_public",
+      "recommended_pin": false,
+      "reason": "Dedicated GitHub profile presentation surface; not an evidence-bearing project."
+    },
+    {
+      "repository": "-Terminal-for-Janus",
+      "class": "PUBLIC_WIP",
+      "recommended_action": "keep_public_unpinned_or_archive_if_inactive",
+      "recommended_pin": false,
+      "reason": "Supporting interface prototype; incomplete and non-primary."
+    },
+    {
+      "repository": "AI-Cardputer-adv-A-Portable-AI-Assistant",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "AIFC",
+      "class": "FEATURED",
+      "recommended_action": "keep_public_and_pin",
+      "recommended_pin": true,
+      "reason": "Primary protocol research surface; external Implementation B / bench remain open."
+    },
+    {
+      "repository": "Arduino-AI-Chat-Library",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "arduino-ide",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "ATOM-ELITE-1989---M5stack-ATOMS3R-2026-",
+      "class": "PUBLIC_ACTIVE_CREATIVE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Substantive embedded game/firmware project; not a research claim."
+    },
+    {
+      "repository": "ATOM-RPG",
+      "class": "PUBLIC_WIP",
+      "recommended_action": "keep_public_unpinned_or_archive_if_inactive",
+      "recommended_pin": false,
+      "reason": "Small creative embedded prototype; incomplete."
+    },
+    {
+      "repository": "aura-oracle-tg",
+      "class": "PUBLIC_WIP_CREATIVE",
+      "recommended_action": "keep_public_unpinned_or_archive_if_inactive",
+      "recommended_pin": false,
+      "reason": "Creative conversational experiment; no predictive authority."
+    },
+    {
+      "repository": "BFain",
+      "class": "PUBLIC_WIP",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Incomplete interface/simulation concept; operational deployment and BCI integration are not established."
+    },
+    {
+      "repository": "Cardputer-Game-Station-Emulators",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "clawdbot",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "Demi_Head",
+      "class": "PUBLIC_ACTIVE_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Active guardian-mesh integration prototype; no automatic external effect authority"
+    },
+    {
+      "repository": "DIVINE_REALM",
+      "class": "PUBLIC_WIP_CREATIVE",
+      "recommended_action": "keep_public_unpinned_or_archive_if_inactive",
+      "recommended_pin": false,
+      "reason": "Creative/narrative software experiment; incomplete as a product."
+    },
+    {
+      "repository": "Echo-Pyramid",
+      "class": "PUBLIC_ACTIVE_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "M5Stack Echo Pyramid hardware and audio processing interface; Hardware integration needs real-device qualification"
+    },
+    {
+      "repository": "emoji",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "ESP32-TWAI-CAN",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "Fast-CAT-SHAiTan",
+      "class": "PUBLIC_ACTIVE_RESEARCH_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Cat facial timing and provenance-bound visual measurements; No externally validated biological response findings"
+    },
+    {
+      "repository": "HotdRemake_ArcadePlugin",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Externally authored House of the Dead Remake arcade plugin fork; Upstream base authorship; local changes need diff verification"
+    },
+    {
+      "repository": "Hrain",
+      "class": "PUBLIC_ACTIVE_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Useful local-first interaction prototype; no clinical/BCI validation claim."
+    },
+    {
+      "repository": "iNaiHR",
+      "class": "PUBLIC_ACTIVE_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Useful semantic-interface prototype; clinical/BCI performance remains unestablished."
+    },
+    {
+      "repository": "Janus",
+      "class": "PUBLIC_ACTIVE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Supporting gateway and account-wide metadata hub."
+    },
+    {
+      "repository": "Janus_Genesis",
+      "class": "FEATURED_CREATIVE",
+      "recommended_action": "keep_public_and_pin",
+      "recommended_pin": true,
+      "reason": "Primary creative-technology project, explicitly separate from research evidence lines."
+    },
+    {
+      "repository": "Janus-Cosmos",
+      "class": "PUBLIC_ACTIVE_RESEARCH_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Radio SETI, astronomy, Earth/ocean observation and OSIRIS computational studies; Radio injections and internal tests do not establish independently validated technosignatures or superior detection"
+    },
+    {
+      "repository": "Janus-Demiurge",
+      "class": "PUBLIC_ACTIVE_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Active source-bound agent-control prototype, not externally validated self-improving AI"
+    },
+    {
+      "repository": "janus-distributed-ai-swarm",
+      "class": "FEATURED",
+      "recommended_action": "keep_public_and_pin",
+      "recommended_pin": true,
+      "reason": "Primary embedded/distributed engineering surface."
+    },
+    {
+      "repository": "janus-first-followers-club-",
+      "class": "PUBLIC_WIP_CREATIVE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Creative/social protocol experiment; not scientific evidence or an authorization mechanism."
+    },
+    {
+      "repository": "Janus-Fundamentum",
+      "class": "FEATURED",
+      "recommended_action": "keep_public_and_pin",
+      "recommended_pin": true,
+      "reason": "Primary mathematics / proof-carrying research surface; frozen for external review."
+    },
+    {
+      "repository": "Janus-HELIOS",
+      "class": "PUBLIC_ACTIVE_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Explicit-consent B2B distributed-compute control reference; Production, settlement and real-money service not independently established"
+    },
+    {
+      "repository": "janus-io-public",
+      "class": "FEATURED",
+      "recommended_action": "keep_public_and_pin",
+      "recommended_pin": true,
+      "reason": "Primary controlled systems-measurement surface."
+    },
+    {
+      "repository": "janus-lapis",
+      "class": "PUBLIC_WIP_RESEARCH_TOOL",
+      "recommended_action": "keep_public_unpinned_or_archive_if_inactive",
+      "recommended_pin": false,
+      "reason": "Exploratory hypothesis-ranking sandbox; no validated chemistry/material result."
+    },
+    {
+      "repository": "JANUS-MACHINE-MARKET",
+      "class": "PUBLIC_ACTIVE_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Machine-readable agent marketplace discovery and request routing; Live payment/transaction delivery not established"
+    },
+    {
+      "repository": "janus-meta-registry",
+      "class": "ARCHIVAL_REFERENCE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Historical registry/provenance archive; not a single current scientific claim."
+    },
+    {
+      "repository": "Janus-Portal",
+      "class": "PUBLIC_ACTIVE_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Public 360 panorama explorer with AFK tours and local Passport; Provider availability is live; no paid automatic Google API or production wallet"
+    },
+    {
+      "repository": "Linear-A-decipherment-programme",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Externally authored Linear A decipherment programme fork; Upstream academic authorship; not a JANUS-originated algorithm"
+    },
+    {
+      "repository": "lineara.xyz",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Linear A Explorer upstream-derived fork; Upstream base authorship; local contributions require diff audit"
+    },
+    {
+      "repository": "M5Unit-ENV",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "neuromorphic-vision-sensor",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Event-based vision sensor fork; GitHub fork; local hardware novelty and claims need diff verification"
+    },
+    {
+      "repository": "player",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "RadioPlayerV3",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "SCOBY-D0",
+      "class": "PUBLIC_ACTIVE_RESEARCH_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Bacterial-cellulose oil sorbent research; Material uptake and marine field performance need independent experiments"
+    },
+    {
+      "repository": "Simptomat",
+      "class": "PUBLIC_ACTIVE_RESEARCH_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Active health-information research; no clinical diagnostic authority"
+    },
+    {
+      "repository": "SLOT",
+      "class": "LEGACY_ARCHIVE_CANDIDATE",
+      "recommended_action": "archive_if_no_longer_needed_for_active_development",
+      "recommended_pin": false,
+      "reason": "Legacy application/game prototype; not current research."
+    },
+    {
+      "repository": "SSlot",
+      "class": "LEGACY_ARCHIVE_CANDIDATE",
+      "recommended_action": "archive_if_no_longer_needed_for_active_development",
+      "recommended_pin": false,
+      "reason": "Legacy application/game prototype; not current research."
+    },
+    {
+      "repository": "The-Voice-of-Janus",
+      "class": "PUBLIC_ACTIVE_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Deterministic acoustics and WAV rendering from geometry; Model-predicted resonances are not measured ancient acoustic facts"
+    },
+    {
+      "repository": "TOPA",
+      "class": "PUBLIC_ACTIVE_RESEARCH_PROTOTYPE",
+      "recommended_action": "keep_public_unpinned",
+      "recommended_pin": false,
+      "reason": "Structured observation, counterhypothesis and falsification protocols; Anomaly records do not establish paranormal or universal mathematical truth"
+    },
+    {
+      "repository": "tranception",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived research-code copy; base research/code authorship is not claimed."
+    },
+    {
+      "repository": "vcmi",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    },
+    {
+      "repository": "xiaozhi-esp32",
+      "class": "UPSTREAM_REFERENCE",
+      "recommended_action": "archive_if_not_actively_diffing_upstream",
+      "recommended_pin": false,
+      "reason": "Upstream-derived working copy; base authorship is not claimed."
+    }
   ],
-  "note": "Archiving, changing visibility, or pinning repositories is a GitHub UI/settings action and is intentionally separate from this recommendation metadata."
+  "note": "49 PUBLIC repos verified; private repository names intentionally excluded. Historical iNaiHR-Janus- absent in current listing; no deletion asserted. Evidence: audit/portfolio-2026-11-22/manifest.json."
 }
