@@ -5,6 +5,7 @@ on:
     paths:
       - 'autonomy/pillars/**'
       - 'tests/test_autonomy_pillars.py'
+      - 'tests/test_autonomy_pillars_fitness.py'
       - '.github/workflows/janus-pillars-r2.yml'
       - 'docs/JANUS_PILLARS_R2.md'
   push:
@@ -12,6 +13,7 @@ on:
     paths:
       - 'autonomy/pillars/**'
       - 'tests/test_autonomy_pillars.py'
+      - 'tests/test_autonomy_pillars_fitness.py'
       - '.github/workflows/janus-pillars-r2.yml'
       - 'docs/JANUS_PILLARS_R2.md'
   workflow_dispatch:
@@ -39,6 +41,7 @@ jobs:
           set -euo pipefail
           python -m py_compile autonomy/pillars/*.py
           python -m unittest discover -s tests -p 'test_autonomy_pillars.py' -v
+          python -m unittest discover -s tests -p 'test_autonomy_pillars_fitness.py' -v
           python -m unittest discover -s tests -p 'test_autonomy_admission.py' -v
           python -m unittest discover -s tests -p 'test_autonomy_health.py' -v
 
