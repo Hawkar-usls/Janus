@@ -1,0 +1,257 @@
+{
+  "schema": "janus.autonomy.pillars.needs.v1",
+  "source_evidence": {
+    "repository": "Hawkar-usls/janus-meta-registry",
+    "source_commit": "9306037335bb4532049633b7f5f082e75891ff51",
+    "current_state_git_blob_sha": "72049d537eb822b517165be5a068d5abd785e60b",
+    "contract_git_blob_sha": "e00aebd4a8a1a0d9aef57ecc882be234bee1be8c",
+    "observed_public_repositories": 49,
+    "health_integrity": "PASS",
+    "observed_health": "HOLD",
+    "autonomy_phase": "P0.3",
+    "source_is_frozen_not_live": true
+  },
+  "incomplete_is_not_proof_of_absence": true,
+  "needs": [
+    {
+      "id": "health_repair",
+      "capability": "READONLY_SKILL_HEALING",
+      "observed_status": "RESEARCH_ONLY",
+      "impact": 10,
+      "urgency": 10,
+      "risk": 3,
+      "cost": 1,
+      "pillars": [
+        "aeon",
+        "nexusforge"
+      ],
+      "goal": "read-only health RCA and repair plan, never write patches",
+      "requires_human_activation": true
+    },
+    {
+      "id": "secure_workflow",
+      "capability": "AGENT_WORKFLOW_FIREWALL",
+      "observed_status": "NOT_DEMONSTRATED",
+      "impact": 10,
+      "urgency": 9,
+      "risk": 2,
+      "cost": 1,
+      "pillars": [
+        "gh_aw",
+        "agensh"
+      ],
+      "goal": "review sandbox permissions and untrusted source context before PR proposal",
+      "requires_human_activation": true
+    },
+    {
+      "id": "capability_discovery",
+      "capability": "CAPABILITY_NEED_DISCOVERY",
+      "observed_status": "NOT_DEMONSTRATED",
+      "impact": 9,
+      "urgency": 8,
+      "risk": 3,
+      "cost": 2,
+      "pillars": [
+        "nexus",
+        "evoagentx"
+      ],
+      "goal": "derive missing function from validated health deficit",
+      "requires_human_activation": true
+    },
+    {
+      "id": "organ_registry",
+      "capability": "TYPED_ORGAN_REGISTRY",
+      "observed_status": "RESEARCH_ONLY",
+      "impact": 10,
+      "urgency": 9,
+      "risk": 3,
+      "cost": 2,
+      "pillars": [
+        "nexusforge",
+        "gitagent"
+      ],
+      "goal": "validated lineage, typed interfaces, no repository spawning",
+      "requires_human_activation": true
+    },
+    {
+      "id": "role_budget",
+      "capability": "ROLE_BUDGET_ACCOUNTING",
+      "observed_status": "RESEARCH_ONLY",
+      "impact": 9,
+      "urgency": 9,
+      "risk": 2,
+      "cost": 1,
+      "pillars": [
+        "paperclip",
+        "agensh"
+      ],
+      "goal": "count CPU, task, memory, repo budgets per organ",
+      "requires_human_activation": true
+    },
+    {
+      "id": "versioned_skills",
+      "capability": "GIT_NATIVE_SKILL_IDENTITY",
+      "observed_status": "NOT_DEMONSTRATED",
+      "impact": 8,
+      "urgency": 7,
+      "risk": 3,
+      "cost": 2,
+      "pillars": [
+        "gitagent",
+        "nexus"
+      ],
+      "goal": "versioned skill manifest and explicit provenance",
+      "requires_human_activation": true
+    },
+    {
+      "id": "cross_repo_graph",
+      "capability": "LIVE_CROSS_REPO_DEPENDENCY_GRAPH",
+      "observed_status": "RESEARCH_ONLY",
+      "impact": 9,
+      "urgency": 9,
+      "risk": 2,
+      "cost": 1,
+      "pillars": [
+        "multi_repo",
+        "gh_aw"
+      ],
+      "goal": "hash-bound dependency update proposals only",
+      "requires_human_activation": true
+    },
+    {
+      "id": "generation_selection",
+      "capability": "NONREGRESSING_GENERATION_SELECTOR",
+      "observed_status": "NOT_DEMONSTRATED",
+      "impact": 10,
+      "urgency": 10,
+      "risk": 4,
+      "cost": 2,
+      "pillars": [
+        "dgm",
+        "shinka"
+      ],
+      "goal": "strong parent plus frozen exam and reversible experimental candidate",
+      "requires_human_activation": true
+    },
+    {
+      "id": "archive_search",
+      "capability": "BOUNDED_VARIATION_ARCHIVE",
+      "observed_status": "NOT_DEMONSTRATED",
+      "impact": 8,
+      "urgency": 7,
+      "risk": 3,
+      "cost": 2,
+      "pillars": [
+        "shinka",
+        "evoagentx"
+      ],
+      "goal": "archive attempted variants and negative results",
+      "requires_human_activation": true
+    },
+    {
+      "id": "workflow_evaluation",
+      "capability": "COMPARATIVE_WORKFLOW_EXAM",
+      "observed_status": "RESEARCH_ONLY",
+      "impact": 10,
+      "urgency": 9,
+      "risk": 2,
+      "cost": 2,
+      "pillars": [
+        "evoagentx",
+        "dgm"
+      ],
+      "goal": "equal budget + paired evaluation before candidate recommendation",
+      "requires_human_activation": true
+    },
+    {
+      "id": "curriculum",
+      "capability": "TRAIN_ONLY_CURRICULUM_SANDBOX",
+      "observed_status": "RESEARCH_ONLY",
+      "impact": 10,
+      "urgency": 9,
+      "risk": 4,
+      "cost": 2,
+      "pillars": [
+        "agent0",
+        "dgm"
+      ],
+      "goal": "teacher proposal only, mathematical truth oracle, untouched exams",
+      "requires_human_activation": true
+    },
+    {
+      "id": "distributed_dispatch",
+      "capability": "BOUNDED_MULTI_AGENT_DISPATCH",
+      "observed_status": "RESEARCH_ONLY",
+      "impact": 9,
+      "urgency": 8,
+      "risk": 5,
+      "cost": 3,
+      "pillars": [
+        "agensh",
+        "paperclip"
+      ],
+      "goal": "preapproved typed agents, never execute sourced instructions",
+      "requires_human_activation": true
+    },
+    {
+      "id": "gene_memory",
+      "capability": "GENE_CAPSULE_EVENT_LEDGER",
+      "observed_status": "NOT_DEMONSTRATED",
+      "impact": 9,
+      "urgency": 8,
+      "risk": 2,
+      "cost": 1,
+      "pillars": [
+        "evomap",
+        "gitagent"
+      ],
+      "goal": "hash-linked outcomes with recall; GPL concept only",
+      "requires_human_activation": true
+    },
+    {
+      "id": "external_custody",
+      "capability": "INDEPENDENT_REVIEW_AND_WITNESS",
+      "observed_status": "NOT_DEMONSTRATED",
+      "impact": 10,
+      "urgency": 10,
+      "risk": 2,
+      "cost": 1,
+      "pillars": [
+        "gh_aw",
+        "agensh"
+      ],
+      "goal": "external anchored proof for promotion, not same-owner labels",
+      "requires_human_activation": true
+    },
+    {
+      "id": "failure_recovery",
+      "capability": "CLEAN_WORKER_RECOVERY_PROBE",
+      "observed_status": "RESEARCH_ONLY",
+      "impact": 10,
+      "urgency": 10,
+      "risk": 2,
+      "cost": 1,
+      "pillars": [
+        "aeon",
+        "nexusforge"
+      ],
+      "goal": "idempotent recovery, synthetic and external failover tests",
+      "requires_human_activation": true
+    },
+    {
+      "id": "dependency_quarantine",
+      "capability": "UPSTREAM_FORK_QUARANTINE",
+      "observed_status": "RESEARCH_ONLY",
+      "impact": 10,
+      "urgency": 9,
+      "risk": 2,
+      "cost": 1,
+      "pillars": [
+        "gh_aw",
+        "nexus"
+      ],
+      "goal": "commit/license/tree-hash bound no untrusted code execution",
+      "requires_human_activation": true
+    }
+  ]
+}

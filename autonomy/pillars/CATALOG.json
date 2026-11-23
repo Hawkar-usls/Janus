@@ -1,0 +1,234 @@
+{
+  "schema": "janus.autonomy.pillars.catalog.v1",
+  "frozen_at_utc": "2026-11-24T00:00:00Z",
+  "source": "PUBLIC_GITHUB_REPOSITORY_METADATA_AND_DEFAULT_BRANCH_HEAD_ONLY",
+  "intent": "ARCHITECTURE_REFERENCE_AND_NONEXECUTING_GAP_PLANNING",
+  "license_scope": "METADATA_ONLY__LICENSE_BYTES_HISTORY_AND_TRANSITIVE_DEPS_UNVERIFIED",
+  "code_copied": false,
+  "foreign_code_executed": false,
+  "fork_created": false,
+  "policy_reuse": "autonomy/policy.json",
+  "pillars": [
+    {
+      "id": "aeon",
+      "repo": "aeonfun/aeon",
+      "canonical_url": "https://github.com/aeonfun/aeon",
+      "default_branch": "main",
+      "commit_sha": "f94f39e80a790e0f8b379434862d64b79e55f9ff",
+      "license_metadata_spdx": "MIT",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_NEEDS_BYTE_LEVEL_REVIEW",
+      "capability_patterns": [
+        "scheduled_self_health",
+        "repair_proposal"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "gh_aw",
+      "repo": "github/gh-aw",
+      "canonical_url": "https://github.com/github/gh-aw",
+      "default_branch": "main",
+      "commit_sha": "7c61defa7076907f5739d67689589b4298f25a57",
+      "license_metadata_spdx": "MIT",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_NEEDS_BYTE_LEVEL_REVIEW",
+      "capability_patterns": [
+        "privilege_isolation",
+        "reviewed_workflow_changes"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "nexus",
+      "repo": "malakazlan/NEXUS",
+      "canonical_url": "https://github.com/malakazlan/NEXUS",
+      "default_branch": "main",
+      "commit_sha": "417a263fcc6fa330b346319545820c00242683b5",
+      "license_metadata_spdx": null,
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_HOLD_LICENSE_OR_POLICY",
+      "capability_patterns": [
+        "capability_need_discovery",
+        "typed_tool_lifecycle"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "nexusforge",
+      "repo": "Narco995/nexusforge-ai-organism",
+      "canonical_url": "https://github.com/Narco995/nexusforge-ai-organism",
+      "default_branch": "main",
+      "commit_sha": "0b2d8f065e1bc5c7b71a53bcfb03d27387adeefb",
+      "license_metadata_spdx": null,
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_HOLD_LICENSE_OR_POLICY",
+      "capability_patterns": [
+        "organ_registry",
+        "immune_system"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "paperclip",
+      "repo": "paperclipai/paperclip",
+      "canonical_url": "https://github.com/paperclipai/paperclip",
+      "default_branch": "master",
+      "commit_sha": "bda1bf7b52ca6fc059bd6df80ddf76e2190f07c6",
+      "license_metadata_spdx": "MIT",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_NEEDS_BYTE_LEVEL_REVIEW",
+      "capability_patterns": [
+        "role_hierarchy",
+        "resource_budgets"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "gitagent",
+      "repo": "open-gitagent/gitagent",
+      "canonical_url": "https://github.com/open-gitagent/gitagent",
+      "default_branch": "main",
+      "commit_sha": "f4a309cd600b877177c17ac789e83bd7355d0383",
+      "license_metadata_spdx": "MIT",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_NEEDS_BYTE_LEVEL_REVIEW",
+      "capability_patterns": [
+        "versioned_agent_identity",
+        "skills_as_git"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "multi_repo",
+      "repo": "hanfour/multi-repo-agent",
+      "canonical_url": "https://github.com/hanfour/multi-repo-agent",
+      "default_branch": "main",
+      "commit_sha": "46a4f7797f1cd8f012d3c07cc40fb33827f1ca3f",
+      "license_metadata_spdx": "MIT",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_NEEDS_BYTE_LEVEL_REVIEW",
+      "capability_patterns": [
+        "cross_repo_dependency_graph",
+        "cross_repo_change_review"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "dgm",
+      "repo": "jennyzzt/dgm",
+      "canonical_url": "https://github.com/jennyzzt/dgm",
+      "default_branch": "main",
+      "commit_sha": "a565fd2d1dca504ef5104a7cc0f3bdc4ab9b4fd2",
+      "license_metadata_spdx": "Apache-2.0",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_NEEDS_BYTE_LEVEL_REVIEW",
+      "capability_patterns": [
+        "generation_lineage",
+        "selection_with_regression"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "shinka",
+      "repo": "SakanaAI/ShinkaEvolve",
+      "canonical_url": "https://github.com/SakanaAI/ShinkaEvolve",
+      "default_branch": "main",
+      "commit_sha": "0e09d0d5869a9a9d8568a5eb10c88d00a3677404",
+      "license_metadata_spdx": "Apache-2.0",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_NEEDS_BYTE_LEVEL_REVIEW",
+      "capability_patterns": [
+        "variation_archive",
+        "bounded_candidate_search"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "evoagentx",
+      "repo": "ANative-Lab/EvoAgentX",
+      "canonical_url": "https://github.com/ANative-Lab/EvoAgentX",
+      "default_branch": "main",
+      "commit_sha": "e3df900662443e94dd92141be5633b040a69a70a",
+      "license_metadata_spdx": "NOASSERTION",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_HOLD_LICENSE_OR_POLICY",
+      "capability_patterns": [
+        "agent_workflow_evaluation",
+        "comparative_optimization"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "agent0",
+      "repo": "aiming-lab/Agent0",
+      "canonical_url": "https://github.com/aiming-lab/Agent0",
+      "default_branch": "main",
+      "commit_sha": "f775b5101e62fe92976831adf4a21a38fcc0a767",
+      "license_metadata_spdx": "Apache-2.0",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_NEEDS_BYTE_LEVEL_REVIEW",
+      "capability_patterns": [
+        "curriculum_proposals",
+        "teacher_student_separation"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "agensh",
+      "repo": "microsoft/Agensh",
+      "canonical_url": "https://github.com/microsoft/Agensh",
+      "default_branch": "main",
+      "commit_sha": "2dae4e14a653da48549fd9aa093f834841475d6c",
+      "license_metadata_spdx": "MIT",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_NEEDS_BYTE_LEVEL_REVIEW",
+      "capability_patterns": [
+        "multi_agent_harness",
+        "independent_change_review"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    },
+    {
+      "id": "evomap",
+      "repo": "EvoMap/evolver",
+      "canonical_url": "https://github.com/EvoMap/evolver",
+      "default_branch": "main",
+      "commit_sha": "31b0691acd97ba18878019312e646f1f2d970d43",
+      "license_metadata_spdx": "GPL-3.0",
+      "license_bytes_verified": false,
+      "dependency_licenses_verified": false,
+      "import_policy": "PATTERN_ONLY__CODE_IMPORT_HOLD_LICENSE_OR_POLICY",
+      "capability_patterns": [
+        "gene_capsule_event_memory",
+        "provenance_trace"
+      ],
+      "evidence_level": "PUBLIC_DESCRIPTION_AND_REPOSITORY_METADATA_NOT_INDEPENDENT_FUNCTIONAL_REPLICATION",
+      "action_authority": false
+    }
+  ]
+}
