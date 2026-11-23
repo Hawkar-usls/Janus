@@ -32,12 +32,12 @@ def verify(plan,catalog,needs,policy):
         raise ValueError("VERIFY_INPUT_REBINDING")
     if plan.get("source_evidence")!=needs.get("source_evidence"):
         raise ValueError("VERIFY_OBSERVATION_REBINDING")
-    if plan.get("status")!="OFFLINE_PROPOSALS_GENERATED__ACTIVATION_AND_AUTONOMY_HOLD" or any(
+    if (plan.get("status")!="OFFLINE_PROPOSALS_GENERATED__ACTIVATION_AND_AUTONOMY_HOLD" or any(
         plan.get(k) is not True for k in ("no_model_training","no_foreign_code_run",
               "no_fork_or_repo_created","no_self_approved_evaluation","janus_main_unchanged")) or
         plan.get("action_authority") is not False or
         plan.get("external_admission")!="HOLD_NOT_OBTAINED" or
-        plan.get("p03_checkpoint")!="HOLD_UNCHANGED":
+        plan.get("p03_checkpoint")!="HOLD_UNCHANGED"):
         raise ValueError("VERIFY_AUTHORITY_ESCALATION")
     if policy.get("mode")!="PROPOSALS_ONLY" or policy.get("external_effects") is not False or (
         policy.get("limits") or {}).get("max_new_repositories")!=0:
@@ -59,19 +59,19 @@ def verify(plan,catalog,needs,policy):
         raise ValueError("VERIFY_BUDGET_OR_LIST_DRIFT")
     prev=ZERO
     for i,(need,item,event) in enumerate(zip(selection,blue,events)):
-        if item.get("organ_id")!="candidate_"+need["id"] or item.get("kind")!="MODULE_PROPOSAL_ONLY" or (
+        if (item.get("organ_id")!="candidate_"+need["id"] or item.get("kind")!="MODULE_PROPOSAL_ONLY" or (
             item.get("capability")!=need["capability"]) or
             item.get("priority_score")!=score(need) or
             item.get("source_map_git_commit")!=needs["source_evidence"]["source_commit"] or
-            item.get("module_path")!="modules/candidates/"+need["id"]+"/":
+            item.get("module_path")!="modules/candidates/"+need["id"]+"/"):
             raise ValueError("VERIFY_SELECTION_OR_CANDIDATE_DRIFT")
         for key in ("has_passed_independent_tests","review_is_authenticated",
                     "execution_allowed","fork_allowed","production_promotion"):
             if item.get(key) is not False:
                 raise ValueError("VERIFY_PROPOSAL_PROMOTION")
-        if item.get("test_partition")!="SYNTHETIC_ENGINEERING_ONLY__NEW_EXTERNAL_EXAM_REQUIRED" or (
+        if (item.get("test_partition")!="SYNTHETIC_ENGINEERING_ONLY__NEW_EXTERNAL_EXAM_REQUIRED" or (
             item.get("training_partition")!="TRAIN_ONLY_NOT_EXECUTED") or
-            item.get("state")!="CATALOGUED_NOT_BORN":
+            item.get("state")!="CATALOGUED_NOT_BORN"):
             raise ValueError("VERIFY_FALSE_TRAINING")
         refs=[{"repository":pmap[p]["repo"],"pinned_commit":pmap[p]["commit_sha"],
                "license_status":pmap[p]["import_policy"]} for p in need["pillars"]]
@@ -81,11 +81,11 @@ def verify(plan,catalog,needs,policy):
         gene=seal(pure)
         if item.get("gene_sha256")!=gene:
             raise ValueError("VERIFY_GENE_REBINDING")
-        if event.get("sequence")!=i or event.get("previous_head")!=prev or (
+        if (event.get("sequence")!=i or event.get("previous_head")!=prev or (
             event.get("gene_sha256")!=gene) or
             event.get("kind")!="GENE_AND_CAPSULE_PROPOSED" or
             event.get("capsule_status")!="UNEVALUATED_NO_NEURAL_GAIN" or
-            event.get("candidate_id")!=item["organ_id"]:
+            event.get("candidate_id")!=item["organ_id"]):
             raise ValueError("VERIFY_EVENT_CHAIN")
         current=seal({k:v for k,v in event.items() if k!="head"})
         if event.get("head")!=current:
