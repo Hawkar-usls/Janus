@@ -1,0 +1,112 @@
+name: JANUS Organism Coherence and P0.2 Neural Handoff Audit
+
+# Existing Meta Registry roadmap and Demiurge conductor remain the controllers.
+# This cross-repository witness has no dispatch, write or production authority.
+on:
+  pull_request:
+    paths:
+      - 'organism/coherence.py'
+      - 'tests/test_organism_coherence.py'
+      - '.github/workflows/janus-organism-coherence.yml'
+      - 'organism/LAUNCH_CONTRACT_20261123.json'
+  push:
+    branches: [main]
+    paths:
+      - 'organism/coherence.py'
+      - 'tests/test_organism_coherence.py'
+      - '.github/workflows/janus-organism-coherence.yml'
+      - 'organism/LAUNCH_CONTRACT_20261123.json'
+  schedule:
+    - cron: '07 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-organism-coherence-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reject organ promotion, private leaks and P0.2 shortcuts
+        run: |
+          set -euo pipefail
+          python -m py_compile organism/coherence.py tests/test_organism_coherence.py
+          python -m unittest -v tests.test_organism_coherence
+          python -m unittest -v mcp_gateway.tests.test_organism_tools
+
+  live-public-census:
+    needs: contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Source-pin current public owner repos; classify organs and P0.2
+        run: |
+          set -euo pipefail
+          mkdir -p runtime/organism
+          python -m organism.coherence --out runtime/organism/FLEET_COHERENCE.json
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from organism.coherence import sha256_obj
+          report=json.loads(Path('runtime/organism/FLEET_COHERENCE.json').read_text())
+          assert report['schema']=='janus.organism.coherence_witness.v1'
+          assert report['organism_id']=='JANUS_FEDERATED_ORGANISM'
+          assert report['sha256']==sha256_obj({k:v for k,v in report.items() if k!='sha256'})
+          assert report['summary']['public_repository_count'] >= 40
+          assert report['summary']['public_admitted_organ_count']==22
+          assert report['private_repository_names_disclosed'] is False
+          assert report['topology']['private_placeholder_count']==1
+          assert report['cross_repository_dispatch_performed'] is False
+          assert report['model_training_performed'] is False
+          assert report['production_weights_changed'] is False
+          assert report['full_autonomy_proven'] is False
+          print('JANUS_COHERENCE=SOURCE_PINNED_PUBLIC_INVENTORY__FULL_AUTONOMY_HOLD')
+          print('JANUS_P0_2=' + report['priority_recovery']['status'])
+          PY
+      - name: Summarize highest-priority blocker without private topology
+        if: always()
+        shell: bash
+        run: |
+          if test -f runtime/organism/FLEET_COHERENCE.json; then
+            python - <<'PY' >> "$GITHUB_STEP_SUMMARY"
+          import json
+          from pathlib import Path
+          r=json.loads(Path('runtime/organism/FLEET_COHERENCE.json').read_text())
+          print('## JANUS Organism — public neural coherence')
+          print('- Public repos: ' + str(r['summary']['public_repository_count']))
+          print('- Canonically admitted public organs: ' + str(r['summary']['public_admitted_organ_count']))
+          print('- Matched linked organs: ' + str(r['summary']['admitted_link_matches']))
+          print('- Unknown source observations: ' + str(r['summary']['source_unknown_members']))
+          print('- P0.2: ' + r['priority_recovery']['status'])
+          print('- Repair recommendation: ' + str(r['priority_recovery'].get('repair')))
+          print('- No authority increment, cross-repo dispatch or model adoption.')
+          PY
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: janus-organism-public-coherence-${{ github.run_id }}
+          path: runtime/organism/FLEET_COHERENCE.json
+          if-no-files-found: warn
+          retention-days: 30
