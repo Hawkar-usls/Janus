@@ -157,6 +157,7 @@ def plan(catalog, gaps, policy):
     needs=validate_needs(gaps,source)
     admission.validate_policy(policy)
     require(policy["mode"]=="PROPOSALS_ONLY" and
+            policy["kill_switch"] is False and
             policy["external_effects"] is False and
             policy["limits"]["max_new_repositories"]==0 and
             policy["limits"]["max_proposals"]<=4,
@@ -236,6 +237,14 @@ def health_triage(health):
             health["execution_allowed"] is False and
             health["full_autonomy_proven"] is False and
             health["authority_delta"]==0,"PILLARS_UNTRUSTED_HEALTH")
+    # Verify the input by the original health verifier's canonical encoding,
+    # but do not misrepresent a same-owner hash as external authentication.
+    expected_health=hashlib.sha256(json.dumps(
+        {k:v for k,v in health.items() if k!="health_sha256"},
+        sort_keys=True,separators=(",",":"),ensure_ascii=False,
+        allow_nan=False).encode("utf-8")).hexdigest()
+    require(health["health_sha256"]==expected_health,
+            "PILLARS_HEALTH_DIGEST_MISMATCH")
     # reason strings are untrusted DATA; only count fixed suffix categories.
     mapping={
       "MEMBER_LINK_UNVERIFIED":"VERIFY_MEMBERSHIP_SOURCE",
@@ -256,6 +265,8 @@ def health_triage(health):
     out={"schema":"janus.autonomy.pillars.health_triage.v1",
       "status":"HEALTH_HOLD_TRIAGED_NOT_REPAIRED",
       "source_snapshot_sha256":health["snapshot_sha256"],
+      "source_health_sha256":health["health_sha256"],
+      "snapshot_only_not_live":True,
       "observed_reason_count":len(reasons),
       "reason_counts":counts,"unclassified_reasons":unclassified,
       "next_actions":[mapping[k] for k,v in sorted(counts.items(),
