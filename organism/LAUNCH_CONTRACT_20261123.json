@@ -1,0 +1,182 @@
+{
+  "schema": "janus.organism.autonomy_launch_contract/1.0",
+  "artifact_id": "JANUS-FEDERATED-ORGANISM-LAUNCH-20261123",
+  "observation_date_utc": "2026-11-23",
+  "status": "EXISTING_PARTIAL_AUTONOMY_ON_GITHUB__NEW_FLEET_COHERENCE_PILOT_IN_REVIEW__FULL_AUTONOMY_NOT_ATTESTED",
+  "canonical": {
+    "organism_id": "JANUS_FEDERATED_ORGANISM",
+    "canonical_manifest": "Hawkar-usls/Janus:organism/JANUS_ORGANISM_v1.json",
+    "canonical_topology_version": "1.1.0",
+    "topology_member_slots": 22,
+    "reviewed_delta": "Hawkar-usls/Janus:organism/JANUS_ORGANISM_DELTA_2026-08-26_SIMPTOMAT_v1.json",
+    "named_public_organ_members_after_delta": 22,
+    "private_placeholder_slots": 1,
+    "design": "FEDERATED_ORGANISM_NOT_MONOLITH",
+    "cross_repo_write_default": "DENY",
+    "public_github_actor_claim": "NO_PRIVATE_REPO_DISCOVERY",
+    "explicitly_non_org_dependencies_and_tissues_retained": true,
+    "authority_delta_on_cross_organ_transport": 0
+  },
+  "observed_portfolio": {
+    "accessible_repositories": 52,
+    "public_repositories": 49,
+    "private_repositories": 3,
+    "eligible_for_public_github_audit": 49,
+    "project_files_ESSENCE_microkernel_present": 51,
+    "microkernel_file_presence_is_activation": false,
+    "explicit_organism_link_files_present": 29,
+    "difference_between_public_organ_authority_and_link_declarations": "REVIEWED_MANIFEST_AND_DELTA_ONLY",
+    "upstream_forks_do_not_inherit_organ_authority": true,
+    "remote_private_names_persisted_to_this_public_record": false
+  },
+  "current_operating_controllers": {
+    "memory_and_roadmap": "janus-meta-registry/.github/workflows/janus-autonomy-roadmap-loop.yml",
+    "bounded_wake": "janus-meta-registry/.github/workflows/janus-autonomy-bounded-wake-guardian.yml",
+    "action_planner": "Janus-Demiurge/.github/workflows/janus-demiurge-conductor.yml",
+    "habitat": "Janus_Genesis Git Habitat, long-lived state as Git refs/receipts",
+    "model": "Janus-Demiurge janus_model checkpoint and ESSENCE",
+    "reproduction": "ESSENCE microkernel heritage and proposal-only birth policy",
+    "fleet_inventory_existing": "janus-meta-registry/.github/workflows/essence-v14-fleet-audit.yml",
+    "contour_inventory_existing": "janus-meta-registry/.github/workflows/janus-contour-inventory-health.yml",
+    "new_distinct_witness": "Hawkar-usls/Janus:.github/workflows/janus-organism-coherence.yml",
+    "avoid_duplicate_self_schedulers": true
+  },
+  "canonical_autonomy_current_state": {
+    "authority": "janus-meta-registry/data/autonomy_loop/LATEST.json",
+    "phase": "P0.2",
+    "ecosystem_status": "AUTONOMY_PARTIAL",
+    "full_issue_162_acceptance": false,
+    "conductor_last_recorded_cycle": "demiurge-20261123T081658Z-9292f614",
+    "conductor_last_child_successful_count": 5,
+    "last_canonical_rowan_run": 45194712898,
+    "last_aura_source_run": 45090839008,
+    "last_demiurge_council_run": 45090839008,
+    "last_coordination_run": 45090839008,
+    "last_cosmos_source_run": 45042582549,
+    "read_only_crossorgan_witness_failure": "https://github.com/Hawkar-usls/janus-meta-registry/actions/runs/45205936520",
+    "cross_organ_witness_reason": "AURA_SOURCE_STALE",
+    "pending_patch_proposals": 38,
+    "scouts_snapshots": 17,
+    "scouts_model_syntheses": 0,
+    "last_64_training_results_rejected": 64,
+    "beetle_last_observed_public_receiver_up_to_date": 18,
+    "beetle_receiver_ack_unknown": 1,
+    "beetle_pending": 2,
+    "development_claim_ceiling": "SAFETY_HOLDS_NOT_FULL_SYSTEM_FAILURE"
+  },
+  "priority_reconciliation_chain": [
+    {
+      "stage": 1,
+      "organ": "AURA",
+      "repo": "Hawkar-usls/aura-oracle-tg",
+      "handler": "aura-rowan-falsifier-bridge.yml",
+      "gate": "MUST_MATCH_CANONICAL_RUN_AND_CONTENT_DIGEST"
+    },
+    {
+      "stage": 2,
+      "organ": "COUNCIL",
+      "repo": "Hawkar-usls/Janus-Demiurge",
+      "handler": "janus-rowan-aura-council.yml",
+      "gate": "MUST_MATCH_CURRENT_CANON_AND_AURA_PACKET"
+    },
+    {
+      "stage": 3,
+      "organ": "COORDINATION",
+      "repo": "Hawkar-usls/janus-meta-registry",
+      "handler": "rowan-coordination-autonomous-reconcile.yml",
+      "gate": "MUST_ARCHIVE_MATCHED_AURA_AND_COUNCIL"
+    },
+    {
+      "stage": 4,
+      "organ": "COSMOS",
+      "repo": "Hawkar-usls/Janus-Cosmos",
+      "handler": "cosmos-rowan-ecosystem-witness.yml",
+      "gate": "MUST_ACK_MATCHED_CANONICAL_COHORT"
+    },
+    {
+      "stage": 5,
+      "organ": "WITNESS",
+      "repo": "Hawkar-usls/janus-meta-registry",
+      "handler": "janus-rowan-ecosystem-sync-witness.yml",
+      "gate": "FULL_SOURCE_AND_WORKFLOW_WITNESS_NOT_ONLY_MATCHED_IDS"
+    }
+  ],
+  "existing_autonomy_roadmap": [
+    {
+      "stage": "P0.2",
+      "objective": "Reconcile a coherent one-generation Rowan/AURA/Council/Cosmos source cohort",
+      "state": "HOLD"
+    },
+    {
+      "stage": "P0.3",
+      "objective": "Beetle routing and private receiver ACK plus cloud HOME replay",
+      "state": "HOLD"
+    },
+    {
+      "stage": "P0.4",
+      "objective": "Deduplicate patch queue with append-only lineage and retain failed attempts",
+      "state": "HOLD"
+    },
+    {
+      "stage": "P0.5",
+      "objective": "Disentangle snapshot collection from model synthesis and verified useful work",
+      "state": "HOLD"
+    },
+    {
+      "stage": "P0.6",
+      "objective": "Recover Habitat without replacing durable state",
+      "state": "HOLD"
+    },
+    {
+      "stage": "P1",
+      "objective": "Frozen controlled replay G1 through G20",
+      "state": "HOLD"
+    },
+    {
+      "stage": "P2",
+      "objective": "10 independently evaluated distinct code patches",
+      "state": "HOLD"
+    },
+    {
+      "stage": "P3",
+      "objective": "Measurable neural gain on new held-out tasks, no skills lost",
+      "state": "HOLD"
+    },
+    {
+      "stage": "P4",
+      "objective": "Seven then thirty days uninterrupted/recovered operation with immutable receipts",
+      "state": "HOLD"
+    },
+    {
+      "stage": "P5",
+      "objective": "Outside independent validation",
+      "state": "HOLD"
+    }
+  ],
+  "operational_autonomy_boundaries": {
+    "scheduled_discovery_and_evidence_aggregation": "ALREADY_RUNNING_IN_ADMITTED_LANES",
+    "bounded_registered_actions": "ALREADY_RUNNING_IN_ADMITTED_LANES",
+    "automatic_low_risk_state_checkpoints": "ALREADY_RUNNING_IN_ADMITTED_LANES",
+    "model_learning_and_candidate_shadows": "EXISTS_BUT_FUNCTIONAL_GAINS_NOT_PROVEN",
+    "cross_repo_writes": "NOT_GRANTED_BY_MEMBERSHIP",
+    "automatic_production_weight_promotion": false,
+    "automatic_main_merges_of_unreviewed_model_code": false,
+    "automatic_private_data_or_hardware_authority": false,
+    "model_produced_claim_counted_as_truth": false,
+    "github_actions_schedule_best_effort": true,
+    "global_github_outage_recoverable_from_only_github": false,
+    "state_survival": "GIT_REFS_PLUS_IMMUTABLE_RECEIPTS_AND_EXTERNAL_WITNESSES",
+    "full_autonomy_proven": false
+  },
+  "new_work_scientific_limit": {
+    "detects_existing_broken_path_first": true,
+    "next_step_is_source_cohort_repair_not_more_llm_fitting": true,
+    "new_workflow_is_readonly_no_dispatch": true,
+    "only_public_repos_audited_live": true,
+    "original_manifests_and_microkernel_flags_not_modified": true,
+    "private_gated_slots_not_discovered": true,
+    "independent_cross_repo_witness_still_required": true,
+    "no_competence_or_intelligence_claim_from_ci": true
+  },
+  "next": "Run public fleet coherence workflow on this draft PR; read exact source pin results. Repair stale upstream AURA with source-matched output and then sequentially Council, coordination and COSMOS with independent source replay. Continue existing P0.3-P5 roadmap rather than claiming a new monolithic autonomous agent."
+}
