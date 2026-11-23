@@ -1,0 +1,18 @@
+{
+  "schema": "janus.autonomy.policy.v1",
+  "mode": "PROPOSALS_ONLY",
+  "kill_switch": false,
+  "external_effects": false,
+  "authority_delta": 0,
+  "allowed_licenses": ["MIT", "Apache-2.0", "BSD-2-Clause", "BSD-3-Clause"],
+  "limits": {
+    "max_candidates": 16,
+    "max_proposals": 4,
+    "max_depth": 1,
+    "max_forks": 1,
+    "max_new_repositories": 0,
+    "max_artifact_bytes": 1048576,
+    "max_files": 128,
+    "max_events": 128
+  }
+}

@@ -1,0 +1,107 @@
+name: JANUS R1 bounded map observer
+
+on:
+  pull_request:
+    paths: ['autonomy/**', 'tests/test_autonomy_*.py', 'docs/JANUS_AUTONOMY_R1*', '.github/workflows/janus-autonomy-observer-r1.yml']
+  push:
+    branches: ['research/bounded-autonomy-map-r1-20261123']
+    paths: ['autonomy/**', 'tests/test_autonomy_*.py', 'docs/JANUS_AUTONOMY_R1*', '.github/workflows/janus-autonomy-observer-r1.yml']
+  workflow_dispatch:
+  schedule:
+    - cron: '43 4 * * *'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: janus-r1-observer-${{ github.repository }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  offline-contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Offline adversarial contracts, unchanged ESSENCE and gateway boundaries
+        run: |
+          python -m unittest discover -s tests -p 'test_autonomy_*.py' -v
+          python -m unittest discover -s tests -p 'test_essence_kernel.py' -v
+          python -m unittest discover -s mcp_gateway/tests -v
+
+  observe:
+    needs: offline-contract
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    permissions:
+      contents: read
+      actions: read
+      checks: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Fixed-owner public metadata only; no dispatch, forks or installs
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          python -m autonomy.inventory --live --authenticated --source-commit "$(git rev-parse HEAD)" --out "$RUNNER_TEMP/inventory.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: janus-r1-observation-${{ github.run_id }}
+          path: ${{ runner.temp }}/inventory.json
+          if-no-files-found: error
+          retention-days: 14
+
+  separate-health-verifier:
+    needs: observe
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha || '929cabcab2c1886432ae6f075448c823a6f40a50' }}
+          path: trusted-map
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: janus-r1-observation-${{ github.run_id }}
+          path: observation
+      - name: Recompute integrity from base map; never trust collector PASS
+        run: |
+          python -m autonomy.health observation/inventory.json --trusted-root trusted-map --expected-source-commit "$(git rev-parse HEAD)" --out "$RUNNER_TEMP/health.json"
+      - name: Record observation HOLD separately from engineering CI
+        if: always()
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          result = json.loads((Path(os.environ['RUNNER_TEMP']) / 'health.json').read_text())
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a') as out:
+              out.write('## Observation health gate\n\n' + result['observation_gate'] + '\n\n')
+              out.write('## Independent admission gate\n\n' + result['independent_admission_gate'] + '\n\n')
+              out.write('Candidate verifier is under review. A green contract run does not promote an organ or prove full autonomy.\n')
+              for reason in result['integrity_reasons'] + result['observation_reasons']:
+                  out.write('- ' + reason + '\n')
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: janus-r1-health-${{ github.run_id }}
+          path: ${{ runner.temp }}/health.json
+          if-no-files-found: error
+          retention-days: 14
