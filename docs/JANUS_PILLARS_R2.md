@@ -51,6 +51,13 @@ The existing health verifier was HOLD. Plan generation never overrides it.
   missing evidence, license changes and lack of access remain HOLD.
 - verifier.py is an independently written structural checker in a
   separate no-credential CI job, not an independent outside custodian.
+- fitness.py implements a strict parent-vs-child paired criterion:
+  12 complete identical-case results, source/checkpoint hashes, equal CPU
+  class, at least 2 new solved, ZERO previously solved lost, nontrivial
+  parent and <=20% extra CPU cost. Even a positive synthetic internal
+  comparison can only return INTERNAL_CANDIDATE_PROMISING with an explicit
+  EXTERNAL_GRADUATION_HOLD. This is a tested selector contract, not an
+  achieved improvement by JANUS or permission to promote checkpoints.
 - tests/test_autonomy_pillars.py contains adversarial unit controls for
   authority inflation, license spoofing, fork creation, audit tampering,
   source unavailability and exact source pinning.
