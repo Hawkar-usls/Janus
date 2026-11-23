@@ -45,6 +45,16 @@ def github_get(path, token=""):
     if not isinstance(path,str) or not re.fullmatch(
        r"/repos/[A-Za-z0-9-]+/[A-Za-z0-9_.-]+(?:/branches/(?:main|master))?\Z",path):
         raise ValueError("PILLARS_UNTRUSTED_API_PATH")
+    # Even a syntactically valid GitHub repository path must be in the
+    # validated public source list. This prevents arbitrary private probes
+    # if another caller ever invokes github_get directly.
+    catalog=engine.read_json(engine.CATALOG)
+    engine.validate_catalog(catalog)
+    allowed={"/repos/"+p["repo"] for p in catalog["pillars"]}
+    allowed.update("/repos/"+p["repo"]+"/branches/"+p["default_branch"]
+                   for p in catalog["pillars"])
+    if path not in allowed:
+        raise ValueError("PILLARS_SOURCE_NOT_IN_ALLOWLIST")
     request=urllib.request.Request(API+path,headers={
       "Accept":"application/vnd.github+json",
       "User-Agent":"JANUS-Pillars-R2-ReadOnly",
