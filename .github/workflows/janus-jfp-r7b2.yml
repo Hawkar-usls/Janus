@@ -1,0 +1,23 @@
+name: JANUS JFP R7B.2 trust policy
+on:
+  pull_request:
+    paths:
+      - 'autonomy/federation/jfp_trust.py'
+      - '.github/workflows/janus-jfp-r7b2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  trust:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Verify prior gateway and trust lifecycle
+        run: |
+          set -euo pipefail
+          python3 autonomy/federation/jfp_gateway.py test
+          python3 autonomy/federation/jfp_trust.py test
+          echo 'R7B2_TRUST_LOCAL_TESTS_PASS__NO_LIVE_KEYS_NO_REMOTE_PERSISTENCE'
