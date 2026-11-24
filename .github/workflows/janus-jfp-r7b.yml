@@ -1,0 +1,28 @@
+name: JANUS JFP R7B signed gateway pilot
+on:
+  pull_request:
+    paths:
+      - 'autonomy/federation/**'
+      - '.github/workflows/janus-jfp-r7b.yml'
+  push:
+    branches: [research/jfp-r7b-bidirectional-20261124]
+    paths:
+      - 'autonomy/federation/**'
+      - '.github/workflows/janus-jfp-r7b.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  signed-pilot:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Verify local signed exchange and negative controls
+        run: |
+          set -euo pipefail
+          openssl version
+          python3 autonomy/federation/jfp_gateway.py test
+          python3 autonomy/federation/jfp_gateway.py pilot
