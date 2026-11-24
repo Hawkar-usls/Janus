@@ -1,0 +1,36 @@
+name: R7.0A bounded knowledge assimilation preflight
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/assimilation_r70a.py'
+      - '.github/workflows/janus-r70a-assimilation-preflight.yml'
+      - 'research/assimilation/R70A_PROTOCOL.json'
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: ecf61e5aec2bc7ffb370c28b5a2f8cd7a277dd2c
+          path: source-memory
+          persist-credentials: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R69-LIVING-MEMORY-EVIDENCE.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: source-trinity
+          persist-credentials: false
+          sparse-checkout: |
+            research/essence/trinity_parental_school/R14_REAL_CPU_RESULT_20261123.json
+          sparse-checkout-cone-mode: false
+      - run: python3 autonomy/registry/assimilation_r70a.py source-memory source-trinity
