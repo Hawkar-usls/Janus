@@ -131,7 +131,9 @@ def make_catalog(root, expected_commit, at=None, max_files=MAX_FILES):
     # This inventory is not a real-time watcher: HEAD and source are pinned.
     report={
         "schema":SCHEMA,
-        "status":"PUBLIC_JSON_SCHEMAS_INDEXED__ALL_DISCOVERIES_NONAUTHORITATIVE",
+        "status":("PUBLIC_JSON_SCHEMA_METADATA_PARSED__NONAUTHORITATIVE"
+                  if parsed==total else
+                  "PUBLIC_JSON_PATHS_DISCOVERED__PARTIAL_SCHEMA_PARSE_HOLD"),
         "source_repository":"Hawkar-usls/janus-meta-registry",
         "source_commit_sha":expected_commit,
         "catalog_generated_at_utc":(at or datetime.now(timezone.utc)).isoformat(),
@@ -148,7 +150,8 @@ def make_catalog(root, expected_commit, at=None, max_files=MAX_FILES):
                                    key=lambda x:(-x[1],x[0]))[:MAX_FAMILY_TOP]),
         "role_path_candidates":role_candidates,
         "candidate_paths_truncated":len(role_candidates)>=MAX_CANDIDATE_PATHS,
-        "complete_metadata_only_inventory":True,
+        "complete_path_inventory_within_budgets":True,
+        "complete_json_schema_coverage":parsed==total,
         "all_schema_files_trusted":False,
         "all_filenames_are_live_projects":False,
         "source_text_executed":False,
