@@ -1,0 +1,183 @@
+{
+  "schema": "janus.r70d.train.v1",
+  "snapshot": "2c0fe086fe26d766e6df62f932d1df88bba0ab22",
+  "sources": [
+    {
+      "path": "data/JANUS-COSMOS-SETI-R21-WEAK-SIGNAL-TEMPLATE-2026-11-17.json",
+      "blob": "2bb640562e549aa4af2d7fc4c556dc67c84752cb"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R24-ODONTO-CRYSTAL-GROWTH-2026-11-17.json",
+      "blob": "bbb58827ed42a3c85da76053d9e41ff91499ae87"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R25-FUNDAMENTUM-BOUNDARY-MATCHING-2026-11-17.json",
+      "blob": "40334aa8dfd241ead68c99f4b585147bbddf6794"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R26-WEAKNESS-DIAGNOSTIC-2026-11-17.json",
+      "blob": "52cf407a20117498db2f462a9e2283853ef4e9a6"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R26C-ON-OFF-REFERENCE-ALIGNMENT-2026-11-17.json",
+      "blob": "5d593603fab898e67211ef901fec89fe6caa4573"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R27-EXTERNAL-BENCHMARK-2026-11-17.json",
+      "blob": "079f58847c19bccd7db1d5014104f181d6abc304"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R28-HYBRID-DETECTOR-2026-11-17.json",
+      "blob": "4d02c5d3b7d43f87694db7a3f56ce16649a330c4"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R28B-ADAPTIVE-ROUTER-2026-11-18.json",
+      "blob": "b75be6944deed78ab48b0300ddfcbc368fd50ce2"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R29-STAR-FORGE-2026-11-18.json",
+      "blob": "5a4ad6ddb45c914c7d0b6e5cbfe909be60ae7a78"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R30-FALSE-ALARM-SHIELD-2026-11-18.json",
+      "blob": "0331c43a665e4f3342f1071fcfca4b8d73a96478"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R30C-HANNAH-RFI-MEMORY-2026-11-18.json",
+      "blob": "5f2492d1387177dd8f98845127a2fa44e0d26736"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R31-HANNAH-PROSPECTIVE-2026-11-18.json",
+      "blob": "b4460ba6ac98fd19aba0353a8cd80e8c79e7289e"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R32-HANNAH-ADAPTIVE-2026-11-18.json",
+      "blob": "0100839ea85502771d81c31f9d906254b2c70e46"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R33-HANNAH-VERIFIED-FAMILIES-2026-11-18.json",
+      "blob": "77f762064d147585f0292e3f5c6d73b19548be21"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R33B2-HANNAH-DRIFT-REPLAY-2026-11-18.json",
+      "blob": "2604d9a4b779d60568fcd28a3c10b7599e3e4eb2"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R33B4-SOURCE-IDENTITY-2026-11-18.json",
+      "blob": "9f62f2dbabbbcd3c74f1e614572424981106441d"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R33BCD-HANNAH-CATALOG-2026-11-18.json",
+      "blob": "4e8a1eb84bcfbb8f05756f352cc494616ada5a11"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R35-GRAND-BENCHMARK-2026-11-18.json",
+      "blob": "c7dcc4246e2ef364b5d7a5540bef5ad4a5b12b61"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R36-GALAXY-SWARM-2026-11-18.json",
+      "blob": "8c290b24dafcc8235f1a5869b6f5abd3d484d58a"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R37A-HANNAH-RESOLUTION-2026-11-18.json",
+      "blob": "b4b4ab503861ad447c14cf3d5ed2583d4a25b15c"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40B-TRANSFER-2026-11-18.json",
+      "blob": "1d3f44d6e4249e82be0d0924a6ab471f82ca9212"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40CDE-TRANSFER-2026-11-18.json",
+      "blob": "89c2be5e143c00fe3293dabaea9551a68f4f8008"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40H-FROZEN-TRANSFER-2026-11-18.json",
+      "blob": "d15b439297d95de61941606e9f8b73ec98994a09"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40M-ADVERSARIAL-SHIELD-2026-11-19.json",
+      "blob": "764acae97d203b2cf045283c495676cb17806ca6"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40N-RAW-RIVALS-2026-11-19.json",
+      "blob": "3b1221dbda6ff6caaa4ab2b4280744c97de5ae31"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40N1-CROSSDAY-2026-11-19.json",
+      "blob": "892f14f45ae68566ecd21895082f7aa746444a7f"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40N10-ARTMONEY-TURBO-2026-11-19.json",
+      "blob": "37844dad46bf82f21c6c41a3d3f727cb54d9c16a"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40N10B-EXPANSION-2026-11-19.json",
+      "blob": "7796b57e63c1bfafebb69f67d2512b64a6a0d01b"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40N2-INSTRUMENT-CONTROLS-2026-11-19.json",
+      "blob": "63369a08ae84de5d7b64e6115977bf5c4075172e"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40N3-CROSSDAY-KUSTO-2026-11-19.json",
+      "blob": "080d3de6ce1c012fdb7820f0c0eb14a2d02556e3"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40N4-NEIGHBORHOOD-2026-11-19.json",
+      "blob": "095bc3bc5d9f4bf345c8879b556d664568b07572"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40N5-MATCHED-FREQUENCY-2026-11-19.json",
+      "blob": "2e6dd84cfb4436b6069605726700050ca4abf5d1"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R40N5A-VERIFIED-FREQUENCY-2026-11-19.json",
+      "blob": "23fa089a9cbf5c5c6ed97a399066d2e44d3eefac"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R41A-PRUNING-2026-11-19.json",
+      "blob": "26922e09712d25c351270e9b675984dcca496486"
+    },
+    {
+      "path": "data/JANUS-TACHYON-DEMIHEAD-R5-PAIRED-GAIN-2026-11-22.json",
+      "blob": "cc9818dd9e0b6b60fe69df02416c1e569d842402"
+    },
+    {
+      "path": "data/JANUS-TACHYON-SIMPTOMAT-R3-INDEPENDENT-DATA-QUALIFICATION-2026-11-22.json",
+      "blob": "1c98ccedd4039f94c7ffacbc91b683cb37a1b840"
+    },
+    {
+      "path": "data/JANUS-TOPA-SPIDER-SIRIUS-CRT-0222-CROSS-LINEAGE-RUN-2026-09-01-v1.0.json",
+      "blob": "47c858903c602e3b36ac2535b9a636bdd275076f"
+    },
+    {
+      "path": "data/JANUS-TRUMP-EXACT-CHANNEL-DECOMPOSITION-APPLICATION-CONTRACT-2026-09-20-v1.6.json",
+      "blob": "f306210f2ab8f7e4667bc400c40839ff542b7f28"
+    },
+    {
+      "path": "data/JANUS-TRUMP-MINIMAL-SPLIT-STATE-REQUIREMENTS-RESULT-2026-09-20-v1.0.json",
+      "blob": "93310f74dc936cb822eed8dbcb22d4f6b894cdf9"
+    },
+    {
+      "path": "data/JANUS-WEDJAT-MUSEUM-GEOMETRY-PROTOCOL-2026-08-15-v0.1.json",
+      "blob": "830276a73188ae0ffc22d63a6760283633041065"
+    }
+  ],
+  "parent": {
+    "artifact": 14950931857,
+    "run": 45456941303,
+    "zip_sha256": "15272209de2d1b9aee63b00428f9aba8357ab0371b9af213f2b49d500c5ec52e",
+    "receipt": "1114ff85f4fa8a1e891dd7e355b575d3eb7e3046b29804224c5d4ab811aec896"
+  },
+  "budget": 400,
+  "min_rows": 300,
+  "max_rows": 500,
+  "max_unknown": 60,
+  "max_class": 80,
+  "seed": 20261124,
+  "steps": 100,
+  "learning_rate": 0.002,
+  "threshold": 0.55,
+  "teacher": "frozen R70B strengthened_rule, scalar pseudo-labels only",
+  "scope": "First-party historical JSON; balanced without replacement across available labels, no synthetic duplication. No assumption of equal availability across 9 classes, provenance verified but pseudo-labels not independently certified. Hold if fewer than 300 distinct rows. Fixed hyperparameters. No live model changes."
+}
