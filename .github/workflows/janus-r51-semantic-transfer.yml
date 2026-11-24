@@ -1,0 +1,60 @@
+name: JANUS R5.1 Real Registry Semantic Transfer
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/semantic_transfer_r51.py'
+      - 'autonomy/registry/R51_REAL_DOCUMENT_SPLIT.json'
+      - '.github/workflows/janus-r51-semantic-transfer.yml'
+  push:
+    branches: [research/r51-registry-semantic-transfer-20261124]
+    paths:
+      - 'autonomy/registry/semantic_transfer_r51.py'
+      - '.github/workflows/janus-r51-semantic-transfer.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  real-document-exam:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-r51-meta
+          persist-credentials: false
+          sparse-checkout: |
+            PROJECT_STATUS.json
+            registry/research_portfolio/CURRENT-PORTFOLIO-AUTHORITY.json
+            registry/audit/JANUS-META-REGISTRY-TECHNICAL-AUDIT-v1.0.json
+            registry/audit/JANUS-META-REGISTRY-EXECUTION-SAFETY-v1.0.json
+            data/JANUS-SEARCH-SURFACE-v1.0.json
+            data/JANUS-PROJECT-CONTINUITY-LEDGER-HRAIN-INAIHR-PROTOCOL-2026-08-24-v1.0.json
+            data/JANUS-RULE-001-FIRST-PERSON-TEMPORAL-CONSTRUCTION-2026-11-22-v1.0.json
+            data/JANUS-SIT2-REAL-GBT-WEAK-INJECTION-2026-11-22.json
+            data/JANUS-TACHYON-DEMIHEAD-R5D-EXTERNAL-SOURCE-QUALIFICATION-2026-11-22.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Train and compare on frozen document-disjoint exam
+        run: |
+          set -euo pipefail
+          python autonomy/registry/project_context_r4.py --self-test
+          python autonomy/registry/semantic_transfer_r51.py --registry pinned-r51-meta --manifest autonomy/registry/R51_REAL_DOCUMENT_SPLIT.json > "$RUNNER_TEMP/r51-result.json"
+          cat "$RUNNER_TEMP/r51-result.json"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          x=json.loads((Path(os.environ["RUNNER_TEMP"])/"r51-result.json").read_text())
+          assert x["train_fields"]==42 and x["exam_fields"]==24
+          assert x["schema_disjoint"] and not x["external_blind"]
+          assert not x["live_authority"] and not x["production_promotion"]
+          assert len(x["predictions"])==24
+          assert all(not r["action_authority"] for r in x["predictions"])
+          print("R51_ENGINEERING_REPLAY_COMPLETE__NO_PROMOTION")
+          PY
