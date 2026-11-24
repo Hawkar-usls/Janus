@@ -1,0 +1,473 @@
+{
+  "schema": "janus.registry.r51.real_document_split.v1",
+  "commit": "e85c19c31bdad729f06961d64de36d8f3a620483",
+  "scope": "Same-owner manually authored labels, previously read by developer, document- and schema-disjoint from training; not external blind. No live authority. GOAL includes stated purpose/research question, EVIDENCE includes recorded pointers/results not verified truth, OPEN is unresolved gate, BOUNDARY is restriction, STATUS is descriptive status, UNKNOWN is unsupported for this ontology. Freeze before implementation; compare strong field rule; no tuning on exam.",
+  "documents": [
+    {
+      "path": "PROJECT_STATUS.json",
+      "blob": "6f0111603c62b48839ea5c04bfc1ee7a5e5847dc",
+      "partition": "TRAIN",
+      "fields": [
+        {
+          "pointer": [
+            "summary"
+          ],
+          "role": "GOAL"
+        },
+        {
+          "pointer": [
+            "known_unresolved_strict_result"
+          ],
+          "role": "OPEN"
+        },
+        {
+          "pointer": [
+            "technical_audit"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "machine_audit"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "current_portfolio_authority"
+          ],
+          "role": "AUTHORITY"
+        },
+        {
+          "pointer": [
+            "interpretation_policy"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "maturity"
+          ],
+          "role": "STATUS"
+        },
+        {
+          "pointer": [
+            "historical_research_portfolio_master_current_authority"
+          ],
+          "role": "BOUNDARY"
+        }
+      ]
+    },
+    {
+      "path": "registry/research_portfolio/CURRENT-PORTFOLIO-AUTHORITY.json",
+      "blob": "1333351624bb0beaef10ac52334ea643d29bab17",
+      "partition": "TRAIN",
+      "fields": [
+        {
+          "pointer": [
+            "purpose"
+          ],
+          "role": "GOAL"
+        },
+        {
+          "pointer": [
+            "current_authority"
+          ],
+          "role": "AUTHORITY"
+        },
+        {
+          "pointer": [
+            "project_authority"
+          ],
+          "role": "AUTHORITY"
+        },
+        {
+          "pointer": [
+            "historical_snapshots"
+          ],
+          "role": "HISTORY"
+        },
+        {
+          "pointer": [
+            "rule"
+          ],
+          "role": "BOUNDARY"
+        }
+      ]
+    },
+    {
+      "path": "registry/audit/JANUS-META-REGISTRY-TECHNICAL-AUDIT-v1.0.json",
+      "blob": "2e1aab9db4025ba76e6d05378b9d81b354de750d",
+      "partition": "TRAIN",
+      "fields": [
+        {
+          "pointer": [
+            "purpose"
+          ],
+          "role": "GOAL"
+        },
+        {
+          "pointer": [
+            "authority"
+          ],
+          "role": "AUTHORITY"
+        },
+        {
+          "pointer": [
+            "audited_base_commit"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "unresolved"
+          ],
+          "role": "OPEN"
+        },
+        {
+          "pointer": [
+            "policies"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "global_boundaries"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "standout_objects"
+          ],
+          "role": "EVIDENCE"
+        }
+      ]
+    },
+    {
+      "path": "registry/audit/JANUS-META-REGISTRY-EXECUTION-SAFETY-v1.0.json",
+      "blob": "cce562dfb4fd83dcec00a74f50a461423d90063d",
+      "partition": "TRAIN",
+      "fields": [
+        {
+          "pointer": [
+            "status"
+          ],
+          "role": "STATUS"
+        },
+        {
+          "pointer": [
+            "critical_boundaries"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "safe_review_default"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "reviewed_runtime_surfaces"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "interpretation"
+          ],
+          "role": "BOUNDARY"
+        }
+      ]
+    },
+    {
+      "path": "data/JANUS-SEARCH-SURFACE-v1.0.json",
+      "blob": "773b97ce1ce54e8d650d5dbaae0f6818b0593bc8",
+      "partition": "TRAIN",
+      "fields": [
+        {
+          "pointer": [
+            "purpose"
+          ],
+          "role": "GOAL"
+        },
+        {
+          "pointer": [
+            "status"
+          ],
+          "role": "STATUS"
+        },
+        {
+          "pointer": [
+            "manual_next_gate"
+          ],
+          "role": "OPEN"
+        },
+        {
+          "pointer": [
+            "manual_next_gate",
+            "after_deployment"
+          ],
+          "role": "NEXT"
+        },
+        {
+          "pointer": [
+            "claim_ceiling"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "pages_configuration_observed"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "authority_model"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "evolution_policy"
+          ],
+          "role": "BOUNDARY"
+        }
+      ]
+    },
+    {
+      "path": "data/JANUS-PROJECT-CONTINUITY-LEDGER-HRAIN-INAIHR-PROTOCOL-2026-08-24-v1.0.json",
+      "blob": "740065281c7c7b289c927db7661b9b000abb8c68",
+      "partition": "TRAIN",
+      "fields": [
+        {
+          "pointer": [
+            "purpose"
+          ],
+          "role": "GOAL"
+        },
+        {
+          "pointer": [
+            "status"
+          ],
+          "role": "STATUS"
+        },
+        {
+          "pointer": [
+            "core_law"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "parents"
+          ],
+          "role": "HISTORY"
+        },
+        {
+          "pointer": [
+            "pre_stage_gate"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "post_stage_gate"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "canonical_event_schema"
+          ],
+          "role": "UNKNOWN"
+        },
+        {
+          "pointer": [
+            "compatibility"
+          ],
+          "role": "UNKNOWN"
+        },
+        {
+          "pointer": [
+            "archive_request_contract"
+          ],
+          "role": "BOUNDARY"
+        }
+      ]
+    },
+    {
+      "path": "data/JANUS-RULE-001-FIRST-PERSON-TEMPORAL-CONSTRUCTION-2026-11-22-v1.0.json",
+      "blob": "8913375012e76dc236ffb49e21a293606ba753b8",
+      "partition": "EXAM",
+      "fields": [
+        {
+          "pointer": [
+            "canonical_name"
+          ],
+          "role": "UNKNOWN"
+        },
+        {
+          "pointer": [
+            "epistemic_boundaries"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "validation",
+            "pre_registration_required"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "sources"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "how_janus_must_use_rule",
+            "default_research_question"
+          ],
+          "role": "GOAL"
+        },
+        {
+          "pointer": [
+            "change_control"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "language"
+          ],
+          "role": "UNKNOWN"
+        },
+        {
+          "pointer": [
+            "predictions"
+          ],
+          "role": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "path": "data/JANUS-SIT2-REAL-GBT-WEAK-INJECTION-2026-11-22.json",
+      "blob": "5d66ca59c19bf66849959de821192c86568256e5",
+      "partition": "EXAM",
+      "fields": [
+        {
+          "pointer": [
+            "status"
+          ],
+          "role": "STATUS"
+        },
+        {
+          "pointer": [
+            "source",
+            "first_successful_ci"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "source",
+            "research_merge_sha"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "heldout_metrics"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "epistemic_limits"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "epistemic_limits",
+            "scientific_gate"
+          ],
+          "role": "OPEN"
+        },
+        {
+          "pointer": [
+            "next"
+          ],
+          "role": "NEXT"
+        },
+        {
+          "pointer": [
+            "date"
+          ],
+          "role": "UNKNOWN"
+        }
+      ]
+    },
+    {
+      "path": "data/JANUS-TACHYON-DEMIHEAD-R5D-EXTERNAL-SOURCE-QUALIFICATION-2026-11-22.json",
+      "blob": "ab683c42ea6f1fd3281b6afe23a419bb42633a17",
+      "partition": "EXAM",
+      "fields": [
+        {
+          "pointer": [
+            "status"
+          ],
+          "role": "STATUS"
+        },
+        {
+          "pointer": [
+            "source_result"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "verified_ci"
+          ],
+          "role": "EVIDENCE"
+        },
+        {
+          "pointer": [
+            "outside_custodian_status"
+          ],
+          "role": "OPEN"
+        },
+        {
+          "pointer": [
+            "hard_gates"
+          ],
+          "role": "BOUNDARY"
+        },
+        {
+          "pointer": [
+            "hard_gates",
+            "scientific_gate"
+          ],
+          "role": "OPEN"
+        },
+        {
+          "pointer": [
+            "next_recommendation"
+          ],
+          "role": "NEXT"
+        },
+        {
+          "pointer": [
+            "as_of"
+          ],
+          "role": "UNKNOWN"
+        }
+      ]
+    }
+  ]
+}
