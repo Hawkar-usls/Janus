@@ -10,6 +10,12 @@ The separate pinned, still-unmerged autonomy_map/CURRENT_STATE.json contains nin
 
 The first-party autonomy/registry/navigator.py resolves only declared project aliases and the independently pinned R1 JANUS_AUTONOMY overlay. It checks Git blob identities, safe paths, strict JSON keys, schema, authority limits, health receipt and controller identity, and outputs BOOT_CONTEXT.json. An unindexed or un-fetched project is UNKNOWN or HOLD; no hallucinated state, no promotion. It never interprets source JSON text as instructions, executes code or changes remote files.
 
+## Whole public registry schema exploration
+
+Actual GitHub Actions run 45297638911 on source head 723f11bb4cbecaf661f385266f31cf83b930f809 checked out the exact pinned public Meta Registry main and enumerated 4,615 JSON paths under data. The Schema Explorer parsed 3,922 bounded object JSON files into 1,080 distinct schema-name groups, with 693 paths unparsed or skipped because of scope, size or validation limits. Its output is a source-SHA-bound read-only catalog artifact, not a declaration that every JSON has been understood or that filenames establish current authority.
+
+The new first-party autonomy/registry/schema_indexer.py inventories files without executing their contents, reusing the strict duplicate-key JSON parser, size/path restrictions, and preserving SHA-256 of bounded candidate CURRENT_STATE / JOURNAL / INDEX files. It never fetches private repos, writes source files, runs dependencies, merges PRs or creates forks. Other topics remain discovery candidates until an independent check of current-state, journal and fresh CI. The user does not need to manually tell the agent which filename exists, but this is still an exploratory read-only organ rather than continuous production memory synchronization.
+
 ## Public architecture patterns inspected in original sources
 
 Aeon, aeonfun/aeon commit f94f39e, .github/workflows/scheduler.yml: scheduling and polling are independent failure domains; missed cron ticks tracked as debt; retry/breaker prevents endless failures. In JANUS R3 this motivates independently staged diagnosis and bounded retry/recovery, NOT automatic dispatch.
