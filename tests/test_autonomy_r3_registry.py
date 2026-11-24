@@ -20,6 +20,9 @@ def inputs():
     return index,state,contract,health
 
 
+@unittest.skipUnless(
+    os.environ.get("JANUS_R3_REQUIRE_PINNED_REGISTRY")=="1",
+    "R3 two-repo pinned Meta Registry checkout not present in generic R1 offline suite")
 class NavigatorTests(unittest.TestCase):
     def test_autonomy_bootstrap_finds_expected_organs_and_review_gates(self):
         x=n.boot(MAIN,MAP,n.MAIN_COMMIT,n.MAP_COMMIT,"JANUS")
