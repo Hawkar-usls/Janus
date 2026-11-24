@@ -52,6 +52,7 @@ jobs:
         env:
           JANUS_R3_MAIN_ROOT: ../pinned-meta-main
           JANUS_R3_MAP_ROOT: ../pinned-meta-map
+          JANUS_R3_REQUIRE_PINNED_REGISTRY: '1'
         run: |
           set -euo pipefail
           python -m py_compile autonomy/registry/navigator.py autonomy/repair/doctor.py tests/test_autonomy_r3_registry.py tests/test_autonomy_r3_repair.py
