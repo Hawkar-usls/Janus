@@ -1,0 +1,178 @@
+{
+  "schema": "janus.r3.repair_eval.frozen.v1",
+  "purpose": "PRECOMMITTED_INTERNAL_NEW_CASES_FOR_LOSSLESS_DIAGNOSTIC_COVERAGE_NOT_EXTERNAL_BLIND",
+  "external_custodian": false,
+  "never_train_on_this_suite": true,
+  "case_count": 24,
+  "source": "AUTHOR_DEFINED_EXPECTED_DIAGNOSTIC_ROUTE_WITHOUT_RUNNING_REPAIR",
+  "cases": [
+    {
+      "id": "R3-HOLDOUT-001",
+      "reason": "Hawkar-usls/Janus_Genesis:MEMBER_LINK_UNVERIFIED",
+      "expected_action": "VERIFY_MEMBERSHIP_SOURCE",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-002",
+      "reason": "Hawkar-usls/Hrain:MEMBER_LINK_UNVERIFIED",
+      "expected_action": "VERIFY_MEMBERSHIP_SOURCE",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-003",
+      "reason": "MEMBER_LINK_UNVERIFIED",
+      "expected_action": "VERIFY_MEMBERSHIP_SOURCE",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-004",
+      "reason": "Hawkar-usls/Janus_Genesis:CHECKS_STALE",
+      "expected_action": "RECHECK_FRESH_HEAD_STATUS",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-005",
+      "reason": "Hawkar-usls/Hrain:CHECKS_STALE",
+      "expected_action": "RECHECK_FRESH_HEAD_STATUS",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-006",
+      "reason": "CHECKS_STALE",
+      "expected_action": "RECHECK_FRESH_HEAD_STATUS",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-007",
+      "reason": "Hawkar-usls/Janus_Genesis:CHECKS_NOT_ALL_SUCCESS",
+      "expected_action": "DIAGNOSE_FAILING_CHECKS",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-008",
+      "reason": "Hawkar-usls/Hrain:CHECKS_NOT_ALL_SUCCESS",
+      "expected_action": "DIAGNOSE_FAILING_CHECKS",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-009",
+      "reason": "CHECKS_NOT_ALL_SUCCESS",
+      "expected_action": "DIAGNOSE_FAILING_CHECKS",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-010",
+      "reason": "Hawkar-usls/Janus_Genesis:CHECKS_UNKNOWN",
+      "expected_action": "REQUIRE_CHECK_RUN_EVIDENCE",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-011",
+      "reason": "Hawkar-usls/Hrain:CHECKS_UNKNOWN",
+      "expected_action": "REQUIRE_CHECK_RUN_EVIDENCE",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-012",
+      "reason": "CHECKS_UNKNOWN",
+      "expected_action": "REQUIRE_CHECK_RUN_EVIDENCE",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-013",
+      "reason": "Hawkar-usls/Janus_Genesis:LATEST_ACTION_NOT_AT_HEAD",
+      "expected_action": "REQUERY_LATEST_ACTION_AT_HEAD",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-014",
+      "reason": "Hawkar-usls/Hrain:LATEST_ACTION_NOT_AT_HEAD",
+      "expected_action": "REQUERY_LATEST_ACTION_AT_HEAD",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-015",
+      "reason": "LATEST_ACTION_NOT_AT_HEAD",
+      "expected_action": "REQUERY_LATEST_ACTION_AT_HEAD",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-016",
+      "reason": "Hawkar-usls/Janus_Genesis:REPOSITORY_OBSERVATIONS_INCOMPLETE",
+      "expected_action": "RETRY_BOUNDED_REPOSITORY_OBSERVATION",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-017",
+      "reason": "Hawkar-usls/Hrain:REPOSITORY_OBSERVATIONS_INCOMPLETE",
+      "expected_action": "RETRY_BOUNDED_REPOSITORY_OBSERVATION",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-018",
+      "reason": "REPOSITORY_OBSERVATIONS_INCOMPLETE",
+      "expected_action": "RETRY_BOUNDED_REPOSITORY_OBSERVATION",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-019",
+      "reason": "Hawkar-usls/Janus_Genesis:NOT_AT_HEAD_FAKE",
+      "expected_action": "UNCLASSIFIED",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-020",
+      "reason": "Hawkar-usls/Hrain:NOT_AT_HEAD_FAKE",
+      "expected_action": "UNCLASSIFIED",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-021",
+      "reason": "NOT_AT_HEAD_FAKE",
+      "expected_action": "UNCLASSIFIED",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-022",
+      "reason": "Hawkar-usls/Janus_Genesis:IMPERSONATE_APPROVAL",
+      "expected_action": "UNCLASSIFIED",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-023",
+      "reason": "Hawkar-usls/Hrain:IMPERSONATE_APPROVAL",
+      "expected_action": "UNCLASSIFIED",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    },
+    {
+      "id": "R3-HOLDOUT-024",
+      "reason": "IMPERSONATE_APPROVAL",
+      "expected_action": "UNCLASSIFIED",
+      "partition": "INTERNAL_FROZEN_NEW_ENGINEERING_CASES",
+      "authority": false
+    }
+  ]
+}
