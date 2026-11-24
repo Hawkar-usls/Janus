@@ -1,0 +1,133 @@
+name: R7.0C bounded structural teacher distillation
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/assimilation_r70c.py'
+      - 'research/assimilation/R70C_TRAIN.json'
+      - 'research/assimilation/R70C_EXAM.json'
+      - '.github/workflows/janus-r70c-structural-distillation.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  train:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      seal: ${{ steps.seal.outputs.receipt }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            autonomy/registry/assimilation_r70b.py
+            autonomy/registry/assimilation_r70c.py
+            research/assimilation/R70C_TRAIN.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: f0ccae20def2fe256ff3f0f9da123798b162ca1a
+          path: train63
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R63-ORGAN-BOOT-CONTRACT-2026-11-24.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 86bbdbdb4327c7f94ab43b42e1ef63dcdb54c10b
+          path: train64
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R64-ESSENCE-BOOT-INTEGRATION-2026-11-24.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 5a80cb7a740822447f64573f29c3f2f413f57829
+          path: train66
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R66-PERSISTENT-CONTEXT-LINEAGE-2026-11-24.json
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Download verified historical parent (read only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/14905061950/zip > "$RUNNER_TEMP/r62.zip"
+          echo "92d253e6956b51d7a2a61ab99d02cd373bb825805fe33c4ecd4faa203d814d27  $RUNNER_TEMP/r62.zip" | sha256sum -c -
+      - run: python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Train on teacher-labeled sources, no exam source checkout
+        run: python autonomy/registry/assimilation_r70c.py train "$RUNNER_TEMP/r62.zip" "$RUNNER_TEMP/CANDIDATE.json"
+      - name: Freeze candidate receipt
+        id: seal
+        run: |
+          python -c 'import json,os; print("receipt="+json.load(open(os.environ["RUNNER_TEMP"]+"/CANDIDATE.json"))["receipt_sha256"])' >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r70c-frozen-candidate
+          path: ${{ runner.temp }}/CANDIDATE.json
+          retention-days: 30
+  exam:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            autonomy/registry/assimilation_r70b.py
+            autonomy/registry/assimilation_r70c.py
+            research/assimilation/R70C_TRAIN.json
+            research/assimilation/R70C_EXAM.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 9b04f146b386d215fede6eb5d53bdb5de600bcc1
+          path: exam651
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-MEMORY-CORTEX-RELIABILITY-REPAIR-2026-11-23-v2.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 6aa8ded5f7e31112bc9ff94a13f9521bfa7de438
+          path: exam652
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-ESSENCE-G9-FUNCTIONAL-RECOVERY-2026-11-23.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: d9d74d2e16b743afa796063e31f34ad07ca1099d
+          path: exam654
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-TRINITY-PARENTAL-CPU-R11-R12-2026-11-23.json
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Download verified historical parent (read only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/14905061950/zip > "$RUNNER_TEMP/r62.zip"
+          echo "92d253e6956b51d7a2a61ab99d02cd373bb825805fe33c4ecd4faa203d814d27  $RUNNER_TEMP/r62.zip" | sha256sum -c -
+      - run: python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          name: r70c-frozen-candidate
+          path: ${{ runner.temp }}/candidate
+      - name: First-look paired exam, no optimizer
+        env:
+          EXPECTED_SEAL: ${{ needs.train.outputs.seal }}
+        run: python autonomy/registry/assimilation_r70c.py exam "$RUNNER_TEMP/r62.zip" "$RUNNER_TEMP/candidate/CANDIDATE.json" "$EXPECTED_SEAL"
