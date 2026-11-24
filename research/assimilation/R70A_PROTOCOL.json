@@ -1,0 +1,43 @@
+{
+  "schema": "janus.r70a.protocol.v1",
+  "stage": "RESEARCH_PREPARATION_ONLY",
+  "purpose": "Test source-grounded fact composition before independent model assessment; not evidence of neural learning.",
+  "sources": [
+    {
+      "repository": "Hawkar-usls/janus-meta-registry",
+      "commit": "ecf61e5aec2bc7ffb370c28b5a2f8cd7a277dd2c",
+      "path": "data/autonomy_map/JANUS-R69-LIVING-MEMORY-EVIDENCE.json",
+      "blob": "aee43f5804d5c15a76c333fc9e020d7d619b28b8",
+      "scope": "historical engineering evidence, not current live status"
+    },
+    {
+      "repository": "Hawkar-usls/Janus-Demiurge",
+      "commit": "7d7d355c7ac15cc94f0034ca8171624cda4017eb",
+      "path": "research/essence/trinity_parental_school/R14_REAL_CPU_RESULT_20261123.json",
+      "blob": "99cd8a480e7a11fb9a0d3fe0386738069ec9da1a",
+      "scope": "internal first-look report, not external validation"
+    }
+  ],
+  "interfaces": {
+    "beetle": "future source candidates only, no automatic ingestion in this stage",
+    "registry": "pinned factual sources",
+    "cortex": "future read-only verified retrieval interface; existing PR 702",
+    "trinity": "deterministic answer verifier; parent advice not truth",
+    "essence": "no training or promotion in R70A"
+  },
+  "diagnostic": "14 disclosed developer-authored cases; lookup-only comparison is weak diagnostic, strong typed deterministic composition is reference, not independent model",
+  "next_gate": {
+    "id": "R70B",
+    "requirements": [
+      "Independent examiner supplies previously unseen source/task cohort, separate from development data",
+      "Freeze source hashes, tasks, scoring and strong baselines before evaluation",
+      "Compare frozen student with and without retrieval, strong rule baseline, prior parent on identical tasks and account for cost",
+      "Report paired differences, uncertainty, unsupported assertions, regressions; hold if no reliable advantage"
+    ],
+    "no_automatic_admission": true
+  },
+  "r69_schedule_validation": "INDEPENDENT_PENDING",
+  "action_authority": false,
+  "production_changed": false,
+  "neural_training": false
+}
