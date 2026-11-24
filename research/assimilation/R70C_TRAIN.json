@@ -1,0 +1,40 @@
+{
+  "schema": "janus.r70c.train.v1",
+  "model": {
+    "run": 45361865907,
+    "artifact": 14905061950,
+    "zip_sha256": "92d253e6956b51d7a2a61ab99d02cd373bb825805fe33c4ecd4faa203d814d27",
+    "train_sha256": "08e914714b41a3dc6c58025a0a7862b5b61e230d09efef32df92d7c88603d188",
+    "receipt": "860d74db9a22b4a406ddb2ed6b43505917da509d1d81c9265a7562fafd284497"
+  },
+  "sources": [
+    {
+      "id": "train63",
+      "commit": "f0ccae20def2fe256ff3f0f9da123798b162ca1a",
+      "path": "data/autonomy_map/JANUS-R63-ORGAN-BOOT-CONTRACT-2026-11-24.json",
+      "blob": "f94e09b5686b199735e9a6746c82ec76ea384218",
+      "schema": "janus.registry.organ_boot_contract.r63.v1"
+    },
+    {
+      "id": "train64",
+      "commit": "86bbdbdb4327c7f94ab43b42e1ef63dcdb54c10b",
+      "path": "data/autonomy_map/JANUS-R64-ESSENCE-BOOT-INTEGRATION-2026-11-24.json",
+      "blob": "a75ec211d99826a277e312f8864a1ffa2d22283c",
+      "schema": "janus.registry.essence_boot.r64.v1"
+    },
+    {
+      "id": "train66",
+      "commit": "5a80cb7a740822447f64573f29c3f2f413f57829",
+      "path": "data/autonomy_map/JANUS-R66-PERSISTENT-CONTEXT-LINEAGE-2026-11-24.json",
+      "blob": "da86dae84b863f19c84840ebecdcba169d4d428e",
+      "schema": "janus.registry.persistent_context_lineage.r66.v1"
+    }
+  ],
+  "teacher": "R70B strengthened_rule exact frozen",
+  "seed": 20261124,
+  "steps": 100,
+  "learning_rate": 0.005,
+  "threshold": 0.55,
+  "max_rows": 512,
+  "scope": "Historical source scalars only, teacher pseudo-labels (not independent ground truth). No exam bytes read; inherited and scratch comparison. Training CPU, fixed budget, no production adoption."
+}

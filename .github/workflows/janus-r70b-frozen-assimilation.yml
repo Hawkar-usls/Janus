@@ -1,0 +1,56 @@
+name: R7.0B frozen knowledge assimilation first look
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/assimilation_r70b.py'
+      - 'research/assimilation/R70B_EXAM.json'
+      - '.github/workflows/janus-r70b-frozen-assimilation.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  exam:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 3bf5fe520e2b3599e77dc0c59db780b47815e75e
+          path: exam-r65
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R65-SELECTIVE-KNOWLEDGE-UPDATE-2026-11-24.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 483b979202a6c9592e94fda7c2b682ead32818bf
+          path: exam-r67
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R67-CONTEXT-HOMEOSTASIS-2026-11-24.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 23c65d08793ef1baa271f85029acfa8857f9d406
+          path: exam-r68
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R68-MEMORY-CONTINUITY-2026-11-24.json
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Download exact prior reviewed training artifact (read only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/14905061950/zip > "$RUNNER_TEMP/r62.zip"
+          echo "92d253e6956b51d7a2a61ab99d02cd373bb825805fe33c4ecd4faa203d814d27  $RUNNER_TEMP/r62.zip" | sha256sum -c -
+      - run: python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - run: python autonomy/registry/assimilation_r70b.py "$RUNNER_TEMP/r62.zip"
