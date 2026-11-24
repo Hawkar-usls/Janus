@@ -1,0 +1,29 @@
+{
+  "commit": "dfbd5a3680083ea18ce276bf2876bb696e559d1f",
+  "packet": {
+    "capability": "registry.read_fixture.v1",
+    "created": 1795507329,
+    "expires": 1795507629,
+    "id": "e943b9e3eeca45f1b004e64a0971ff88",
+    "payload": {
+      "answer": {
+        "gate": "HOLD",
+        "goal": "compare documented capabilities",
+        "next": "review source"
+      },
+      "request_sha256": "23fdb2596d87241b6bea3be4fe1d22267f4aa2dbc5c34679195d3bbd34afe043"
+    },
+    "payload_sha256": "5a02427c41c0a25287b9def3fe87b4526f38fdcdcdfb07726ccf5a5bb22e83ad",
+    "recipient": "meta:r7b1",
+    "reply_to": "a784d5dd590b4f4998ca22b79fc5163c",
+    "sender": "janus:r7b1",
+    "signature": "VU5wzMc9JduhOI3gBk7XPzQj6harv2T3QgBAvfQnIX4XYurwueSwpUpeWFpmIZkKyshzcmAfQD+wMhUd1QXeAQ==",
+    "type": "TASK_RESULT",
+    "version": "0.1-pilot"
+  },
+  "public_key": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAgHv4lnDVKnsF+DCAj4LCK2yoW0HeEvHA1icY8ccGS5A=\n-----END PUBLIC KEY-----\n",
+  "repo": "Hawkar-usls/Janus",
+  "run_id": "45352622798",
+  "schema": "janus.jfp.remote_pilot.bundle.v1",
+  "stage": "RESPONSE"
+}
