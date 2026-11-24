@@ -1,0 +1,229 @@
+{
+  "schema": "janus.r70e.exam.v1",
+  "sources": [
+    {
+      "id": "freshE1",
+      "path": "data/JANUS-COSMOS-SETI-R42B-EQUAL-INFORMATION-DESIGN-2026-11-20.json",
+      "blob": "3e8526e1f2ba51bde97b1f0f47505dae92498e47",
+      "schema": "janus.cosmos.r42b.design.v1",
+      "commit": "2c0fe086fe26d766e6df62f932d1df88bba0ab22"
+    },
+    {
+      "id": "freshE2",
+      "path": "data/JANUS-SIT2B-REAL-GBT-POSITIVE-GUARD-2026-11-22.json",
+      "blob": "1eb7cbb015031f05e9ffd727394bef70cf5a7962",
+      "schema": "janus.meta_registry.cosmos.sit2b.strong_positive_temporal_accumulation_v1",
+      "commit": "2c0fe086fe26d766e6df62f932d1df88bba0ab22"
+    },
+    {
+      "id": "freshE3",
+      "path": "data/JANUS-TACHYON-SIMPTOMAT-R2-TEMPORAL-IDENTIFIABILITY-2026-11-22.json",
+      "blob": "cead41ec03cc1741a4bdad2ee8ed8deefedb86f2",
+      "schema": "janus.meta_registry.tachyon_simptomat.temporal_identifiability_evidence.v1",
+      "commit": "2c0fe086fe26d766e6df62f932d1df88bba0ab22"
+    }
+  ],
+  "scope": "New internal source-disjoint developer exam, related scientific lineages so not independent external science. R70C and R70D cases only regression; all variants reported without posthoc selection.",
+  "cases": [
+    [
+      "freshE1",
+      "STATUS",
+      [
+        "status",
+        "stage"
+      ],
+      "status"
+    ],
+    [
+      "freshE1",
+      "EVIDENCE",
+      [
+        "source_r42a/receipt_commit",
+        "source_r42a/run"
+      ],
+      "source_r42a/receipt_commit"
+    ],
+    [
+      "freshE1",
+      "BOUNDARY",
+      [
+        "gates/production_adoption",
+        "gates/fresh_groups"
+      ],
+      "gates/production_adoption"
+    ],
+    [
+      "freshE1",
+      "NEXT",
+      [
+        "next",
+        "revision"
+      ],
+      "next"
+    ],
+    [
+      "freshE1",
+      "BOUNDARY",
+      [
+        "gates/external_validation",
+        "source_r42a/common_artifact"
+      ],
+      "gates/external_validation"
+    ],
+    [
+      "freshE1",
+      "AUTHORITY",
+      [
+        "gates/fresh_groups",
+        "source_r42a/run"
+      ],
+      null
+    ],
+    [
+      "freshE2",
+      "STATUS",
+      [
+        "status",
+        "date"
+      ],
+      "status"
+    ],
+    [
+      "freshE2",
+      "EVIDENCE",
+      [
+        "source/result_git_blob_sha1",
+        "source/unit_tests_passed"
+      ],
+      "source/result_git_blob_sha1"
+    ],
+    [
+      "freshE2",
+      "BOUNDARY",
+      [
+        "scientific_gates/production_models_changed",
+        "measured/weak_loc_native"
+      ],
+      "scientific_gates/production_models_changed"
+    ],
+    [
+      "freshE2",
+      "NEXT",
+      [
+        "next_research",
+        "interpretation_ru"
+      ],
+      "next_research"
+    ],
+    [
+      "freshE2",
+      "BOUNDARY",
+      [
+        "scientific_gates/external_heldout_and_custodian",
+        "source/unit_tests_passed"
+      ],
+      "scientific_gates/external_heldout_and_custodian"
+    ],
+    [
+      "freshE2",
+      "AUTHORITY",
+      [
+        "source/unit_tests_passed",
+        "measured/weak_loc_native"
+      ],
+      null
+    ],
+    [
+      "freshE3",
+      "STATUS",
+      [
+        "status",
+        "created_on"
+      ],
+      "status"
+    ],
+    [
+      "freshE3",
+      "EVIDENCE",
+      [
+        "source_commit",
+        "evidence/total_vectors"
+      ],
+      "source_commit"
+    ],
+    [
+      "freshE3",
+      "BOUNDARY",
+      [
+        "privacy_and_runtime/production_model_weights_changed",
+        "evidence/total_vectors"
+      ],
+      "privacy_and_runtime/production_model_weights_changed"
+    ],
+    [
+      "freshE3",
+      "NEXT",
+      [
+        "rule_001_implications/next_requirement",
+        "evidence/negative_result"
+      ],
+      "rule_001_implications/next_requirement"
+    ],
+    [
+      "freshE3",
+      "STATUS",
+      [
+        "evidence/test_status",
+        "evidence/total_vectors"
+      ],
+      "evidence/test_status"
+    ],
+    [
+      "freshE3",
+      "AUTHORITY",
+      [
+        "evidence/total_vectors",
+        "evidence/one_answer_unstable_vectors"
+      ],
+      null
+    ]
+  ],
+  "composition": [
+    [
+      0,
+      6,
+      "equal",
+      false
+    ],
+    [
+      2,
+      8,
+      "both_false",
+      true
+    ],
+    [
+      4,
+      10,
+      "both_false",
+      true
+    ],
+    [
+      8,
+      14,
+      "both_false",
+      true
+    ],
+    [
+      1,
+      7,
+      "equal",
+      false
+    ],
+    [
+      5,
+      11,
+      "equal",
+      "HOLD"
+    ]
+  ]
+}
