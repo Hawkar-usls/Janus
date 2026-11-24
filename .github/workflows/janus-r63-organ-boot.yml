@@ -1,0 +1,200 @@
+name: JANUS R6.3 scoped organ boot packets
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/organ_boot_r63.py'
+      - '.github/workflows/janus-r63-organ-boot.yml'
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    outputs:
+      pins: ${{ steps.prepare.outputs.pins }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-meta
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-CHAT-CONTEXT-INDEX.json
+            data/JANUS-COSMOS-SETI-CURRENT-STATE.json
+            data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json
+            data/JANUS-RULE-001-FIRST-PERSON-TEMPORAL-CONSTRUCTION-2026-11-22-v1.0.json
+            data/JANUS-TACHYON-RULE-001-TEMPORAL-PERCEPTION-ALGORITHM-2026-11-22-v1.0.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Fundamentum
+          ref: 941148371aac0a503d4f254c839683642fdf2f20
+          path: pinned-fund
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            registry/TRUMP_CURRENT_STATE.json
+            docs/TRUMP_DEVELOPMENT_JOURNAL.md
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 9306037335bb4532049633b7f5f082e75891ff51
+          path: pinned-map
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/OPERATING_CONTRACT.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: b72746a8f4e30450e3522f931a83da7889a6a605
+          path: pinned-jfp
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-JFP-R7B1-REMOTE-HANDSHAKE-EVIDENCE-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: bed6698f038e7edb81abc0acf93cbacdfbf35ec5
+          path: pinned-contract
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R61-REGISTRY-PREFLIGHT-CONTRACT-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 00910a3e1ea2d50650c20308ab66e3c2f7be46ab
+          path: pinned-demi
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            janus_model/__init__.py
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: f0ccae20def2fe256ff3f0f9da123798b162ca1a
+          path: pinned-r63
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R63-ORGAN-BOOT-CONTRACT-2026-11-24.json
+      - name: Build shared atlas and sealed recipient packets
+        id: prepare
+        env:
+          PYTHONPATH: ${{ github.workspace }}/pinned-demi
+        run: |
+          set -euo pipefail
+          python3 autonomy/registry/organ_boot_r63.py test
+          python3 autonomy/registry/organ_boot_r63.py prepare --out "$RUNNER_TEMP/boot"
+          python3 -c 'import json,os,pathlib; print("pins="+json.dumps(json.loads((pathlib.Path(os.environ["RUNNER_TEMP"])/"boot/pins.json").read_text()),separators=(",",":")))' >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r63-boot-root
+          path: ${{ runner.temp }}/boot/root.json
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r63-boot-terminal
+          path: ${{ runner.temp }}/boot/terminal.json
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r63-boot-demiurge
+          path: ${{ runner.temp }}/boot/demiurge.json
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r63-boot-demihead
+          path: ${{ runner.temp }}/boot/demihead.json
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r63-boot-registry
+          path: ${{ runner.temp }}/boot/registry.json
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r63-boot-genesis
+          path: ${{ runner.temp }}/boot/genesis.json
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r63-boot-lapis
+          path: ${{ runner.temp }}/boot/lapis.json
+          if-no-files-found: error
+          retention-days: 30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r63-boot-janus
+          path: ${{ runner.temp }}/boot/janus.json
+          if-no-files-found: error
+          retention-days: 30
+  consumer:
+    needs: prepare
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - organ: root
+            repository: Hawkar-usls/Hawkar-usls
+            project: JFP
+          - organ: terminal
+            repository: Hawkar-usls/-Terminal-for-Janus
+            project: JFP
+          - organ: demiurge
+            repository: Hawkar-usls/Janus-Demiurge
+            project: COSMOS
+          - organ: demihead
+            repository: Hawkar-usls/Demi_Head
+            project: TACHYON
+          - organ: registry
+            repository: Hawkar-usls/janus-meta-registry
+            project: JFP
+          - organ: genesis
+            repository: Hawkar-usls/Janus_Genesis
+            project: TRUMP
+          - organ: lapis
+            repository: Hawkar-usls/janus-lapis
+            project: COSMOS
+          - organ: janus
+            repository: Hawkar-usls/Janus
+            project: JFP
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/registry
+      - uses: actions/download-artifact@v4
+        with:
+          name: r63-boot-${{ matrix.organ }}
+          path: ${{ runner.temp }}/capsule
+      - name: Read only own sealed boot packet, without registry checkout
+        env:
+          ORGAN: ${{ matrix.organ }}
+          REPO: ${{ matrix.repository }}
+          PROJECT: ${{ matrix.project }}
+          PINS: ${{ needs.prepare.outputs.pins }}
+        run: |
+          set -euo pipefail
+          PIN="$(python3 -c 'import os,json;print(json.loads(os.environ["PINS"])[os.environ["ORGAN"]])')"
+          test ! -e pinned-meta
+          test ! -e pinned-fund
+          test ! -e pinned-demi
+          python3 autonomy/registry/organ_boot_r63.py consume --packet "$RUNNER_TEMP/capsule/$ORGAN.json" --pin "$PIN" --organ "$ORGAN" --repo "$REPO" --project "$PROJECT"
