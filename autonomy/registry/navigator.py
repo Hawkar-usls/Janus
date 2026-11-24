@@ -62,6 +62,8 @@ def strict_json(raw):
     try:
         return json.loads(raw, object_pairs_hook=pairs,
                           parse_constant=lambda _:(1/0))
+    except RegistryHold:
+        raise
     except (UnicodeError,ValueError,ZeroDivisionError) as exc:
         raise RegistryHold("REGISTRY_BAD_JSON") from exc
 
@@ -106,7 +108,10 @@ def validate_index(index):
             demand(type(alias) is str and 1<=len(alias)<=70
                    and not any(ord(ch)<32 for ch in alias), "REGISTRY_UNTRUSTED_ALIAS")
             key=alias.casefold().strip()
-            demand(key not in alias_map, "REGISTRY_AMBIGUOUS_ALIAS")
+            # The canonical project ID may deliberately repeat as its own
+            # alias (TRUMP). Only competing project ownership is ambiguous.
+            demand(key not in alias_map or alias_map[key]==p["id"],
+                   "REGISTRY_AMBIGUOUS_ALIAS")
             alias_map[key]=p["id"]
     proto=index.get("canonical_protocol")
     demand(type(proto) is dict and
