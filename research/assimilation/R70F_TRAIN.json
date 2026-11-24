@@ -1,0 +1,66 @@
+{
+  "schema": "janus.r70f.train.v1",
+  "snapshot": "2c0fe086fe26d766e6df62f932d1df88bba0ab22",
+  "sources": [
+    {
+      "path": "data/JANUS-COSMOS-SETI-R41S-5D-SPIRAL-2026-11-20.json",
+      "blob": "21096ab363882b5c4c08c004eab2645141c48293"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R41S1H2A-ROC-MORPHOLOGY-2026-11-20.json",
+      "blob": "0764ce4865291c3d9b9618e36048bb1674201581"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R42A4A-FULL-NOISE-SCORE-2026-11-20.json",
+      "blob": "2b1d0f25943f4c7dec0620ad19f44658828fd94a"
+    },
+    {
+      "path": "data/JANUS-TACHYON-DEMIHEAD-R5B-WITNESS-ANTI-SHORTCUT-2026-11-22.json",
+      "blob": "c36fb240cb7ae8f9116dc04f401376cbec965a64"
+    },
+    {
+      "path": "data/JANUS-TACHYON-DEMIHEAD-R5C-OBSERVATION-NATIVE-2026-11-22.json",
+      "blob": "1db6e78236074c2a2b82a56bb1ea9ff72897dbf8"
+    },
+    {
+      "path": "data/JANUS-COSMOS-OSIRIS-SPEAR-R2A-REAL-RADIO-COVERAGE-2026-11-21.json",
+      "blob": "d949d7e50c71096623b07685d638a583d776999f"
+    },
+    {
+      "path": "data/JANUS-COSMOS-OSIRIS-SPEAR-R2D-R2E-CASDA-DAP-2026-11-21.json",
+      "blob": "ac87a4cfcd1a6ba704bc32203984dd9f86a5d1c3"
+    }
+  ],
+  "parents": {
+    "E": {
+      "artifact": 14952319403,
+      "zip_sha256": "bcdc3c4e3ad0ae7406d30889081319f779d320604e73d21efeb3fa223473c403",
+      "receipt": "ccf1a62ff4a9b11b0a44e94c3f5e154393642082a11c9104d7652b1e329110ee",
+      "variant": "l2"
+    },
+    "D": {
+      "artifact": 14950263514,
+      "run": 45458912734,
+      "zip_sha256": "a8d23ae96bec8c5fb07890a0ed9723738233ede1ad21f283c960c5219d9cfbc9",
+      "receipt": "365d501bd372639e14482c0fc153d49177ffdaf05a5380e38b5f73a5702ff022"
+    },
+    "C": {
+      "artifact": 14950931857,
+      "run": 45456941303,
+      "zip_sha256": "15272209de2d1b9aee63b00428f9aba8357ab0371b9af213f2b49d500c5ec52e",
+      "receipt": "1114ff85f4fa8a1e891dd7e355b575d3eb7e3046b29804224c5d4ab811aec896"
+    }
+  },
+  "seed": 20261124,
+  "steps": 100,
+  "batch": 64,
+  "lr": 0.001,
+  "l2_lambda": 1,
+  "temperature": 2,
+  "distill_weight": 1,
+  "threshold": 0.55,
+  "new_budget": 120,
+  "minimum_new": 40,
+  "expected_replay_E": "2da17104de0babffd6a91cc6f1193a9cd607db3f7799f03aa01f92a99c10fcbb",
+  "scope": "One bounded research experiment. Three arms equal 100 steps and 32 new + 32 replay draws per step. No optimizer during evaluation. E-only vs C/D/E soft-target retention. Frozen candidate never admitted automatically."
+}

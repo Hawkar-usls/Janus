@@ -1,0 +1,270 @@
+name: R7.0F memory lock controlled distillation
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/assimilation_r70f.py'
+      - 'research/assimilation/R70F_TRAIN.json'
+      - 'research/assimilation/R70F_EXAM.json'
+      - '.github/workflows/janus-r70f-memory-lock.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  train:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    outputs:
+      seal: ${{ steps.seal.outputs.receipt }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            autonomy/registry/assimilation_r70b.py
+            autonomy/registry/assimilation_r70c.py
+            autonomy/registry/assimilation_r70d.py
+            autonomy/registry/assimilation_r70e.py
+            autonomy/registry/assimilation_r70f.py
+            research/assimilation/R70C_TRAIN.json
+            research/assimilation/R70D_TRAIN.json
+            research/assimilation/R70E_TRAIN.json
+            research/assimilation/R70F_TRAIN.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: f0ccae20def2fe256ff3f0f9da123798b162ca1a
+          path: train63
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R63-ORGAN-BOOT-CONTRACT-2026-11-24.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 86bbdbdb4327c7f94ab43b42e1ef63dcdb54c10b
+          path: train64
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R64-ESSENCE-BOOT-INTEGRATION-2026-11-24.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 5a80cb7a740822447f64573f29c3f2f413f57829
+          path: train66
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R66-PERSISTENT-CONTEXT-LINEAGE-2026-11-24.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 2c0fe086fe26d766e6df62f932d1df88bba0ab22
+          path: pool
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-COSMOS-SETI-R21-WEAK-SIGNAL-TEMPLATE-2026-11-17.json
+            data/JANUS-COSMOS-SETI-R24-ODONTO-CRYSTAL-GROWTH-2026-11-17.json
+            data/JANUS-COSMOS-SETI-R25-FUNDAMENTUM-BOUNDARY-MATCHING-2026-11-17.json
+            data/JANUS-COSMOS-SETI-R26-WEAKNESS-DIAGNOSTIC-2026-11-17.json
+            data/JANUS-COSMOS-SETI-R26C-ON-OFF-REFERENCE-ALIGNMENT-2026-11-17.json
+            data/JANUS-COSMOS-SETI-R27-EXTERNAL-BENCHMARK-2026-11-17.json
+            data/JANUS-COSMOS-SETI-R28-HYBRID-DETECTOR-2026-11-17.json
+            data/JANUS-COSMOS-SETI-R28B-ADAPTIVE-ROUTER-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R29-STAR-FORGE-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R30-FALSE-ALARM-SHIELD-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R30C-HANNAH-RFI-MEMORY-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R31-HANNAH-PROSPECTIVE-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R32-HANNAH-ADAPTIVE-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R33-HANNAH-VERIFIED-FAMILIES-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R33B2-HANNAH-DRIFT-REPLAY-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R33B4-SOURCE-IDENTITY-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R33BCD-HANNAH-CATALOG-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R35-GRAND-BENCHMARK-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R36-GALAXY-SWARM-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R37A-HANNAH-RESOLUTION-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R40B-TRANSFER-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R40CDE-TRANSFER-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R40H-FROZEN-TRANSFER-2026-11-18.json
+            data/JANUS-COSMOS-SETI-R40M-ADVERSARIAL-SHIELD-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R40N-RAW-RIVALS-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R40N1-CROSSDAY-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R40N10-ARTMONEY-TURBO-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R40N10B-EXPANSION-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R40N2-INSTRUMENT-CONTROLS-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R40N3-CROSSDAY-KUSTO-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R40N4-NEIGHBORHOOD-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R40N5-MATCHED-FREQUENCY-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R40N5A-VERIFIED-FREQUENCY-2026-11-19.json
+            data/JANUS-COSMOS-SETI-R41A-PRUNING-2026-11-19.json
+            data/JANUS-TACHYON-DEMIHEAD-R5-PAIRED-GAIN-2026-11-22.json
+            data/JANUS-TACHYON-SIMPTOMAT-R3-INDEPENDENT-DATA-QUALIFICATION-2026-11-22.json
+            data/JANUS-TOPA-SPIDER-SIRIUS-CRT-0222-CROSS-LINEAGE-RUN-2026-09-01-v1.0.json
+            data/JANUS-TRUMP-EXACT-CHANNEL-DECOMPOSITION-APPLICATION-CONTRACT-2026-09-20-v1.6.json
+            data/JANUS-TRUMP-MINIMAL-SPLIT-STATE-REQUIREMENTS-RESULT-2026-09-20-v1.0.json
+            data/JANUS-WEDJAT-MUSEUM-GEOMETRY-PROTOCOL-2026-08-15-v0.1.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 2c0fe086fe26d766e6df62f932d1df88bba0ab22
+          path: newpool
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-COSMOS-SETI-R41S1B-TRANSITION-AUDIT-2026-11-20.json
+            data/JANUS-COSMOS-SETI-R41S1C-EVIDENCE-DIFFERENTIATION-2026-11-20.json
+            data/JANUS-COSMOS-SETI-R41S1D-RETINA-RUBIK-2026-11-20.json
+            data/JANUS-COSMOS-SETI-R41S1E-NOISE-MODEL-2026-11-20.json
+            data/JANUS-COSMOS-SETI-R41U1-WISE-BOUNDED-2026-11-20.json
+            data/JANUS-COSMOS-SETI-R42A-COMMON-COMPETITOR-2026-11-20.json
+            data/JANUS-COSMOS-SETI-R42A7-NONDESTRUCTIVE-RFI-2026-11-21.json
+            data/JANUS-COSMOS-SETI-R42A7B-INDEPENDENT-ONOFF-2026-11-21.json
+            data/JANUS-COSMOS-SETI-R42A7B3-GBT-TCS-WITNESS-REQUEST-2026-11-21.json
+            data/JANUS-COSMOS-SETI-R42A8A-FROZEN-OOD-STRESS-2026-11-21.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 2c0fe086fe26d766e6df62f932d1df88bba0ab22
+          path: newpool-f
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-COSMOS-SETI-R41S-5D-SPIRAL-2026-11-20.json
+            data/JANUS-COSMOS-SETI-R41S1H2A-ROC-MORPHOLOGY-2026-11-20.json
+            data/JANUS-COSMOS-SETI-R42A4A-FULL-NOISE-SCORE-2026-11-20.json
+            data/JANUS-TACHYON-DEMIHEAD-R5B-WITNESS-ANTI-SHORTCUT-2026-11-22.json
+            data/JANUS-TACHYON-DEMIHEAD-R5C-OBSERVATION-NATIVE-2026-11-22.json
+            data/JANUS-COSMOS-OSIRIS-SPEAR-R2A-REAL-RADIO-COVERAGE-2026-11-21.json
+            data/JANUS-COSMOS-OSIRIS-SPEAR-R2D-R2E-CASDA-DAP-2026-11-21.json
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Read three exact previous research artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/14952319403/zip > "$RUNNER_TEMP/r70e.zip"
+          echo "bcdc3c4e3ad0ae7406d30889081319f779d320604e73d21efeb3fa223473c403  $RUNNER_TEMP/r70e.zip" | sha256sum -c -
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/14950263514/zip > "$RUNNER_TEMP/r70d.zip"
+          echo "a8d23ae96bec8c5fb07890a0ed9723738233ede1ad21f283c960c5219d9cfbc9  $RUNNER_TEMP/r70d.zip" | sha256sum -c -
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/14950931857/zip > "$RUNNER_TEMP/r70c.zip"
+          echo "15272209de2d1b9aee63b00428f9aba8357ab0371b9af213f2b49d500c5ec52e  $RUNNER_TEMP/r70c.zip" | sha256sum -c -
+      - run: python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Train bounded ablation
+        run: |
+          python autonomy/registry/assimilation_r70f.py train "$RUNNER_TEMP" "$RUNNER_TEMP/CANDIDATE.json"
+      - name: Freeze receipt
+        id: seal
+        run: python -c 'import json,os; print("receipt="+json.load(open(os.environ["RUNNER_TEMP"]+"/CANDIDATE.json"))["receipt_sha256"])' >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r70f-frozen-candidates
+          path: ${{ runner.temp }}/CANDIDATE.json
+          retention-days: 30
+  exam:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            autonomy/registry/assimilation_r70b.py
+            autonomy/registry/assimilation_r70c.py
+            autonomy/registry/assimilation_r70d.py
+            autonomy/registry/assimilation_r70e.py
+            autonomy/registry/assimilation_r70f.py
+            research/assimilation/R70C_TRAIN.json
+            research/assimilation/R70D_TRAIN.json
+            research/assimilation/R70E_TRAIN.json
+            research/assimilation/R70F_TRAIN.json
+            research/assimilation/R70C_EXAM.json
+            research/assimilation/R70D_EXAM.json
+            research/assimilation/R70E_EXAM.json
+            research/assimilation/R70F_EXAM.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 9b04f146b386d215fede6eb5d53bdb5de600bcc1
+          path: exam651
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-MEMORY-CORTEX-RELIABILITY-REPAIR-2026-11-23-v2.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 6aa8ded5f7e31112bc9ff94a13f9521bfa7de438
+          path: exam652
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-ESSENCE-G9-FUNCTIONAL-RECOVERY-2026-11-23.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: d9d74d2e16b743afa796063e31f34ad07ca1099d
+          path: exam654
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-TRINITY-PARENTAL-CPU-R11-R12-2026-11-23.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 2c0fe086fe26d766e6df62f932d1df88bba0ab22
+          path: freshd
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-COSMOS-SETI-R41S1H3-RETINA-CLOCK-INTERMOD-2026-11-21.json
+            data/JANUS-COSMOS-SETI-R42A6-SIGNAL-PRESERVATION-2026-11-21.json
+            data/JANUS-TACHYON-SIMPTOMAT-R2B-INDEPENDENT-METHODS-REVIEW-2026-11-22.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 2c0fe086fe26d766e6df62f932d1df88bba0ab22
+          path: freshe
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-COSMOS-SETI-R42B-EQUAL-INFORMATION-DESIGN-2026-11-20.json
+            data/JANUS-SIT2B-REAL-GBT-POSITIVE-GUARD-2026-11-22.json
+            data/JANUS-TACHYON-SIMPTOMAT-R2-TEMPORAL-IDENTIFIABILITY-2026-11-22.json
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 2c0fe086fe26d766e6df62f932d1df88bba0ab22
+          path: freshf
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-COSMOS-SETI-R42A5-COMBINED-SCORE-2026-11-21.json
+            data/JANUS-TACHYON-DEMIHEAD-R5D-EXTERNAL-SOURCE-QUALIFICATION-2026-11-22.json
+            data/JANUS-SIT2-REAL-GBT-WEAK-INJECTION-2026-11-22.json
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Read three exact previous research artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/14952319403/zip > "$RUNNER_TEMP/r70e.zip"
+          echo "bcdc3c4e3ad0ae7406d30889081319f779d320604e73d21efeb3fa223473c403  $RUNNER_TEMP/r70e.zip" | sha256sum -c -
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/14950263514/zip > "$RUNNER_TEMP/r70d.zip"
+          echo "a8d23ae96bec8c5fb07890a0ed9723738233ede1ad21f283c960c5219d9cfbc9  $RUNNER_TEMP/r70d.zip" | sha256sum -c -
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/14950931857/zip > "$RUNNER_TEMP/r70c.zip"
+          echo "15272209de2d1b9aee63b00428f9aba8357ab0371b9af213f2b49d500c5ec52e  $RUNNER_TEMP/r70c.zip" | sha256sum -c -
+      - run: python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          name: r70f-frozen-candidates
+          path: ${{ runner.temp }}/candidate
+      - name: Frozen fresh exam and old union regression
+        env:
+          EXPECTED_SEAL: ${{ needs.train.outputs.seal }}
+        run: python autonomy/registry/assimilation_r70f.py exam "$RUNNER_TEMP" "$RUNNER_TEMP/candidate/CANDIDATE.json" "$EXPECTED_SEAL"
