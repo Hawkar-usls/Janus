@@ -1,0 +1,72 @@
+name: JANUS JFP R7B.3 automatic two-way pilot
+on:
+  pull_request:
+    paths:
+      - 'autonomy/federation/auto_exchange_r7b3.py'
+      - '.github/workflows/jfp-r7b3*.yml'
+permissions:
+  contents: read
+jobs:
+  janus_request:
+    uses: ./.github/workflows/jfp-r7b3-local.yml
+    with:
+      stage: request
+      node: janus:r7b3
+  meta_request:
+    uses: Hawkar-usls/janus-meta-registry/.github/workflows/jfp-r7b3-peer.yml@28f205074a1667d2bca317cc76afe5e14e2c8ddd
+    with:
+      stage: request
+      node: meta:r7b3
+  janus_response:
+    needs: [meta_request]
+    uses: ./.github/workflows/jfp-r7b3-local.yml
+    with:
+      stage: receive
+      node: janus:r7b3
+      request_bundle: ${{ needs.meta_request.outputs.bundle }}
+  meta_response:
+    needs: [janus_request]
+    uses: Hawkar-usls/janus-meta-registry/.github/workflows/jfp-r7b3-peer.yml@28f205074a1667d2bca317cc76afe5e14e2c8ddd
+    with:
+      stage: receive
+      node: meta:r7b3
+      request_bundle: ${{ needs.janus_request.outputs.bundle }}
+  janus_verify:
+    needs: [janus_request, meta_response]
+    uses: ./.github/workflows/jfp-r7b3-local.yml
+    with:
+      stage: verify
+      node: janus:r7b3
+      request_bundle: ${{ needs.janus_request.outputs.bundle }}
+      response_bundle: ${{ needs.meta_response.outputs.bundle }}
+  meta_verify:
+    needs: [meta_request, janus_response]
+    uses: Hawkar-usls/janus-meta-registry/.github/workflows/jfp-r7b3-peer.yml@28f205074a1667d2bca317cc76afe5e14e2c8ddd
+    with:
+      stage: verify
+      node: meta:r7b3
+      request_bundle: ${{ needs.meta_request.outputs.bundle }}
+      response_bundle: ${{ needs.janus_response.outputs.bundle }}
+  evidence:
+    needs: [janus_verify, meta_verify]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      - name: Confirm both directions and no operator relay
+        env:
+          JANUS_RECEIPT: ${{ needs.janus_verify.outputs.bundle }}
+          META_RECEIPT: ${{ needs.meta_verify.outputs.bundle }}
+        run: |
+          python3 - <<'PY'
+          import base64, json, os
+          a,b=[json.loads(base64.b64decode(os.environ[k],validate=True)) for k in ("JANUS_RECEIPT","META_RECEIPT")]
+          assert {a["local"],b["local"]}=={"janus:r7b3","meta:r7b3"}
+          assert a["local"]==b["peer"] and b["local"]==a["peer"]
+          assert a["request_id"]!=b["request_id"]
+          for r in (a,b):
+              assert r["status"]=="VERIFIED_TRUST_BOUND_FIXTURE_ONLY"
+              assert r["run"]==os.environ["GITHUB_RUN_ID"]
+              assert r["attempt"]==os.environ["GITHUB_RUN_ATTEMPT"]
+              assert r["replay_rejected"] and not r["operator_relay"] and not r["action_authority"]
+          print("JFP_R7B3_AUTOMATIC_TWO_WAY_CI_PASS "+json.dumps({"directions":2,"receipts":[a,b],"scope":"reusable_workflow_cross_repo_code_single_caller_context","persistent_peer_identity":False,"external_peers":0},sort_keys=True))
+          PY
