@@ -1,0 +1,105 @@
+name: JANUS R6 Registry Mind boot context
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/registry_mind_r6.py'
+      - '.github/workflows/janus-r6-registry-mind.yml'
+  push:
+    branches: [research/r6-registry-mind-20261124]
+    paths:
+      - 'autonomy/registry/registry_mind_r6.py'
+      - '.github/workflows/janus-r6-registry-mind.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  boot-context:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-r6-meta
+          persist-credentials: false
+          sparse-checkout: |
+            data/JANUS-CHAT-CONTEXT-INDEX.json
+            data/JANUS-COSMOS-SETI-CURRENT-STATE.json
+            data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Fundamentum
+          ref: 941148371aac0a503d4f254c839683642fdf2f20
+          path: pinned-r6-fund
+          persist-credentials: false
+          sparse-checkout: |
+            registry/TRUMP_CURRENT_STATE.json
+            docs/TRUMP_DEVELOPMENT_JOURNAL.md
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 9306037335bb4532049633b7f5f082e75891ff51
+          path: pinned-r6-map
+          persist-credentials: false
+          sparse-checkout: |
+            data/autonomy_map/OPERATING_CONTRACT.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 48fb78caa34c3fc5d9aa0486fcf608ddfa53fc32
+          path: pinned-r6-evidence
+          persist-credentials: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R5-R51-REGISTRY-INTELLIGENCE-EVIDENCE-2026-11-24.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 00910a3e1ea2d50650c20308ab66e3c2f7be46ab
+          path: pinned-r6-demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/__init__.py
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Build and verify boot packets before hypothetical consumer
+        env:
+          PYTHONPATH: ${{ github.workspace }}/pinned-r6-demi
+        run: |
+          set -euo pipefail
+          python autonomy/registry/project_context_r4.py --self-test
+          python autonomy/registry/registry_mind_r6.py --self-test
+          mkdir -p "$RUNNER_TEMP/r6/COSMOS" "$RUNNER_TEMP/r6/TRUMP" "$RUNNER_TEMP/r6/UNKNOWN"
+          for project in COSMOS TRUMP UNKNOWN; do
+            python autonomy/registry/registry_mind_r6.py --meta pinned-r6-meta --fund pinned-r6-fund --map-root pinned-r6-map --evidence-root pinned-r6-evidence --demi pinned-r6-demi --project "$project" --out "$RUNNER_TEMP/r6/$project/BOOT_CONTEXT.json"
+          done
+          python - <<'PY'
+          import json, os, hashlib
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"r6"
+          for p in ("COSMOS","TRUMP","UNKNOWN"):
+              x=json.loads((root/p/"BOOT_CONTEXT.json").read_text())
+              digest=x.pop("receipt_sha256")
+              assert hashlib.sha256(json.dumps(x,sort_keys=True,ensure_ascii=False,separators=(",",":"),allow_nan=False).encode()).hexdigest()==digest
+              assert not x["action_authority"] and not x["live_state_verified"] and not x["automatic_dispatch"] and not x["production_writeback"]
+              if p=="UNKNOWN":
+                  assert x["project_id"] is None and x["status"]=="HOLD_UNKNOWN_OR_AMBIGUOUS_PROJECT"
+              else:
+                  assert x["project_id"]==("COSMOS_SETI" if p=="COSMOS" else p)
+                  assert x["goal"] and x["history"] and len(x["capabilities"])==8 and x["open_tasks"]
+                  assert x["knowledge"]["citations"] and x["knowledge"]["indexed_documents"]==3
+                  assert x["learning_history"]["R5_1"]=={"key_only":9,"contextual":9,"rules":22}
+                  assert x["neural_advisory"]["status"]=="MODEL_NOT_CONNECTED"
+              print(json.dumps({"project":p,"status":x["status"],"sha256":digest,"open_tasks":len(x["open_tasks"]),"capabilities":len(x["capabilities"]),"history":x["history"],"knowledge":x["knowledge"],"learning_history":x.get("learning_history")},ensure_ascii=False))
+          PY
