@@ -1,0 +1,229 @@
+{
+  "schema": "janus.r70f.exam.v1",
+  "sources": [
+    {
+      "id": "f1",
+      "path": "data/JANUS-COSMOS-SETI-R42A5-COMBINED-SCORE-2026-11-21.json",
+      "blob": "21fdd3e53b70b0536377d77dc622fae5ba634e8e",
+      "schema": "janus.cosmos.r42a5.receipt.v1",
+      "commit": "2c0fe086fe26d766e6df62f932d1df88bba0ab22"
+    },
+    {
+      "id": "f2",
+      "path": "data/JANUS-TACHYON-DEMIHEAD-R5D-EXTERNAL-SOURCE-QUALIFICATION-2026-11-22.json",
+      "blob": "ab683c42ea6f1fd3281b6afe23a419bb42633a17",
+      "schema": "janus.meta_registry.tachyon.demihead.r5d.external_corpus_qualification.v1",
+      "commit": "2c0fe086fe26d766e6df62f932d1df88bba0ab22"
+    },
+    {
+      "id": "f3",
+      "path": "data/JANUS-SIT2-REAL-GBT-WEAK-INJECTION-2026-11-22.json",
+      "blob": "5d66ca59c19bf66849959de821192c86568256e5",
+      "schema": "janus.meta_registry.cosmos.sit2_real_background_synthetic_weak_injections.v1",
+      "commit": "2c0fe086fe26d766e6df62f932d1df88bba0ab22"
+    }
+  ],
+  "scope": "New developer-authored internal exam, related archives not independent external evidence. C/D/E disclosed exams are regression only. Report all arms, no posthoc promotion.",
+  "cases": [
+    [
+      "f1",
+      "STATUS",
+      [
+        "status",
+        "stage"
+      ],
+      "status"
+    ],
+    [
+      "f1",
+      "EVIDENCE",
+      [
+        "source_r42a4b/digest",
+        "source_r42a4b/rows"
+      ],
+      "source_r42a4b/digest"
+    ],
+    [
+      "f1",
+      "BOUNDARY",
+      [
+        "production_adoption",
+        "goal/localized"
+      ],
+      "production_adoption"
+    ],
+    [
+      "f1",
+      "NEXT",
+      [
+        "next",
+        "design"
+      ],
+      "next"
+    ],
+    [
+      "f1",
+      "BOUNDARY",
+      [
+        "external_validation",
+        "source_r42a4b/missing"
+      ],
+      "external_validation"
+    ],
+    [
+      "f1",
+      "AUTHORITY",
+      [
+        "goal/weak",
+        "source_r42a4b/rows"
+      ],
+      null
+    ],
+    [
+      "f2",
+      "STATUS",
+      [
+        "status",
+        "as_of"
+      ],
+      "status"
+    ],
+    [
+      "f2",
+      "EVIDENCE",
+      [
+        "source_merged_main_commit",
+        "tests/source_pins_verified"
+      ],
+      "source_merged_main_commit"
+    ],
+    [
+      "f2",
+      "BOUNDARY",
+      [
+        "hard_gates/no_production_changes",
+        "tests/new_r5d_unit_tests_passed"
+      ],
+      "hard_gates/no_production_changes"
+    ],
+    [
+      "f2",
+      "NEXT",
+      [
+        "next_recommendation",
+        "scientific_interpretation"
+      ],
+      "next_recommendation"
+    ],
+    [
+      "f2",
+      "OPEN",
+      [
+        "hard_gates/scientific_gate",
+        "tests/source_pins_verified"
+      ],
+      "hard_gates/scientific_gate"
+    ],
+    [
+      "f2",
+      "AUTHORITY",
+      [
+        "tests/new_r5d_unit_tests_passed",
+        "tests/source_pins_verified"
+      ],
+      null
+    ],
+    [
+      "f3",
+      "STATUS",
+      [
+        "status",
+        "date"
+      ],
+      "status"
+    ],
+    [
+      "f3",
+      "EVIDENCE",
+      [
+        "source/research_merge_sha",
+        "experiment/heldout_cases"
+      ],
+      "source/research_merge_sha"
+    ],
+    [
+      "f3",
+      "BOUNDARY",
+      [
+        "experiment/production_model_changed",
+        "experiment/development_cases"
+      ],
+      "experiment/production_model_changed"
+    ],
+    [
+      "f3",
+      "NEXT",
+      [
+        "next",
+        "interpretation_ru"
+      ],
+      "next"
+    ],
+    [
+      "f3",
+      "OPEN",
+      [
+        "epistemic_limits/scientific_gate",
+        "experiment/heldout_cases"
+      ],
+      "epistemic_limits/scientific_gate"
+    ],
+    [
+      "f3",
+      "AUTHORITY",
+      [
+        "experiment/development_cases",
+        "experiment/heldout_cases"
+      ],
+      null
+    ]
+  ],
+  "composition": [
+    [
+      0,
+      6,
+      "equal",
+      false
+    ],
+    [
+      2,
+      14,
+      "both_false",
+      true
+    ],
+    [
+      2,
+      4,
+      "both_false",
+      true
+    ],
+    [
+      1,
+      7,
+      "equal",
+      false
+    ],
+    [
+      5,
+      11,
+      "equal",
+      "HOLD"
+    ],
+    [
+      6,
+      12,
+      "equal",
+      false
+    ]
+  ]
+}
