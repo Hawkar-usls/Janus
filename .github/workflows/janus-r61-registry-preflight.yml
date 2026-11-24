@@ -1,0 +1,90 @@
+name: JANUS R6.1 registry typed preflight
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/registry_preflight_r61.py'
+      - '.github/workflows/janus-r61-registry-preflight.yml'
+permissions:
+  contents: read
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-meta
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-CHAT-CONTEXT-INDEX.json
+            data/JANUS-COSMOS-SETI-CURRENT-STATE.json
+            data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json
+            data/JANUS-RULE-001-FIRST-PERSON-TEMPORAL-CONSTRUCTION-2026-11-22-v1.0.json
+            data/JANUS-TACHYON-RULE-001-TEMPORAL-PERCEPTION-ALGORITHM-2026-11-22-v1.0.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Fundamentum
+          ref: 941148371aac0a503d4f254c839683642fdf2f20
+          path: pinned-fund
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            registry/TRUMP_CURRENT_STATE.json
+            docs/TRUMP_DEVELOPMENT_JOURNAL.md
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 9306037335bb4532049633b7f5f082e75891ff51
+          path: pinned-map
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/OPERATING_CONTRACT.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: b72746a8f4e30450e3522f931a83da7889a6a605
+          path: pinned-jfp
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-JFP-R7B1-REMOTE-HANDSHAKE-EVIDENCE-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: bed6698f038e7edb81abc0acf93cbacdfbf35ec5
+          path: pinned-contract
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R61-REGISTRY-PREFLIGHT-CONTRACT-2026-11-24.json
+      - name: Verify frozen typed expectations and reference paths
+        run: |
+          set -euo pipefail
+          python3 autonomy/registry/registry_preflight_r61.py --self-test
+          mkdir -p "$RUNNER_TEMP/r61"
+          for project in COSMOS TRUMP TACHYON JFP UNKNOWN; do
+            python3 autonomy/registry/registry_preflight_r61.py --contract pinned-contract --meta pinned-meta --fund pinned-fund --map pinned-map --jfp pinned-jfp --project "$project" --out "$RUNNER_TEMP/r61/$project.json"
+          done
+          python3 - <<'PY'
+          import os,json,hashlib
+          from pathlib import Path
+          root=Path(os.environ["RUNNER_TEMP"])/"r61"
+          counts={}
+          for p in ("COSMOS","TRUMP","TACHYON","JFP","UNKNOWN"):
+              x=json.loads((root/(p+".json")).read_text())
+              digest=x.pop("receipt_sha256")
+              assert hashlib.sha256(json.dumps(x,sort_keys=True,ensure_ascii=False,separators=(",",":"),allow_nan=False).encode()).hexdigest()==digest
+              assert all(x[k] is False for k in ("action_authority","automatic_dispatch","production_writeback","model_promotion","live_state_verified","actual_neural_inference"))
+              assert x["project_id"]==({"COSMOS":"COSMOS_SETI","UNKNOWN":None}.get(p,p))
+              if p!="UNKNOWN": assert x["documents"] and x["status"].startswith("PREFLIGHT_READY")
+              else: assert x["documents"]==[] and x["status"].startswith("HOLD")
+              counts[p]={"documents":len(x["documents"]),"fields":sum(len(d["fields"]) for d in x["documents"]),"edges":len(x.get("verified_edges",[]))}
+          print("R61_PREFLIGHT_PASS "+json.dumps(counts,sort_keys=True))
+          PY
