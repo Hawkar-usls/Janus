@@ -48,7 +48,8 @@ jobs:
           from pathlib import Path
           x=json.loads((Path(os.environ["RUNNER_TEMP"])/"janus-r3/LIVE_FRESHNESS.json").read_text())
           assert x["api_get_calls_completed"]<=2
-          assert x["source_file_writes"] is False if "source_file_writes" in x else True
+          assert x["new_foreign_code_executed"] is False
+          assert x["model_weights_updated"] is False
           assert x["main_index_may_be_automatically_rewritten"] is False
           assert x["full_organism_current_state_validated"] is False
           assert x["p03_admission_granted"] is False
