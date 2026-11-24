@@ -20,6 +20,7 @@ BASE_BLOB_SHA1 = "238b0767e5298dbd1723ed38dfef60cbfabed67f"
 BASE_COMMIT = "376fdc5fe16b36071136290cec715724b21ffe86"
 TARGET = "autonomy/pillars/engine.py"
 EXAM = "autonomy/repair/R3_FROZEN_NEW_CASES.json"
+FROZEN_EXAM_BLOB_SHA1 = "ea4f7855da82d4bd1bf3b101aa054cd60294f246"
 SOURCE_HEALTH_SNAPSHOT = "c12e95b93548657f536501583aaa5c5d274ae8cfc8c26c0c6a7b34579ba6d9b3"
 NEW_ROUTES = {
     "CHECKS_UNKNOWN": "REQUIRE_CHECK_RUN_EVIDENCE",
@@ -244,10 +245,13 @@ def main():
     args=p.parse_args()
     require(not args.out.exists() and not args.out.is_symlink(),
             "R3_OUTPUT_OVERWRITE_DENIED")
+    exam_raw=read_bounded(args.exam)
+    require(blob_sha(exam_raw)==FROZEN_EXAM_BLOB_SHA1,
+            "R3_PRECOMMITTED_EXAM_DRIFT")
     report=propose(
        strict_json(read_bounded(args.health)),
        read_bounded(args.baseline).decode("utf-8"),
-       strict_json(read_bounded(args.exam)),
+       strict_json(exam_raw),
        read_bounded(args.candidate).decode("utf-8"))
     args.out.parent.mkdir(parents=True,exist_ok=True)
     args.out.write_text(json.dumps(report,sort_keys=True,indent=2)+"\n",encoding="utf-8")
