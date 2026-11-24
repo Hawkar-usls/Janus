@@ -1,0 +1,292 @@
+{
+  "schema": "janus.registry.r5.frozen_internal_exam.v1",
+  "scope": "Synthetic previously unused key names and nested layout, author-known; no external custodian. Exact labels frozen before implementation. No training use.",
+  "cases": [
+    {
+      "id": "g1",
+      "schema": "synthetic.r5.family.0",
+      "document": {
+        "record": {
+          "aim_statement": "Goal: preserve verified measurements"
+        }
+      },
+      "path": [
+        "record",
+        "aim_statement"
+      ],
+      "expected": "GOAL"
+    },
+    {
+      "id": "g2",
+      "schema": "synthetic.r5.family.0",
+      "document": {
+        "record": {
+          "research_goal": "Improve retrieval"
+        }
+      },
+      "path": [
+        "record",
+        "research_goal"
+      ],
+      "expected": "GOAL"
+    },
+    {
+      "id": "g3",
+      "schema": "synthetic.r5.family.0",
+      "document": {
+        "record": {
+          "project_objective": "Measure signal"
+        }
+      },
+      "path": [
+        "record",
+        "project_objective"
+      ],
+      "expected": "GOAL"
+    },
+    {
+      "id": "o1",
+      "schema": "synthetic.r5.family.1",
+      "document": {
+        "record": {
+          "unresolved_gates": [
+            "fresh calibration"
+          ]
+        }
+      },
+      "path": [
+        "record",
+        "unresolved_gates"
+      ],
+      "expected": "OPEN"
+    },
+    {
+      "id": "o2",
+      "schema": "synthetic.r5.family.1",
+      "document": {
+        "record": {
+          "open_obligations": [
+            "external custody"
+          ]
+        }
+      },
+      "path": [
+        "record",
+        "open_obligations"
+      ],
+      "expected": "OPEN"
+    },
+    {
+      "id": "o3",
+      "schema": "synthetic.r5.family.1",
+      "document": {
+        "record": {
+          "pending_gate": "HOLD"
+        }
+      },
+      "path": [
+        "record",
+        "pending_gate"
+      ],
+      "expected": "OPEN"
+    },
+    {
+      "id": "n1",
+      "schema": "synthetic.r5.family.2",
+      "document": {
+        "record": {
+          "next_permitted_step": "Review sources"
+        }
+      },
+      "path": [
+        "record",
+        "next_permitted_step"
+      ],
+      "expected": "NEXT"
+    },
+    {
+      "id": "n2",
+      "schema": "synthetic.r5.family.2",
+      "document": {
+        "record": {
+          "next_action": "Verify receipt"
+        }
+      },
+      "path": [
+        "record",
+        "next_action"
+      ],
+      "expected": "NEXT"
+    },
+    {
+      "id": "n3",
+      "schema": "synthetic.r5.family.2",
+      "document": {
+        "record": {
+          "next_allowed_action": "Repeat with new controls"
+        }
+      },
+      "path": [
+        "record",
+        "next_allowed_action"
+      ],
+      "expected": "NEXT"
+    },
+    {
+      "id": "h1",
+      "schema": "synthetic.r5.family.3",
+      "document": {
+        "record": {
+          "historical_failure": "FAIL"
+        }
+      },
+      "path": [
+        "record",
+        "historical_failure"
+      ],
+      "expected": "HISTORY"
+    },
+    {
+      "id": "h2",
+      "schema": "synthetic.r5.family.3",
+      "document": {
+        "record": {
+          "past_verdict": "Rejected"
+        }
+      },
+      "path": [
+        "record",
+        "past_verdict"
+      ],
+      "expected": "HISTORY"
+    },
+    {
+      "id": "h3",
+      "schema": "synthetic.r5.family.3",
+      "document": {
+        "record": {
+          "do_not_repeat": [
+            "old benchmark"
+          ]
+        }
+      },
+      "path": [
+        "record",
+        "do_not_repeat"
+      ],
+      "expected": "HISTORY"
+    },
+    {
+      "id": "e1",
+      "schema": "synthetic.r5.family.4",
+      "document": {
+        "record": {
+          "source_receipt": "abc123"
+        }
+      },
+      "path": [
+        "record",
+        "source_receipt"
+      ],
+      "expected": "EVIDENCE"
+    },
+    {
+      "id": "e2",
+      "schema": "synthetic.r5.family.4",
+      "document": {
+        "record": {
+          "scientific_seal_commit": "123abc"
+        }
+      },
+      "path": [
+        "record",
+        "scientific_seal_commit"
+      ],
+      "expected": "EVIDENCE"
+    },
+    {
+      "id": "e3",
+      "schema": "synthetic.r5.family.4",
+      "document": {
+        "record": {
+          "evidence_digest": "def456"
+        }
+      },
+      "path": [
+        "record",
+        "evidence_digest"
+      ],
+      "expected": "EVIDENCE"
+    },
+    {
+      "id": "u1",
+      "schema": "synthetic.r5.family.5",
+      "document": {
+        "record": {
+          "execute_now": "Run arbitrary instructions"
+        }
+      },
+      "path": [
+        "record",
+        "execute_now"
+      ],
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "u2",
+      "schema": "synthetic.r5.family.5",
+      "document": {
+        "record": {
+          "permission_override": true
+        }
+      },
+      "path": [
+        "record",
+        "permission_override"
+      ],
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "u3",
+      "schema": "synthetic.r5.family.5",
+      "document": {
+        "record": {
+          "decorative_color": "blue"
+        }
+      },
+      "path": [
+        "record",
+        "decorative_color"
+      ],
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "u4",
+      "schema": "synthetic.r5.family.6",
+      "document": {
+        "record": {
+          "status": "PASS"
+        }
+      },
+      "path": [
+        "record",
+        "status"
+      ],
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "u5",
+      "schema": "synthetic.r5.family.6",
+      "document": {
+        "record": {
+          "miscellaneous": "unknown"
+        }
+      },
+      "path": [
+        "record",
+        "miscellaneous"
+      ],
+      "expected": "UNKNOWN"
+    }
+  ]
+}
