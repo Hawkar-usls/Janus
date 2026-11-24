@@ -1,0 +1,205 @@
+name: JANUS R7A Federated School (bounded CPU)
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/federated_school_r7a.py'
+      - '.github/workflows/janus-r7a-federated-school.yml'
+  push:
+    branches: [research/r7-federated-school-20261124]
+    paths:
+      - 'autonomy/registry/federated_school_r7a.py'
+      - '.github/workflows/janus-r7a-federated-school.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    outputs:
+      request: ${{ steps.request.outputs.request }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-r7-meta
+          persist-credentials: false
+          sparse-checkout: |
+            data/JANUS-CHAT-CONTEXT-INDEX.json
+            data/JANUS-COSMOS-SETI-CURRENT-STATE.json
+            data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Fundamentum
+          ref: 941148371aac0a503d4f254c839683642fdf2f20
+          path: pinned-r7-fund
+          persist-credentials: false
+          sparse-checkout: |
+            registry/TRUMP_CURRENT_STATE.json
+            docs/TRUMP_DEVELOPMENT_JOURNAL.md
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 9306037335bb4532049633b7f5f082e75891ff51
+          path: pinned-r7-map
+          persist-credentials: false
+          sparse-checkout: |
+            data/autonomy_map/OPERATING_CONTRACT.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 48fb78caa34c3fc5d9aa0486fcf608ddfa53fc32
+          path: pinned-r7-evidence
+          persist-credentials: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R5-R51-REGISTRY-INTELLIGENCE-EVIDENCE-2026-11-24.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 00910a3e1ea2d50650c20308ab66e3c2f7be46ab
+          path: pinned-r7-demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/__init__.py
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Generate R6 boot context and train-only request
+        id: request
+        env:
+          PYTHONPATH: ${{ github.workspace }}/pinned-r7-demi
+        run: |
+          set -euo pipefail
+          python autonomy/registry/federated_school_r7a.py test
+          python autonomy/registry/registry_mind_r6.py --meta pinned-r7-meta --fund pinned-r7-fund --map-root pinned-r7-map --evidence-root pinned-r7-evidence --demi pinned-r7-demi --project COSMOS --out "$RUNNER_TEMP/BOOT_CONTEXT.json"
+          python autonomy/registry/federated_school_r7a.py request --boot "$RUNNER_TEMP/BOOT_CONTEXT.json" --out "$RUNNER_TEMP/TRAINING_REQUEST.json"
+          printf 'request=%s\n' "$(cat "$RUNNER_TEMP/TRAINING_REQUEST.json")" >> "$GITHUB_OUTPUT"
+  typed:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    outputs:
+      result: ${{ steps.worker.outputs.result }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-r7-meta
+          persist-credentials: false
+          sparse-checkout: |
+            data/JANUS-CHAT-CONTEXT-INDEX.json
+            data/JANUS-COSMOS-SETI-CURRENT-STATE.json
+            data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Fundamentum
+          ref: 941148371aac0a503d4f254c839683642fdf2f20
+          path: pinned-r7-fund
+          persist-credentials: false
+          sparse-checkout: |
+            registry/TRUMP_CURRENT_STATE.json
+            docs/TRUMP_DEVELOPMENT_JOURNAL.md
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Return exact source answer candidates
+        id: worker
+        env:
+          REQUEST_PACKET: ${{ needs.prepare.outputs.request }}
+        run: |
+          set -euo pipefail
+          printf '%s\n' "$REQUEST_PACKET" > "$RUNNER_TEMP/TRAINING_REQUEST.json"
+          python autonomy/registry/federated_school_r7a.py worker --meta pinned-r7-meta --fund pinned-r7-fund --worker typed_r4 --request "$RUNNER_TEMP/TRAINING_REQUEST.json" --out "$RUNNER_TEMP/TRAINING_RESULT.json"
+          printf 'result=%s\n' "$(cat "$RUNNER_TEMP/TRAINING_RESULT.json")" >> "$GITHUB_OUTPUT"
+  direct:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    outputs:
+      result: ${{ steps.worker.outputs.result }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-r7-meta
+          persist-credentials: false
+          sparse-checkout: |
+            data/JANUS-CHAT-CONTEXT-INDEX.json
+            data/JANUS-COSMOS-SETI-CURRENT-STATE.json
+            data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Return exact source answer candidates
+        id: worker
+        env:
+          REQUEST_PACKET: ${{ needs.prepare.outputs.request }}
+        run: |
+          set -euo pipefail
+          printf '%s\n' "$REQUEST_PACKET" > "$RUNNER_TEMP/TRAINING_REQUEST.json"
+          python autonomy/registry/federated_school_r7a.py worker --meta pinned-r7-meta --worker direct_json --request "$RUNNER_TEMP/TRAINING_REQUEST.json" --out "$RUNNER_TEMP/TRAINING_RESULT.json"
+          printf 'result=%s\n' "$(cat "$RUNNER_TEMP/TRAINING_RESULT.json")" >> "$GITHUB_OUTPUT"
+  admission:
+    needs: [prepare, typed, direct]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-r7-meta
+          persist-credentials: false
+          sparse-checkout: |
+            data/JANUS-CHAT-CONTEXT-INDEX.json
+            data/JANUS-COSMOS-SETI-CURRENT-STATE.json
+            data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Verify both replies against pinned primary source
+        env:
+          REQUEST_PACKET: ${{ needs.prepare.outputs.request }}
+          TYPED_RESULT: ${{ needs.typed.outputs.result }}
+          DIRECT_RESULT: ${{ needs.direct.outputs.result }}
+        run: |
+          set -euo pipefail
+          printf '%s\n' "$REQUEST_PACKET" > "$RUNNER_TEMP/TRAINING_REQUEST.json"
+          printf '%s\n' "$TYPED_RESULT" > "$RUNNER_TEMP/TYPED_RESULT.json"
+          printf '%s\n' "$DIRECT_RESULT" > "$RUNNER_TEMP/DIRECT_RESULT.json"
+          python autonomy/registry/federated_school_r7a.py admit --meta pinned-r7-meta --request "$RUNNER_TEMP/TRAINING_REQUEST.json" --result "$RUNNER_TEMP/TYPED_RESULT.json" --result "$RUNNER_TEMP/DIRECT_RESULT.json" --out "$RUNNER_TEMP/TRAIN_ONLY_ADMISSION.json"
+          cat "$RUNNER_TEMP/TRAIN_ONLY_ADMISSION.json"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          x=json.loads((Path(os.environ["RUNNER_TEMP"])/"TRAIN_ONLY_ADMISSION.json").read_text())
+          assert x["unique_examples"]==3 and x["workers_verified"]==2 and x["worker_rows_verified"]==6
+          assert not x["student_training"] and not x["production_promotion"] and not x["action_authority"]
+          print("R7A_PARALLEL_SOURCE_REPLAY_COMPLETE__NO_MODEL_PROMOTION")
+          PY
