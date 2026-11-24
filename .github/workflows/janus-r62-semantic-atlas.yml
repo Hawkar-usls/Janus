@@ -1,0 +1,220 @@
+name: JANUS R6.2 semantic atlas and Trinity CPU study
+on:
+  pull_request:
+    paths:
+      - 'autonomy/registry/semantic_atlas_r62.py'
+      - '.github/workflows/janus-r62-semantic-atlas.yml'
+permissions:
+  contents: read
+env:
+  HF_HUB_DISABLE_TELEMETRY: '1'
+  HF_HUB_DOWNLOAD_TIMEOUT: '120'
+  TOKENIZERS_PARALLELISM: 'false'
+  OMP_NUM_THREADS: '2'
+  PYTHONHASHSEED: '0'
+jobs:
+  atlas:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-meta
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-CHAT-CONTEXT-INDEX.json
+            data/JANUS-COSMOS-SETI-CURRENT-STATE.json
+            data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json
+            data/JANUS-RULE-001-FIRST-PERSON-TEMPORAL-CONSTRUCTION-2026-11-22-v1.0.json
+            data/JANUS-TACHYON-RULE-001-TEMPORAL-PERCEPTION-ALGORITHM-2026-11-22-v1.0.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Fundamentum
+          ref: 941148371aac0a503d4f254c839683642fdf2f20
+          path: pinned-fund
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            registry/TRUMP_CURRENT_STATE.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 9306037335bb4532049633b7f5f082e75891ff51
+          path: pinned-map
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/OPERATING_CONTRACT.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: b72746a8f4e30450e3522f931a83da7889a6a605
+          path: pinned-jfp
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-JFP-R7B1-REMOTE-HANDSHAKE-EVIDENCE-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: bed6698f038e7edb81abc0acf93cbacdfbf35ec5
+          path: pinned-contract
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R61-REGISTRY-PREFLIGHT-CONTRACT-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 00910a3e1ea2d50650c20308ab66e3c2f7be46ab
+          path: pinned-demi
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            janus_model/__init__.py
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+      - name: Build and query real Cortex source atlas
+        env:
+          PYTHONPATH: ${{ github.workspace }}/pinned-demi
+        run: |
+          set -euo pipefail
+          python3 autonomy/registry/semantic_atlas_r62.py test
+          python3 autonomy/registry/semantic_atlas_r62.py atlas --out "$RUNNER_TEMP/ATLAS.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r62-semantic-atlas
+          path: ${{ runner.temp }}/ATLAS.json
+          retention-days: 30
+  trinity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: e85c19c31bdad729f06961d64de36d8f3a620483
+          path: pinned-meta
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/JANUS-CHAT-CONTEXT-INDEX.json
+            data/JANUS-COSMOS-SETI-CURRENT-STATE.json
+            data/JANUS-COSMOS-SETI-DEVELOPMENT-JOURNAL.json
+            data/JANUS-RULE-001-FIRST-PERSON-TEMPORAL-CONSTRUCTION-2026-11-22-v1.0.json
+            data/JANUS-TACHYON-RULE-001-TEMPORAL-PERCEPTION-ALGORITHM-2026-11-22-v1.0.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Fundamentum
+          ref: 941148371aac0a503d4f254c839683642fdf2f20
+          path: pinned-fund
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            registry/TRUMP_CURRENT_STATE.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 9306037335bb4532049633b7f5f082e75891ff51
+          path: pinned-map
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/OPERATING_CONTRACT.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: b72746a8f4e30450e3522f931a83da7889a6a605
+          path: pinned-jfp
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-JFP-R7B1-REMOTE-HANDSHAKE-EVIDENCE-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: bed6698f038e7edb81abc0acf93cbacdfbf35ec5
+          path: pinned-contract
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R61-REGISTRY-PREFLIGHT-CONTRACT-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 6acb9288601673d49b65c61ab26952705d346fe6
+          path: pinned-trinity
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            tools/trinity_parental_contract.py
+            tools/trinity_parental_cpu.py
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - name: Previously tested CPU model dependencies
+        run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check --no-cache-dir transformers==4.48.3 safetensors==0.5.3
+      - name: Train only, frozen labels and real parents
+        env:
+          PYTHONPATH: ${{ github.workspace }}/pinned-trinity
+        run: |
+          set -euo pipefail
+          python autonomy/registry/semantic_atlas_r62.py train --parents --out "$RUNNER_TEMP/TRAIN.json"
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 99eefe466d19954340cddef90f893b0542aeb903
+          path: pinned-protocol
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R62-SEMANTIC-ATLAS-PROTOCOL-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: ab914cf6f2b4e862272dfc126b65040afbdca9c4
+          path: exam-roadmap
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R7-FEDERATED-SCHOOL-ROADMAP-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 48fb78caa34c3fc5d9aa0486fcf608ddfa53fc32
+          path: exam-evidence
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/autonomy_map/JANUS-R5-R51-REGISTRY-INTELLIGENCE-EVIDENCE-2026-11-24.json
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: 63f66283b05524e30c2bcf3f026b664a52ca3e2c
+          path: exam-queue
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            data/jfp-r7b4/QUEUE.json
+      - name: Document-disjoint internal exam after training
+        run: |
+          set -euo pipefail
+          python autonomy/registry/semantic_atlas_r62.py exam --train "$RUNNER_TEMP/TRAIN.json" --out "$RUNNER_TEMP/EXAM.json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r62-trinity-study
+          path: |
+            ${{ runner.temp }}/TRAIN.json
+            ${{ runner.temp }}/EXAM.json
+          retention-days: 30
