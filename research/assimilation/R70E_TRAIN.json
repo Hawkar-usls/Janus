@@ -1,0 +1,65 @@
+{
+  "schema": "janus.r70e.train.v1",
+  "snapshot": "2c0fe086fe26d766e6df62f932d1df88bba0ab22",
+  "sources": [
+    {
+      "path": "data/JANUS-COSMOS-SETI-R41S1B-TRANSITION-AUDIT-2026-11-20.json",
+      "blob": "c7d24cfb0e4f30ee07f94daaecf466b366864724"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R41S1C-EVIDENCE-DIFFERENTIATION-2026-11-20.json",
+      "blob": "2a64dda6e3e853a0a4d729db506d877277cdccc4"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R41S1D-RETINA-RUBIK-2026-11-20.json",
+      "blob": "40b163fc6dafec4eaae223b03139ad67e8e69412"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R41S1E-NOISE-MODEL-2026-11-20.json",
+      "blob": "d262a77351c54c881dd6dd08e7fa1c1a45f82473"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R41U1-WISE-BOUNDED-2026-11-20.json",
+      "blob": "77710ef427c7e2acd63401c94403e1b87b511313"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R42A-COMMON-COMPETITOR-2026-11-20.json",
+      "blob": "068e829448862836ac894354c6bb8bda83702c23"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R42A7-NONDESTRUCTIVE-RFI-2026-11-21.json",
+      "blob": "365e4950ae337e99747ef6832aca72331665bb70"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R42A7B-INDEPENDENT-ONOFF-2026-11-21.json",
+      "blob": "8a0f8857155aed665c27faaf53c737e41662bd35"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R42A7B3-GBT-TCS-WITNESS-REQUEST-2026-11-21.json",
+      "blob": "a6a87b2c42a3b181961a2c22145f5b98b0e4859b"
+    },
+    {
+      "path": "data/JANUS-COSMOS-SETI-R42A8A-FROZEN-OOD-STRESS-2026-11-21.json",
+      "blob": "a3d35bc348911833e23753159e02751f58603f2b"
+    }
+  ],
+  "parent": {
+    "artifact": 14950263514,
+    "run": 45458912734,
+    "zip_sha256": "a8d23ae96bec8c5fb07890a0ed9723738233ede1ad21f283c960c5219d9cfbc9",
+    "receipt": "365d501bd372639e14482c0fc153d49177ffdaf05a5380e38b5f73a5702ff022"
+  },
+  "previous_train_receipts": {
+    "r70c": "c7c7d896a4f0f9abab57e2acb87ad6d236417d0d4527e7e3494419ad4f798b38",
+    "r70d": "6e72b8bc13b5217f5ad3ee8c2dd0313d92b160d180c7458dc34383c1efba03ed"
+  },
+  "seed": 20261124,
+  "steps": 100,
+  "batch": 64,
+  "learning_rate": 0.002,
+  "l2_lambda": 1,
+  "threshold": 0.55,
+  "new_budget": 160,
+  "minimum_new": 40,
+  "scope": "Finite offline experimental descendants of non-admitted R70D. Four matched CPU arms plain/replay/L2/replay+L2. Exact previous training sets reconstructed, verified against old receipts, no old exam rows used in training. No auto selection or deployment."
+}
