@@ -1,0 +1,131 @@
+name: JDG R7C6 Foundation School
+on:
+  pull_request:
+    paths:
+      - 'autonomy/federation/jdg_r7c6.py'
+      - '.github/workflows/jdg-r7c6-foundation.yml'
+permissions:
+  contents: read
+concurrency:
+  group: jdg-r7c6-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            tools/trinity_r14_verified_oracle.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python autonomy/federation/jdg_r7c6.py prepare demi "$RUNNER_TEMP/prepared"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7c6-prepared
+          path: ${{ runner.temp }}/prepared
+          if-no-files-found: error
+          retention-days: 60
+  train:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [control, adaptive]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/jdg_r7c6.py
+            autonomy/federation/jdg_r7c4.py
+            autonomy/federation/jdg_r7c3.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model
+            tools/trinity_parental_cpu.py
+            tools/trinity_parental_contract.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c6-prepared
+          path: ${{ runner.temp }}/prepared
+      - run: python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - name: Train without frozen exam
+        env:
+          ARM: ${{ matrix.arm }}
+        run: |
+          test ! -f autonomy/federation/R7C6_FROZEN_FOUNDATION_EXAM.json
+          test ! -f autonomy/federation/R7C5_FROZEN_INTERNAL_EXAM.json
+          python autonomy/federation/jdg_r7c6.py train demi "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/shadow" "$ARM"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7c6-shadow-${{ matrix.arm }}
+          path: ${{ runner.temp }}/shadow
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model
+            tools/trinity_parental_cpu.py
+            tools/trinity_parental_contract.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c6-prepared
+          path: ${{ runner.temp }}/prepared
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c6-shadow-control
+          path: ${{ runner.temp }}/control
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c6-shadow-adaptive
+          path: ${{ runner.temp }}/adaptive
+      - run: python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - run: python autonomy/federation/jdg_r7c6.py evaluate demi "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/control" "$RUNNER_TEMP/adaptive" "$RUNNER_TEMP/eval"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7c6-firstlook
+          path: ${{ runner.temp }}/eval
+          if-no-files-found: error
+          retention-days: 60
