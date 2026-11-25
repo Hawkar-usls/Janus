@@ -1,0 +1,217 @@
+name: JANUS R84H3 bounded growth stability
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h3_stability.py'
+      - '.github/workflows/r84h3-stability.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h3-bounded-research
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h3-growth-stability-20261125' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h3_stability.py
+            autonomy/federation/r84h2_growth.py
+            autonomy/federation/r84g2_selective.py
+            autonomy/federation/r84g_adaptive.py
+            autonomy/federation/r84f2_vocab.py
+            autonomy/federation/r84f_continuity.py
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84g2-replay
+          path: ${{ runner.temp }}/parent
+          run-id: 45688517804
+          github-token: ${{ github.token }}
+      - run: |
+          for name in R84H3_FROZEN_EXAM R84H2_FROZEN_EXAM R84G2_FROZEN_EXAM R84G_FROZEN_EXAM R84F_FROZEN_EXAM R84E_FROZEN_EXAM R84B_FROZEN_EXAM R8_FROZEN_SKILL_EXAM; do test ! -f "autonomy/federation/$name.json" || exit 1; done
+          python autonomy/federation/r84h3_stability.py diagnostic "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parent" "$RUNNER_TEMP/trained"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h3-diagnostic
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  cycle1:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h3-growth-stability-20261125' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h3_stability.py
+            autonomy/federation/r84h2_growth.py
+            autonomy/federation/r84g2_selective.py
+            autonomy/federation/r84g_adaptive.py
+            autonomy/federation/r84f2_vocab.py
+            autonomy/federation/r84f_continuity.py
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h2-cycle2
+          path: ${{ runner.temp }}/parent
+          run-id: 45689872145
+          github-token: ${{ github.token }}
+      - run: |
+          for name in R84H3_FROZEN_EXAM R84H2_FROZEN_EXAM R84G2_FROZEN_EXAM R84G_FROZEN_EXAM R84F_FROZEN_EXAM R84E_FROZEN_EXAM R84B_FROZEN_EXAM R8_FROZEN_SKILL_EXAM; do test ! -f "autonomy/federation/$name.json" || exit 1; done
+          python autonomy/federation/r84h3_stability.py train "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parent" "$RUNNER_TEMP/trained" 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h3-cycle1
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  cycle2:
+    needs: cycle1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h3_stability.py
+            autonomy/federation/r84h2_growth.py
+            autonomy/federation/r84g2_selective.py
+            autonomy/federation/r84g_adaptive.py
+            autonomy/federation/r84f2_vocab.py
+            autonomy/federation/r84f_continuity.py
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h3-cycle1
+          path: ${{ runner.temp }}/parent
+      - run: |
+          for name in R84H3_FROZEN_EXAM R84H2_FROZEN_EXAM R84G2_FROZEN_EXAM R84G_FROZEN_EXAM R84F_FROZEN_EXAM R84E_FROZEN_EXAM R84B_FROZEN_EXAM R8_FROZEN_SKILL_EXAM; do test ! -f "autonomy/federation/$name.json" || exit 1; done
+          python autonomy/federation/r84h3_stability.py train "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parent" "$RUNNER_TEMP/trained" 2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h3-cycle2
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: [diagnostic, cycle2]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84g2-replay
+          path: ${{ runner.temp }}/diagroot
+          run-id: 45688517804
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h2-cycle1
+          path: ${{ runner.temp }}/h2first
+          run-id: 45689872145
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h3-diagnostic
+          path: ${{ runner.temp }}/diag
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h2-cycle2
+          path: ${{ runner.temp }}/h2final
+          run-id: 45689872145
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h3-cycle1
+          path: ${{ runner.temp }}/c1
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h3-cycle2
+          path: ${{ runner.temp }}/c2
+      - run: python autonomy/federation/r84h3_stability.py evaluate "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/diagroot" "$RUNNER_TEMP/h2first" "$RUNNER_TEMP/diag" "$RUNNER_TEMP/h2final" "$RUNNER_TEMP/c1" "$RUNNER_TEMP/c2" "$RUNNER_TEMP/results"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h3-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 60
