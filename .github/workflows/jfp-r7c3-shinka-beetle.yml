@@ -1,0 +1,77 @@
+name: JFP R7C3 ShinkaEvolve and Beetle student helper
+on:
+  pull_request:
+    paths:
+      - 'autonomy/federation/JFP_R7C3_CAPABILITY.json'
+      - 'autonomy/federation/jfp_r7c3.py'
+      - '.github/workflows/jfp-r7c3-shinka-beetle.yml'
+permissions:
+  contents: read
+jobs:
+  evaluate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    outputs:
+      key_sha: ${{ steps.worker.outputs.key_sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: SakanaAI/ShinkaEvolve
+          ref: fbf532115431a94c45c38393b75f4c5f7d6e0e01
+          path: upstream-shinka
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            LICENSE
+            examples/sine_approx_headless/evaluate.py
+            shinka/core/evaluation_results.py
+      - name: Run real upstream evaluator and bounded candidate search
+        id: worker
+        run: python3 autonomy/federation/jfp_r7c3.py worker upstream-shinka "$RUNNER_TEMP/shinka-result"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jfp-r7c3-shinka-result
+          path: ${{ runner.temp }}/shinka-result/
+          if-no-files-found: error
+  beetle:
+    needs: evaluate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-lapis
+          ref: f6a30b41fca4ce1dc636909e2c4c14b29891cbaf
+          path: beetle-source
+          persist-credentials: false
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            tools/beetle_context_projector.py
+            tools/beetle_shard_store.py
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: jfp-r7c3-shinka-result
+          path: ${{ runner.temp }}/shinka-result
+      - name: Verify original result and project learning context through Beetle
+        env:
+          KEY_SHA: ${{ needs.evaluate.outputs.key_sha }}
+        run: python3 autonomy/federation/jfp_r7c3.py beetle "$RUNNER_TEMP/shinka-result" "$KEY_SHA" beetle-source "$RUNNER_TEMP/beetle-delivery"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jfp-r7c3-student-candidates
+          path: |
+            ${{ runner.temp }}/beetle-delivery/STUDENT_TASKS.json
+            ${{ runner.temp }}/beetle-delivery/BEETLE_CONTEXT.json
+            ${{ runner.temp }}/beetle-delivery/DELIVERY_RECEIPT.json
+          if-no-files-found: error
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jfp-r7c3-review-answers
+          path: ${{ runner.temp }}/beetle-delivery/REVIEW_GOLD.json
+          if-no-files-found: error
