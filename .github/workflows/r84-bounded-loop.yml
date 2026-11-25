@@ -1,0 +1,44 @@
+name: JANUS R84 bounded durable replay
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84_loop.py'
+      - '.github/workflows/r84-bounded-loop.yml'
+permissions:
+  contents: read
+concurrency:
+  group: r84-owned-research-writer
+  cancel-in-progress: false
+jobs:
+  bootstrap:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84-bounded-loop-20261125' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    permissions:
+      contents: write
+    outputs:
+      checkpoint: ${{ steps.state.outputs.checkpoint }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: true
+      - id: state
+        env:
+          R84_HEAD: ${{ github.event.pull_request.head.ref }}
+        run: python3 autonomy/federation/r84_loop.py bootstrap
+  resume:
+    needs: bootstrap
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ needs.bootstrap.outputs.checkpoint }}
+          persist-credentials: true
+      - env:
+          R84_HEAD: ${{ github.event.pull_request.head.ref }}
+        run: python3 autonomy/federation/r84_loop.py resume
