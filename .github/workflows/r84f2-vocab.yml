@@ -1,0 +1,126 @@
+name: JANUS R84F2 append-only input vocabulary and resume
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84f2_vocab.py'
+      - '.github/workflows/r84f2-vocab.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84f2-bounded-research
+  cancel-in-progress: false
+jobs:
+  resume:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84f2-vocab-expansion-20261125' && github.run_attempt == 1
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [replay, joint]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84f2_vocab.py
+            autonomy/federation/r84f_continuity.py
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f-cycle1-${{ matrix.arm }}
+          path: ${{ runner.temp }}/parent
+          run-id: 45679580938
+          github-token: ${{ github.token }}
+      - run: |
+          test ! -f autonomy/federation/R84F_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R84E_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R84B_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R8_FROZEN_SKILL_EXAM.json
+          python autonomy/federation/r84f2_vocab.py train "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parent" "$RUNNER_TEMP/trained" "${{ matrix.arm }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84f2-cycle2-${{ matrix.arm }}
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: resume
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-trained-replay
+          path: ${{ runner.temp }}/replay0
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-trained-joint
+          path: ${{ runner.temp }}/joint0
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f-cycle1-replay
+          path: ${{ runner.temp }}/replay1
+          run-id: 45679580938
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f-cycle1-joint
+          path: ${{ runner.temp }}/joint1
+          run-id: 45679580938
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f2-cycle2-replay
+          path: ${{ runner.temp }}/replay2
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f2-cycle2-joint
+          path: ${{ runner.temp }}/joint2
+      - run: python autonomy/federation/r84f2_vocab.py evaluate "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/replay0" "$RUNNER_TEMP/joint0" "$RUNNER_TEMP/replay1" "$RUNNER_TEMP/joint1" "$RUNNER_TEMP/replay2" "$RUNNER_TEMP/joint2" "$RUNNER_TEMP/results"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84f2-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 60
