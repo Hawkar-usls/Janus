@@ -1,0 +1,49 @@
+name: JDG R7C3 EvoAgentX curriculum optimizer
+on:
+  pull_request:
+    paths:
+      - 'autonomy/federation/jdg_r7c3.py'
+      - '.github/workflows/jdg-r7c3-evoagentx.yml'
+permissions:
+  contents: read
+jobs:
+  curriculum:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    outputs:
+      key_sha: ${{ steps.worker.outputs.key_sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Run pinned upstream CPU optimizer on synthetic train-only fixture
+        id: worker
+        run: |
+          mkdir -p "$RUNNER_TEMP/jdg-home"
+          env -i PATH=/usr/bin:/bin HOME="$RUNNER_TEMP/jdg-home" LANG=C.UTF-8 \
+            GITHUB_RUN_ID="$GITHUB_RUN_ID" GITHUB_RUN_ATTEMPT="$GITHUB_RUN_ATTEMPT" \
+            GITHUB_SHA="$GITHUB_SHA" GITHUB_OUTPUT="$GITHUB_OUTPUT" \
+            python3 autonomy/federation/jdg_r7c3.py worker "$RUNNER_TEMP/jdg-curriculum"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jdg-r7c3-curriculum
+          path: ${{ runner.temp }}/jdg-curriculum/
+          if-no-files-found: error
+          retention-days: 30
+  verify:
+    needs: curriculum
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: jdg-r7c3-curriculum
+          path: ${{ runner.temp }}/jdg-curriculum
+      - name: Verify signed curriculum, arithmetic, archive and negative controls
+        env:
+          KEY_SHA: ${{ needs.curriculum.outputs.key_sha }}
+        run: python3 autonomy/federation/jdg_r7c3.py verify "$RUNNER_TEMP/jdg-curriculum" "$KEY_SHA"
