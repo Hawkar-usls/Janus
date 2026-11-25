@@ -1,0 +1,170 @@
+name: JANUS R84F inherited neural continuity
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84f_continuity.py'
+      - '.github/workflows/r84f-continuity.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84f-bounded-research
+  cancel-in-progress: false
+jobs:
+  cycle1:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84f-neural-continuity-20261125' && github.run_attempt == 1
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [replay, joint]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84f_continuity.py
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-trained-${{ matrix.arm }}
+          path: ${{ runner.temp }}/parent
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - run: |
+          test ! -f autonomy/federation/R84F_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R84E_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R84B_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R8_FROZEN_SKILL_EXAM.json
+          python autonomy/federation/r84f_continuity.py train "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parent" "$RUNNER_TEMP/trained" "${{ matrix.arm }}" 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84f-cycle1-${{ matrix.arm }}
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 30
+  cycle2:
+    needs: cycle1
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [replay, joint]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84f_continuity.py
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f-cycle1-${{ matrix.arm }}
+          path: ${{ runner.temp }}/parent
+      - run: |
+          test ! -f autonomy/federation/R84F_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R84E_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R84B_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R8_FROZEN_SKILL_EXAM.json
+          python autonomy/federation/r84f_continuity.py train "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parent" "$RUNNER_TEMP/trained" "${{ matrix.arm }}" 2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84f-cycle2-${{ matrix.arm }}
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 30
+  evaluate:
+    needs: cycle2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-trained-replay
+          path: ${{ runner.temp }}/replay0
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-trained-joint
+          path: ${{ runner.temp }}/joint0
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f-cycle1-replay
+          path: ${{ runner.temp }}/replay1
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f-cycle1-joint
+          path: ${{ runner.temp }}/joint1
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f-cycle2-replay
+          path: ${{ runner.temp }}/replay2
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f-cycle2-joint
+          path: ${{ runner.temp }}/joint2
+      - run: python autonomy/federation/r84f_continuity.py evaluate "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/replay0" "$RUNNER_TEMP/joint0" "$RUNNER_TEMP/replay1" "$RUNNER_TEMP/joint1" "$RUNNER_TEMP/replay2" "$RUNNER_TEMP/joint2" "$RUNNER_TEMP/results"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84f-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 30
