@@ -1,0 +1,96 @@
+name: JANUS R84C federation engine bounded research
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84c_engine.py'
+      - '.github/workflows/r84c-engine.yml'
+permissions:
+  contents: read
+concurrency:
+  group: r84c-bounded-one-shot
+  cancel-in-progress: false
+jobs:
+  scout:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84c-engine-20261125' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-lapis
+          ref: 46d7aaead678f03255606979113d34ca4d2d6d88
+          path: lapis
+          persist-credentials: false
+          sparse-checkout: |
+            tools
+          sparse-checkout-cone-mode: false
+      - run: |
+          python3 -m pip install --disable-pip-version-check requests==2.32.5
+          python3 autonomy/federation/r84c_engine.py scout lapis "$RUNNER_TEMP/scout"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84c-quarantine
+          path: ${{ runner.temp }}/scout
+          if-no-files-found: error
+          retention-days: 60
+  verify:
+    needs: scout
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            tools/trinity_r14_verified_oracle.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus_Genesis
+          ref: 2aed1c4d1f54ac22cdd1503b2972d8174f0723d0
+          path: genesis
+          persist-credentials: false
+          sparse-checkout: |
+            tools/essence_v54_neural_witness.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84c-quarantine
+          path: ${{ runner.temp }}/scout
+      - run: python3 autonomy/federation/r84c_engine.py verify demi genesis "$RUNNER_TEMP/scout" "$RUNNER_TEMP/verified"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84c-verified
+          path: ${{ runner.temp }}/verified
+          if-no-files-found: error
+          retention-days: 60
+  publish:
+    needs: verify
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84c-verified
+          path: ${{ runner.temp }}/verified
+      - env:
+          R84C_HEAD: ${{ github.event.pull_request.head.ref }}
+        run: python3 autonomy/federation/r84c_engine.py publish "$RUNNER_TEMP/verified"

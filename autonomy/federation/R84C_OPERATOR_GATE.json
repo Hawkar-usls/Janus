@@ -1,0 +1,48 @@
+{
+  "schema": "janus.r84c.operator_gate.v1",
+  "enabled": false,
+  "live_schedule": false,
+  "proposed_cron_utc": "17,47 * * * *",
+  "max_total_cycles": 2,
+  "max_requests_per_cycle": 1,
+  "max_candidate_metadata_bytes": 256000,
+  "max_new_candidates": 5,
+  "max_training_transitions": 0,
+  "allow_external_peers": false,
+  "production_promotion": false,
+  "execution_of_incoming_code": false,
+  "participants": [
+    {
+      "id": "Hawkar-usls/Janus",
+      "public_key_fingerprint": null,
+      "active": false
+    },
+    {
+      "id": "Hawkar-usls/janus-meta-registry",
+      "public_key_fingerprint": null,
+      "active": false
+    },
+    {
+      "id": "Hawkar-usls/Janus_Genesis",
+      "public_key_fingerprint": null,
+      "active": false
+    },
+    {
+      "id": "Hawkar-usls/Janus-Demiurge",
+      "public_key_fingerprint": null,
+      "active": false
+    },
+    {
+      "id": "Hawkar-usls/janus-lapis",
+      "public_key_fingerprint": null,
+      "active": false
+    }
+  ],
+  "operator_requirements": [
+    "Review each public key fingerprint and prove possession without exposing private key",
+    "Provision private keys in repository-scoped GitHub environments with approvals",
+    "Review explicit default-branch workflow deployment; no active cron in this draft",
+    "Require verified source license and a scoped validation oracle before any training",
+    "Use a durable finite-cycle counter and operator stop; never automatically promote production"
+  ]
+}

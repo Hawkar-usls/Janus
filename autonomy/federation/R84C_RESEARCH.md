@@ -1,0 +1,3 @@
+# R84C research boundary
+
+One bounded metadata-only BEETLE request; public arXiv leads remain quarantined. Real TRINITY R1.4 arithmetic oracle tests supported and unsupported tasks; it is not a general factual or license validator. Real ESSENCE v5.4 seal/check helpers verify a new typed receipt, not a native neural generation admission. Genesis separate witness reopens the previous R84B lineage and verifies the committed receipt. No new training, promotion, external participant, schedule, or persistent key provisioning. Schedule and operator identity prerequisites are documented in R84C_OPERATOR_GATE.json (disabled).
