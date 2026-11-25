@@ -1,0 +1,169 @@
+name: JANUS R84H15 bounded infinite world
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h15_world.py'
+      - '.github/workflows/r84h15-world.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h15-bounded-research
+  cancel-in-progress: false
+jobs:
+  fixtures:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h15-infinite-world-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h15_world.py
+            autonomy/federation/r84h14_partition.py
+            autonomy/federation/r84h13_streaming.py
+            autonomy/federation/r84h12_evolution.py
+            autonomy/federation/r84h11b_repair.py
+            autonomy/federation/r84h11_cortex.py
+            autonomy/federation/r84h10_resonance.py
+            autonomy/federation/r84h9_synapse.py
+            autonomy/federation/r84h8_neurogenesis.py
+            autonomy/federation/r84h7_immortal.py
+            autonomy/federation/r84h6_heritage.py
+            autonomy/federation/r84h5_control.py
+            autonomy/federation/r84h4_equilibrium.py
+            autonomy/federation/r84h3_stability.py
+            autonomy/federation/r84h2_growth.py
+            autonomy/federation/r84g2_selective.py
+            autonomy/federation/r84g_adaptive.py
+            autonomy/federation/r84f2_vocab.py
+            autonomy/federation/r84f_continuity.py
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 scipy==1.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - run: |
+          test -z "$(find autonomy/federation -name '*FROZEN_EXAM.json' -print)"
+          python autonomy/federation/r84h15_world.py prepare "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/fixtures"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h15-fixtures
+          path: ${{ runner.temp }}/fixtures
+          if-no-files-found: error
+          retention-days: 60
+  scale:
+    needs: fixtures
+    strategy:
+      fail-fast: false
+      matrix:
+        size: [15, 30, 60, 120]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 scipy==1.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h7-cycle5
+          path: ${{ runner.temp }}/root
+          run-id: 45702441451
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h8-cycle3
+          path: ${{ runner.temp }}/bundle
+          run-id: 45704306939
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h10-trained
+          path: ${{ runner.temp }}/resonance
+          run-id: 45706296802
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h11-trained
+          path: ${{ runner.temp }}/cortex
+          run-id: 45707256292
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h12-trained
+          path: ${{ runner.temp }}/evolution
+          run-id: 45708640174
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h15-fixtures
+          path: ${{ runner.temp }}/fixtures
+      - run: |
+          for mode in exact sprites16 tree16 tree16_prefetch; do
+            python autonomy/federation/r84h15_world.py run "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/root" "$RUNNER_TEMP/bundle" "$RUNNER_TEMP/resonance" "$RUNNER_TEMP/cortex" "$RUNNER_TEMP/evolution" "$RUNNER_TEMP/fixtures" "${{ matrix.size }}" "$mode" "$RUNNER_TEMP/results"
+          done
+          python autonomy/federation/r84h15_world.py compare "$RUNNER_TEMP/results" "${{ matrix.size }}"
+          if [ "${{ matrix.size }}" = "15" ]; then
+            python -c 'import json,os; d=json.load(open(os.environ["RUNNER_TEMP"]+"/results/exact.json")); assert d["metrics"]["historical_dep"]==386, "H14_SEED111_REGRESSION"'
+          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h15-scale-${{ matrix.size }}
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 60
+  summarize:
+    needs: scale
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 scipy==1.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r84h15-scale-*
+          path: ${{ runner.temp }}/scales
+      - run: python autonomy/federation/r84h15_world.py summarize "$RUNNER_TEMP/scales" "$RUNNER_TEMP/summary"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h15-results
+          path: ${{ runner.temp }}/summary
+          if-no-files-found: error
+          retention-days: 60
