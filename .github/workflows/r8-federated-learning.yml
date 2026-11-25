@@ -1,0 +1,73 @@
+name: JANUS R8 federated skill learning pilot
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r8_learning.py'
+      - '.github/workflows/r8-federated-learning.yml'
+permissions:
+  contents: read
+concurrency:
+  group: r8-internal-one-shot
+  cancel-in-progress: false
+jobs:
+  learner:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r8-live-learning-20261125' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - run: |
+          test ! -f autonomy/federation/R8_FROZEN_SKILL_EXAM.json
+          python3 autonomy/federation/r8_learning.py learner "$RUNNER_TEMP/shadow"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-shadow
+          path: ${{ runner.temp }}/shadow
+          if-no-files-found: error
+          retention-days: 60
+  audit:
+    needs: learner
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: r8-shadow
+          path: ${{ runner.temp }}/shadow
+      - run: python3 autonomy/federation/r8_learning.py audit "$RUNNER_TEMP/shadow" "$RUNNER_TEMP/audit"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r8-audit
+          path: ${{ runner.temp }}/audit
+          if-no-files-found: error
+          retention-days: 60
+  return_skill:
+    needs: audit
+    permissions:
+      contents: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: r8-audit
+          path: ${{ runner.temp }}/audit
+      - env:
+          R8_HEAD: ${{ github.event.pull_request.head.ref }}
+        run: python3 autonomy/federation/r8_learning.py return "$RUNNER_TEMP/audit"
