@@ -1,0 +1,17 @@
+{
+  "schema": "janus.jdg.capability.v1",
+  "capability": "workflow.compile.gh_aw.v1",
+  "provider": "github/gh-aw",
+  "version": "v1.2.2",
+  "license": "MIT",
+  "binary_url": "https://github.com/github/gh-aw/releases/download/v1.2.2/linux-amd64",
+  "binary_sha256": "c2378d85466d29cdbdfebd0e513557b5cbec18d34f44e7cc00c2fa323687a153",
+  "binary_bytes": 51249312,
+  "transport": "own GitHub Actions artifacts; independent verifier job",
+  "request_scope": "fixed public workflow only; compile and return inert lock artifact; no engine calls, dispatch, write privileges, secrets or external task execution",
+  "limits": {
+    "timeout_seconds": 120,
+    "output_bytes": 2000000
+  },
+  "status": "RESEARCH_ONLY"
+}
