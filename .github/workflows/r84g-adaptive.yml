@@ -1,0 +1,121 @@
+name: JANUS R84G paired adaptive replay
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84g_adaptive.py'
+      - '.github/workflows/r84g-adaptive.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84g-bounded-research
+  cancel-in-progress: false
+jobs:
+  train:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84g-adaptive-replay-20261125' && github.run_attempt == 1
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [replay, joint]
+        mode: [fixed, adaptive]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84g_adaptive.py
+            autonomy/federation/r84f2_vocab.py
+            autonomy/federation/r84f_continuity.py
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f2-cycle2-${{ matrix.arm }}
+          path: ${{ runner.temp }}/parent
+          run-id: 45681757254
+          github-token: ${{ github.token }}
+      - run: |
+          for name in R84G_FROZEN_EXAM R84F_FROZEN_EXAM R84E_FROZEN_EXAM R84B_FROZEN_EXAM R8_FROZEN_SKILL_EXAM; do test ! -f "autonomy/federation/$name.json" || exit 1; done
+          python autonomy/federation/r84g_adaptive.py train "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parent" "$RUNNER_TEMP/trained" "${{ matrix.arm }}" "${{ matrix.mode }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84g-${{ matrix.arm }}-${{ matrix.mode }}
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f2-cycle2-replay
+          path: ${{ runner.temp }}/replay
+          run-id: 45681757254
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84f2-cycle2-joint
+          path: ${{ runner.temp }}/joint
+          run-id: 45681757254
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84g-replay-fixed
+          path: ${{ runner.temp }}/rf
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84g-replay-adaptive
+          path: ${{ runner.temp }}/ra
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84g-joint-fixed
+          path: ${{ runner.temp }}/jf
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84g-joint-adaptive
+          path: ${{ runner.temp }}/ja
+      - run: python autonomy/federation/r84g_adaptive.py evaluate "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/replay" "$RUNNER_TEMP/joint" "$RUNNER_TEMP/results" "$RUNNER_TEMP/rf" "$RUNNER_TEMP/ra" "$RUNNER_TEMP/jf" "$RUNNER_TEMP/ja"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84g-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 60
