@@ -12,6 +12,7 @@ SOURCES={
  "receipt":(DEMI,"e7d0f016cfb59c253ab2363cbeecf0facf06cc17","research/essence/trinity_parental_school/R1_REAL_CPU_DIAGNOSTIC_RESULT_20261123.json","0d5847fe97de0570a6aa4abd670ec2c1038083de"),
  "contract":(DEMI,"e7d0f016cfb59c253ab2363cbeecf0facf06cc17","tools/trinity_parental_contract.py","4636318842c64196c916c75a7b59fac0c876e2fa"),
  "director":(DEMI,"48aa4210f68fc59d00da5e4bc0a45ca4b16a1fe1","tools/demiurge_beetle_director.py","79f221c8ec6ab4e7cc82d0f4df9b35ca9409674d"),
+ "bridge":(DEMI,"48aa4210f68fc59d00da5e4bc0a45ca4b16a1fe1","tools/essence_beetle_core_bridge.py","3b0b7ad61eb433a4568f7b4257833f2b859978a9"),
  "directives":(DEMI,"48aa4210f68fc59d00da5e4bc0a45ca4b16a1fe1","beetle/DEMIURGE_BEETLE_DIRECTIVES.json","8d29dcb8ff7a5e9c9c8725d095ae39f30140fee4")}
 SEED=74
 BUDGET=60
@@ -55,7 +56,12 @@ def desire(p):
 def load_director(root,src):
     path=root/"director.py";path.write_bytes(src["director"])
     spec=importlib.util.spec_from_file_location("pinned_beetle_director",path)
-    m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+    (root/"essence_beetle_core_bridge.py").write_bytes(src["bridge"])
+    sys.path.insert(0,str(root))
+    try:
+        m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+    finally:
+        sys.path.pop(0)
     return m
 def route(root,src,p):
     m=load_director(root,src)
