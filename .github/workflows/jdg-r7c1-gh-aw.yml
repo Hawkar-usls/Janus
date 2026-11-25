@@ -1,0 +1,50 @@
+name: JDG R7C1 real gh-aw compiler adapter
+on:
+  pull_request:
+    paths:
+      - 'autonomy/federation/JDG_R7C1_*'
+      - 'autonomy/federation/jdg_r7c1.py'
+      - '.github/workflows/jdg-r7c1-gh-aw.yml'
+permissions:
+  contents: read
+jobs:
+  compile:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    outputs:
+      key_sha: ${{ steps.worker.outputs.key_sha }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Obtain immutable public release binary
+        run: |
+          curl --fail --silent --show-error --location --proto '=https' --max-time 90 -o "$RUNNER_TEMP/gh-aw" 'https://github.com/github/gh-aw/releases/download/v1.2.2/linux-amd64'
+          echo 'c2378d85466d29cdbdfebd0e513557b5cbec18d34f44e7cc00c2fa323687a153  '"$RUNNER_TEMP/gh-aw" | sha256sum --check
+          chmod 700 "$RUNNER_TEMP/gh-aw"
+      - name: Compile public fixture, reject unsafe control, seal result
+        id: worker
+        run: python3 autonomy/federation/jdg_r7c1.py worker "$RUNNER_TEMP/gh-aw" "$RUNNER_TEMP/jdg-result"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jdg-r7c1-result
+          path: ${{ runner.temp }}/jdg-result/
+          if-no-files-found: error
+          retention-days: 30
+  verify:
+    needs: compile
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: jdg-r7c1-result
+          path: ${{ runner.temp }}/jdg-result
+      - name: Validate immutable result, not execute generated workflow
+        env:
+          KEY_SHA: ${{ needs.compile.outputs.key_sha }}
+        run: python3 autonomy/federation/jdg_r7c1.py verify "$RUNNER_TEMP/jdg-result" "$KEY_SHA"
