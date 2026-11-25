@@ -1,0 +1,104 @@
+name: JDG R7C9 DOVOD Number Sense
+on:
+  pull_request:
+    paths:
+      - 'autonomy/federation/jdg_r7c9.py'
+      - '.github/workflows/jdg-r7c9-number-sense.yml'
+permissions:
+  contents: read
+concurrency:
+  group: jdg-r7c9-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python autonomy/federation/jdg_r7c9.py prepare "$RUNNER_TEMP/prepared"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7c9-prepared
+          path: ${{ runner.temp }}/prepared
+          if-no-files-found: error
+          retention-days: 60
+  train:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [byte, place, vector]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/jdg_r7c9.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c9-prepared
+          path: ${{ runner.temp }}/prepared
+      - run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - name: Train isolated shadow models
+        env:
+          ARM: ${{ matrix.arm }}
+        run: |
+          test ! -f autonomy/federation/R7C9_FROZEN_NUMBER_SENSE_EXAM.json
+          python autonomy/federation/jdg_r7c9.py train "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/shadow" "$ARM"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7c9-shadow-${{ matrix.arm }}
+          path: ${{ runner.temp }}/shadow
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c9-prepared
+          path: ${{ runner.temp }}/prepared
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c9-shadow-byte
+          path: ${{ runner.temp }}/byte
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c9-shadow-place
+          path: ${{ runner.temp }}/place
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c9-shadow-vector
+          path: ${{ runner.temp }}/vector
+      - run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - run: python autonomy/federation/jdg_r7c9.py evaluate "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/eval" "$RUNNER_TEMP/byte" "$RUNNER_TEMP/place" "$RUNNER_TEMP/vector"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7c9-firstlook
+          path: ${{ runner.temp }}/eval
+          if-no-files-found: error
+          retention-days: 60
