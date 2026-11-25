@@ -1,5 +1,5 @@
 """R84D bounded source evidence and shadow associative factual memory; not neural weight training."""
-import json,hashlib,re,sys,time,urllib.request,urllib.parse,urllib.error,xml.etree.ElementTree as ET
+import json,hashlib,re,sys,time,unicodedata,urllib.request,urllib.parse,urllib.error,xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
 import jfp_gateway as g
@@ -56,7 +56,15 @@ def extract(atom,page,id):
     title=norm(e.findtext("a:title","",ns));authors=[norm(x.findtext("a:name","",ns)) for x in e.findall("a:author",ns)]
     primary=e.find("x:primary_category",ns);ck(primary is not None,"PRIMARY")
     pt=norm(p.meta.get("citation_title",[""])[0]);pa=[norm(x) for x in p.meta.get("citation_author",[])]
-    ck(title and title==pt and authors and pa==authors,"CROSS_SOURCE_IDENTITY")
+    # arXiv Atom uses given-name first; citation_author can use family-name first.
+    # Preserve author count and sequence, compare tokens of each name (not fuzzy matching).
+    def namekey(s):
+        return sorted(re.findall(r"[^\W_]+",unicodedata.normalize("NFKC",s).casefold(),re.UNICODE))
+    def titlekey(s):return norm(unicodedata.normalize("NFKC",s)).casefold()
+    same_title=bool(title) and titlekey(title)==titlekey(pt)
+    same_authors=bool(authors) and [namekey(x) for x in authors]==[namekey(x) for x in pa]
+    ck(same_title and same_authors,"CROSS_SOURCE_IDENTITY:title="+str(same_title)+",authors="+str(same_authors)+",counts="+str(len(authors))+"/"+str(len(pa)))
+
     links=[h.replace("http://","https://",1).rstrip("/")+"/" for h,t in p.links if t in ("view license","license","(license)") and ("creativecommons.org/" in h or "arxiv.org/licenses/" in h)]
     ck(len(set(links))==1,"LICENSE_LINK")
     lic=CC.get(links[0],"OTHER_OR_RESTRICTED")
