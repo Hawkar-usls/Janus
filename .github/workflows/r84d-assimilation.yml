@@ -1,0 +1,89 @@
+name: JANUS R84D verified source fact assimilation
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84d_assimilation.py'
+      - '.github/workflows/r84d-assimilation.yml'
+permissions:
+  contents: read
+concurrency:
+  group: r84d-bounded-research
+  cancel-in-progress: false
+jobs:
+  harvest:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84d-assimilation-20261125' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84d_assimilation.py
+            autonomy/federation/r84c_engine.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - run: |
+          test ! -f autonomy/federation/R84D_FROZEN_EXAM.json
+          python3 autonomy/federation/r84d_assimilation.py harvest "$RUNNER_TEMP/source"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84d-source
+          path: ${{ runner.temp }}/source
+          if-no-files-found: error
+          retention-days: 60
+  assimilate:
+    needs: harvest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84d_assimilation.py
+            autonomy/federation/r84c_engine.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84d-source
+          path: ${{ runner.temp }}/source
+      - run: |
+          test ! -f autonomy/federation/R84D_FROZEN_EXAM.json
+          python3 autonomy/federation/r84d_assimilation.py assimilate "$RUNNER_TEMP/source" "$RUNNER_TEMP/memory"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84d-memory
+          path: ${{ runner.temp }}/memory
+          if-no-files-found: error
+          retention-days: 60
+  audit:
+    needs: assimilate
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84d-memory
+          path: ${{ runner.temp }}/memory
+      - run: python3 autonomy/federation/r84d_assimilation.py audit "$RUNNER_TEMP/memory" "$RUNNER_TEMP/audit"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84d-audit
+          path: ${{ runner.temp }}/audit
+          if-no-files-found: error
+          retention-days: 60
