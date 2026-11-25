@@ -1,4 +1,4 @@
-name: JANUS R84H6 bounded heritage
+name: JANUS R84H6B bounded heritage capacity repair
 on:
   pull_request:
     types: [opened]
@@ -9,11 +9,11 @@ permissions:
   contents: read
   actions: read
 concurrency:
-  group: r84h6-bounded-research
+  group: r84h6b-bounded-research
   cancel-in-progress: false
 jobs:
   cycle1:
-    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h6-heritage-20261125' && github.run_attempt == 1
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h6b-capacity-repair-20261125' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:

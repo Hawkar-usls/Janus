@@ -8,6 +8,7 @@ import r84h2_growth as h2
 import r84g2_selective as s
 import r84g_adaptive as a
 import r84e_neural as e
+import jfp_gateway as g
 HERE=Path(__file__).parent
 EXAM="42d13b597cc479c3443f33dc07d029a9825bd1c7"
 ROOTS=("52759c49c4188930c6f8126141852e004d4dce6caf7282eed14f9dd02343ecb0","4d7766a99b007677f442a91171faf101d0e985a0f8ba612f0f1eb4e42018e071","5c4d2e4693d6549ad53ed6db40e49feeba14948cfc65c6c5eb87abf9a14ca7b2")
@@ -27,10 +28,55 @@ def data(prep):
         for i,w in enumerate(words,p["input_embedding_size"]):d["vocab"][w]=i
         for y in sorted(grp):d["labels"][y]=max(d["labels"].values())+1
         d["input_embedding_size"]=p["input_embedding_size"]+len(words)
-        ck(d["input_embedding_size"]<=640 and max(d["labels"].values())<258 and not set(d["labels"].values())&set(d["vocab"].values()),"CAP")
+        d["output_size"]=max(258,max(d["labels"].values())+1)
+        log("R84H6_CAPACITY",{"cycle":cycle,"input_size":d["input_embedding_size"],"output_size":d["output_size"],"old_output_size":p.get("output_size",258),"classes":len(d["labels"]),"namespace_overlap":len(set(d["labels"].values())&set(d["vocab"].values()))})
+        ck(d["input_embedding_size"]<=768 and d["output_size"]<=272 and len(set(d["vocab"].values()))==len(d["vocab"]) and len(set(d["labels"].values()))==len(d["labels"]),"CAPACITY")
+        ck(all(d["vocab"][k]==v for k,v in p["vocab"].items()) and all(d["labels"][k]==v for k,v in p["labels"].items()),"ID_STABILITY")
         ds.append(d)
     a.configure(ds[-1]);return d0,old,hist,prior,pre,ds
-def optimize(L,m,d,seed,mode):
+def expand(L,m,d,seed):
+    torch,_=L;nin=m.wte.num_embeddings;nout=m.lm_head.out_features
+    si=d["input_embedding_size"];so=d.get("output_size",258)
+    ck(nin<=si<=768 and nout<=so<=272,"SHAPE_CAP")
+    if si>nin:
+        new=torch.nn.Embedding(si,m.wte.embedding_dim);gen=torch.Generator().manual_seed(seed+842000)
+        with torch.no_grad():
+            new.weight[:nin].copy_(m.wte.weight);new.weight[nin:].copy_(torch.randn((si-nin,m.wte.embedding_dim),generator=gen)*.02)
+        m.wte=new
+    if so>nout:
+        ck(m.lm_head.bias is None,"HEAD_BIAS")
+        new=torch.nn.Linear(m.lm_head.in_features,so,bias=False)
+        with torch.no_grad():
+            new.weight[:nout].copy_(m.lm_head.weight);new.weight[nout:].zero_()
+        m.lm_head=new
+    return m
+def load(L,d,folder,seed):
+    torch,_=L;p=e.read(folder/"receipt.json");path=folder/"shadow.pt"
+    ck(p["file_sha256"]==e.sha(path.read_bytes()) and p["data_sha256"]==g.digest(d) and p["production"] is False,"RECEIPT")
+    m=expand(L,e.model(L),d,seed);m.load_state_dict(torch.load(path,map_location="cpu",weights_only=True),strict=True)
+    ck(e.state_hash(m)==p["model_sha256"] and all(torch.isfinite(x).all() for x in m.state_dict().values()),"TENSORS")
+    return m,p
+def migrate(L,m,p,d,seed):
+    torch,_=L;old={k:v.detach().clone() for k,v in m.state_dict().items()}
+    x,l,y=e.batch(L,p,d["old"]);m.eval();nout=m.lm_head.out_features
+    with torch.no_grad():before=e.forward(L,m,x,l).clone()
+    expand(L,m,d,seed);nin=p["input_embedding_size"]
+    for k,v in old.items():
+        after=m.state_dict()[k]
+        if k=="wte.weight":after=after[:nin]
+        elif k=="lm_head.weight":after=after[:nout]
+        ck(torch.equal(v,after),"OLD_TENSORS:"+k)
+    xx,ll,yy=e.batch(L,d,d["old"]);ck(torch.equal(x,xx) and torch.equal(l,ll) and torch.equal(y,yy),"OLD_IDS")
+    m.eval()
+    with torch.no_grad():
+        z=e.forward(L,m,xx,ll);delta=float((before-z[:,:nout]).abs().max())
+        ck(torch.allclose(before,z[:,:nout],atol=2e-5,rtol=2e-5),"OLD_LOGITS")
+        ck(torch.equal(before.argmax(-1),z[:,:nout].argmax(-1)),"OLD_ARGMAX")
+        changed=int((before.argmax(-1)!=z.argmax(-1)).sum())
+        ck(changed==0,"NEW_HEAD_CHANGED_OLD_PREDICTIONS")
+    log("R84H6_MIGRATION",{"old_input":nin,"new_input":m.wte.num_embeddings,"old_output":nout,"new_output":m.lm_head.out_features,"old_rows":len(d["old"]),"max_old_logit_delta":delta,"changed_predictions":changed,"exact_old_tensors":True})
+    return e.state_hash(m)
+def optimize(L,m,d,seed,mode,old_output):
     torch,_=L;torch.manual_seed(seed+30700);rng=random.Random(seed+30700);rr=random.Random(seed+50700)
     opt=torch.optim.AdamW(m.parameters(),lr=4e-4 if mode in ('low_lr','heritage') else 8e-4,weight_decay=.01)
     cap=[];hooks=[layer.linear1.register_forward_hook(lambda mod,inp,out:cap.append(out)) for layer in m.transformer_encoder.layers]
@@ -88,7 +134,7 @@ def optimize(L,m,d,seed,mode):
                     penalty=50.*sum((fisher[k]*(p-anchor[k]).square()).sum() for k,p in m.named_parameters())
                 elif mode in ("distill","heritage"):
                     ids=selected[3*j:3*j+3];T=2.
-                    penalty=.5*T*T*torch.nn.functional.kl_div(torch.nn.functional.log_softmax(z[-3:]/T,dim=-1),torch.nn.functional.softmax(teacher[ids]/T,dim=-1),reduction="batchmean")
+                    penalty=.5*T*T*torch.nn.functional.kl_div(torch.nn.functional.log_softmax(z[-3:,:old_output]/T,dim=-1),torch.nn.functional.softmax(teacher[ids,:old_output]/T,dim=-1),reduction="batchmean")
                 loss=ce+penalty;penalty_total+=float(penalty.detach());ck(math.isfinite(float(loss.detach())),"LOSS")
                 loss.backward();torch.nn.utils.clip_grad_norm_(m.parameters(),1.);opt.step()
             history.append({"block":block,"class_min":min(sum(blockcounts[i] for i in ids) for ids in by.values()),"covered":sum(c>0 for c in counts),"mean_loss":sum(now)/n,"utility_nonzero":sum(u!=0 for u in utility)})
@@ -105,11 +151,11 @@ def train(prep,parent,out,cycle):
         order=MODES[(i+cycle)%3:]+MODES[:(i+cycle)%3]
         for mode in order:
             folder=parent/"distill"/str(seed) if cycle==1 else parent/mode/str(seed)
-            m,rec=h3.load(L,p,folder,seed)
+            m,rec=load(L,p,folder,seed)
             if cycle==1:ck(rec["model_sha256"]==ROOTS[i],"ROOT")
             else:ck(rec["mode"]==mode and rec["cycle"]==cycle-1 and rec["seed"]==seed and rec["root_sha256"]==ROOTS[i],"PARENT")
-            ss=seed+1200+100*cycle;start=time.perf_counter();cpu=time.process_time();mig=h3.migrate(L,m,p,d,ss)
-            z=optimize(L,m,d,ss,mode)
+            ss=seed+1200+100*cycle;start=time.perf_counter();cpu=time.process_time();mig=migrate(L,m,p,d,ss)
+            z=optimize(L,m,d,ss,mode,p.get('output_size',258))
             ck(z["steps"]==240 and z["old_examples"]==720 and z["new_examples"]==2160 and z["covered_examples"]==len(d["old"]) and z["min_class_replays"]>=6,"BUDGET")
             ck(z["extra_probes"]==(len(d["old"]) if mode in ("distill","heritage") else 0),"TEACHER")
             z.update({"mode":mode,"cycle":cycle,"seed":seed,"root_sha256":ROOTS[i],"parent_sha256":rec["model_sha256"],"migration_sha256":mig,"cpu_seconds":time.process_time()-cpu,"wall_seconds":time.perf_counter()-start,"lr":4e-4 if mode in ("low_lr","heritage") else 8e-4,"blocks":6})
@@ -124,19 +170,19 @@ def evaluate(prep,root,c1,c2,c3,out):
     log("R84H6_EXAM",{"prior_n":347,"fresh_n":list(map(len,fresh)),"fresh_full_n":[8,8,8]})
     results=[]
     for i,seed in enumerate(e.SEEDS):
-        m,p=h3.load(L,ds[0],root/"distill"/str(seed),seed);ck(p["model_sha256"]==ROOTS[i],"ROOT")
+        m,p=load(L,ds[0],root/"distill"/str(seed),seed);ck(p["model_sha256"]==ROOTS[i],"ROOT")
         def stage(q,cy):return h3.score(L,q,groups,old+hist[1:]+prior[1:]+pre[1:]+[ds[min(j,cy)] for j in (1,2,3)],ds[-1]["labels"])
         base=stage(m,0)
         for mode in MODES:
             prev=base;last=p["model_sha256"]
             for cycle,folder in enumerate((c1,c2,c3),1):
-                q,rec=h3.load(L,ds[cycle],folder/mode/str(seed),seed)
+                q,rec=load(L,ds[cycle],folder/mode/str(seed),seed)
                 ck(rec["parent_sha256"]==last and rec["root_sha256"]==ROOTS[i] and rec["mode"]==mode and rec["seed"]==seed and rec["cycle"]==cycle,"LINEAGE")
                 ans=stage(q,cycle);row=h3.compare(prev,ans,groups,ds[-1]["labels"])
                 cumulative=h3.compare(base,ans,groups,ds[-1]["labels"])
                 row.update({"mode":mode,"seed":seed,"cycle":cycle,"cpu_seconds":rec["cpu_seconds"],"profit_cpu":row["net_gain"]/rec["cpu_seconds"],"root_lost":cumulative["lost"],"root_before":cumulative["before"],"model_sha256":rec["model_sha256"],"parent_sha256":last})
                 results.append(row);log("R84H6_RESULT",{k:v for k,v in row.items() if k not in ("lost_indices","per_class")});prev=ans;last=rec["model_sha256"]
-    out.mkdir(parents=True,exist_ok=False);e.write(out/"result.json",{"schema":"r84h6.result.v1","results":results,"production":False,"external_validation":False,"scope":"three finite synthetic concept classification cycles; matched 6 blocks of 40 updates to allow >60 classes; KL only old training rows; no automatic promotion; CPU includes teacher evaluation"})
+    out.mkdir(parents=True,exist_ok=False);e.write(out/"result.json",{"schema":"r84h6.result.v1","results":results,"production":False,"external_validation":False,"scope":"three finite synthetic concept classification cycles; matched 6 blocks of 40 updates to allow >60 classes; KL only old training rows and pre-expansion outputs; separate input/output ID namespaces; zero-initialized new head rows; no automatic promotion; CPU includes teacher evaluation"})
 if __name__=="__main__":
     if sys.argv[1]=="train":train(*[Path(x) for x in sys.argv[2:5]],int(sys.argv[5]))
     elif sys.argv[1]=="evaluate":evaluate(*[Path(x) for x in sys.argv[2:]])
