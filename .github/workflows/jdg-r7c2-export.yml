@@ -1,0 +1,63 @@
+name: JDG R7C2 export verified tool result
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/JDG_R7C2_PIN.json'
+      - 'autonomy/federation/jdg_r7c2.py'
+      - '.github/workflows/jdg-r7c2-export.yml'
+permissions:
+  contents: read
+jobs:
+  archive:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/jdg-r7c2-export-20261125' && github.repository == 'Hawkar-usls/Janus'
+    permissions:
+      contents: write
+      actions: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    outputs:
+      checkpoint: ${{ steps.archive.outputs.checkpoint }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: true
+      - name: Check original run and artifact metadata against frozen pins
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api repos/Hawkar-usls/Janus/actions/runs/45645405484 > "$RUNNER_TEMP/source-run.json"
+          gh api repos/Hawkar-usls/Janus/actions/artifacts/15036902067 > "$RUNNER_TEMP/source-artifact.json"
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=json.loads(Path("autonomy/federation/JDG_R7C2_PIN.json").read_text())
+          r=json.loads(Path(os.environ["RUNNER_TEMP"],"source-run.json").read_text())
+          a=json.loads(Path(os.environ["RUNNER_TEMP"],"source-artifact.json").read_text())
+          assert r["id"]==p["source_run"] and r["head_sha"]==p["source_head"] and r["run_attempt"]==p["source_attempt"] and r["path"]==p["source_workflow"] and r["conclusion"]=="success"
+          assert a["id"]==p["artifact_id"] and a["name"]==p["artifact_name"] and a["digest"]=="sha256:"+p["artifact_sha256"] and not a["expired"] and a["workflow_run"]["id"]==p["source_run"]
+          PY
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: jdg-r7c1-result
+          run-id: 45645405484
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/jdg-original
+      - name: Verify and publish inert data on isolated research branch
+        id: archive
+        env:
+          JDG_HEAD_REPO: ${{ github.event.pull_request.head.repo.full_name }}
+          JDG_HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
+        run: python3 autonomy/federation/jdg_r7c2.py export "$RUNNER_TEMP/jdg-original"
+  audit:
+    needs: archive
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ needs.archive.outputs.checkpoint }}
+          persist-credentials: false
+      - name: Fresh runner re-verifies immutable archive
+        run: python3 autonomy/federation/jdg_r7c2.py audit 'data/jdg-r7c2/gh-aw-v1.2.2' export
