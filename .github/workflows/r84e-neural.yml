@@ -1,0 +1,164 @@
+name: JANUS R84E neural assimilation ablation
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84e_neural.py'
+      - '.github/workflows/r84e-neural.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84e-bounded-research
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84e-neural-assimilation-20261125' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84d-source
+          run-id: 45676341176
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/source
+      - run: python3 autonomy/federation/r84e_neural.py prepare "$RUNNER_TEMP/source" "$RUNNER_TEMP/prepared"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          if-no-files-found: error
+          retention-days: 30
+  parents:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+      - run: |
+          test ! -f autonomy/federation/R84E_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R84B_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R8_FROZEN_SKILL_EXAM.json
+          python autonomy/federation/r84e_neural.py parents "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parents"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84e-parents
+          path: ${{ runner.temp }}/parents
+          if-no-files-found: error
+          retention-days: 30
+  train:
+    needs: parents
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [baseline, replay, activity, joint]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84e_neural.py
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-parents
+          path: ${{ runner.temp }}/parents
+      - run: |
+          test ! -f autonomy/federation/R84E_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R84B_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R8_FROZEN_SKILL_EXAM.json
+          python autonomy/federation/r84e_neural.py train "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parents" "$RUNNER_TEMP/trained" "${{ matrix.arm }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84e-trained-${{ matrix.arm }}
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 30
+  evaluate:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-parents
+          path: ${{ runner.temp }}/parents
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-trained-baseline
+          path: ${{ runner.temp }}/baseline
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-trained-replay
+          path: ${{ runner.temp }}/replay
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-trained-activity
+          path: ${{ runner.temp }}/activity
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-trained-joint
+          path: ${{ runner.temp }}/joint
+      - run: python autonomy/federation/r84e_neural.py evaluate "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/parents" "$RUNNER_TEMP/results" "$RUNNER_TEMP/baseline" "$RUNNER_TEMP/replay" "$RUNNER_TEMP/activity" "$RUNNER_TEMP/joint"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84e-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 30
