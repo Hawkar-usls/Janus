@@ -1,4 +1,4 @@
-name: JANUS R84H13 bounded world streaming
+name: JANUS R84H13B bounded world streaming pin repair
 on:
   pull_request:
     types: [opened]
@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   evaluate:
-    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h13-world-streaming-20261126' && github.run_attempt == 1
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h13b-streaming-pin-repair-20261126' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
