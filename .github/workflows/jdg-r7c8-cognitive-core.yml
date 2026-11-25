@@ -1,0 +1,131 @@
+name: JDG R7C8 DOVOD Cognitive Core
+on:
+  pull_request:
+    paths:
+      - 'autonomy/federation/jdg_r7c8.py'
+      - '.github/workflows/jdg-r7c8-cognitive-core.yml'
+permissions:
+  contents: read
+concurrency:
+  group: jdg-r7c8-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+jobs:
+  prepare:
+    if: github.event.pull_request.head.repo.full_name == github.repository && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python autonomy/federation/jdg_r7c8.py prepare "$RUNNER_TEMP/prepared"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7c8-prepared
+          path: ${{ runner.temp }}/prepared
+          if-no-files-found: error
+          retention-days: 60
+  train:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        arm: [promoted_text, promoted_compact, scratch_text, scratch_compact, dovod_compact]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/jdg_r7c8.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c8-prepared
+          path: ${{ runner.temp }}/prepared
+      - run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - name: Train isolated shadow seeds without exams
+        env:
+          ARM: ${{ matrix.arm }}
+        run: |
+          test ! -f autonomy/federation/R7C8_FROZEN_COGNITIVE_EXAM.json
+          test ! -f autonomy/federation/R7C7_FROZEN_ANTI_OVERFIT_EXAM.json
+          python autonomy/federation/jdg_r7c8.py train demi "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/shadow" "$ARM"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7c8-shadow-${{ matrix.arm }}
+          path: ${{ runner.temp }}/shadow
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c8-prepared
+          path: ${{ runner.temp }}/prepared
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c8-shadow-promoted_text
+          path: ${{ runner.temp }}/promoted_text
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c8-shadow-promoted_compact
+          path: ${{ runner.temp }}/promoted_compact
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c8-shadow-scratch_text
+          path: ${{ runner.temp }}/scratch_text
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c8-shadow-scratch_compact
+          path: ${{ runner.temp }}/scratch_compact
+      - uses: actions/download-artifact@v4
+        with:
+          name: r7c8-shadow-dovod_compact
+          path: ${{ runner.temp }}/dovod_compact
+      - run: |
+          python -m pip install --disable-pip-version-check --no-cache-dir torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4
+      - run: python autonomy/federation/jdg_r7c8.py evaluate demi "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/eval" "$RUNNER_TEMP/promoted_text" "$RUNNER_TEMP/promoted_compact" "$RUNNER_TEMP/scratch_text" "$RUNNER_TEMP/scratch_compact" "$RUNNER_TEMP/dovod_compact"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r7c8-firstlook
+          path: ${{ runner.temp }}/eval
+          if-no-files-found: error
+          retention-days: 60
