@@ -1,0 +1,121 @@
+name: JANUS R84B incremental internal learning
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84b_intake.py'
+      - '.github/workflows/r84b-intake.yml'
+permissions:
+  contents: read
+concurrency:
+  group: r84b-internal-one-shot
+  cancel-in-progress: false
+jobs:
+  learn1:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84b-live-intake-20261125' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+            data/r84b-learning/STATE.json
+          sparse-checkout-cone-mode: false
+      - run: |
+          test ! -f autonomy/federation/R84B_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R8_FROZEN_SKILL_EXAM.json
+          python3 autonomy/federation/r84b_intake.py learn "$RUNNER_TEMP/candidate" 1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84b-candidate1
+          path: ${{ runner.temp }}/candidate
+          if-no-files-found: error
+          retention-days: 60
+  audit1:
+    needs: learn1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    outputs:
+      checkpoint: ${{ steps.audit.outputs.checkpoint }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84b-candidate1
+          path: ${{ runner.temp }}/candidate
+      - id: audit
+        env:
+          R84B_HEAD: ${{ github.event.pull_request.head.ref }}
+        run: python3 autonomy/federation/r84b_intake.py audit "$RUNNER_TEMP/candidate" 1
+  learn2:
+    needs: audit1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ needs.audit1.outputs.checkpoint }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84b_intake.py
+            autonomy/federation/r84_loop.py
+            autonomy/federation/r8_learning.py
+            autonomy/federation/jfp_gateway.py
+            data/r84b-learning/STATE.json
+          sparse-checkout-cone-mode: false
+      - run: |
+          test ! -f autonomy/federation/R84B_FROZEN_EXAM.json
+          test ! -f autonomy/federation/R8_FROZEN_SKILL_EXAM.json
+          python3 autonomy/federation/r84b_intake.py learn "$RUNNER_TEMP/candidate" 2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84b-candidate2
+          path: ${{ runner.temp }}/candidate
+          if-no-files-found: error
+          retention-days: 60
+  audit2:
+    needs: [learn2, audit1]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    outputs:
+      checkpoint: ${{ steps.audit.outputs.checkpoint }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ needs.audit1.outputs.checkpoint }}
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84b-candidate2
+          path: ${{ runner.temp }}/candidate
+      - id: audit
+        env:
+          R84B_HEAD: ${{ github.event.pull_request.head.ref }}
+        run: python3 autonomy/federation/r84b_intake.py audit "$RUNNER_TEMP/candidate" 2
+  replay_return:
+    needs: audit2
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ needs.audit2.outputs.checkpoint }}
+          persist-credentials: true
+      - env:
+          R84B_HEAD: ${{ github.event.pull_request.head.ref }}
+        run: python3 autonomy/federation/r84b_intake.py replay
