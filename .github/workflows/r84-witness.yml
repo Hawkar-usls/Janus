@@ -1,0 +1,20 @@
+name: JANUS R84 independent archive witness
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84_loop.py'
+      - '.github/workflows/r84-witness.yml'
+permissions:
+  contents: read
+jobs:
+  witness:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84-bounded-loop-20261125' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - run: python3 autonomy/federation/r84_loop.py witness
