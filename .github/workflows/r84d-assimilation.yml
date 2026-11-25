@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   harvest:
-    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84d-assimilation-20261125' && github.run_attempt == 1
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84d-normalized-20261125' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
