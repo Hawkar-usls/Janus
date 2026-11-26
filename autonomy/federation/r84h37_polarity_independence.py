@@ -1,5 +1,5 @@
 """H37 standalone verifier; no MiniLM, Transformers, network, or teacher labels."""
-import sys,re,json,hashlib,time,socket
+import sys,re,json,hashlib,time,socket,os,subprocess
 from pathlib import Path
 import torch
 from torch import nn
@@ -29,9 +29,22 @@ def scope(t):
     return not bool(re.search(r"\b(?:unknown|unclear|unspecified|not (?:known|established|specified|determined|reported|stated|given)|might|whether|may or may not|simultaneously present and absent|both present and absent|both before and after|compare|hypothetically|could (?:either|store)|either synchronous or deferred)\b",t,re.I))
 def offline():
     ck("transformers" not in sys.modules and "huggingface_hub" not in sys.modules,"TEACHER_IMPORT")
-    # CI additionally executes in a new Linux network namespace.
-    ck(len(Path("/proc/net/route").read_text().splitlines())==1,"NETWORK_ROUTE")
-    ck(len(list(Path("/sys/class/net").iterdir()))>=1,"NETWORK_INTERFACE")
+    # Witness the actual process namespace, not the line count of a procfs file.
+    # Fixed read-only iproute2 commands run in the same namespace.
+    host=os.environ.get("JANUS_PARENT_NETNS","")
+    current=os.readlink("/proc/self/ns/net")
+    interfaces=socket.if_nameindex()
+    def ip(*args):
+        p=subprocess.run(["ip","-j",*args],check=True,capture_output=True,text=True,timeout=5)
+        return json.loads(p.stdout)
+    v4=ip("-4","route","show","table","all")
+    v6=ip("-6","route","show","table","all")
+    witness={"parent_namespace":host,"process_namespace":current,"uid":os.geteuid(),"interfaces":[name for _,name in interfaces],"ipv4_routes":v4,"ipv6_routes":v6}
+    log("R84H37B_NETWORK_WITNESS",witness)
+    ck(bool(re.fullmatch(r"net:\[\d+\]",host)) and current!=host,"NETWORK_NAMESPACE_NOT_DISTINCT")
+    ck(os.geteuid()!=0,"NETWORK_PRIVILEGE")
+    ck([name for _,name in interfaces]==["lo"],"NETWORK_NONLOOPBACK_INTERFACE")
+    ck(all(z.get("dev")=="lo" and z.get("dst") not in ("default","0.0.0.0/0","::/0") and "gateway" not in z for z in v4+v6),"NETWORK_EXTERNAL_ROUTE")
     def denied(*args,**kwargs):raise RuntimeError("NETWORK_DISABLED")
     socket.create_connection=denied;socket.socket.connect=denied;socket.socket.connect_ex=denied
     torch.set_num_threads(2)

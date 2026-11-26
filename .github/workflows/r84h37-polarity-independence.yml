@@ -1,4 +1,4 @@
-name: JANUS R84H37 polarity and offline independence
+name: JANUS R84H37B polarity and offline witness recovery
 on:
   pull_request:
     types: [opened]
@@ -18,7 +18,7 @@ env:
   TOKENIZERS_PARALLELISM: 'false'
 jobs:
   train:
-    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h37-polarity-independence-20261126' && github.run_attempt == 1
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h37b-offline-witness-20261126' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -45,7 +45,7 @@ jobs:
           github-token: ${{ github.token }}
       - run: |
           test ! -e autonomy/federation/R84H37_FROZEN_EXAM.json
-          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- "$(command -v python)" autonomy/federation/r84h37_polarity_independence.py train "$RUNNER_TEMP/h33trained" "$RUNNER_TEMP/trained"
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h37_polarity_independence.py train "$RUNNER_TEMP/h33trained" "$RUNNER_TEMP/trained"
       - uses: actions/upload-artifact@v4
         with:
           name: r84h37-trained
@@ -87,7 +87,7 @@ jobs:
           run-id: 45808392777
           github-token: ${{ github.token }}
       - run: |
-          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- "$(command -v python)" autonomy/federation/r84h37_polarity_independence.py evaluate "$RUNNER_TEMP/trained" "$RUNNER_TEMP/h36trained" "$RUNNER_TEMP/offline"
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h37_polarity_independence.py evaluate "$RUNNER_TEMP/trained" "$RUNNER_TEMP/h36trained" "$RUNNER_TEMP/offline"
       - uses: actions/upload-artifact@v4
         with:
           name: r84h37-offline
@@ -95,7 +95,7 @@ jobs:
           if-no-files-found: error
           retention-days: 60
   history:
-    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h37-polarity-independence-20261126' && github.run_attempt == 1
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h37b-offline-witness-20261126' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
