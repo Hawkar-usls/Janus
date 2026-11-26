@@ -1,0 +1,311 @@
+{
+  "schema": "h38e.bank.v1",
+  "train": [
+    {
+      "text": "evone came before evtwo",
+      "y": 0
+    },
+    {
+      "text": "evone was earlier than evtwo",
+      "y": 0
+    },
+    {
+      "text": "evone finished ahead of evtwo",
+      "y": 0
+    },
+    {
+      "text": "evone came after evtwo",
+      "y": 1
+    },
+    {
+      "text": "evone was later than evtwo",
+      "y": 1
+    },
+    {
+      "text": "evone finished behind evtwo",
+      "y": 1
+    },
+    {
+      "text": "evone did not come before evtwo",
+      "y": 2
+    },
+    {
+      "text": "evone was not earlier than evtwo",
+      "y": 2
+    },
+    {
+      "text": "evone did not finish ahead of evtwo",
+      "y": 2
+    },
+    {
+      "text": "evone did not come after evtwo",
+      "y": 3
+    },
+    {
+      "text": "evone was not later than evtwo",
+      "y": 3
+    },
+    {
+      "text": "evone did not finish behind evtwo",
+      "y": 3
+    },
+    {
+      "text": "evone triggered evtwo",
+      "y": 4
+    },
+    {
+      "text": "evone brought about evtwo",
+      "y": 4
+    },
+    {
+      "text": "evone led directly to evtwo",
+      "y": 4
+    },
+    {
+      "text": "evone resulted from evtwo",
+      "y": 5
+    },
+    {
+      "text": "evone was triggered by evtwo",
+      "y": 5
+    },
+    {
+      "text": "evone arose because of evtwo",
+      "y": 5
+    },
+    {
+      "text": "evone did not trigger evtwo",
+      "y": 6
+    },
+    {
+      "text": "evone did not bring about evtwo",
+      "y": 6
+    },
+    {
+      "text": "evone did not lead directly to evtwo",
+      "y": 6
+    },
+    {
+      "text": "evone did not result from evtwo",
+      "y": 7
+    },
+    {
+      "text": "evone was not triggered by evtwo",
+      "y": 7
+    },
+    {
+      "text": "evone did not arise because of evtwo",
+      "y": 7
+    },
+    {
+      "text": "evone needs evtwo",
+      "y": 8
+    },
+    {
+      "text": "evone depends on evtwo",
+      "y": 8
+    },
+    {
+      "text": "evone cannot proceed without evtwo",
+      "y": 8
+    },
+    {
+      "text": "evone is needed for evtwo",
+      "y": 9
+    },
+    {
+      "text": "evone is necessary for evtwo",
+      "y": 9
+    },
+    {
+      "text": "evone is a prerequisite for evtwo",
+      "y": 9
+    },
+    {
+      "text": "evone does not need evtwo",
+      "y": 10
+    },
+    {
+      "text": "evone does not depend on evtwo",
+      "y": 10
+    },
+    {
+      "text": "evone can proceed without evtwo",
+      "y": 10
+    },
+    {
+      "text": "evone is not needed for evtwo",
+      "y": 11
+    },
+    {
+      "text": "evone is not necessary for evtwo",
+      "y": 11
+    },
+    {
+      "text": "evone is not a prerequisite for evtwo",
+      "y": 11
+    },
+    {
+      "text": "evone blocks evtwo",
+      "y": 12
+    },
+    {
+      "text": "evone stops evtwo",
+      "y": 12
+    },
+    {
+      "text": "evone rules out evtwo",
+      "y": 12
+    },
+    {
+      "text": "evone is blocked by evtwo",
+      "y": 13
+    },
+    {
+      "text": "evone is stopped by evtwo",
+      "y": 13
+    },
+    {
+      "text": "evone is ruled out by evtwo",
+      "y": 13
+    },
+    {
+      "text": "evone does not block evtwo",
+      "y": 14
+    },
+    {
+      "text": "evone does not stop evtwo",
+      "y": 14
+    },
+    {
+      "text": "evone does not rule out evtwo",
+      "y": 14
+    },
+    {
+      "text": "evone is not blocked by evtwo",
+      "y": 15
+    },
+    {
+      "text": "evone is not stopped by evtwo",
+      "y": 15
+    },
+    {
+      "text": "evone is not ruled out by evtwo",
+      "y": 15
+    },
+    {
+      "text": "evone is adjacent to evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone has the same name as evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone resembles evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone was recorded alongside evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone is mentioned with evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone is unrelated to evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone has a label similar to evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone was compared with evtwo",
+      "y": 16
+    }
+  ],
+  "dev": [
+    {
+      "text": "evone completed earlier than evtwo",
+      "y": 0
+    },
+    {
+      "text": "evone completed later than evtwo",
+      "y": 1
+    },
+    {
+      "text": "evone was not completed earlier than evtwo",
+      "y": 2
+    },
+    {
+      "text": "evone was not completed later than evtwo",
+      "y": 3
+    },
+    {
+      "text": "evone directly triggered evtwo",
+      "y": 4
+    },
+    {
+      "text": "evone resulted directly from evtwo",
+      "y": 5
+    },
+    {
+      "text": "evone never triggered evtwo",
+      "y": 6
+    },
+    {
+      "text": "evone never resulted from evtwo",
+      "y": 7
+    },
+    {
+      "text": "evone needs the completion of evtwo",
+      "y": 8
+    },
+    {
+      "text": "evone is essential for evtwo",
+      "y": 9
+    },
+    {
+      "text": "evone does not need the completion of evtwo",
+      "y": 10
+    },
+    {
+      "text": "evone is not essential for evtwo",
+      "y": 11
+    },
+    {
+      "text": "evone effectively blocks evtwo",
+      "y": 12
+    },
+    {
+      "text": "evone is effectively blocked by evtwo",
+      "y": 13
+    },
+    {
+      "text": "evone never blocks evtwo",
+      "y": 14
+    },
+    {
+      "text": "evone is never blocked by evtwo",
+      "y": 15
+    },
+    {
+      "text": "evone is described alongside evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone has a similar identifier to evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone shares a color with evtwo",
+      "y": 16
+    },
+    {
+      "text": "evone was observed near evtwo",
+      "y": 16
+    }
+  ]
+}
