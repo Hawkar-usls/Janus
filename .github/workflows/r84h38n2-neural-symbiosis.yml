@@ -1,0 +1,316 @@
+name: JANUS R84H38N2 neural symbiosis and correction
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h38n2_neural_symbiosis.py'
+      - 'autonomy/federation/R84H38N2_FROZEN_EXAM.json'
+      - '.github/workflows/r84h38n2-neural-symbiosis.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h38n2-bounded-research
+  cancel-in-progress: false
+jobs:
+  preflight:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h38n2-neural-symbiosis-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38n2_neural_symbiosis.py
+            autonomy/federation/r84h38n1_semantic_recovery.py
+            autonomy/federation/r84h38n_semantic_correction.py
+            autonomy/federation/r84h38m_knowledge_diversification.py
+            autonomy/federation/r84h38l_knowledge_crystallization.py
+            autonomy/federation/r84h38j_fractal_self_learning.py
+            autonomy/federation/r84h38i_fractal_reconstruction.py
+            autonomy/federation/r84h38h_semantic_kaleidoscope.py
+            autonomy/federation/r84h38g_semantic_mosaic.py
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H38N2_FROZEN_EXAM.json
+            autonomy/federation/R84H38C_FROZEN_EXAM.json
+            autonomy/federation/R84H38D_FROZEN_EXAM.json
+            autonomy/federation/R84H38E_FROZEN_EXAM.json
+            autonomy/federation/R84H38F_FROZEN_EXAM.json
+            autonomy/federation/R84H38G_FROZEN_EXAM.json
+            autonomy/federation/R84H38H_FROZEN_EXAM.json
+            autonomy/federation/R84H38I_FROZEN_EXAM.json
+            autonomy/federation/R84H38J_FROZEN_EXAM.json
+            autonomy/federation/R84H38L_FROZEN_EXAM.json
+            autonomy/federation/R84H38N_FROZEN_EXAM.json
+            autonomy/federation/R84H38N1_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38h-trained
+          run-id: 45836412459
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38h
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38i-trained
+          run-id: 45837224743
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38i
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38l-trained
+          run-id: 45840549500
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/lparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n-trained
+          run-id: 45843328260
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/nparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38e-trained
+          run-id: 45829342920
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38e
+      - run: |
+          test "$(git hash-object autonomy/federation/R84H38N2_FROZEN_EXAM.json)" = 6147eaec08b5cdbbd1edf95976ecbe572b682481
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h38n2_neural_symbiosis.py preflight "$RUNNER_TEMP/h38h" "$RUNNER_TEMP/h38i" "$RUNNER_TEMP/lparent" "$RUNNER_TEMP/nparent" "$RUNNER_TEMP/h38e" autonomy/federation/R84H38N2_FROZEN_EXAM.json "$RUNNER_TEMP/pre" autonomy/federation/R84H38C_FROZEN_EXAM.json autonomy/federation/R84H38D_FROZEN_EXAM.json autonomy/federation/R84H38E_FROZEN_EXAM.json autonomy/federation/R84H38F_FROZEN_EXAM.json autonomy/federation/R84H38G_FROZEN_EXAM.json autonomy/federation/R84H38H_FROZEN_EXAM.json autonomy/federation/R84H38I_FROZEN_EXAM.json autonomy/federation/R84H38J_FROZEN_EXAM.json autonomy/federation/R84H38L_FROZEN_EXAM.json autonomy/federation/R84H38N_FROZEN_EXAM.json autonomy/federation/R84H38N1_FROZEN_EXAM.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38n2-preflight
+          path: ${{ runner.temp }}/pre
+          if-no-files-found: error
+          retention-days: 60
+  repair:
+    needs: preflight
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38n2_neural_symbiosis.py
+            autonomy/federation/r84h38n1_semantic_recovery.py
+            autonomy/federation/r84h38n_semantic_correction.py
+            autonomy/federation/r84h38m_knowledge_diversification.py
+            autonomy/federation/r84h38l_knowledge_crystallization.py
+            autonomy/federation/r84h38j_fractal_self_learning.py
+            autonomy/federation/r84h38i_fractal_reconstruction.py
+            autonomy/federation/r84h38h_semantic_kaleidoscope.py
+            autonomy/federation/r84h38g_semantic_mosaic.py
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38h-trained
+          run-id: 45836412459
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38h
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38i-trained
+          run-id: 45837224743
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38i
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38l-trained
+          run-id: 45840549500
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/lparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n-trained
+          run-id: 45843328260
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/nparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n1-factor
+          run-id: 45844137619
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/factor
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n2-preflight
+          path: ${{ runner.temp }}/pre
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: main
+          path: registry
+          sparse-checkout: |
+            data/JANUS-DEEP-ANALYSIS-5D-SPIRAL-ORIGIN-PRIME-ORACLE-PROTOCOL-2026-08-21-v2.1.json
+          sparse-checkout-cone-mode: false
+          persist-credentials: false
+      - run: |
+          test ! -e autonomy/federation/R84H38N2_FROZEN_EXAM.json
+          test ! -e autonomy/federation/R84H38N1_FROZEN_EXAM.json
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h38n2_neural_symbiosis.py train "$RUNNER_TEMP/h38h" "$RUNNER_TEMP/h38i" "$RUNNER_TEMP/lparent" "$RUNNER_TEMP/nparent" "$RUNNER_TEMP/factor" "$RUNNER_TEMP/pre/preflight.json" registry/data/JANUS-DEEP-ANALYSIS-5D-SPIRAL-ORIGIN-PRIME-ORACLE-PROTOCOL-2026-08-21-v2.1.json "$RUNNER_TEMP/repair"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38n2-repair
+          path: ${{ runner.temp }}/repair
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: repair
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38n2_neural_symbiosis.py
+            autonomy/federation/r84h38n1_semantic_recovery.py
+            autonomy/federation/r84h38n_semantic_correction.py
+            autonomy/federation/r84h38m_knowledge_diversification.py
+            autonomy/federation/r84h38l_knowledge_crystallization.py
+            autonomy/federation/r84h38j_fractal_self_learning.py
+            autonomy/federation/r84h38i_fractal_reconstruction.py
+            autonomy/federation/r84h38h_semantic_kaleidoscope.py
+            autonomy/federation/r84h38g_semantic_mosaic.py
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H38N2_FROZEN_EXAM.json
+            autonomy/federation/R84H38C_FROZEN_EXAM.json
+            autonomy/federation/R84H38D_FROZEN_EXAM.json
+            autonomy/federation/R84H38E_FROZEN_EXAM.json
+            autonomy/federation/R84H38F_FROZEN_EXAM.json
+            autonomy/federation/R84H38G_FROZEN_EXAM.json
+            autonomy/federation/R84H38H_FROZEN_EXAM.json
+            autonomy/federation/R84H38I_FROZEN_EXAM.json
+            autonomy/federation/R84H38J_FROZEN_EXAM.json
+            autonomy/federation/R84H38L_FROZEN_EXAM.json
+            autonomy/federation/R84H38N_FROZEN_EXAM.json
+            autonomy/federation/R84H38N1_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38h-trained
+          run-id: 45836412459
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38h
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38i-trained
+          run-id: 45837224743
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38i
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38l-trained
+          run-id: 45840549500
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/lparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n-trained
+          run-id: 45843328260
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/nparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n1-factor
+          run-id: 45844137619
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/factor
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38g-trained
+          run-id: 45834333513
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38g
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38e-trained
+          run-id: 45829342920
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38e
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n2-preflight
+          path: ${{ runner.temp }}/pre
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n2-repair
+          path: ${{ runner.temp }}/repair
+      - run: |
+          test "$(git hash-object autonomy/federation/R84H38N2_FROZEN_EXAM.json)" = 6147eaec08b5cdbbd1edf95976ecbe572b682481
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h38n2_neural_symbiosis.py evaluate "$RUNNER_TEMP/h38h" "$RUNNER_TEMP/h38g" "$RUNNER_TEMP/h38i" "$RUNNER_TEMP/h38e" "$RUNNER_TEMP/lparent" demi "$RUNNER_TEMP/nparent" "$RUNNER_TEMP/factor" "$RUNNER_TEMP/pre/preflight.json" "$RUNNER_TEMP/repair" autonomy/federation/R84H38N2_FROZEN_EXAM.json autonomy/federation/R84H38C_FROZEN_EXAM.json autonomy/federation/R84H38D_FROZEN_EXAM.json autonomy/federation/R84H38E_FROZEN_EXAM.json autonomy/federation/R84H38F_FROZEN_EXAM.json autonomy/federation/R84H38G_FROZEN_EXAM.json autonomy/federation/R84H38H_FROZEN_EXAM.json autonomy/federation/R84H38I_FROZEN_EXAM.json autonomy/federation/R84H38J_FROZEN_EXAM.json autonomy/federation/R84H38L_FROZEN_EXAM.json autonomy/federation/R84H38N1_FROZEN_EXAM.json "$RUNNER_TEMP/results"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38n2-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 60
