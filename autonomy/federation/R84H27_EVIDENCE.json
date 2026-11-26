@@ -1,0 +1,208 @@
+{
+  "schema": "r84h27.evidence.v1",
+  "scope": "Hand-authored conjunctive indicators based on independent public technical references, not an exact natural-language oracle. No source text copied, no claim of legal license or full-document admission. Rules may be wrong, and are evaluated against separate labels. No labels of H26 individual failures used to tune rules.",
+  "rules": [
+    {
+      "label": "h12_cache_hit",
+      "source": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+      "claim": "A read is supplied from an available cached item.",
+      "groups": [
+        "\\b(?:cache|cached)\\b",
+        "\\b(?:read|lookup|request|fetch|retriev\\w*)\\b",
+        "\\b(?:present|resident|available|found|already|satisf\\w*)\\b"
+      ]
+    },
+    {
+      "label": "h12_cache_miss",
+      "source": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+      "claim": "The requested cached item is unavailable and a source read is necessary.",
+      "groups": [
+        "\\b(?:cache|cached)\\b",
+        "\\b(?:miss\\w*|absent|unavailable|not found|fails to find|not present|not in|no cached)\\b",
+        "\\b(?:fetch\\w*|retriev\\w*|origin|source|backing)\\b"
+      ]
+    },
+    {
+      "label": "h12_write_through",
+      "source": "https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching",
+      "claim": "A write updates backing storage immediately rather than deferring it.",
+      "groups": [
+        "\\b(?:write\\w*|update\\w*)\\b",
+        "\\b(?:cache|cached)\\b",
+        "\\b(?:immediately|synchronously|before|alongside|waits until)\\b",
+        "\\b(?:disk|durable|permanent|backing|storage|persist\\w*)\\b"
+      ]
+    },
+    {
+      "label": "h12_write_back",
+      "source": "https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching",
+      "claim": "Modified cached data is propagated to backing storage later.",
+      "groups": [
+        "\\b(?:cache|cached|dirty)\\b",
+        "\\b(?:write\\w*|modified|update\\w*|dirty)\\b",
+        "\\b(?:later|eventually|defer\\w*|asynchronously|subsequent|await\\w*)\\b",
+        "\\b(?:flush\\w*|synchroniz\\w*|storage|disk|media|backing)\\b"
+      ]
+    },
+    {
+      "label": "h12_mutex",
+      "source": "https://docs.oracle.com/javase/tutorial/essential/concurrency/locksync.html",
+      "claim": "Mutual exclusion admits at most one holder to a protected section.",
+      "groups": [
+        "\\b(?:single|one|exclusive|mutual exclusion)\\b",
+        "\\b(?:holder|owner|participant|thread|access|entry|ownership)\\w*\\b",
+        "\\b(?:critical|protected|shared state|lock)\\b"
+      ]
+    },
+    {
+      "label": "h12_semaphore",
+      "source": "https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/Semaphore.html",
+      "claim": "A counting permit mechanism limits concurrent access.",
+      "groups": [
+        "\\b(?:permit\\w*|tokens|counter)\\b",
+        "\\b(?:count\\w*|finite|limited|pool|available|specified)\\b",
+        "\\b(?:concurrent|access|entr\\w*|holders|threads|resource)\\b"
+      ]
+    },
+    {
+      "label": "h12_deadlock",
+      "source": "https://docs.oracle.com/javase/tutorial/essential/concurrency/deadlock.html",
+      "claim": "Participants cannot advance because of interdependent waiting.",
+      "groups": [
+        "\\b(?:wait\\w*|block\\w*)\\b",
+        "\\b(?:cycle|circular|closed dependency|each other|each participant|each is)\\b",
+        "\\b(?:resource\\w*|lock\\w*|progress|advance)\\b"
+      ]
+    },
+    {
+      "label": "h12_starvation",
+      "source": "https://docs.oracle.com/javase/tutorial/essential/concurrency/starvelive.html",
+      "claim": "A runnable participant is repeatedly denied the resources it needs.",
+      "groups": [
+        "\\b(?:indefinitely|never|perpetually|continually|without bound|repeatedly)\\b",
+        "\\b(?:task|process|job|worker|scheduler)\\w*\\b",
+        "\\b(?:den\\w*|bypass\\w*|wait\\w*|other|compet\\w*)\\b"
+      ]
+    },
+    {
+      "label": "h12_idempotency",
+      "source": "https://www.rfc-editor.org/rfc/rfc9110.html#section-9.2.2",
+      "claim": "Repeating an operation preserves the effect of a single execution.",
+      "groups": [
+        "\\b(?:repeat\\w*|duplicate\\w*|identical|reapply\\w*)\\b",
+        "\\b(?:request|operation|command|delivery|execution)\\w*\\b",
+        "\\b(?:same effect|same final effect|unchanged|does not alter|cannot multiply|single execution|first execution|once)\\b"
+      ]
+    },
+    {
+      "label": "h12_atomicity",
+      "source": "https://www.postgresql.org/docs/18/tutorial-transactions.html",
+      "claim": "The transaction's changes commit together or do not commit.",
+      "groups": [
+        "\\b(?:transaction|commit\\w*|composite update)\\w*\\b",
+        "\\b(?:all|none|together|indivisible|partial\\w*|subset|completely|single)\\b",
+        "\\b(?:change\\w*|update\\w*|write\\w*|outcome|failure|commit\\w*)\\b"
+      ]
+    },
+    {
+      "label": "h12_replication",
+      "source": "https://www.postgresql.org/docs/current/high-availability.html",
+      "claim": "Equivalent data is copied across multiple storage locations.",
+      "groups": [
+        "\\b(?:copies|copy|copied|replicat\\w*|equivalent|same record)\\b",
+        "\\b(?:multiple|several|redundan\\w*)\\b",
+        "\\b(?:nodes|servers|machines|storage locations)\\b"
+      ]
+    },
+    {
+      "label": "h12_sharding",
+      "source": "https://learn.microsoft.com/en-us/azure/architecture/patterns/sharding",
+      "claim": "Different subsets of a dataset reside on separate nodes.",
+      "groups": [
+        "\\b(?:partition\\w*|subset\\w*|split|nonoverlapping|disjoint)\\b",
+        "\\b(?:data\\w*|records|collection|key ranges)\\b",
+        "\\b(?:nodes|servers|machines)\\b"
+      ]
+    },
+    {
+      "label": "h12_checksum",
+      "source": "https://csrc.nist.gov/glossary/term/checksum",
+      "claim": "A compact verification value detects changes to data.",
+      "groups": [
+        "\\b(?:digest|checksum|fingerprint|integrity|verification code|compact value)\\b",
+        "\\b(?:detect\\w*|discover\\w*|flag\\w*|reveal\\w*|compar\\w*)\\b",
+        "\\b(?:corrupt\\w*|damag\\w*|alter\\w*|modif\\w*|change\\w*)\\b"
+      ]
+    },
+    {
+      "label": "h12_encryption",
+      "source": "https://csrc.nist.gov/glossary/term/encryption",
+      "claim": "A cryptographic transformation protects plaintext confidentiality.",
+      "groups": [
+        "\\b(?:cryptograph\\w*|cipher|encoded|transform\\w*|decryption)\\b",
+        "\\b(?:key|secret)\\b",
+        "\\b(?:plaintext|readable|conceal\\w*|hid\\w*|unauthorized)\\b"
+      ]
+    },
+    {
+      "label": "h12_authentication",
+      "source": "https://csrc.nist.gov/glossary/term/authentication",
+      "claim": "Credentials establish or verify the identity of a principal.",
+      "groups": [
+        "\\b(?:identity|principal|caller|account)\\b",
+        "\\b(?:credential\\w*|login)\\b",
+        "\\b(?:establish\\w*|verif\\w*|check\\w*)\\b"
+      ]
+    },
+    {
+      "label": "h12_authorization",
+      "source": "https://csrc.nist.gov/glossary/term/authorization",
+      "claim": "Permission is checked for an action or resource.",
+      "groups": [
+        "\\b(?:permission\\w*|privilege\\w*|access control|permitted|permits|denies)\\b",
+        "\\b(?:action|object|access|record|delete|user|principal|account)\\b",
+        "\\b(?:check\\w*|determin\\w*|evaluat\\w*|policy)\\b"
+      ]
+    },
+    {
+      "label": "h12_rate_limit",
+      "source": "https://learn.microsoft.com/en-us/Azure/architecture/patterns/rate-limiting-pattern",
+      "claim": "Admission is bounded by a maximum request rate.",
+      "groups": [
+        "\\b(?:limit\\w*|maximum|quota|bounds|restrict\\w*)\\b",
+        "\\b(?:request\\w*|operation\\w*)\\b",
+        "\\b(?:interval|minute|time window|rate|per unit time)\\b"
+      ]
+    },
+    {
+      "label": "h12_backpressure",
+      "source": "https://learn.microsoft.com/en-us/Azure/architecture/patterns/rate-limiting-pattern",
+      "claim": "Downstream congestion causes upstream production to slow.",
+      "groups": [
+        "\\b(?:consumer|receiver|downstream|later pipeline|queue)\\b",
+        "\\b(?:producer|sender|upstream|earlier stage)\\b",
+        "\\b(?:slow\\w*|throttl\\w*|congestion|saturat\\w*|capacity signal)\\b"
+      ]
+    },
+    {
+      "label": "h12_rollback",
+      "source": "https://learn.microsoft.com/power-platform/well-architected/operational-excellence/mitigation-strategy",
+      "claim": "Recovery restores an earlier working deployment.",
+      "groups": [
+        "\\b(?:restore\\w*|revert\\w*|return\\w*|reinstall\\w*|revers\\w*)\\b",
+        "\\b(?:earlier|previous|prior|older|predecessor)\\b",
+        "\\b(?:release|revision|version|deployment|update)\\b"
+      ]
+    },
+    {
+      "label": "h12_rollforward",
+      "source": "https://learn.microsoft.com/power-platform/well-architected/operational-excellence/mitigation-strategy",
+      "claim": "Recovery proceeds to a newer corrective deployment.",
+      "groups": [
+        "\\b(?:later|newer|advance\\w*|ahead|forward)\\b",
+        "\\b(?:correct\\w*|patch\\w*|repair\\w*|fix\\w*)\\b",
+        "\\b(?:release|revision|version|deployment|update)\\b"
+      ]
+    }
+  ]
+}
