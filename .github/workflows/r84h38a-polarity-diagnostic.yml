@@ -1,0 +1,59 @@
+name: JANUS R84H38A disclosed polarity diagnostic
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h38a_polarity_diagnostic.py'
+      - '.github/workflows/r84h38a-polarity-diagnostic.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h38a-bounded-research
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h38a-polarity-diagnostic-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38a_polarity_diagnostic.py
+            autonomy/federation/r84h37_polarity_independence.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H33_FROZEN_EXAM.json
+            autonomy/federation/R84H34_FROZEN_EXAM.json
+            autonomy/federation/R84H36_FROZEN_EXAM.json
+            autonomy/federation/R84H37_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h37-trained
+          path: ${{ runner.temp }}/h37
+          run-id: 45813736732
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h36-trained
+          path: ${{ runner.temp }}/h36
+          run-id: 45808392777
+          github-token: ${{ github.token }}
+      - run: |
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h38a_polarity_diagnostic.py "$RUNNER_TEMP/h37" "$RUNNER_TEMP/h36" "$RUNNER_TEMP/diagnostic"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38a-diagnostic
+          path: ${{ runner.temp }}/diagnostic
+          if-no-files-found: error
+          retention-days: 60
