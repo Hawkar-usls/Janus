@@ -1,0 +1,190 @@
+name: JANUS R84H30 semantic inheritance
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h30_semantic_inheritance.py'
+      - '.github/workflows/r84h30-semantic-inheritance.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h30-bounded-research
+  cancel-in-progress: false
+env:
+  HF_HUB_DISABLE_TELEMETRY: '1'
+  HF_HUB_DISABLE_IMPLICIT_TOKEN: '1'
+  TOKENIZERS_PARALLELISM: 'false'
+jobs:
+  train:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h30-semantic-inheritance-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/*
+            !autonomy/federation/R84H30_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 scipy==1.13.1 requests==2.32.5 transformers==4.48.3 huggingface_hub==0.28.1 safetensors==0.5.2
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h28-sources
+          path: ${{ runner.temp }}/source
+          run-id: 45797056428
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h29-results
+          path: ${{ runner.temp }}/h29results
+          run-id: 45798117736
+          github-token: ${{ github.token }}
+      - run: |
+          test ! -e autonomy/federation/R84H30_FROZEN_EXAM.json
+          python autonomy/federation/r84h30_semantic_inheritance.py train demi "$RUNNER_TEMP/source" "$RUNNER_TEMP/h29results" "$RUNNER_TEMP/trained"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h30-trained
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  history:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h30-semantic-inheritance-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/*
+            !autonomy/federation/R84H30_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 scipy==1.13.1 requests==2.32.5 transformers==4.48.3 huggingface_hub==0.28.1 safetensors==0.5.2
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h7-cycle5
+          path: ${{ runner.temp }}/root
+          run-id: 45702441451
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h8-cycle3
+          path: ${{ runner.temp }}/bundle
+          run-id: 45704306939
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h10-trained
+          path: ${{ runner.temp }}/resonance
+          run-id: 45706296802
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h11-trained
+          path: ${{ runner.temp }}/cortex
+          run-id: 45707256292
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h12-trained
+          path: ${{ runner.temp }}/evolution
+          run-id: 45708640174
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h19-results
+          path: ${{ runner.temp }}/h19
+          run-id: 45771158477
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h24-results
+          path: ${{ runner.temp }}/h24
+          run-id: 45790325413
+          github-token: ${{ github.token }}
+      - run: python autonomy/federation/r84h30_semantic_inheritance.py history "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/root" "$RUNNER_TEMP/bundle" "$RUNNER_TEMP/resonance" "$RUNNER_TEMP/cortex" "$RUNNER_TEMP/evolution" "$RUNNER_TEMP/h19" "$RUNNER_TEMP/h24" "$RUNNER_TEMP/history"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h30-history
+          path: ${{ runner.temp }}/history
+          if-no-files-found: error
+          retention-days: 60
+  exam:
+    needs: [train, history]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 scipy==1.13.1 requests==2.32.5 transformers==4.48.3 huggingface_hub==0.28.1 safetensors==0.5.2
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h28-sources
+          path: ${{ runner.temp }}/source
+          run-id: 45797056428
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h29-results
+          path: ${{ runner.temp }}/h29results
+          run-id: 45798117736
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h30-trained
+          path: ${{ runner.temp }}/trained
+      - run: python autonomy/federation/r84h30_semantic_inheritance.py evaluate demi "$RUNNER_TEMP/source" "$RUNNER_TEMP/trained" "$RUNNER_TEMP/h29results" "$RUNNER_TEMP/results"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h30-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 60
