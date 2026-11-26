@@ -1,0 +1,217 @@
+name: JANUS R84H38L knowledge crystallization
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h38l_knowledge_crystallization.py'
+      - 'autonomy/federation/R84H38L_FROZEN_EXAM.json'
+      - '.github/workflows/r84h38l-knowledge-crystallization.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h38l-bounded-research
+  cancel-in-progress: false
+jobs:
+  train:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h38l-crystallization-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38l_knowledge_crystallization.py
+            autonomy/federation/r84h38j_fractal_self_learning.py
+            autonomy/federation/r84h38i_fractal_reconstruction.py
+            autonomy/federation/r84h38h_semantic_kaleidoscope.py
+            autonomy/federation/r84h38g_semantic_mosaic.py
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38h-trained
+          run-id: 45836412459
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38h
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38g-trained
+          run-id: 45834333513
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38g
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38i-trained
+          run-id: 45837224743
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38i
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38j-trained
+          run-id: 45838785677
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/jparent
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 3cbb736f3837e25b50860544ee4f7329d66360f7
+          path: kcode
+          sparse-checkout: research/h38k
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: h38k-intake-state
+          path: kstate
+          sparse-checkout: data/h38k-intake
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: memory-cortex-state
+          path: upstream
+          sparse-checkout: data/memory-cortex
+          persist-credentials: false
+      - run: |
+          test ! -e autonomy/federation/R84H38L_FROZEN_EXAM.json
+          test ! -e autonomy/federation/R84H38J_FROZEN_EXAM.json
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h38l_knowledge_crystallization.py train "$RUNNER_TEMP/h38h" "$RUNNER_TEMP/h38g" "$RUNNER_TEMP/h38i" "$RUNNER_TEMP/jparent" demi kcode/research/h38k kstate/data/h38k-intake/queue.json upstream/data/memory-cortex "$RUNNER_TEMP/trained"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38l-trained
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38l_knowledge_crystallization.py
+            autonomy/federation/r84h38j_fractal_self_learning.py
+            autonomy/federation/r84h38i_fractal_reconstruction.py
+            autonomy/federation/r84h38h_semantic_kaleidoscope.py
+            autonomy/federation/r84h38g_semantic_mosaic.py
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H38L_FROZEN_EXAM.json
+            autonomy/federation/R84H38J_FROZEN_EXAM.json
+            autonomy/federation/R84H38C_FROZEN_EXAM.json
+            autonomy/federation/R84H38D_FROZEN_EXAM.json
+            autonomy/federation/R84H38E_FROZEN_EXAM.json
+            autonomy/federation/R84H38F_FROZEN_EXAM.json
+            autonomy/federation/R84H38G_FROZEN_EXAM.json
+            autonomy/federation/R84H38H_FROZEN_EXAM.json
+            autonomy/federation/R84H38I_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38h-trained
+          run-id: 45836412459
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38h
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38g-trained
+          run-id: 45834333513
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38g
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38i-trained
+          run-id: 45837224743
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38i
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38e-trained
+          run-id: 45829342920
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38e
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38j-trained
+          run-id: 45838785677
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/jparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38l-trained
+          path: ${{ runner.temp }}/trained
+      - run: |
+          set -euo pipefail
+          test "$(git hash-object autonomy/federation/R84H38L_FROZEN_EXAM.json)" = 58a7f234f9d4256ea05dd58763679de93f43e646
+          test "$(git hash-object autonomy/federation/R84H38J_FROZEN_EXAM.json)" = 996e5991c6f76dc58622ac4ae843cb43e2dc43df
+          offline=(sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)")
+          "${offline[@]}" autonomy/federation/r84h38l_knowledge_crystallization.py preflight autonomy/federation/R84H38L_FROZEN_EXAM.json autonomy/federation/R84H38{E,F,G,H,I,J}_FROZEN_EXAM.json
+          args=("$RUNNER_TEMP/h38h" "$RUNNER_TEMP/h38g" "$RUNNER_TEMP/h38i" "$RUNNER_TEMP/h38e" demi)
+          exams=(autonomy/federation/R84H38L_FROZEN_EXAM.json autonomy/federation/R84H38{C,D,E,F,G,H,I}_FROZEN_EXAM.json)
+          "${offline[@]}" autonomy/federation/r84h38j_fractal_self_learning.py evaluate "${args[@]}" "$RUNNER_TEMP/jparent" "${exams[@]}" "$RUNNER_TEMP/j2-results" | tee "$RUNNER_TEMP/j2.log"
+          "${offline[@]}" autonomy/federation/r84h38j_fractal_self_learning.py evaluate "${args[@]}" "$RUNNER_TEMP/trained" "${exams[@]}" "$RUNNER_TEMP/l-results" | tee "$RUNNER_TEMP/l.log"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"])
+          a=json.loads((p/"j2-results/result.json").read_text());b=json.loads((p/"l-results/result.json").read_text())
+          report={"schema":"h38l.result.v1","j2_frozen":a,"l_candidate":b,"quality_gate":"HOLD","production":False,"scope":"Same fresh replacement exam, frozen original H38J and L source-driven candidate; operational temporal renderings only, no external scientific truth or model promotion."}
+          (p/"l-results/comparison.json").write_text(json.dumps(report,sort_keys=True)+"\n")
+          print("R84H38L_RESULT",json.dumps(report,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r84h38l-results
+          path: |
+            ${{ runner.temp }}/j2-results
+            ${{ runner.temp }}/l-results
+            ${{ runner.temp }}/j2.log
+            ${{ runner.temp }}/l.log
+          if-no-files-found: ignore
+          retention-days: 60
