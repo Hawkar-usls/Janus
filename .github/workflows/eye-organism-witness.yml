@@ -1,0 +1,47 @@
+name: JANUS EYE Organism Read Witness
+on:
+  pull_request:
+    paths:
+      - "mcp_gateway/**"
+      - "organism/JANUS_ORGANISM_DELTA_2026-11-26_EYE_SPATIAL_v1.json"
+      - ".github/workflows/eye-organism-witness.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  witness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Execute route guards
+        run: python -m unittest mcp_gateway.tests.test_eye_scene -v
+      - name: Read actual public registry receipts through the typed route
+        run: |
+          mkdir -p eye-witness
+          python - <<'PY'
+          import hashlib,json,urllib.request
+          from pathlib import Path
+          from mcp_gateway.organism_tools import read_eye_scene
+          class PublicReader:
+              def get_file(self,repo,path,ref):
+                  url=f'https://raw.githubusercontent.com/{repo}/{ref}/{path}'
+                  with urllib.request.urlopen(url,timeout=30) as response:
+                      b=response.read(2_000_001)
+                  if len(b)>2_000_000:raise ValueError('record cap')
+                  blob=hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()
+                  return {'content':b.decode('utf-8'),'sha':blob}
+          r=read_eye_scene(PublicReader())
+          assert r['authority']=='MODELLED' and r['authority_delta']==0 and not r['write_back']
+          assert [n['id'] for n in r['nodes']]==['ZERO_NODE','LOCAL_NODE']
+          Path('eye-witness/receipt.json').write_text(json.dumps(r,indent=2)+'\n')
+          print(json.dumps(r,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eye-organism-witness
+          path: eye-witness/
