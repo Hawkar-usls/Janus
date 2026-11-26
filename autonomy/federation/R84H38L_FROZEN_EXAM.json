@@ -1,0 +1,766 @@
+{
+  "schema": "h38l.replacement.exam.v1",
+  "scope": "Replacement after H38J overlap HOLD; frozen before L training, same-author internal, exact normalized disjointness checked on runner. Original J exam immutable.",
+  "rows": [
+    {
+      "text": "larch0 reached completion in advance of birch0",
+      "names": [
+        "larch0",
+        "birch0"
+      ],
+      "gold": {
+        "left": "larch0",
+        "right": "birch0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "larch0 finished ahead of the completion of birch0",
+      "names": [
+        "larch0",
+        "birch0"
+      ],
+      "gold": {
+        "left": "larch0",
+        "right": "birch0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "birch0 reached completion following the completion of larch0",
+      "names": [
+        "larch0",
+        "birch0"
+      ],
+      "gold": {
+        "left": "larch0",
+        "right": "birch0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "birch0 finished later than the completion of larch0",
+      "names": [
+        "larch0",
+        "birch0"
+      ],
+      "gold": {
+        "left": "larch0",
+        "right": "birch0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "larch2 did not reach completion in advance of birch2",
+      "names": [
+        "larch2",
+        "birch2"
+      ],
+      "gold": {
+        "left": "larch2",
+        "right": "birch2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "larch2 never finished ahead of the completion of birch2",
+      "names": [
+        "larch2",
+        "birch2"
+      ],
+      "gold": {
+        "left": "larch2",
+        "right": "birch2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "birch2 did not reach completion following the completion of larch2",
+      "names": [
+        "larch2",
+        "birch2"
+      ],
+      "gold": {
+        "left": "larch2",
+        "right": "birch2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "birch2 never finished later than the completion of larch2",
+      "names": [
+        "larch2",
+        "birch2"
+      ],
+      "gold": {
+        "left": "larch2",
+        "right": "birch2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "larch4 brought about the occurrence of birch4",
+      "names": [
+        "larch4",
+        "birch4"
+      ],
+      "gold": {
+        "left": "larch4",
+        "right": "birch4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "larch4 gave rise to the occurrence of birch4",
+      "names": [
+        "larch4",
+        "birch4"
+      ],
+      "gold": {
+        "left": "larch4",
+        "right": "birch4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "birch4 arose as a consequence of larch4",
+      "names": [
+        "larch4",
+        "birch4"
+      ],
+      "gold": {
+        "left": "larch4",
+        "right": "birch4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "birch4 came into being as a result of larch4",
+      "names": [
+        "larch4",
+        "birch4"
+      ],
+      "gold": {
+        "left": "larch4",
+        "right": "birch4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "larch6 did not bring about the occurrence of birch6",
+      "names": [
+        "larch6",
+        "birch6"
+      ],
+      "gold": {
+        "left": "larch6",
+        "right": "birch6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "larch6 did not give rise to the occurrence of birch6",
+      "names": [
+        "larch6",
+        "birch6"
+      ],
+      "gold": {
+        "left": "larch6",
+        "right": "birch6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "birch6 did not arise as a consequence of larch6",
+      "names": [
+        "larch6",
+        "birch6"
+      ],
+      "gold": {
+        "left": "larch6",
+        "right": "birch6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "birch6 did not come into being as a result of larch6",
+      "names": [
+        "larch6",
+        "birch6"
+      ],
+      "gold": {
+        "left": "larch6",
+        "right": "birch6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "larch8 needs birch8 as a prerequisite",
+      "names": [
+        "larch8",
+        "birch8"
+      ],
+      "gold": {
+        "left": "larch8",
+        "right": "birch8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "larch8 has birch8 as a necessary prerequisite",
+      "names": [
+        "larch8",
+        "birch8"
+      ],
+      "gold": {
+        "left": "larch8",
+        "right": "birch8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "birch8 is a necessary prerequisite of larch8",
+      "names": [
+        "larch8",
+        "birch8"
+      ],
+      "gold": {
+        "left": "larch8",
+        "right": "birch8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "birch8 is a necessary condition for the occurrence of larch8",
+      "names": [
+        "larch8",
+        "birch8"
+      ],
+      "gold": {
+        "left": "larch8",
+        "right": "birch8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "larch10 does not need birch10 as a prerequisite",
+      "names": [
+        "larch10",
+        "birch10"
+      ],
+      "gold": {
+        "left": "larch10",
+        "right": "birch10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "larch10 does not have birch10 as a necessary prerequisite",
+      "names": [
+        "larch10",
+        "birch10"
+      ],
+      "gold": {
+        "left": "larch10",
+        "right": "birch10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "birch10 is not a necessary prerequisite of larch10",
+      "names": [
+        "larch10",
+        "birch10"
+      ],
+      "gold": {
+        "left": "larch10",
+        "right": "birch10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "birch10 is not a necessary condition for the occurrence of larch10",
+      "names": [
+        "larch10",
+        "birch10"
+      ],
+      "gold": {
+        "left": "larch10",
+        "right": "birch10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "larch12 rules out the occurrence of birch12",
+      "names": [
+        "larch12",
+        "birch12"
+      ],
+      "gold": {
+        "left": "larch12",
+        "right": "birch12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "larch12 makes the occurrence of birch12 impossible",
+      "names": [
+        "larch12",
+        "birch12"
+      ],
+      "gold": {
+        "left": "larch12",
+        "right": "birch12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "birch12 is ruled out by the occurrence of larch12",
+      "names": [
+        "larch12",
+        "birch12"
+      ],
+      "gold": {
+        "left": "larch12",
+        "right": "birch12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "birch12 is made impossible by the occurrence of larch12",
+      "names": [
+        "larch12",
+        "birch12"
+      ],
+      "gold": {
+        "left": "larch12",
+        "right": "birch12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "larch14 does not rule out the occurrence of birch14",
+      "names": [
+        "larch14",
+        "birch14"
+      ],
+      "gold": {
+        "left": "larch14",
+        "right": "birch14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "larch14 does not make the occurrence of birch14 impossible",
+      "names": [
+        "larch14",
+        "birch14"
+      ],
+      "gold": {
+        "left": "larch14",
+        "right": "birch14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "birch14 is not ruled out by the occurrence of larch14",
+      "names": [
+        "larch14",
+        "birch14"
+      ],
+      "gold": {
+        "left": "larch14",
+        "right": "birch14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "birch14 is not made impossible by the occurrence of larch14",
+      "names": [
+        "larch14",
+        "birch14"
+      ],
+      "gold": {
+        "left": "larch14",
+        "right": "birch14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "alder0 could finish ahead of spruce0",
+      "names": [
+        "alder0",
+        "spruce0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder1 resembles the outline of spruce1",
+      "names": [
+        "alder1",
+        "spruce1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder2 was displayed near the image of spruce2",
+      "names": [
+        "alder2",
+        "spruce2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder3 might bring about spruce3",
+      "names": [
+        "alder3",
+        "spruce3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder4 has a radius comparable to spruce4",
+      "names": [
+        "alder4",
+        "spruce4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder5 and spruce5 were photographed together",
+      "names": [
+        "alder5",
+        "spruce5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder6 is listed close to spruce6",
+      "names": [
+        "alder6",
+        "spruce6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder7 possibly needs spruce7",
+      "names": [
+        "alder7",
+        "spruce7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder8 has a texture comparable to spruce8",
+      "names": [
+        "alder8",
+        "spruce8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder9 was illustrated beside spruce9",
+      "names": [
+        "alder9",
+        "spruce9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder10 or spruce10 was displayed",
+      "names": [
+        "alder10",
+        "spruce10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "alder11 has a shade similar to spruce11",
+      "names": [
+        "alder11",
+        "spruce11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "luna0",
+        "sola0",
+        "stella0"
+      ],
+      "sentences": [
+        "luna0 reached completion in advance of sola0",
+        "sola0 reached completion in advance of stella0"
+      ],
+      "claim": "luna0 reached completion in advance of stella0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "luna0",
+        "sola0",
+        "stella0"
+      ],
+      "sentences": [
+        "luna0 reached completion in advance of sola0"
+      ],
+      "claim": "luna0 did not reach completion in advance of sola0",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "luna0",
+        "sola0",
+        "stella0"
+      ],
+      "sentences": [
+        "luna0 reached completion in advance of sola0",
+        "luna0 did not reach completion in advance of sola0"
+      ],
+      "claim": "luna0 reached completion in advance of sola0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "luna1",
+        "sola1",
+        "stella1"
+      ],
+      "sentences": [
+        "luna1 brought about the occurrence of sola1",
+        "sola1 brought about the occurrence of stella1"
+      ],
+      "claim": "luna1 brought about the occurrence of stella1",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "luna1",
+        "sola1",
+        "stella1"
+      ],
+      "sentences": [
+        "luna1 brought about the occurrence of sola1"
+      ],
+      "claim": "luna1 did not bring about the occurrence of sola1",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "luna1",
+        "sola1",
+        "stella1"
+      ],
+      "sentences": [
+        "luna1 brought about the occurrence of sola1",
+        "luna1 did not bring about the occurrence of sola1"
+      ],
+      "claim": "luna1 brought about the occurrence of sola1",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "luna2",
+        "sola2",
+        "stella2"
+      ],
+      "sentences": [
+        "luna2 needs sola2 as a prerequisite",
+        "sola2 needs stella2 as a prerequisite"
+      ],
+      "claim": "luna2 needs stella2 as a prerequisite",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "luna2",
+        "sola2",
+        "stella2"
+      ],
+      "sentences": [
+        "luna2 needs sola2 as a prerequisite"
+      ],
+      "claim": "luna2 does not need sola2 as a prerequisite",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "luna2",
+        "sola2",
+        "stella2"
+      ],
+      "sentences": [
+        "luna2 needs sola2 as a prerequisite",
+        "luna2 does not need sola2 as a prerequisite"
+      ],
+      "claim": "luna2 needs sola2 as a prerequisite",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "luna3",
+        "sola3",
+        "stella3"
+      ],
+      "sentences": [
+        "luna3 rules out the occurrence of sola3",
+        "sola3 rules out the occurrence of stella3"
+      ],
+      "claim": "luna3 rules out the occurrence of stella3",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "luna3",
+        "sola3",
+        "stella3"
+      ],
+      "sentences": [
+        "luna3 rules out the occurrence of sola3"
+      ],
+      "claim": "luna3 does not rule out the occurrence of sola3",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "luna3",
+        "sola3",
+        "stella3"
+      ],
+      "sentences": [
+        "luna3 rules out the occurrence of sola3",
+        "luna3 does not rule out the occurrence of sola3"
+      ],
+      "claim": "luna3 rules out the occurrence of sola3",
+      "expected": "HOLD_CONFLICT"
+    }
+  ]
+}
