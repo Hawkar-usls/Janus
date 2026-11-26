@@ -1,0 +1,19 @@
+{
+  "schema": "r84h29.protocol.v1",
+  "model": "cross-encoder/nli-MiniLM2-L6-H768",
+  "revision": "b95119ce93d3e065de6214e38cd4a97b0f2f2c6d",
+  "license": "Apache-2.0 model card",
+  "label_order": [
+    "contradiction",
+    "entailment",
+    "neutral"
+  ],
+  "hypotheses": {
+    "h12_cache_hit": "The requested item is present in cached storage and the read is satisfied by the cached copy.",
+    "h12_cache_miss": "The requested item is absent from the cache and must be fetched from the backing source.",
+    "h12_write_through": "The cached update reaches durable backing storage before the write is acknowledged.",
+    "h12_write_back": "The cached write is acknowledged before durable persistence, with the changed data written to backing storage later.",
+    "h12_semaphore": "A limited number of permits controls concurrent access to a resource, and permits are returned when holders finish."
+  },
+  "scope": "External frozen cross-encoder, CPU only, safetensors, no remote custom code. All five original source cards must be retrieved by native Cortex and hash-verified. NLI premise is the scenario; hypothesis is the concept criterion. This estimates entailment, not proof of real-world truth. Compare lexical rank and NLI rank on identical candidates; gate overrides separately."
+}
