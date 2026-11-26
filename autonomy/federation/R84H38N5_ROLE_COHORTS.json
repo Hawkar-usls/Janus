@@ -1,0 +1,351 @@
+{
+  "schema": "h38n5.synthetic_role_cohorts.v1",
+  "scope": "Same-author synthetic role clauses only; not primary source science or independent external exam; no disclosed case labels used in fitting.",
+  "cohorts": [
+    {
+      "id": "batch-001",
+      "train": [
+        {
+          "text": "evone cannot proceed in the absence of evtwo",
+          "y": 8
+        },
+        {
+          "text": "evone is contingent upon the availability of evtwo",
+          "y": 8
+        },
+        {
+          "text": "evone must be available for the completion of evtwo",
+          "y": 9
+        },
+        {
+          "text": "evone is indispensable to the completion of evtwo",
+          "y": 9
+        },
+        {
+          "text": "evone can proceed in the absence of evtwo",
+          "y": 10
+        },
+        {
+          "text": "evone is independent of the availability of evtwo",
+          "y": 10
+        },
+        {
+          "text": "evone is dispensable for the completion of evtwo",
+          "y": 11
+        },
+        {
+          "text": "evone is unnecessary to the completion of evtwo",
+          "y": 11
+        },
+        {
+          "text": "evone keeps evtwo from occurring",
+          "y": 12
+        },
+        {
+          "text": "evone makes completion of evtwo impossible",
+          "y": 12
+        },
+        {
+          "text": "evone is kept from occurring by evtwo",
+          "y": 13
+        },
+        {
+          "text": "evone is made unattainable by evtwo",
+          "y": 13
+        },
+        {
+          "text": "evone does not keep evtwo from occurring",
+          "y": 14
+        },
+        {
+          "text": "evone does not make completion of evtwo impossible",
+          "y": 14
+        },
+        {
+          "text": "evone is not kept from occurring by evtwo",
+          "y": 15
+        },
+        {
+          "text": "evone is not made unattainable by evtwo",
+          "y": 15
+        },
+        {
+          "text": "evone has a similar texture to evtwo",
+          "y": 16
+        },
+        {
+          "text": "evone was placed beside an illustration of evtwo",
+          "y": 16
+        }
+      ],
+      "exam": [
+        {
+          "text": "evone is unable to proceed unless evtwo exists",
+          "y": 8
+        },
+        {
+          "text": "evone must be in existence for evtwo to proceed",
+          "y": 9
+        },
+        {
+          "text": "evone can be completed even when evtwo is absent",
+          "y": 10
+        },
+        {
+          "text": "evone is not a mandatory condition for evtwo to proceed",
+          "y": 11
+        },
+        {
+          "text": "evone makes it impossible for evtwo to proceed",
+          "y": 12
+        },
+        {
+          "text": "evone cannot proceed because evtwo prevents it",
+          "y": 13
+        },
+        {
+          "text": "evone does not make it impossible for evtwo to proceed",
+          "y": 14
+        },
+        {
+          "text": "evone is not prevented from proceeding by evtwo",
+          "y": 15
+        },
+        {
+          "text": "evone has a comparable surface to evtwo",
+          "y": 16
+        }
+      ]
+    },
+    {
+      "id": "batch-002",
+      "train": [
+        {
+          "text": "evone cannot be carried out without the presence of evtwo",
+          "y": 8
+        },
+        {
+          "text": "evone is conditional on the existence of evtwo",
+          "y": 8
+        },
+        {
+          "text": "evone is a mandatory condition for the completion of evtwo",
+          "y": 9
+        },
+        {
+          "text": "evone must be supplied for evtwo to proceed",
+          "y": 9
+        },
+        {
+          "text": "evone can be carried out without the presence of evtwo",
+          "y": 10
+        },
+        {
+          "text": "evone is not conditional on the existence of evtwo",
+          "y": 10
+        },
+        {
+          "text": "evone is not a mandatory condition for the completion of evtwo",
+          "y": 11
+        },
+        {
+          "text": "evone need not be supplied for evtwo to proceed",
+          "y": 11
+        },
+        {
+          "text": "evone stops the realization of evtwo",
+          "y": 12
+        },
+        {
+          "text": "evone makes the execution of evtwo impossible",
+          "y": 12
+        },
+        {
+          "text": "evone is stopped from being realized by evtwo",
+          "y": 13
+        },
+        {
+          "text": "evone is made impossible to execute by evtwo",
+          "y": 13
+        },
+        {
+          "text": "evone does not stop the realization of evtwo",
+          "y": 14
+        },
+        {
+          "text": "evone does not make the execution of evtwo impossible",
+          "y": 14
+        },
+        {
+          "text": "evone is not stopped from being realized by evtwo",
+          "y": 15
+        },
+        {
+          "text": "evone is not made impossible to execute by evtwo",
+          "y": 15
+        },
+        {
+          "text": "evone has a similar outline to evtwo",
+          "y": 16
+        },
+        {
+          "text": "evone was catalogued beside a photograph of evtwo",
+          "y": 16
+        }
+      ],
+      "exam": [
+        {
+          "text": "evone is unable to take place in the absence of evtwo",
+          "y": 8
+        },
+        {
+          "text": "evone is indispensable to the realization of evtwo",
+          "y": 9
+        },
+        {
+          "text": "evone is able to take place in the absence of evtwo",
+          "y": 10
+        },
+        {
+          "text": "evone is dispensable to the realization of evtwo",
+          "y": 11
+        },
+        {
+          "text": "evone keeps the realization of evtwo from taking place",
+          "y": 12
+        },
+        {
+          "text": "evone is kept from being realized by evtwo",
+          "y": 13
+        },
+        {
+          "text": "evone does not keep the realization of evtwo from taking place",
+          "y": 14
+        },
+        {
+          "text": "evone is not kept from being realized by evtwo",
+          "y": 15
+        },
+        {
+          "text": "evone has a comparable height to evtwo",
+          "y": 16
+        }
+      ]
+    },
+    {
+      "id": "batch-003",
+      "train": [
+        {
+          "text": "evone cannot be realized unless evtwo is present",
+          "y": 8
+        },
+        {
+          "text": "evone is dependent upon the availability of evtwo",
+          "y": 8
+        },
+        {
+          "text": "evone is required for the realization of evtwo",
+          "y": 9
+        },
+        {
+          "text": "evone must be supplied before evtwo can be realized",
+          "y": 9
+        },
+        {
+          "text": "evone can be realized even when evtwo is absent",
+          "y": 10
+        },
+        {
+          "text": "evone is not dependent upon the availability of evtwo",
+          "y": 10
+        },
+        {
+          "text": "evone is not required for the realization of evtwo",
+          "y": 11
+        },
+        {
+          "text": "evone need not be supplied before evtwo can be realized",
+          "y": 11
+        },
+        {
+          "text": "evone forestalls the realization of evtwo",
+          "y": 12
+        },
+        {
+          "text": "evone prevents the successful execution of evtwo",
+          "y": 12
+        },
+        {
+          "text": "evone is forestalled by evtwo",
+          "y": 13
+        },
+        {
+          "text": "evone is prevented from successful execution by evtwo",
+          "y": 13
+        },
+        {
+          "text": "evone does not forestall the realization of evtwo",
+          "y": 14
+        },
+        {
+          "text": "evone does not prevent the successful execution of evtwo",
+          "y": 14
+        },
+        {
+          "text": "evone is not forestalled by evtwo",
+          "y": 15
+        },
+        {
+          "text": "evone is not prevented from successful execution by evtwo",
+          "y": 15
+        },
+        {
+          "text": "evone has a similar contour to evtwo",
+          "y": 16
+        },
+        {
+          "text": "evone was recorded next to an image of evtwo",
+          "y": 16
+        }
+      ],
+      "exam": [
+        {
+          "text": "evone is impossible to complete in the absence of evtwo",
+          "y": 8
+        },
+        {
+          "text": "evone is indispensable for the successful realization of evtwo",
+          "y": 9
+        },
+        {
+          "text": "evone is possible to complete in the absence of evtwo",
+          "y": 10
+        },
+        {
+          "text": "evone is dispensable for the successful realization of evtwo",
+          "y": 11
+        },
+        {
+          "text": "evone makes the execution of evtwo unattainable",
+          "y": 12
+        },
+        {
+          "text": "evone is made unattainable in its execution by evtwo",
+          "y": 13
+        },
+        {
+          "text": "evone does not make the execution of evtwo unattainable",
+          "y": 14
+        },
+        {
+          "text": "evone is not made unattainable in its execution by evtwo",
+          "y": 15
+        },
+        {
+          "text": "evone has a comparable depth to evtwo",
+          "y": 16
+        }
+      ]
+    }
+  ]
+}
