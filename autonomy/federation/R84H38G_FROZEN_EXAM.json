@@ -1,0 +1,773 @@
+{
+  "schema": "h38g.exam.v1",
+  "scope": "same-author distinct normalized forms, supplied event IDs, 4 held-out combinations, paraphrase groups and graph tests",
+  "rows": [
+    {
+      "text": "amber0 concluded prior to onyx0",
+      "names": [
+        "amber0",
+        "onyx0"
+      ],
+      "gold": {
+        "left": "amber0",
+        "right": "onyx0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "amber0 was registered before onyx0",
+      "names": [
+        "amber0",
+        "onyx0"
+      ],
+      "gold": {
+        "left": "amber0",
+        "right": "onyx0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "onyx0 concluded subsequent to amber0",
+      "names": [
+        "amber0",
+        "onyx0"
+      ],
+      "gold": {
+        "left": "amber0",
+        "right": "onyx0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "onyx0 was registered after amber0",
+      "names": [
+        "amber0",
+        "onyx0"
+      ],
+      "gold": {
+        "left": "amber0",
+        "right": "onyx0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "amber2 never concluded prior to onyx2",
+      "names": [
+        "amber2",
+        "onyx2"
+      ],
+      "gold": {
+        "left": "amber2",
+        "right": "onyx2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "amber2 was not registered before onyx2",
+      "names": [
+        "amber2",
+        "onyx2"
+      ],
+      "gold": {
+        "left": "amber2",
+        "right": "onyx2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "onyx2 never concluded subsequent to amber2",
+      "names": [
+        "amber2",
+        "onyx2"
+      ],
+      "gold": {
+        "left": "amber2",
+        "right": "onyx2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "onyx2 was not registered after amber2",
+      "names": [
+        "amber2",
+        "onyx2"
+      ],
+      "gold": {
+        "left": "amber2",
+        "right": "onyx2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "amber4 directly activated onyx4",
+      "names": [
+        "amber4",
+        "onyx4"
+      ],
+      "gold": {
+        "left": "amber4",
+        "right": "onyx4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "amber4 brought forth onyx4",
+      "names": [
+        "amber4",
+        "onyx4"
+      ],
+      "gold": {
+        "left": "amber4",
+        "right": "onyx4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "onyx4 was directly activated by amber4",
+      "names": [
+        "amber4",
+        "onyx4"
+      ],
+      "gold": {
+        "left": "amber4",
+        "right": "onyx4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "onyx4 was brought forth by amber4",
+      "names": [
+        "amber4",
+        "onyx4"
+      ],
+      "gold": {
+        "left": "amber4",
+        "right": "onyx4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "amber6 never activated onyx6",
+      "names": [
+        "amber6",
+        "onyx6"
+      ],
+      "gold": {
+        "left": "amber6",
+        "right": "onyx6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "amber6 did not bring forth onyx6",
+      "names": [
+        "amber6",
+        "onyx6"
+      ],
+      "gold": {
+        "left": "amber6",
+        "right": "onyx6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "onyx6 was never activated by amber6",
+      "names": [
+        "amber6",
+        "onyx6"
+      ],
+      "gold": {
+        "left": "amber6",
+        "right": "onyx6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "onyx6 was not brought forth by amber6",
+      "names": [
+        "amber6",
+        "onyx6"
+      ],
+      "gold": {
+        "left": "amber6",
+        "right": "onyx6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "amber8 strongly presupposes onyx8",
+      "names": [
+        "amber8",
+        "onyx8"
+      ],
+      "gold": {
+        "left": "amber8",
+        "right": "onyx8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "amber8 is conditional upon onyx8",
+      "names": [
+        "amber8",
+        "onyx8"
+      ],
+      "gold": {
+        "left": "amber8",
+        "right": "onyx8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "onyx8 is an indispensable precondition for amber8",
+      "names": [
+        "amber8",
+        "onyx8"
+      ],
+      "gold": {
+        "left": "amber8",
+        "right": "onyx8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "onyx8 is obligatory for amber8",
+      "names": [
+        "amber8",
+        "onyx8"
+      ],
+      "gold": {
+        "left": "amber8",
+        "right": "onyx8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "amber10 never presupposes onyx10",
+      "names": [
+        "amber10",
+        "onyx10"
+      ],
+      "gold": {
+        "left": "amber10",
+        "right": "onyx10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "amber10 is not conditional upon onyx10",
+      "names": [
+        "amber10",
+        "onyx10"
+      ],
+      "gold": {
+        "left": "amber10",
+        "right": "onyx10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "onyx10 is not an indispensable precondition for amber10",
+      "names": [
+        "amber10",
+        "onyx10"
+      ],
+      "gold": {
+        "left": "amber10",
+        "right": "onyx10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "onyx10 is not obligatory for amber10",
+      "names": [
+        "amber10",
+        "onyx10"
+      ],
+      "gold": {
+        "left": "amber10",
+        "right": "onyx10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "amber12 directly averts onyx12",
+      "names": [
+        "amber12",
+        "onyx12"
+      ],
+      "gold": {
+        "left": "amber12",
+        "right": "onyx12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "amber12 effectively precludes onyx12",
+      "names": [
+        "amber12",
+        "onyx12"
+      ],
+      "gold": {
+        "left": "amber12",
+        "right": "onyx12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "onyx12 is directly averted by amber12",
+      "names": [
+        "amber12",
+        "onyx12"
+      ],
+      "gold": {
+        "left": "amber12",
+        "right": "onyx12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "onyx12 is effectively precluded by amber12",
+      "names": [
+        "amber12",
+        "onyx12"
+      ],
+      "gold": {
+        "left": "amber12",
+        "right": "onyx12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "amber14 never averts onyx14",
+      "names": [
+        "amber14",
+        "onyx14"
+      ],
+      "gold": {
+        "left": "amber14",
+        "right": "onyx14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "amber14 does not effectively preclude onyx14",
+      "names": [
+        "amber14",
+        "onyx14"
+      ],
+      "gold": {
+        "left": "amber14",
+        "right": "onyx14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "onyx14 is never averted by amber14",
+      "names": [
+        "amber14",
+        "onyx14"
+      ],
+      "gold": {
+        "left": "amber14",
+        "right": "onyx14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "onyx14 is not effectively precluded by amber14",
+      "names": [
+        "amber14",
+        "onyx14"
+      ],
+      "gold": {
+        "left": "amber14",
+        "right": "onyx14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "luna0 might activate sol0",
+      "names": [
+        "luna0",
+        "sol0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna1 has a matching hue to sol1",
+      "names": [
+        "luna1",
+        "sol1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna2 is pictured near sol2",
+      "names": [
+        "luna2",
+        "sol2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna3 may avert sol3",
+      "names": [
+        "luna3",
+        "sol3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna4 has an equivalent label to sol4",
+      "names": [
+        "luna4",
+        "sol4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna5 and sol5 were indexed",
+      "names": [
+        "luna5",
+        "sol5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna6 was listed alongside sol6",
+      "names": [
+        "luna6",
+        "sol6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna7 possibly presupposes sol7",
+      "names": [
+        "luna7",
+        "sol7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna8 has a matching width to sol8",
+      "names": [
+        "luna8",
+        "sol8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna9 was drawn adjacent to sol9",
+      "names": [
+        "luna9",
+        "sol9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna10 or sol10 was registered",
+      "names": [
+        "luna10",
+        "sol10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "luna11 is approximately the size of sol11",
+      "names": [
+        "luna11",
+        "sol11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "stara0",
+        "starb0",
+        "starc0"
+      ],
+      "sentences": [
+        "stara0 concluded prior to starb0",
+        "starc0 concluded subsequent to starb0"
+      ],
+      "claim": "stara0 was registered before starc0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "stara0",
+        "starb0",
+        "starc0"
+      ],
+      "sentences": [
+        "stara0 concluded prior to starb0",
+        "starc0 concluded subsequent to starb0"
+      ],
+      "claim": "stara0 directly activated starc0",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "stara0",
+        "starb0",
+        "starc0"
+      ],
+      "sentences": [
+        "stara0 concluded prior to starb0",
+        "starc0 concluded subsequent to starb0",
+        "starc0 was registered before stara0"
+      ],
+      "claim": "stara0 was registered before starc0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "stara0",
+        "starb0",
+        "starc0"
+      ],
+      "sentences": [
+        "stara0 concluded prior to starb0",
+        "starc0 concluded subsequent to starb0"
+      ],
+      "claim": "starc0 was not registered before stara0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "stara1",
+        "starb1",
+        "starc1"
+      ],
+      "sentences": [
+        "stara1 concluded prior to starb1",
+        "starc1 concluded subsequent to starb1"
+      ],
+      "claim": "stara1 was registered before starc1",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "stara1",
+        "starb1",
+        "starc1"
+      ],
+      "sentences": [
+        "stara1 concluded prior to starb1",
+        "starc1 concluded subsequent to starb1"
+      ],
+      "claim": "stara1 directly activated starc1",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "stara1",
+        "starb1",
+        "starc1"
+      ],
+      "sentences": [
+        "stara1 concluded prior to starb1",
+        "starc1 concluded subsequent to starb1",
+        "starc1 was registered before stara1"
+      ],
+      "claim": "stara1 was registered before starc1",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "stara1",
+        "starb1",
+        "starc1"
+      ],
+      "sentences": [
+        "stara1 concluded prior to starb1",
+        "starc1 concluded subsequent to starb1"
+      ],
+      "claim": "starc1 was not registered before stara1",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "stara2",
+        "starb2",
+        "starc2"
+      ],
+      "sentences": [
+        "stara2 concluded prior to starb2",
+        "starc2 concluded subsequent to starb2"
+      ],
+      "claim": "stara2 was registered before starc2",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "stara2",
+        "starb2",
+        "starc2"
+      ],
+      "sentences": [
+        "stara2 concluded prior to starb2",
+        "starc2 concluded subsequent to starb2"
+      ],
+      "claim": "stara2 directly activated starc2",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "stara2",
+        "starb2",
+        "starc2"
+      ],
+      "sentences": [
+        "stara2 concluded prior to starb2",
+        "starc2 concluded subsequent to starb2",
+        "starc2 was registered before stara2"
+      ],
+      "claim": "stara2 was registered before starc2",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "stara2",
+        "starb2",
+        "starc2"
+      ],
+      "sentences": [
+        "stara2 concluded prior to starb2",
+        "starc2 concluded subsequent to starb2"
+      ],
+      "claim": "starc2 was not registered before stara2",
+      "expected": "ENTAILED"
+    }
+  ]
+}
