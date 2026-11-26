@@ -1,0 +1,109 @@
+name: JANUS H38K continuous source intake
+on:
+  pull_request:
+    paths:
+      - 'research/h38k/**'
+      - '.github/workflows/r84h38k-continuous-intake.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'research/h38k/**'
+      - '.github/workflows/r84h38k-continuous-intake.yml'
+  schedule:
+    - cron: '12,32,52 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: h38k-source-intake
+  cancel-in-progress: false
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: python research/h38k/continuous_intake.py --test
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        if: github.event_name == 'pull_request'
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: memory-cortex-state
+          path: upstream
+          sparse-checkout: data/memory-cortex
+          persist-credentials: false
+      - if: github.event_name == 'pull_request'
+        run: |
+          set -euo pipefail
+          src="$(git -C upstream rev-parse HEAD)"
+          python research/h38k/continuous_intake.py --source upstream/data/memory-cortex --commit "$src" --state "$RUNNER_TEMP/queue.json" --report "$RUNNER_TEMP/scan.json"
+          python research/h38k/continuous_intake.py --source upstream/data/memory-cortex --commit "$src" --state "$RUNNER_TEMP/queue.json" --report "$RUNNER_TEMP/resume.json"
+      - if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: h38k-read-only-smoke
+          path: |
+            ${{ runner.temp }}/scan.json
+            ${{ runner.temp }}/resume.json
+            ${{ runner.temp }}/queue.json
+          if-no-files-found: error
+          retention-days: 30
+  persist:
+    needs: validate
+    if: github.repository == 'Hawkar-usls/Janus' && github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          path: code
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: memory-cortex-state
+          path: upstream
+          sparse-checkout: data/memory-cortex
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: h38k-intake-state
+          path: state
+          sparse-checkout: data/h38k-intake
+          fetch-depth: 1
+      - name: Bounded source scan
+        run: |
+          set -euo pipefail
+          src="$(git -C upstream rev-parse HEAD)"
+          python code/research/h38k/continuous_intake.py --source upstream/data/memory-cortex --commit "$src" --state state/data/h38k-intake/queue.json --report "$RUNNER_TEMP/scan.json"
+          test -z "$(git -C upstream status --porcelain)"
+      - name: Persist only isolated research state
+        working-directory: state
+        run: |
+          set -euo pipefail
+          git config user.name 'janus-h38k-intake[bot]'
+          git config user.email 'janus-h38k-intake[bot]@users.noreply.github.com'
+          git add -- data/h38k-intake/queue.json
+          python - <<'PY'
+          import subprocess
+          paths=subprocess.check_output(['git','diff','--cached','--name-only','-z']).split(b'\0')
+          if any(p and p != b'data/h38k-intake/queue.json' for p in paths):
+              raise SystemExit('REFUSE_OUTSIDE_STATE')
+          PY
+          if git diff --cached --quiet; then
+            echo 'No state progress'
+            exit 0
+          fi
+          git diff --cached --check
+          git commit -m "h38k: bounded source intake ${GITHUB_RUN_ID}"
+          git push origin HEAD:refs/heads/h38k-intake-state
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h38k-intake-receipt
+          path: ${{ runner.temp }}/scan.json
+          if-no-files-found: error
+          retention-days: 30
