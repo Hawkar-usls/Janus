@@ -1,0 +1,68 @@
+{
+  "schema": "janus.verified_capabilities.v1",
+  "policy": "CI success is not scientific or production admission. Only bounded exact typed graph callable is included in this integration. Other capabilities have verified experimental receipts and are catalogued for separate integration gates. No legacy gateway changes or automatic promotion.",
+  "capabilities": [
+    {
+      "id": "chunk-cache",
+      "stage": "H13B-H17",
+      "run": 45714097493,
+      "status": "RESEARCH_PASS",
+      "boundary": "Bounded lazy cache, typed fixture experiments; model and catalog dependencies not yet vendored"
+    },
+    {
+      "id": "graph-propagation",
+      "stage": "H22",
+      "run": 45780392030,
+      "status": "SHADOW_ONLY",
+      "boundary": "Neural propagation not answer authority; exact solver selected"
+    },
+    {
+      "id": "typed-reachability",
+      "stage": "H23-H24",
+      "run": 45787512793,
+      "status": "INTEGRATION_CANDIDATE",
+      "entrypoint": "autonomy/federation/verified_capabilities.py",
+      "boundary": "Only typed binary directed graph n=1..24; no untyped interception",
+      "prior_evidence": {
+        "graph": 1836,
+        "permutation": 1836,
+        "text_parity": 959
+      }
+    },
+    {
+      "id": "memory-routing",
+      "stage": "H24",
+      "run": 45790325413,
+      "status": "RESEARCH_PASS",
+      "boundary": "isolated Cortex fixture; no live corpus mutation"
+    },
+    {
+      "id": "evidence-critic",
+      "stage": "H27B",
+      "run": 45796084982,
+      "status": "SHADOW_ONLY",
+      "boundary": "Same-author probes, manual predicates, no deployment"
+    },
+    {
+      "id": "evidence-retrieval",
+      "stage": "H28",
+      "run": 45797056428,
+      "status": "HOLD",
+      "boundary": "5 source cards and 6 quarantined leads; no fresh gain"
+    },
+    {
+      "id": "semantic-parent",
+      "stage": "H29",
+      "run": 45798117736,
+      "status": "HOLD",
+      "boundary": "NLI benchmark, no safe improvement"
+    },
+    {
+      "id": "semantic-student",
+      "stage": "H30",
+      "run": 45799682159,
+      "status": "HOLD",
+      "boundary": "25/60, parent 42/60, 16 prior correct lost; not admitted"
+    }
+  ]
+}
