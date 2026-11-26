@@ -1,0 +1,24 @@
+name: JANUS verified capability integration
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    paths:
+      - 'autonomy/federation/verified_capabilities.py'
+      - 'autonomy/federation/test_verified_capabilities.py'
+      - 'autonomy/federation/VERIFIED_CAPABILITIES.json'
+      - 'autonomy/federation/R84H23_FROZEN_EXAM.json'
+      - '.github/workflows/r84-verified-capabilities.yml'
+permissions:
+  contents: read
+jobs:
+  exact-route:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python autonomy/federation/test_verified_capabilities.py -v
