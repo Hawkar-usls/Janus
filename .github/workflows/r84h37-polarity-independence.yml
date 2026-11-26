@@ -1,4 +1,4 @@
-name: JANUS R84H37B polarity and offline witness recovery
+name: JANUS R84H37C offline dependency recovery
 on:
   pull_request:
     types: [opened]
@@ -18,7 +18,7 @@ env:
   TOKENIZERS_PARALLELISM: 'false'
 jobs:
   train:
-    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h37b-offline-witness-20261126' && github.run_attempt == 1
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h37c-offline-dependencies-20261126' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
@@ -35,7 +35,8 @@ jobs:
           python-version: '3.11'
       - run: |
           python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
-          python -m pip install --disable-pip-version-check safetensors==0.5.2
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import torch,numpy; from safetensors.torch import save,load; assert torch.equal(load(save({"probe":torch.tensor([1,2])}))["probe"],torch.tensor([1,2]))'
           python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
       - uses: actions/download-artifact@v4
         with:
@@ -74,7 +75,8 @@ jobs:
           python-version: '3.11'
       - run: |
           python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
-          python -m pip install --disable-pip-version-check safetensors==0.5.2
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import torch,numpy; from safetensors.torch import save,load; assert torch.equal(load(save({"probe":torch.tensor([1,2])}))["probe"],torch.tensor([1,2]))'
           python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
       - uses: actions/download-artifact@v4
         with:
@@ -95,7 +97,7 @@ jobs:
           if-no-files-found: error
           retention-days: 60
   history:
-    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h37b-offline-witness-20261126' && github.run_attempt == 1
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h37c-offline-dependencies-20261126' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:
