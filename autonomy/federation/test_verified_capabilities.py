@@ -21,4 +21,29 @@ class Integration(unittest.TestCase):
         self.assertEqual(v.dispatch(good)["answer"],1)
         for q in (None,[],{},{"schema":"unknown"},{**good,"target":True},{**good,"edges":[2]},{**good,"roots":[True]},{**good,"expected":1},{**good,"target":1},{**good,"edges":[]},{**good,"roots":[0]*25,"edges":[0]*625}):
             self.assertEqual(v.dispatch(q)["status"],"REJECT")
+    def test_relations(self):
+        count=0
+        for i in range(64):
+            for attribute in ("presence","sequence","access"):
+                for a in (0,1):
+                    for b in (0,1):
+                        for same in (False,True):
+                            subject="holdout-%d"%i
+                            fact={"subject":subject,"attribute":attribute,"value":a}
+                            claim={"subject":subject if same else "other-"+subject,"attribute":attribute,"value":b}
+                            q={"schema":"janus.relation.v1","facts":[fact],"claim":claim}
+                            expected="neutral" if not same else "entailment" if a==b else "contradiction"
+                            self.assertEqual(v.dispatch(json.loads(json.dumps(q)))["answer"],expected)
+                            count+=1
+        self.assertEqual(count,1536)
+    def test_relation_boundaries(self):
+        f={"subject":"s","attribute":"a","value":1}
+        q={"schema":"janus.relation.v1","facts":[f],"claim":f}
+        self.assertEqual(v.dispatch(q)["answer"],"entailment")
+        self.assertEqual(v.dispatch({**q,"facts":[f,{**f,"value":0}]})["status"],"HOLD_CONFLICT")
+        self.assertEqual(v.dispatch({**q,"facts":[f,f]})["answer"],"entailment")
+        self.assertEqual(v.dispatch({**q,"claim":{**f,"attribute":"b"}})["answer"],"neutral")
+        for bad in ({**q,"facts":[]},{**q,"facts":[f]*33},{**q,"claim":{**f,"value":True}},{**q,"facts":[{**f,"subject":""}]},{**q,"claim":{**f,"source":"x"}},{**q,"extra":1}):
+            self.assertEqual(v.dispatch(bad)["status"],"HOLD_INVALID")
+        self.assertEqual(v.dispatch("some prose",lambda s:("legacy",s)),("legacy","some prose"))
 if __name__=="__main__":unittest.main()

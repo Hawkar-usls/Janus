@@ -1,6 +1,6 @@
 {
   "schema": "janus.verified_capabilities.v1",
-  "policy": "CI success is not scientific or production admission. Only bounded exact typed graph callable is included in this integration. Other capabilities have verified experimental receipts and are catalogued for separate integration gates. No legacy gateway changes or automatic promotion.",
+  "policy": "Only bounded exact typed graph and relation callables are integrated candidates; CI is not scientific or production admission. Other capabilities are catalogued for separate gates. No legacy gateway changes or automatic promotion.",
   "capabilities": [
     {
       "id": "chunk-cache",
@@ -20,7 +20,7 @@
       "id": "typed-reachability",
       "stage": "H23-H24",
       "run": 45787512793,
-      "status": "INTEGRATION_CANDIDATE",
+      "status": "INTEGRATED_OPT_IN",
       "entrypoint": "autonomy/federation/verified_capabilities.py",
       "boundary": "Only typed binary directed graph n=1..24; no untyped interception",
       "prior_evidence": {
@@ -63,6 +63,25 @@
       "run": 45799682159,
       "status": "HOLD",
       "boundary": "25/60, parent 42/60, 16 prior correct lost; not admitted"
+    },
+    {
+      "id": "typed-json-relation",
+      "stage": "H31",
+      "run": 45801810497,
+      "status": "INTEGRATION_CANDIDATE",
+      "entrypoint": "autonomy/federation/verified_capabilities.py",
+      "boundary": "Explicit binary subject/attribute/value facts, 1–32 facts, no prose parsing or truth certification; conflicting facts hold",
+      "prior_evidence": {
+        "exact": 1536,
+        "controls": 2
+      }
+    },
+    {
+      "id": "ordered-semantic-student",
+      "stage": "H31",
+      "run": 45801810497,
+      "status": "HOLD",
+      "boundary": "17/48 chosen attention distill versus 23/48 H30 and 34/48 parent; no deployment"
     }
   ]
 }
