@@ -1,0 +1,1242 @@
+{
+  "schema": "janus.h38d.frozen.v1",
+  "scope": "same-author authored text; includes semantically valid paraphrases outside the grammar and unsupported inputs; gold atoms and statuses fixed before run",
+  "cases": [
+    {
+      "id": "d1",
+      "cohort": "temporal_composition",
+      "sentences": [
+        "scan happened before save.",
+        "Only after save did reply occur."
+      ],
+      "atoms": [
+        {
+          "left": "scan",
+          "rel": "BEFORE",
+          "right": "save",
+          "positive": true
+        },
+        {
+          "left": "save",
+          "rel": "BEFORE",
+          "right": "reply",
+          "positive": true
+        }
+      ],
+      "claim": "scan precedes reply.",
+      "claim_atom": {
+        "left": "scan",
+        "rel": "BEFORE",
+        "right": "reply",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d2",
+      "cohort": "reverse_negation",
+      "sentences": [
+        "scan happened before save.",
+        "Only after save did reply occur."
+      ],
+      "atoms": [
+        {
+          "left": "scan",
+          "rel": "BEFORE",
+          "right": "save",
+          "positive": true
+        },
+        {
+          "left": "save",
+          "rel": "BEFORE",
+          "right": "reply",
+          "positive": true
+        }
+      ],
+      "claim": "reply did not happen before scan.",
+      "claim_atom": {
+        "left": "reply",
+        "rel": "BEFORE",
+        "right": "scan",
+        "positive": false
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d3",
+      "cohort": "causality_barrier",
+      "sentences": [
+        "scan happened before save.",
+        "Only after save did reply occur."
+      ],
+      "atoms": [
+        {
+          "left": "scan",
+          "rel": "BEFORE",
+          "right": "save",
+          "positive": true
+        },
+        {
+          "left": "save",
+          "rel": "BEFORE",
+          "right": "reply",
+          "positive": true
+        }
+      ],
+      "claim": "scan caused reply.",
+      "claim_atom": {
+        "left": "scan",
+        "rel": "CAUSES",
+        "right": "reply",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d4",
+      "cohort": "temporal_composition",
+      "sentences": [
+        "boot happened before index.",
+        "Only after index did serve occur."
+      ],
+      "atoms": [
+        {
+          "left": "boot",
+          "rel": "BEFORE",
+          "right": "index",
+          "positive": true
+        },
+        {
+          "left": "index",
+          "rel": "BEFORE",
+          "right": "serve",
+          "positive": true
+        }
+      ],
+      "claim": "boot precedes serve.",
+      "claim_atom": {
+        "left": "boot",
+        "rel": "BEFORE",
+        "right": "serve",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d5",
+      "cohort": "reverse_negation",
+      "sentences": [
+        "boot happened before index.",
+        "Only after index did serve occur."
+      ],
+      "atoms": [
+        {
+          "left": "boot",
+          "rel": "BEFORE",
+          "right": "index",
+          "positive": true
+        },
+        {
+          "left": "index",
+          "rel": "BEFORE",
+          "right": "serve",
+          "positive": true
+        }
+      ],
+      "claim": "serve did not happen before boot.",
+      "claim_atom": {
+        "left": "serve",
+        "rel": "BEFORE",
+        "right": "boot",
+        "positive": false
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d6",
+      "cohort": "causality_barrier",
+      "sentences": [
+        "boot happened before index.",
+        "Only after index did serve occur."
+      ],
+      "atoms": [
+        {
+          "left": "boot",
+          "rel": "BEFORE",
+          "right": "index",
+          "positive": true
+        },
+        {
+          "left": "index",
+          "rel": "BEFORE",
+          "right": "serve",
+          "positive": true
+        }
+      ],
+      "claim": "boot caused serve.",
+      "claim_atom": {
+        "left": "boot",
+        "rel": "CAUSES",
+        "right": "serve",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d7",
+      "cohort": "temporal_composition",
+      "sentences": [
+        "sense happened before filter.",
+        "Only after filter did publish occur."
+      ],
+      "atoms": [
+        {
+          "left": "sense",
+          "rel": "BEFORE",
+          "right": "filter",
+          "positive": true
+        },
+        {
+          "left": "filter",
+          "rel": "BEFORE",
+          "right": "publish",
+          "positive": true
+        }
+      ],
+      "claim": "sense precedes publish.",
+      "claim_atom": {
+        "left": "sense",
+        "rel": "BEFORE",
+        "right": "publish",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d8",
+      "cohort": "reverse_negation",
+      "sentences": [
+        "sense happened before filter.",
+        "Only after filter did publish occur."
+      ],
+      "atoms": [
+        {
+          "left": "sense",
+          "rel": "BEFORE",
+          "right": "filter",
+          "positive": true
+        },
+        {
+          "left": "filter",
+          "rel": "BEFORE",
+          "right": "publish",
+          "positive": true
+        }
+      ],
+      "claim": "publish did not happen before sense.",
+      "claim_atom": {
+        "left": "publish",
+        "rel": "BEFORE",
+        "right": "sense",
+        "positive": false
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d9",
+      "cohort": "causality_barrier",
+      "sentences": [
+        "sense happened before filter.",
+        "Only after filter did publish occur."
+      ],
+      "atoms": [
+        {
+          "left": "sense",
+          "rel": "BEFORE",
+          "right": "filter",
+          "positive": true
+        },
+        {
+          "left": "filter",
+          "rel": "BEFORE",
+          "right": "publish",
+          "positive": true
+        }
+      ],
+      "claim": "sense caused publish.",
+      "claim_atom": {
+        "left": "sense",
+        "rel": "CAUSES",
+        "right": "publish",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d10",
+      "cohort": "temporal_composition",
+      "sentences": [
+        "lock happened before write.",
+        "Only after write did release occur."
+      ],
+      "atoms": [
+        {
+          "left": "lock",
+          "rel": "BEFORE",
+          "right": "write",
+          "positive": true
+        },
+        {
+          "left": "write",
+          "rel": "BEFORE",
+          "right": "release",
+          "positive": true
+        }
+      ],
+      "claim": "lock precedes release.",
+      "claim_atom": {
+        "left": "lock",
+        "rel": "BEFORE",
+        "right": "release",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d11",
+      "cohort": "reverse_negation",
+      "sentences": [
+        "lock happened before write.",
+        "Only after write did release occur."
+      ],
+      "atoms": [
+        {
+          "left": "lock",
+          "rel": "BEFORE",
+          "right": "write",
+          "positive": true
+        },
+        {
+          "left": "write",
+          "rel": "BEFORE",
+          "right": "release",
+          "positive": true
+        }
+      ],
+      "claim": "release did not happen before lock.",
+      "claim_atom": {
+        "left": "release",
+        "rel": "BEFORE",
+        "right": "lock",
+        "positive": false
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d12",
+      "cohort": "causality_barrier",
+      "sentences": [
+        "lock happened before write.",
+        "Only after write did release occur."
+      ],
+      "atoms": [
+        {
+          "left": "lock",
+          "rel": "BEFORE",
+          "right": "write",
+          "positive": true
+        },
+        {
+          "left": "write",
+          "rel": "BEFORE",
+          "right": "release",
+          "positive": true
+        }
+      ],
+      "claim": "lock caused release.",
+      "claim_atom": {
+        "left": "lock",
+        "rel": "CAUSES",
+        "right": "release",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d13",
+      "cohort": "temporal_composition",
+      "sentences": [
+        "probe happened before collect.",
+        "Only after collect did archive occur."
+      ],
+      "atoms": [
+        {
+          "left": "probe",
+          "rel": "BEFORE",
+          "right": "collect",
+          "positive": true
+        },
+        {
+          "left": "collect",
+          "rel": "BEFORE",
+          "right": "archive",
+          "positive": true
+        }
+      ],
+      "claim": "probe precedes archive.",
+      "claim_atom": {
+        "left": "probe",
+        "rel": "BEFORE",
+        "right": "archive",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d14",
+      "cohort": "reverse_negation",
+      "sentences": [
+        "probe happened before collect.",
+        "Only after collect did archive occur."
+      ],
+      "atoms": [
+        {
+          "left": "probe",
+          "rel": "BEFORE",
+          "right": "collect",
+          "positive": true
+        },
+        {
+          "left": "collect",
+          "rel": "BEFORE",
+          "right": "archive",
+          "positive": true
+        }
+      ],
+      "claim": "archive did not happen before probe.",
+      "claim_atom": {
+        "left": "archive",
+        "rel": "BEFORE",
+        "right": "probe",
+        "positive": false
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d15",
+      "cohort": "causality_barrier",
+      "sentences": [
+        "probe happened before collect.",
+        "Only after collect did archive occur."
+      ],
+      "atoms": [
+        {
+          "left": "probe",
+          "rel": "BEFORE",
+          "right": "collect",
+          "positive": true
+        },
+        {
+          "left": "collect",
+          "rel": "BEFORE",
+          "right": "archive",
+          "positive": true
+        }
+      ],
+      "claim": "probe caused archive.",
+      "claim_atom": {
+        "left": "probe",
+        "rel": "CAUSES",
+        "right": "archive",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d16",
+      "cohort": "temporal_composition",
+      "sentences": [
+        "prepare happened before commit.",
+        "Only after commit did notify occur."
+      ],
+      "atoms": [
+        {
+          "left": "prepare",
+          "rel": "BEFORE",
+          "right": "commit",
+          "positive": true
+        },
+        {
+          "left": "commit",
+          "rel": "BEFORE",
+          "right": "notify",
+          "positive": true
+        }
+      ],
+      "claim": "prepare precedes notify.",
+      "claim_atom": {
+        "left": "prepare",
+        "rel": "BEFORE",
+        "right": "notify",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d17",
+      "cohort": "reverse_negation",
+      "sentences": [
+        "prepare happened before commit.",
+        "Only after commit did notify occur."
+      ],
+      "atoms": [
+        {
+          "left": "prepare",
+          "rel": "BEFORE",
+          "right": "commit",
+          "positive": true
+        },
+        {
+          "left": "commit",
+          "rel": "BEFORE",
+          "right": "notify",
+          "positive": true
+        }
+      ],
+      "claim": "notify did not happen before prepare.",
+      "claim_atom": {
+        "left": "notify",
+        "rel": "BEFORE",
+        "right": "prepare",
+        "positive": false
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d18",
+      "cohort": "causality_barrier",
+      "sentences": [
+        "prepare happened before commit.",
+        "Only after commit did notify occur."
+      ],
+      "atoms": [
+        {
+          "left": "prepare",
+          "rel": "BEFORE",
+          "right": "commit",
+          "positive": true
+        },
+        {
+          "left": "commit",
+          "rel": "BEFORE",
+          "right": "notify",
+          "positive": true
+        }
+      ],
+      "claim": "prepare caused notify.",
+      "claim_atom": {
+        "left": "prepare",
+        "rel": "CAUSES",
+        "right": "notify",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d19",
+      "cohort": "inverse_forms",
+      "sentences": [
+        "Before flush, queue occurred.",
+        "reply follows flush."
+      ],
+      "atoms": [
+        {
+          "left": "queue",
+          "rel": "BEFORE",
+          "right": "flush",
+          "positive": true
+        },
+        {
+          "left": "flush",
+          "rel": "BEFORE",
+          "right": "reply",
+          "positive": true
+        }
+      ],
+      "claim": "queue took place before reply.",
+      "claim_atom": {
+        "left": "queue",
+        "rel": "BEFORE",
+        "right": "reply",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d20",
+      "cohort": "inverse_forms",
+      "sentences": [
+        "After sample, analyze happened.",
+        "report occurred after analyze."
+      ],
+      "atoms": [
+        {
+          "left": "sample",
+          "rel": "BEFORE",
+          "right": "analyze",
+          "positive": true
+        },
+        {
+          "left": "analyze",
+          "rel": "BEFORE",
+          "right": "report",
+          "positive": true
+        }
+      ],
+      "claim": "report happened after sample.",
+      "claim_atom": {
+        "left": "sample",
+        "rel": "BEFORE",
+        "right": "report",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d21",
+      "cohort": "inverse_forms",
+      "sentences": [
+        "B was caused by A."
+      ],
+      "atoms": [
+        {
+          "left": "a",
+          "rel": "CAUSES",
+          "right": "b",
+          "positive": true
+        }
+      ],
+      "claim": "A causes B.",
+      "claim_atom": {
+        "left": "a",
+        "rel": "CAUSES",
+        "right": "b",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d22",
+      "cohort": "inverse_forms",
+      "sentences": [
+        "token is required by access."
+      ],
+      "atoms": [
+        {
+          "left": "access",
+          "rel": "REQUIRES",
+          "right": "token",
+          "positive": true
+        }
+      ],
+      "claim": "access requires token.",
+      "claim_atom": {
+        "left": "access",
+        "rel": "REQUIRES",
+        "right": "token",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d23",
+      "cohort": "inverse_forms",
+      "sentences": [
+        "write was prevented by lock."
+      ],
+      "atoms": [
+        {
+          "left": "lock",
+          "rel": "PREVENTS",
+          "right": "write",
+          "positive": true
+        }
+      ],
+      "claim": "lock prevented write.",
+      "claim_atom": {
+        "left": "lock",
+        "rel": "PREVENTS",
+        "right": "write",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d24",
+      "cohort": "explicit_negation",
+      "sentences": [
+        "read did not cause retry."
+      ],
+      "atoms": [
+        {
+          "left": "read",
+          "rel": "CAUSES",
+          "right": "retry",
+          "positive": false
+        }
+      ],
+      "claim": "read caused retry.",
+      "claim_atom": {
+        "left": "read",
+        "rel": "CAUSES",
+        "right": "retry",
+        "positive": true
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "d25",
+      "cohort": "explicit_negation",
+      "sentences": [
+        "launch does not require cache."
+      ],
+      "atoms": [
+        {
+          "left": "launch",
+          "rel": "REQUIRES",
+          "right": "cache",
+          "positive": false
+        }
+      ],
+      "claim": "launch requires cache.",
+      "claim_atom": {
+        "left": "launch",
+        "rel": "REQUIRES",
+        "right": "cache",
+        "positive": true
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "d26",
+      "cohort": "explicit_negation",
+      "sentences": [
+        "alarm did not prevent boot."
+      ],
+      "atoms": [
+        {
+          "left": "alarm",
+          "rel": "PREVENTS",
+          "right": "boot",
+          "positive": false
+        }
+      ],
+      "claim": "alarm prevented boot.",
+      "claim_atom": {
+        "left": "alarm",
+        "rel": "PREVENTS",
+        "right": "boot",
+        "positive": true
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "d27",
+      "cohort": "explicit_negation",
+      "sentences": [
+        "reply did not occur after write."
+      ],
+      "atoms": [
+        {
+          "left": "write",
+          "rel": "BEFORE",
+          "right": "reply",
+          "positive": false
+        }
+      ],
+      "claim": "write precedes reply.",
+      "claim_atom": {
+        "left": "write",
+        "rel": "BEFORE",
+        "right": "reply",
+        "positive": true
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "d28",
+      "cohort": "nontransitive",
+      "sentences": [
+        "spark causes heat.",
+        "heat causes alarm."
+      ],
+      "atoms": [
+        {
+          "left": "spark",
+          "rel": "CAUSES",
+          "right": "heat",
+          "positive": true
+        },
+        {
+          "left": "heat",
+          "rel": "CAUSES",
+          "right": "alarm",
+          "positive": true
+        }
+      ],
+      "claim": "spark causes alarm.",
+      "claim_atom": {
+        "left": "spark",
+        "rel": "CAUSES",
+        "right": "alarm",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d29",
+      "cohort": "nontransitive",
+      "sentences": [
+        "upload requires encode.",
+        "encode requires input."
+      ],
+      "atoms": [
+        {
+          "left": "upload",
+          "rel": "REQUIRES",
+          "right": "encode",
+          "positive": true
+        },
+        {
+          "left": "encode",
+          "rel": "REQUIRES",
+          "right": "input",
+          "positive": true
+        }
+      ],
+      "claim": "upload requires input.",
+      "claim_atom": {
+        "left": "upload",
+        "rel": "REQUIRES",
+        "right": "input",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d30",
+      "cohort": "nontransitive",
+      "sentences": [
+        "lock prevents write.",
+        "write prevents reset."
+      ],
+      "atoms": [
+        {
+          "left": "lock",
+          "rel": "PREVENTS",
+          "right": "write",
+          "positive": true
+        },
+        {
+          "left": "write",
+          "rel": "PREVENTS",
+          "right": "reset",
+          "positive": true
+        }
+      ],
+      "claim": "lock prevents reset.",
+      "claim_atom": {
+        "left": "lock",
+        "rel": "PREVENTS",
+        "right": "reset",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d31",
+      "cohort": "conflict",
+      "sentences": [
+        "a occurred before b.",
+        "b happened before c.",
+        "c precedes a."
+      ],
+      "atoms": [
+        {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        },
+        {
+          "left": "b",
+          "rel": "BEFORE",
+          "right": "c",
+          "positive": true
+        },
+        {
+          "left": "c",
+          "rel": "BEFORE",
+          "right": "a",
+          "positive": true
+        }
+      ],
+      "claim": "a precedes c.",
+      "claim_atom": {
+        "left": "a",
+        "rel": "BEFORE",
+        "right": "c",
+        "positive": true
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "d32",
+      "cohort": "conflict",
+      "sentences": [
+        "copy caused alert.",
+        "copy did not cause alert."
+      ],
+      "atoms": [
+        {
+          "left": "copy",
+          "rel": "CAUSES",
+          "right": "alert",
+          "positive": true
+        },
+        {
+          "left": "copy",
+          "rel": "CAUSES",
+          "right": "alert",
+          "positive": false
+        }
+      ],
+      "claim": "copy causes alert.",
+      "claim_atom": {
+        "left": "copy",
+        "rel": "CAUSES",
+        "right": "alert",
+        "positive": true
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "d33",
+      "cohort": "conflict",
+      "sentences": [
+        "a precedes b.",
+        "b precedes c.",
+        "a did not happen before c."
+      ],
+      "atoms": [
+        {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        },
+        {
+          "left": "b",
+          "rel": "BEFORE",
+          "right": "c",
+          "positive": true
+        },
+        {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "c",
+          "positive": false
+        }
+      ],
+      "claim": "a precedes c.",
+      "claim_atom": {
+        "left": "a",
+        "rel": "BEFORE",
+        "right": "c",
+        "positive": true
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "d34",
+      "cohort": "disconnected",
+      "sentences": [
+        "start precedes stop.",
+        "read precedes write."
+      ],
+      "atoms": [
+        {
+          "left": "start",
+          "rel": "BEFORE",
+          "right": "stop",
+          "positive": true
+        },
+        {
+          "left": "read",
+          "rel": "BEFORE",
+          "right": "write",
+          "positive": true
+        }
+      ],
+      "claim": "start precedes write.",
+      "claim_atom": {
+        "left": "start",
+        "rel": "BEFORE",
+        "right": "write",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d35",
+      "cohort": "disconnected",
+      "sentences": [],
+      "atoms": [],
+      "claim": "start precedes write.",
+      "claim_atom": {
+        "left": "start",
+        "rel": "BEFORE",
+        "right": "write",
+        "positive": true
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "d36",
+      "cohort": "unsupported",
+      "sentences": [
+        "If scan occurs before save, reply happens."
+      ],
+      "atoms": [
+        null
+      ],
+      "claim": "scan precedes save.",
+      "claim_atom": {
+        "left": "scan",
+        "rel": "BEFORE",
+        "right": "save",
+        "positive": true
+      },
+      "expected": "HOLD_UNPARSED"
+    },
+    {
+      "id": "d37",
+      "cohort": "unsupported",
+      "sentences": [
+        "scan might precede save."
+      ],
+      "atoms": [
+        null
+      ],
+      "claim": "scan precedes save.",
+      "claim_atom": {
+        "left": "scan",
+        "rel": "BEFORE",
+        "right": "save",
+        "positive": true
+      },
+      "expected": "HOLD_UNPARSED"
+    },
+    {
+      "id": "d38",
+      "cohort": "unsupported",
+      "sentences": [
+        "scan precedes save.",
+        "It caused reply."
+      ],
+      "atoms": [
+        {
+          "left": "scan",
+          "rel": "BEFORE",
+          "right": "save",
+          "positive": true
+        },
+        null
+      ],
+      "claim": "scan precedes save.",
+      "claim_atom": {
+        "left": "scan",
+        "rel": "BEFORE",
+        "right": "save",
+        "positive": true
+      },
+      "expected": "HOLD_UNPARSED"
+    },
+    {
+      "id": "d39",
+      "cohort": "unsupported",
+      "sentences": [
+        "scan precedes save."
+      ],
+      "atoms": [
+        {
+          "left": "scan",
+          "rel": "BEFORE",
+          "right": "save",
+          "positive": true
+        }
+      ],
+      "claim": "Does scan precede save?",
+      "claim_atom": null,
+      "expected": "HOLD_UNPARSED"
+    },
+    {
+      "id": "d40",
+      "cohort": "unsupported",
+      "sentences": [
+        "scan and save were recorded."
+      ],
+      "atoms": [
+        null
+      ],
+      "claim": "scan precedes save.",
+      "claim_atom": {
+        "left": "scan",
+        "rel": "BEFORE",
+        "right": "save",
+        "positive": true
+      },
+      "expected": "HOLD_UNPARSED"
+    },
+    {
+      "id": "d41",
+      "cohort": "unsupported",
+      "sentences": [
+        "The log claims scan caused save."
+      ],
+      "atoms": [
+        null
+      ],
+      "claim": "scan causes save.",
+      "claim_atom": {
+        "left": "scan",
+        "rel": "CAUSES",
+        "right": "save",
+        "positive": true
+      },
+      "expected": "HOLD_UNPARSED"
+    },
+    {
+      "id": "d42",
+      "cohort": "unseen_paraphrase",
+      "sentences": [
+        "scan came before save.",
+        "save precedes reply."
+      ],
+      "atoms": [
+        {
+          "left": "scan",
+          "rel": "BEFORE",
+          "right": "save",
+          "positive": true
+        },
+        {
+          "left": "save",
+          "rel": "BEFORE",
+          "right": "reply",
+          "positive": true
+        }
+      ],
+      "claim": "scan precedes reply.",
+      "claim_atom": {
+        "left": "scan",
+        "rel": "BEFORE",
+        "right": "reply",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d43",
+      "cohort": "unseen_paraphrase",
+      "sentences": [
+        "cache_check was earlier than origin_fetch."
+      ],
+      "atoms": [
+        {
+          "left": "cache_check",
+          "rel": "BEFORE",
+          "right": "origin_fetch",
+          "positive": true
+        }
+      ],
+      "claim": "cache_check precedes origin_fetch.",
+      "claim_atom": {
+        "left": "cache_check",
+        "rel": "BEFORE",
+        "right": "origin_fetch",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d44",
+      "cohort": "unseen_paraphrase",
+      "sentences": [
+        "The failure triggered recovery."
+      ],
+      "atoms": [
+        {
+          "left": "failure",
+          "rel": "CAUSES",
+          "right": "recovery",
+          "positive": true
+        }
+      ],
+      "claim": "failure causes recovery.",
+      "claim_atom": {
+        "left": "failure",
+        "rel": "CAUSES",
+        "right": "recovery",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d45",
+      "cohort": "unseen_paraphrase",
+      "sentences": [
+        "boot precedes ready."
+      ],
+      "atoms": [
+        {
+          "left": "boot",
+          "rel": "BEFORE",
+          "right": "ready",
+          "positive": true
+        }
+      ],
+      "claim": "ready came later than boot.",
+      "claim_atom": {
+        "left": "boot",
+        "rel": "BEFORE",
+        "right": "ready",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "d46",
+      "cohort": "unseen_paraphrase",
+      "sentences": [
+        "approval is a prerequisite for deploy."
+      ],
+      "atoms": [
+        {
+          "left": "deploy",
+          "rel": "REQUIRES",
+          "right": "approval",
+          "positive": true
+        }
+      ],
+      "claim": "deploy requires approval.",
+      "claim_atom": {
+        "left": "deploy",
+        "rel": "REQUIRES",
+        "right": "approval",
+        "positive": true
+      },
+      "expected": "ENTAILED"
+    }
+  ]
+}
