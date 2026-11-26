@@ -1,0 +1,38 @@
+name: JANUS R84H38C semantic world graph
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h38c_semantic_world_graph.py'
+      - 'autonomy/federation/R84H38C_FROZEN_EXAM.json'
+      - '.github/workflows/r84h38c-world-graph.yml'
+permissions:
+  contents: read
+concurrency:
+  group: r84h38c-bounded-research
+  cancel-in-progress: false
+jobs:
+  graph-exam:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h38c-world-graph-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H38C_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - run: |
+          test "$(git hash-object autonomy/federation/R84H38C_FROZEN_EXAM.json)" = 585a43d61afa2a40443a9702adefcec060f9b463
+          test "$(git hash-object autonomy/federation/verified_capabilities.py)" = 1b131dc27b0fb5524761473e3b27c6c4db51e759
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python3)" autonomy/federation/r84h38c_semantic_world_graph.py autonomy/federation/R84H38C_FROZEN_EXAM.json "$RUNNER_TEMP/h38c"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38c-results
+          path: ${{ runner.temp }}/h38c
+          if-no-files-found: error
+          retention-days: 60
