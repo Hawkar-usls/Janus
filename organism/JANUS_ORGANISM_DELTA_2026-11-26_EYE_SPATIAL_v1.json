@@ -30,7 +30,6 @@
         "memory",
         "orchestrator",
         "left_context",
-        "right_association",
         "hypothesis_metabolism",
         "anomaly_lab"
       ],
@@ -42,5 +41,17 @@
   ],
   "runtime_status": "READ_ONLY_GATEWAY_EXAM_PENDING",
   "no_new_repository_member": true,
-  "production_promotion": false
+  "production_promotion": false,
+  "mediation": {
+    "contract": "Hawkar-usls/janus-meta-registry:EYE/integration/EYE-HRAIN-INAIHR-INTERHEMISPHERE-CONTRACT-v1.0.json",
+    "route": [
+      "EYE_SPATIAL",
+      "left_context",
+      "right_association",
+      "left_context",
+      "EYE_SPATIAL"
+    ],
+    "direct_eye_to_right_association": "REJECT",
+    "runtime_status": "NOT_TESTED_FOR_SPATIAL_PACKETS"
+  }
 }
