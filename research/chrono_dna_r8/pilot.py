@@ -134,7 +134,7 @@ def receive(bundle_path,out,source_commit):
     print(json.dumps(ack,sort_keys=True))
 def check(bundle_path,ack_path,source_commit):
     b=read(bundle_path);a=read(ack_path);r=verify(a["receipt"],a["public_key"])
-    require(r["capability"]==CAP and r["type"]=="ACK" and r["sender"]=="B" and r["recipient"]=="A" and r["source_commit"]==source_commit and r["bundle_sha256"]==sha(b) and r["version"]==12 and r["accepted"]==12 and r["head"]==b["head"] and r["graph"]==b["final"] and r["audited_distances"]==12*N*N and len(r["tests"])==9 and all(r["tests"].values()) and r["action_authority"] is False,"ACK_BINDING")
+    require(r["capability"]==CAP and r["type"]=="ACK" and r["sender"]=="B" and r["recipient"]=="A" and r["source_commit"]==source_commit and r["bundle_sha256"]==sha(b) and r["version"]==12 and r["accepted"]==12 and r["head"]==b["head"] and r["graph"]==b["final"] and r["audited_distances"]==12*N*N and set(r["tests"])=={"offline_restart","missing_versions","replay","conflicting_version","invalid_mid_batch","transaction_rollback","wrong_parent","tampered","converged_after_restart","persistent_replay"} and all(r["tests"].values()) and r["action_authority"] is False,"ACK_BINDING")
     print(json.dumps({"status":"ACK_VERIFIED","graph":r["graph"],"source_commit":source_commit,"ack_sha256":sha(a)}))
 if __name__=="__main__":
     mode=sys.argv[1]

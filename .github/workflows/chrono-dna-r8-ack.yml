@@ -1,0 +1,28 @@
+name: CHRONO-DNA R8 node A ACK
+on:
+  push:
+    branches: [research/chrono-dna-r8-node-a]
+    paths:
+      - '.github/workflows/chrono-dna-r8-ack.yml'
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Fetch immutable B receipt and verify acknowledgement
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/research/chrono-dna-r8-node-a
+          tmp=$(mktemp -d)
+          trap 'rm -rf "$tmp"' EXIT
+          git init -q "$tmp"
+          git -C "$tmp" fetch --depth=1 https://github.com/Hawkar-usls/janus-meta-registry.git 6ad914cfad21edd9b792b86231fede68f6e0d835
+          test "$(git -C "$tmp" rev-parse FETCH_HEAD)" = 6ad914cfad21edd9b792b86231fede68f6e0d835
+          test "$(git -C "$tmp" rev-parse FETCH_HEAD:research/chrono_dna_r8/inbox/ack.json)" = 745c81a955218b6367f0305603266d3040b58f5a
+          git -C "$tmp" show FETCH_HEAD:research/chrono_dna_r8/inbox/ack.json > "$tmp/ack.json"
+          test "$(git hash-object research/chrono_dna_r8/outbox/bundle.json)" = dc086e14ff2db2b9a800b11301483cfefc7db1a4
+          python research/chrono_dna_r8/pilot.py check research/chrono_dna_r8/outbox/bundle.json "$tmp/ack.json" 479cebfe4c6bdb4b6bbb58ec1ab9b2eec538df41
