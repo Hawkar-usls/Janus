@@ -1,0 +1,174 @@
+name: JANUS H38N5 three-cohort preflight
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/R84H38N5_ROLE_COHORTS.json'
+      - '.github/workflows/r84h38n5-role-cohort-preflight.yml'
+permissions:
+  contents: read
+  actions: read
+jobs:
+  preflight:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/R84H38N5_ROLE_COHORTS.json
+            autonomy/federation/R84H38N_FROZEN_EXAM.json
+            autonomy/federation/R84H38N4_FROZEN_EXAM.json
+            autonomy/federation/r84h38n5_autonomous_learning_loop.py
+            autonomy/federation/r84h38n4_experience_crystallization.py
+            autonomy/federation/r84h38n3_adaptive_repair.py
+            autonomy/federation/r84h38n2_neural_symbiosis.py
+            autonomy/federation/r84h38n1_semantic_recovery.py
+            autonomy/federation/r84h38n_semantic_correction.py
+            autonomy/federation/r84h38m_knowledge_diversification.py
+            autonomy/federation/r84h38l_knowledge_crystallization.py
+            autonomy/federation/r84h38j_fractal_self_learning.py
+            autonomy/federation/r84h38i_fractal_reconstruction.py
+            autonomy/federation/r84h38h_semantic_kaleidoscope.py
+            autonomy/federation/r84h38g_semantic_mosaic.py
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H38N4A_FROZEN_EXAM.json
+            autonomy/federation/R84H38C_FROZEN_EXAM.json
+            autonomy/federation/R84H38D_FROZEN_EXAM.json
+            autonomy/federation/R84H38E_FROZEN_EXAM.json
+            autonomy/federation/R84H38F_FROZEN_EXAM.json
+            autonomy/federation/R84H38G_FROZEN_EXAM.json
+            autonomy/federation/R84H38H_FROZEN_EXAM.json
+            autonomy/federation/R84H38I_FROZEN_EXAM.json
+            autonomy/federation/R84H38J_FROZEN_EXAM.json
+            autonomy/federation/R84H38L_FROZEN_EXAM.json
+            autonomy/federation/R84H38N_FROZEN_EXAM.json
+            autonomy/federation/R84H38N1_FROZEN_EXAM.json
+            autonomy/federation/R84H38N2_FROZEN_EXAM.json
+            autonomy/federation/R84H38N3_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38h-trained
+          run-id: 45836412459
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38h
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38i-trained
+          run-id: 45837224743
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38i
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38l-trained
+          run-id: 45840549500
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/lparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n-trained
+          run-id: 45843328260
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/nparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n1-factor
+          run-id: 45844137619
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/factor
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38g-trained
+          run-id: 45834333513
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38g
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38e-trained
+          run-id: 45829342920
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38e
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n4a-preflight
+          run-id: 45848556759
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/pre
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38n4a-repair
+          run-id: 45848556759
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/repair
+      - run: |
+          test "$(git hash-object autonomy/federation/R84H38N5_ROLE_COHORTS.json)" = 3eed0a749bf06efb1992c1802e485d8c2150c115
+          python - <<'PY'
+          import sys,json,hashlib,os
+          from pathlib import Path
+          sys.path.insert(0,str(Path("autonomy/federation").resolve()))
+          import r84h38e_semantic_invariance as e
+          def digest(x):return hashlib.sha256(json.dumps(x,sort_keys=True,separators=(",",":"),allow_nan=False).encode()).hexdigest()
+          root=Path("autonomy/federation")
+          tmp=Path(os.environ["RUNNER_TEMP"])
+          refs=set(json.loads((tmp/"nparent/training_refs.json").read_text()))
+          eb=json.loads((tmp/"h38e/bank.json").read_text());refs.update(z["text"] for z in eb["train"]+eb["dev"])
+          for p in sorted(root.glob("R84H38*_FROZEN_EXAM.json")):
+              ex=json.loads(p.read_text())
+              for z in ex.get("rows",[]):
+                  n=e.norm(z["text"],z["names"])
+                  if n:refs.add(n[0])
+              for z in ex.get("graphs",[]):
+                  for t in z["sentences"]+[z["claim"]]:
+                      n=e.norm(t,z["names"])
+                      if n:refs.add(n[0])
+              for z in ex.get("cases",[]):
+                  if "atoms" not in z:continue
+                  names=sorted({a[k] for a in z["atoms"]+[z["claim_atom"]] if a for k in ("left","right")})
+                  for t in z["sentences"]+[z["claim"]]:
+                      n=e.norm(t,names)
+                      if n:refs.add(n[0])
+          src=json.loads((root/"R84H38N5_ROLE_COHORTS.json").read_text())
+          seen=set();batches=[];overlap=[]
+          for b in src["cohorts"]:
+              for r in b["train"]+b["exam"]:
+                  t=r["text"]
+                  if t in refs or t in seen:overlap.append(t)
+                  seen.add(t)
+              assert len(b["train"])==18 and len(b["exam"])==9
+              assert set(r["y"] for r in b["train"])==set(r["y"] for r in b["exam"])==set(range(8,17))
+              batches.append({"id":b["id"],"bank_sha256":digest(b["train"]),"exam_sha256":digest(b["exam"])})
+          rec={"schema":"h38n5.cohort_preflight.v1","source_sha256":digest(src),"reference_count":len(refs),"forbidden_normalized_sha256":sorted(hashlib.sha256(t.encode()).hexdigest() for t in refs),"overlap":overlap,"batches":batches,"cohorts":3,"train_rows":54,"exam_rows":27,"production":False}
+          (tmp/"cohort_preflight.json").write_text(json.dumps(rec,sort_keys=True)+"\n")
+          print("H38N5_COHORT_PREFLIGHT",json.dumps(rec,sort_keys=True))
+          assert not overlap
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38n5-cohort-preflight
+          path: ${{ runner.temp }}/cohort_preflight.json
+          if-no-files-found: error
+          retention-days: 60
