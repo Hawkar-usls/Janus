@@ -1,0 +1,766 @@
+{
+  "schema": "h38n4.exam.v1",
+  "scope": "Same-author frozen exam; separate preflight mandatory",
+  "rows": [
+    {
+      "text": "cobalt0 took place chronologically in advance of amber0",
+      "names": [
+        "cobalt0",
+        "amber0"
+      ],
+      "gold": {
+        "left": "cobalt0",
+        "right": "amber0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "cobalt0 was recorded at an earlier moment than amber0",
+      "names": [
+        "cobalt0",
+        "amber0"
+      ],
+      "gold": {
+        "left": "cobalt0",
+        "right": "amber0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "amber0 took place chronologically subsequent to cobalt0",
+      "names": [
+        "cobalt0",
+        "amber0"
+      ],
+      "gold": {
+        "left": "cobalt0",
+        "right": "amber0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "amber0 was recorded at a later moment than cobalt0",
+      "names": [
+        "cobalt0",
+        "amber0"
+      ],
+      "gold": {
+        "left": "cobalt0",
+        "right": "amber0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "cobalt2 did not take place chronologically in advance of amber2",
+      "names": [
+        "cobalt2",
+        "amber2"
+      ],
+      "gold": {
+        "left": "cobalt2",
+        "right": "amber2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "cobalt2 was not recorded at an earlier moment than amber2",
+      "names": [
+        "cobalt2",
+        "amber2"
+      ],
+      "gold": {
+        "left": "cobalt2",
+        "right": "amber2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "amber2 did not take place chronologically subsequent to cobalt2",
+      "names": [
+        "cobalt2",
+        "amber2"
+      ],
+      "gold": {
+        "left": "cobalt2",
+        "right": "amber2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "amber2 was not recorded at a later moment than cobalt2",
+      "names": [
+        "cobalt2",
+        "amber2"
+      ],
+      "gold": {
+        "left": "cobalt2",
+        "right": "amber2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "cobalt4 was the initiating cause of amber4",
+      "names": [
+        "cobalt4",
+        "amber4"
+      ],
+      "gold": {
+        "left": "cobalt4",
+        "right": "amber4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "cobalt4 produced amber4 as a consequence",
+      "names": [
+        "cobalt4",
+        "amber4"
+      ],
+      "gold": {
+        "left": "cobalt4",
+        "right": "amber4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "amber4 was initiated as a consequence of cobalt4",
+      "names": [
+        "cobalt4",
+        "amber4"
+      ],
+      "gold": {
+        "left": "cobalt4",
+        "right": "amber4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "amber4 came about as an effect of cobalt4",
+      "names": [
+        "cobalt4",
+        "amber4"
+      ],
+      "gold": {
+        "left": "cobalt4",
+        "right": "amber4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "cobalt6 was not the initiating cause of amber6",
+      "names": [
+        "cobalt6",
+        "amber6"
+      ],
+      "gold": {
+        "left": "cobalt6",
+        "right": "amber6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "cobalt6 did not produce amber6 as a consequence",
+      "names": [
+        "cobalt6",
+        "amber6"
+      ],
+      "gold": {
+        "left": "cobalt6",
+        "right": "amber6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "amber6 was not initiated as a consequence of cobalt6",
+      "names": [
+        "cobalt6",
+        "amber6"
+      ],
+      "gold": {
+        "left": "cobalt6",
+        "right": "amber6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "amber6 did not come about as an effect of cobalt6",
+      "names": [
+        "cobalt6",
+        "amber6"
+      ],
+      "gold": {
+        "left": "cobalt6",
+        "right": "amber6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "cobalt8 depends upon the existence of amber8",
+      "names": [
+        "cobalt8",
+        "amber8"
+      ],
+      "gold": {
+        "left": "cobalt8",
+        "right": "amber8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "cobalt8 presupposes the presence of amber8",
+      "names": [
+        "cobalt8",
+        "amber8"
+      ],
+      "gold": {
+        "left": "cobalt8",
+        "right": "amber8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "amber8 is a necessary condition for the existence of cobalt8",
+      "names": [
+        "cobalt8",
+        "amber8"
+      ],
+      "gold": {
+        "left": "cobalt8",
+        "right": "amber8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "amber8 is a prerequisite to the occurrence of cobalt8",
+      "names": [
+        "cobalt8",
+        "amber8"
+      ],
+      "gold": {
+        "left": "cobalt8",
+        "right": "amber8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "cobalt10 does not depend upon the existence of amber10",
+      "names": [
+        "cobalt10",
+        "amber10"
+      ],
+      "gold": {
+        "left": "cobalt10",
+        "right": "amber10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "cobalt10 does not presuppose the presence of amber10",
+      "names": [
+        "cobalt10",
+        "amber10"
+      ],
+      "gold": {
+        "left": "cobalt10",
+        "right": "amber10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "amber10 is not a necessary condition for the existence of cobalt10",
+      "names": [
+        "cobalt10",
+        "amber10"
+      ],
+      "gold": {
+        "left": "cobalt10",
+        "right": "amber10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "amber10 is not a prerequisite to the occurrence of cobalt10",
+      "names": [
+        "cobalt10",
+        "amber10"
+      ],
+      "gold": {
+        "left": "cobalt10",
+        "right": "amber10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "cobalt12 prohibits the occurrence of amber12",
+      "names": [
+        "cobalt12",
+        "amber12"
+      ],
+      "gold": {
+        "left": "cobalt12",
+        "right": "amber12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "cobalt12 rules out the occurrence of amber12",
+      "names": [
+        "cobalt12",
+        "amber12"
+      ],
+      "gold": {
+        "left": "cobalt12",
+        "right": "amber12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "amber12 is prohibited from occurring by cobalt12",
+      "names": [
+        "cobalt12",
+        "amber12"
+      ],
+      "gold": {
+        "left": "cobalt12",
+        "right": "amber12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "amber12 is ruled out by the occurrence of cobalt12",
+      "names": [
+        "cobalt12",
+        "amber12"
+      ],
+      "gold": {
+        "left": "cobalt12",
+        "right": "amber12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "cobalt14 does not prohibit the occurrence of amber14",
+      "names": [
+        "cobalt14",
+        "amber14"
+      ],
+      "gold": {
+        "left": "cobalt14",
+        "right": "amber14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "cobalt14 does not rule out the occurrence of amber14",
+      "names": [
+        "cobalt14",
+        "amber14"
+      ],
+      "gold": {
+        "left": "cobalt14",
+        "right": "amber14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "amber14 is not prohibited from occurring by cobalt14",
+      "names": [
+        "cobalt14",
+        "amber14"
+      ],
+      "gold": {
+        "left": "cobalt14",
+        "right": "amber14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "amber14 is not ruled out by the occurrence of cobalt14",
+      "names": [
+        "cobalt14",
+        "amber14"
+      ],
+      "gold": {
+        "left": "cobalt14",
+        "right": "amber14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "birch0 might be initiated as a consequence of cedar0",
+      "names": [
+        "birch0",
+        "cedar0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch1 resembles the coloration found on cedar1",
+      "names": [
+        "birch1",
+        "cedar1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch2 was exhibited beside a painting of cedar2",
+      "names": [
+        "birch2",
+        "cedar2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch3 could produce cedar3 as a consequence",
+      "names": [
+        "birch3",
+        "cedar3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch4 has a thickness comparable to cedar4",
+      "names": [
+        "birch4",
+        "cedar4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch5 and cedar5 were numbered jointly",
+      "names": [
+        "birch5",
+        "cedar5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch6 stands near a photograph of cedar6",
+      "names": [
+        "birch6",
+        "cedar6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch7 possibly presupposes the presence of cedar7",
+      "names": [
+        "birch7",
+        "cedar7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch8 has an area comparable to the area of cedar8",
+      "names": [
+        "birch8",
+        "cedar8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch9 was photographed alongside a depiction of cedar9",
+      "names": [
+        "birch9",
+        "cedar9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch10 or cedar10 was registered",
+      "names": [
+        "birch10",
+        "cedar10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "birch11 shares a decorative border with cedar11",
+      "names": [
+        "birch11",
+        "cedar11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "zeta0",
+        "eta0",
+        "theta0"
+      ],
+      "sentences": [
+        "zeta0 took place chronologically in advance of eta0",
+        "eta0 took place chronologically in advance of theta0"
+      ],
+      "claim": "zeta0 took place chronologically in advance of theta0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "zeta0",
+        "eta0",
+        "theta0"
+      ],
+      "sentences": [
+        "zeta0 took place chronologically in advance of eta0"
+      ],
+      "claim": "zeta0 did not take place chronologically in advance of eta0",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "zeta0",
+        "eta0",
+        "theta0"
+      ],
+      "sentences": [
+        "zeta0 took place chronologically in advance of eta0",
+        "zeta0 did not take place chronologically in advance of eta0"
+      ],
+      "claim": "zeta0 took place chronologically in advance of eta0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "zeta1",
+        "eta1",
+        "theta1"
+      ],
+      "sentences": [
+        "zeta1 was the initiating cause of eta1",
+        "eta1 was the initiating cause of theta1"
+      ],
+      "claim": "zeta1 was the initiating cause of theta1",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "zeta1",
+        "eta1",
+        "theta1"
+      ],
+      "sentences": [
+        "zeta1 was the initiating cause of eta1"
+      ],
+      "claim": "zeta1 was not the initiating cause of eta1",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "zeta1",
+        "eta1",
+        "theta1"
+      ],
+      "sentences": [
+        "zeta1 was the initiating cause of eta1",
+        "zeta1 was not the initiating cause of eta1"
+      ],
+      "claim": "zeta1 was the initiating cause of eta1",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "zeta2",
+        "eta2",
+        "theta2"
+      ],
+      "sentences": [
+        "zeta2 depends upon the existence of eta2",
+        "eta2 depends upon the existence of theta2"
+      ],
+      "claim": "zeta2 depends upon the existence of theta2",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "zeta2",
+        "eta2",
+        "theta2"
+      ],
+      "sentences": [
+        "zeta2 depends upon the existence of eta2"
+      ],
+      "claim": "zeta2 does not depend upon the existence of eta2",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "zeta2",
+        "eta2",
+        "theta2"
+      ],
+      "sentences": [
+        "zeta2 depends upon the existence of eta2",
+        "zeta2 does not depend upon the existence of eta2"
+      ],
+      "claim": "zeta2 depends upon the existence of eta2",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "zeta3",
+        "eta3",
+        "theta3"
+      ],
+      "sentences": [
+        "zeta3 prohibits the occurrence of eta3",
+        "eta3 prohibits the occurrence of theta3"
+      ],
+      "claim": "zeta3 prohibits the occurrence of theta3",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "zeta3",
+        "eta3",
+        "theta3"
+      ],
+      "sentences": [
+        "zeta3 prohibits the occurrence of eta3"
+      ],
+      "claim": "zeta3 does not prohibit the occurrence of eta3",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "zeta3",
+        "eta3",
+        "theta3"
+      ],
+      "sentences": [
+        "zeta3 prohibits the occurrence of eta3",
+        "zeta3 does not prohibit the occurrence of eta3"
+      ],
+      "claim": "zeta3 prohibits the occurrence of eta3",
+      "expected": "HOLD_CONFLICT"
+    }
+  ]
+}
