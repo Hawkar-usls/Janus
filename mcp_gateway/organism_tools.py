@@ -231,6 +231,47 @@ def _parse_clipped_json(item: dict[str, Any], clip: Callable[[str], tuple[str, b
     return content, truncated
 
 
+# EYE spatial is a subtissue of the existing Genesis/EYE route, not a new
+# repository member or an execution capability.
+EYE_SPATIAL_REGISTRY = "Hawkar-usls/janus-meta-registry"
+EYE_SPATIAL_CAPABILITY_PATH = "data/JANUS-EYE-OPEN-PERCEPTION-CAPABILITY-v1.0.json"
+EYE_SPATIAL_CAPABILITY_REF = "716dd0fe2f53dcfc8423243e465d109a6fd6690c"
+EYE_SPATIAL_BINDING_PATH = "EYE/integration/EYE-PLA-GENESIS-SPATIAL-BINDING-v1.0.json"
+EYE_SPATIAL_BINDING_REF = "6b9825d6dcaddb066a463972e789d5d3aaae9ebe"
+EYE_SPATIAL_SCENE_PATH = "experiments/janus-eye/r1/2026-11-26-run-45833030382.json"
+EYE_SPATIAL_SCENE_REF = "777156992f0fd60da864c9c4a308291f548be262"
+
+def read_eye_scene(api: Any, scene_id: str = "KUSTO_ZERO_NODE") -> dict[str, Any]:
+    """Resolve a pinned, allowlisted scientific scene; no caller-controlled URLs or code."""
+    if scene_id != "KUSTO_ZERO_NODE":
+        raise ValueError("unknown EYE scene; only admitted public scene identifiers accepted")
+    def read(path, ref):
+        obj = api.get_file(EYE_SPATIAL_REGISTRY, path, ref)
+        raw = obj["content"]
+        if not isinstance(raw, str) or len(raw.encode("utf-8")) > 2_000_000:
+            raise ValueError("invalid EYE record size")
+        return json.loads(raw), {"repo":EYE_SPATIAL_REGISTRY,"path":path,"ref":ref,"sha":obj["sha"]}
+    cap, cap_ref = read(EYE_SPATIAL_CAPABILITY_PATH, EYE_SPATIAL_CAPABILITY_REF)
+    binding, bind_ref = read(EYE_SPATIAL_BINDING_PATH, EYE_SPATIAL_BINDING_REF)
+    record, source = read(EYE_SPATIAL_SCENE_PATH, EYE_SPATIAL_SCENE_REF)
+    if cap.get("schema") != "janus.eye.organ_capability.v1" or cap.get("organ_id") != "JANUS_EYE":
+        raise ValueError("EYE capability contract mismatch")
+    if cap.get("policy",{}).get("read_only_data") is not True or cap["policy"].get("production_promotion") is not False:
+        raise ValueError("EYE capability authority mismatch")
+    if binding.get("schema") != "janus.eye.spatial_binding.v1" or binding.get("authority_delta") != 0:
+        raise ValueError("EYE binding mismatch")
+    r = record["receipt"]
+    if record.get("run_id") != 45833030382 or r.get("schema") != "janus.eye.scene_receipt.v1" or r.get("scene_id") != scene_id:
+        raise ValueError("EYE receipt identity mismatch")
+    if r.get("authority") != "MODELLED" or record.get("production_promotion") is not False:
+        raise ValueError("EYE authority mismatch")
+    return {"schema":"janus.eye.organism_read.v1","scene_id":scene_id,"authority":"MODELLED",
+            "host_member":"simulation_habitat","capability":cap_ref,"binding":bind_ref,"source":source,
+            "frame":r["frame"],"units":r["units"],"nodes":r["nodes"],"coverage_fraction":r["coverage_fraction"],
+            "claim_ceiling":r["claim_ceiling"],"limitations":r["limitations"],
+            "authority_delta":0,"write_back":False,"production_promotion":False,
+            "boundary":"MODELLED_GEOMETRY != DIRECT_OBSERVATION; ROUTING != TRUTH"}
+
 def install_organism_tools(mcp: Any, api: Any, clip: Callable[[str], tuple[str, bool]], root_repo: str) -> None:
     """Register read-only tools for the typed JANUS federated organism, ecology and spiral execution model."""
 
@@ -271,6 +312,11 @@ def install_organism_tools(mcp: Any, api: Any, clip: Callable[[str], tuple[str, 
             },
             "boundary": "ORGANISM_MEMBERSHIP != AUTHORITY_INHERITANCE; SUBTISSUE_PARENT != AUTHORITY_INHERITANCE; SPIRAL_ASCENT != CLAIM_PROMOTION",
         }
+
+    @mcp.tool(name="janus.eye_scene")
+    def eye_scene(scene_id: str = "KUSTO_ZERO_NODE") -> dict[str, Any]:
+        """Read an admitted public EYE spatial receipt with provenance; never dispatch or write."""
+        return read_eye_scene(api, scene_id)
 
     @mcp.tool(name="janus.spiral_pass")
     def spiral_pass(
