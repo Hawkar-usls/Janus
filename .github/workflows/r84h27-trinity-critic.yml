@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   critic:
-    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h27-trinity-critic-20261126' && github.run_attempt == 1
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h27b-replay-audit-20261126' && github.run_attempt == 1
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     steps:

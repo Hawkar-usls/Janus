@@ -37,7 +37,22 @@ def replay(ctx,folder,h25feedback):
     refs={h18.clean(t) for t,_ in ctx.fit+ctx.dev+ctx.oldknown}|{h18.clean(t) for t in ctx.oldunknown}|{h18.clean(x["text"]) for x in prev}
     known=[x for x in ex["known"] if h18.clean(x[0]) not in refs];unknown=[x for x in ex["unknown"] if h18.clean(x) not in refs]
     actual,cost=ctx.observations(known,unknown,"H26_FRESH_EVAL")
-    ck(len(actual)==len(rows) and all(all(x[k]==y[k] for k in x) for x,y in zip(actual,rows)),"H26_REPLAY")
+    ck(len(actual)==len(rows),"H26_REPLAY_SIZE")
+    # Float scores can vary by a few ULPs between independent CPU runners.
+    # Every other field, including identities, labels, predictions and routes,
+    # remains exact. Log the actual differences before accepting tolerance.
+    mismatches=[];max_delta=0.;float_diffs=0
+    for x,y in zip(actual,rows):
+        for k in x:
+            if k=="scores":
+                if set(x[k])!=set(y[k]):mismatches.append({"id":x["id"],"field":"score_keys"});continue
+                for sk,v in x[k].items():
+                    d=abs(v-y[k][sk]);max_delta=max(max_delta,d);float_diffs+=int(d!=0.)
+                    if not d<=1e-10:mismatches.append({"id":x["id"],"field":"scores."+sk,"actual":v,"expected":y[k][sk]})
+            elif x[k]!=y[k]:mismatches.append({"id":x["id"],"field":k,"actual":x[k],"expected":y[k]})
+        if h19.classify(x["scores"],ctx.fixed)!=h19.classify(y["scores"],ctx.fixed):mismatches.append({"id":x["id"],"field":"familiarity_class"})
+    log("R84H27_REPLAY_AUDIT",{"rows":len(rows),"float_diffs":float_diffs,"max_abs_score_delta":max_delta,"mismatch_n":len(mismatches),"mismatches":mismatches[:20],"tolerance":1e-10})
+    ck(not mismatches,"H26_REPLAY_AUDITED")
     return rows,prev,cost
 def verdict(row,critic,enabled=None):
     v=critic.inspect(row["text"])
