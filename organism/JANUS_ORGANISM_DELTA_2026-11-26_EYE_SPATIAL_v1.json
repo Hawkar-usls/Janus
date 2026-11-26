@@ -1,0 +1,46 @@
+{
+  "schema": "janus.organism.capability_delta.v1",
+  "delta_id": "JANUS_ORGANISM_DELTA_2026-11-26_EYE_SPATIAL_v1",
+  "status": "RESEARCH_PROPOSED",
+  "applies_to": "organism/JANUS_ORGANISM_v1.json",
+  "observed_manifest_blob": "24c4876e93913f231cd544797defb1c05f89df04",
+  "host_member": "simulation_habitat",
+  "subcapability": "eye_spatial",
+  "existing_eye_root": "Hawkar-usls/janus-meta-registry:EYE/EYE-ROOT-CONSTITUTION-v1.0.json",
+  "binding": "Hawkar-usls/janus-meta-registry:EYE/integration/EYE-PLA-GENESIS-SPATIAL-BINDING-v1.0.json",
+  "gateway_tool": "janus.eye_scene",
+  "authority": "DESCRIPTIVE_GEOMETRY_ONLY",
+  "authority_delta": 0,
+  "proposed_flows": [
+    {
+      "from": "observatory",
+      "to": [
+        "simulation_habitat"
+      ],
+      "payload": [
+        "HEIGHTFIELD_SCENE"
+      ],
+      "authority_delta": 0
+    },
+    {
+      "from": "simulation_habitat",
+      "to": [
+        "gateway",
+        "guardian_cortex",
+        "memory",
+        "orchestrator",
+        "left_context",
+        "right_association",
+        "hypothesis_metabolism",
+        "anomaly_lab"
+      ],
+      "payload": [
+        "SPATIAL_SCENE_RECEIPT"
+      ],
+      "authority_delta": 0
+    }
+  ],
+  "runtime_status": "READ_ONLY_GATEWAY_EXAM_PENDING",
+  "no_new_repository_member": true,
+  "production_promotion": false
+}
