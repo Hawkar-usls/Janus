@@ -1,0 +1,773 @@
+{
+  "schema": "h38h.exam.v1",
+  "scope": "Same-author new normalized strings, supplied event IDs, matched training bank, held-out joint labels",
+  "rows": [
+    {
+      "text": "raven0 was recorded prior to sable0",
+      "names": [
+        "raven0",
+        "sable0"
+      ],
+      "gold": {
+        "left": "raven0",
+        "right": "sable0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "raven0 terminated before sable0",
+      "names": [
+        "raven0",
+        "sable0"
+      ],
+      "gold": {
+        "left": "raven0",
+        "right": "sable0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "sable0 was recorded subsequent to raven0",
+      "names": [
+        "raven0",
+        "sable0"
+      ],
+      "gold": {
+        "left": "raven0",
+        "right": "sable0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "sable0 terminated after raven0",
+      "names": [
+        "raven0",
+        "sable0"
+      ],
+      "gold": {
+        "left": "raven0",
+        "right": "sable0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "raven2 was never recorded prior to sable2",
+      "names": [
+        "raven2",
+        "sable2"
+      ],
+      "gold": {
+        "left": "raven2",
+        "right": "sable2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "raven2 did not terminate before sable2",
+      "names": [
+        "raven2",
+        "sable2"
+      ],
+      "gold": {
+        "left": "raven2",
+        "right": "sable2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "sable2 was never recorded subsequent to raven2",
+      "names": [
+        "raven2",
+        "sable2"
+      ],
+      "gold": {
+        "left": "raven2",
+        "right": "sable2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "sable2 did not terminate after raven2",
+      "names": [
+        "raven2",
+        "sable2"
+      ],
+      "gold": {
+        "left": "raven2",
+        "right": "sable2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "raven4 immediately provoked sable4",
+      "names": [
+        "raven4",
+        "sable4"
+      ],
+      "gold": {
+        "left": "raven4",
+        "right": "sable4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "raven4 directly activated the event sable4",
+      "names": [
+        "raven4",
+        "sable4"
+      ],
+      "gold": {
+        "left": "raven4",
+        "right": "sable4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "sable4 was immediately provoked by raven4",
+      "names": [
+        "raven4",
+        "sable4"
+      ],
+      "gold": {
+        "left": "raven4",
+        "right": "sable4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "sable4 was directly activated by the event raven4",
+      "names": [
+        "raven4",
+        "sable4"
+      ],
+      "gold": {
+        "left": "raven4",
+        "right": "sable4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "raven6 never provoked sable6",
+      "names": [
+        "raven6",
+        "sable6"
+      ],
+      "gold": {
+        "left": "raven6",
+        "right": "sable6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "raven6 did not activate the event sable6",
+      "names": [
+        "raven6",
+        "sable6"
+      ],
+      "gold": {
+        "left": "raven6",
+        "right": "sable6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "sable6 was never provoked by raven6",
+      "names": [
+        "raven6",
+        "sable6"
+      ],
+      "gold": {
+        "left": "raven6",
+        "right": "sable6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "sable6 was not activated by the event raven6",
+      "names": [
+        "raven6",
+        "sable6"
+      ],
+      "gold": {
+        "left": "raven6",
+        "right": "sable6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "raven8 explicitly presupposes sable8",
+      "names": [
+        "raven8",
+        "sable8"
+      ],
+      "gold": {
+        "left": "raven8",
+        "right": "sable8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "raven8 is strictly contingent upon sable8",
+      "names": [
+        "raven8",
+        "sable8"
+      ],
+      "gold": {
+        "left": "raven8",
+        "right": "sable8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "sable8 constitutes a precondition for raven8",
+      "names": [
+        "raven8",
+        "sable8"
+      ],
+      "gold": {
+        "left": "raven8",
+        "right": "sable8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "sable8 is strictly needed by raven8",
+      "names": [
+        "raven8",
+        "sable8"
+      ],
+      "gold": {
+        "left": "raven8",
+        "right": "sable8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "raven10 never explicitly presupposes sable10",
+      "names": [
+        "raven10",
+        "sable10"
+      ],
+      "gold": {
+        "left": "raven10",
+        "right": "sable10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "raven10 is not strictly contingent upon sable10",
+      "names": [
+        "raven10",
+        "sable10"
+      ],
+      "gold": {
+        "left": "raven10",
+        "right": "sable10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "sable10 does not constitute a precondition for raven10",
+      "names": [
+        "raven10",
+        "sable10"
+      ],
+      "gold": {
+        "left": "raven10",
+        "right": "sable10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "sable10 is not strictly needed by raven10",
+      "names": [
+        "raven10",
+        "sable10"
+      ],
+      "gold": {
+        "left": "raven10",
+        "right": "sable10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "raven12 immediately precludes sable12",
+      "names": [
+        "raven12",
+        "sable12"
+      ],
+      "gold": {
+        "left": "raven12",
+        "right": "sable12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "raven12 decisively bars sable12",
+      "names": [
+        "raven12",
+        "sable12"
+      ],
+      "gold": {
+        "left": "raven12",
+        "right": "sable12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "sable12 is immediately precluded by raven12",
+      "names": [
+        "raven12",
+        "sable12"
+      ],
+      "gold": {
+        "left": "raven12",
+        "right": "sable12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "sable12 is decisively barred by raven12",
+      "names": [
+        "raven12",
+        "sable12"
+      ],
+      "gold": {
+        "left": "raven12",
+        "right": "sable12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "raven14 never precludes sable14",
+      "names": [
+        "raven14",
+        "sable14"
+      ],
+      "gold": {
+        "left": "raven14",
+        "right": "sable14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "raven14 does not decisively bar sable14",
+      "names": [
+        "raven14",
+        "sable14"
+      ],
+      "gold": {
+        "left": "raven14",
+        "right": "sable14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "sable14 is never precluded by raven14",
+      "names": [
+        "raven14",
+        "sable14"
+      ],
+      "gold": {
+        "left": "raven14",
+        "right": "sable14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "sable14 is not decisively barred by raven14",
+      "names": [
+        "raven14",
+        "sable14"
+      ],
+      "gold": {
+        "left": "raven14",
+        "right": "sable14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "cedar0 might provoke ash0",
+      "names": [
+        "cedar0",
+        "ash0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar1 has a comparable hue to ash1",
+      "names": [
+        "cedar1",
+        "ash1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar2 was photographed near ash2",
+      "names": [
+        "cedar2",
+        "ash2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar3 may preclude ash3",
+      "names": [
+        "cedar3",
+        "ash3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar4 has a similar width to ash4",
+      "names": [
+        "cedar4",
+        "ash4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar5 and ash5 were registered",
+      "names": [
+        "cedar5",
+        "ash5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar6 was catalogued alongside ash6",
+      "names": [
+        "cedar6",
+        "ash6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar7 possibly presupposes ash7",
+      "names": [
+        "cedar7",
+        "ash7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar8 has an identical label to ash8",
+      "names": [
+        "cedar8",
+        "ash8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar9 is drawn beside ash9",
+      "names": [
+        "cedar9",
+        "ash9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar10 or ash10 was recorded",
+      "names": [
+        "cedar10",
+        "ash10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "cedar11 is nearly the size of ash11",
+      "names": [
+        "cedar11",
+        "ash11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "orba0",
+        "orbb0",
+        "orbc0"
+      ],
+      "sentences": [
+        "orba0 was recorded prior to orbb0",
+        "orbc0 was recorded subsequent to orbb0"
+      ],
+      "claim": "orba0 terminated before orbc0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "orba0",
+        "orbb0",
+        "orbc0"
+      ],
+      "sentences": [
+        "orba0 was recorded prior to orbb0",
+        "orbc0 was recorded subsequent to orbb0"
+      ],
+      "claim": "orba0 immediately provoked orbc0",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "orba0",
+        "orbb0",
+        "orbc0"
+      ],
+      "sentences": [
+        "orba0 was recorded prior to orbb0",
+        "orbc0 was recorded subsequent to orbb0",
+        "orbc0 terminated before orba0"
+      ],
+      "claim": "orba0 terminated before orbc0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "orba0",
+        "orbb0",
+        "orbc0"
+      ],
+      "sentences": [
+        "orba0 was recorded prior to orbb0",
+        "orbc0 was recorded subsequent to orbb0"
+      ],
+      "claim": "orbc0 did not terminate before orba0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "orba1",
+        "orbb1",
+        "orbc1"
+      ],
+      "sentences": [
+        "orba1 was recorded prior to orbb1",
+        "orbc1 was recorded subsequent to orbb1"
+      ],
+      "claim": "orba1 terminated before orbc1",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "orba1",
+        "orbb1",
+        "orbc1"
+      ],
+      "sentences": [
+        "orba1 was recorded prior to orbb1",
+        "orbc1 was recorded subsequent to orbb1"
+      ],
+      "claim": "orba1 immediately provoked orbc1",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "orba1",
+        "orbb1",
+        "orbc1"
+      ],
+      "sentences": [
+        "orba1 was recorded prior to orbb1",
+        "orbc1 was recorded subsequent to orbb1",
+        "orbc1 terminated before orba1"
+      ],
+      "claim": "orba1 terminated before orbc1",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "orba1",
+        "orbb1",
+        "orbc1"
+      ],
+      "sentences": [
+        "orba1 was recorded prior to orbb1",
+        "orbc1 was recorded subsequent to orbb1"
+      ],
+      "claim": "orbc1 did not terminate before orba1",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "orba2",
+        "orbb2",
+        "orbc2"
+      ],
+      "sentences": [
+        "orba2 was recorded prior to orbb2",
+        "orbc2 was recorded subsequent to orbb2"
+      ],
+      "claim": "orba2 terminated before orbc2",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "orba2",
+        "orbb2",
+        "orbc2"
+      ],
+      "sentences": [
+        "orba2 was recorded prior to orbb2",
+        "orbc2 was recorded subsequent to orbb2"
+      ],
+      "claim": "orba2 immediately provoked orbc2",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "orba2",
+        "orbb2",
+        "orbc2"
+      ],
+      "sentences": [
+        "orba2 was recorded prior to orbb2",
+        "orbc2 was recorded subsequent to orbb2",
+        "orbc2 terminated before orba2"
+      ],
+      "claim": "orba2 terminated before orbc2",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "orba2",
+        "orbb2",
+        "orbc2"
+      ],
+      "sentences": [
+        "orba2 was recorded prior to orbb2",
+        "orbc2 was recorded subsequent to orbb2"
+      ],
+      "claim": "orbc2 did not terminate before orba2",
+      "expected": "ENTAILED"
+    }
+  ]
+}

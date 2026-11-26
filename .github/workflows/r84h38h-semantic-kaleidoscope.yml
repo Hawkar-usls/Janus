@@ -1,0 +1,159 @@
+name: JANUS R84H38H fractal semantic kaleidoscope
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h38h_semantic_kaleidoscope.py'
+      - 'autonomy/federation/R84H38H_FROZEN_EXAM.json'
+      - '.github/workflows/r84h38h-semantic-kaleidoscope.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h38h-bounded-research
+  cancel-in-progress: false
+jobs:
+  train:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h38h-semantic-kaleidoscope-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38h_semantic_kaleidoscope.py
+            autonomy/federation/r84h38g_semantic_mosaic.py
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H38G_TRAIN_BANK.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: b4be137c4f5c0d039154fd09d6ffff33d72b478c
+          path: registry
+          persist-credentials: false
+          sparse-checkout: |
+            data/JANUS-DEEP-ANALYSIS-5D-SPIRAL-ORIGIN-PRIME-ORACLE-PROTOCOL-2026-08-21-v2.1.json
+            data/JANUS-JSON-FORWARD-REVERSE-MIRROR-PROTOCOL-2026-08-21-v1.0.json
+            data/JANUS-DEEP-ANALYSIS-5D-RECURSIVE-TRANCEPTION-HRAIN-INAIHR-PROTOCOL-2026-08-21-v2.0.json
+            data/JANUS-P-VS-NP-R5-E9-THREE-TRANSLATE-TILING-NORMAL-FORM-2026-09-24-v1.0.json
+            data/JANUS-WEDJAT-FULL-EYE-COMPOSITION-CONTROL-RESULT-2026-08-15-v0.6.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Cosmos
+          ref: 28d2937f47c4c6f48c8ea2d712145ea0f7c06199
+          path: cosmos
+          persist-credentials: false
+          sparse-checkout: |
+            research/seti/retina_5d_mosaic_protocol.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+      - run: |
+          test ! -e autonomy/federation/R84H38H_FROZEN_EXAM.json
+          test "$(git hash-object autonomy/federation/R84H38G_TRAIN_BANK.json)" = f33ef51c516a0b5f39092bfe2d3b31b818ef2e25
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h38h_semantic_kaleidoscope.py train autonomy/federation/R84H38G_TRAIN_BANK.json registry cosmos "$RUNNER_TEMP/trained"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38h-trained
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38h_semantic_kaleidoscope.py
+            autonomy/federation/r84h38g_semantic_mosaic.py
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H38H_FROZEN_EXAM.json
+            autonomy/federation/R84H38C_FROZEN_EXAM.json
+            autonomy/federation/R84H38D_FROZEN_EXAM.json
+            autonomy/federation/R84H38E_FROZEN_EXAM.json
+            autonomy/federation/R84H38F_FROZEN_EXAM.json
+            autonomy/federation/R84H38G_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-meta-registry
+          ref: b4be137c4f5c0d039154fd09d6ffff33d72b478c
+          path: registry
+          persist-credentials: false
+          sparse-checkout: |
+            data/JANUS-DEEP-ANALYSIS-5D-SPIRAL-ORIGIN-PRIME-ORACLE-PROTOCOL-2026-08-21-v2.1.json
+            data/JANUS-JSON-FORWARD-REVERSE-MIRROR-PROTOCOL-2026-08-21-v1.0.json
+            data/JANUS-DEEP-ANALYSIS-5D-RECURSIVE-TRANCEPTION-HRAIN-INAIHR-PROTOCOL-2026-08-21-v2.0.json
+            data/JANUS-P-VS-NP-R5-E9-THREE-TRANSLATE-TILING-NORMAL-FORM-2026-09-24-v1.0.json
+            data/JANUS-WEDJAT-FULL-EYE-COMPOSITION-CONTROL-RESULT-2026-08-15-v0.6.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Cosmos
+          ref: 28d2937f47c4c6f48c8ea2d712145ea0f7c06199
+          path: cosmos
+          persist-credentials: false
+          sparse-checkout: |
+            research/seti/retina_5d_mosaic_protocol.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38h-trained
+          path: ${{ runner.temp }}/trained
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38g-trained
+          run-id: 45834333513
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38g
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38e-trained
+          run-id: 45829342920
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38e
+      - run: |
+          test "$(git hash-object autonomy/federation/R84H38H_FROZEN_EXAM.json)" = 5c448fe613ff9ea588d7fe931964e79e5f07dd9c
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h38h_semantic_kaleidoscope.py evaluate "$RUNNER_TEMP/trained" "$RUNNER_TEMP/h38e" "$RUNNER_TEMP/h38g" demi registry cosmos autonomy/federation/R84H38H_FROZEN_EXAM.json autonomy/federation/R84H38C_FROZEN_EXAM.json autonomy/federation/R84H38D_FROZEN_EXAM.json autonomy/federation/R84H38E_FROZEN_EXAM.json autonomy/federation/R84H38F_FROZEN_EXAM.json autonomy/federation/R84H38G_FROZEN_EXAM.json "$RUNNER_TEMP/results"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38h-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 60
