@@ -1,0 +1,766 @@
+{
+  "schema": "h38n.exam.v1",
+  "scope": "Same-author new semantic clauses and graph cases. Disjoint normalized strings; no external custodian.",
+  "rows": [
+    {
+      "text": "opal0 attained completion before the onset of jade0",
+      "names": [
+        "opal0",
+        "jade0"
+      ],
+      "gold": {
+        "left": "opal0",
+        "right": "jade0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "opal0 reached its end earlier than the onset of jade0",
+      "names": [
+        "opal0",
+        "jade0"
+      ],
+      "gold": {
+        "left": "opal0",
+        "right": "jade0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "jade0 attained completion after the onset of opal0",
+      "names": [
+        "opal0",
+        "jade0"
+      ],
+      "gold": {
+        "left": "opal0",
+        "right": "jade0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "jade0 reached its end later than the onset of opal0",
+      "names": [
+        "opal0",
+        "jade0"
+      ],
+      "gold": {
+        "left": "opal0",
+        "right": "jade0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "opal2 did not attain completion before the onset of jade2",
+      "names": [
+        "opal2",
+        "jade2"
+      ],
+      "gold": {
+        "left": "opal2",
+        "right": "jade2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "opal2 did not reach its end earlier than the onset of jade2",
+      "names": [
+        "opal2",
+        "jade2"
+      ],
+      "gold": {
+        "left": "opal2",
+        "right": "jade2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "jade2 did not attain completion after the onset of opal2",
+      "names": [
+        "opal2",
+        "jade2"
+      ],
+      "gold": {
+        "left": "opal2",
+        "right": "jade2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "jade2 did not reach its end later than the onset of opal2",
+      "names": [
+        "opal2",
+        "jade2"
+      ],
+      "gold": {
+        "left": "opal2",
+        "right": "jade2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "opal4 produced the occurrence of jade4",
+      "names": [
+        "opal4",
+        "jade4"
+      ],
+      "gold": {
+        "left": "opal4",
+        "right": "jade4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "opal4 was the cause of jade4",
+      "names": [
+        "opal4",
+        "jade4"
+      ],
+      "gold": {
+        "left": "opal4",
+        "right": "jade4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "jade4 resulted from opal4",
+      "names": [
+        "opal4",
+        "jade4"
+      ],
+      "gold": {
+        "left": "opal4",
+        "right": "jade4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "jade4 was the consequence of opal4",
+      "names": [
+        "opal4",
+        "jade4"
+      ],
+      "gold": {
+        "left": "opal4",
+        "right": "jade4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "opal6 did not produce the occurrence of jade6",
+      "names": [
+        "opal6",
+        "jade6"
+      ],
+      "gold": {
+        "left": "opal6",
+        "right": "jade6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "opal6 was not the cause of jade6",
+      "names": [
+        "opal6",
+        "jade6"
+      ],
+      "gold": {
+        "left": "opal6",
+        "right": "jade6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "jade6 did not result from opal6",
+      "names": [
+        "opal6",
+        "jade6"
+      ],
+      "gold": {
+        "left": "opal6",
+        "right": "jade6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "jade6 was not the consequence of opal6",
+      "names": [
+        "opal6",
+        "jade6"
+      ],
+      "gold": {
+        "left": "opal6",
+        "right": "jade6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "opal8 demands the presence of jade8",
+      "names": [
+        "opal8",
+        "jade8"
+      ],
+      "gold": {
+        "left": "opal8",
+        "right": "jade8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "opal8 needs the occurrence of jade8 as a prerequisite",
+      "names": [
+        "opal8",
+        "jade8"
+      ],
+      "gold": {
+        "left": "opal8",
+        "right": "jade8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "jade8 is indispensable for the occurrence of opal8",
+      "names": [
+        "opal8",
+        "jade8"
+      ],
+      "gold": {
+        "left": "opal8",
+        "right": "jade8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "jade8 is a prerequisite of the occurrence of opal8",
+      "names": [
+        "opal8",
+        "jade8"
+      ],
+      "gold": {
+        "left": "opal8",
+        "right": "jade8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "opal10 does not demand the presence of jade10",
+      "names": [
+        "opal10",
+        "jade10"
+      ],
+      "gold": {
+        "left": "opal10",
+        "right": "jade10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "opal10 does not need the occurrence of jade10 as a prerequisite",
+      "names": [
+        "opal10",
+        "jade10"
+      ],
+      "gold": {
+        "left": "opal10",
+        "right": "jade10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "jade10 is not indispensable for the occurrence of opal10",
+      "names": [
+        "opal10",
+        "jade10"
+      ],
+      "gold": {
+        "left": "opal10",
+        "right": "jade10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "jade10 is not a prerequisite of the occurrence of opal10",
+      "names": [
+        "opal10",
+        "jade10"
+      ],
+      "gold": {
+        "left": "opal10",
+        "right": "jade10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "opal12 excludes the occurrence of jade12",
+      "names": [
+        "opal12",
+        "jade12"
+      ],
+      "gold": {
+        "left": "opal12",
+        "right": "jade12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "opal12 renders the occurrence of jade12 impossible",
+      "names": [
+        "opal12",
+        "jade12"
+      ],
+      "gold": {
+        "left": "opal12",
+        "right": "jade12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "jade12 is excluded by the occurrence of opal12",
+      "names": [
+        "opal12",
+        "jade12"
+      ],
+      "gold": {
+        "left": "opal12",
+        "right": "jade12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "jade12 is rendered impossible by the occurrence of opal12",
+      "names": [
+        "opal12",
+        "jade12"
+      ],
+      "gold": {
+        "left": "opal12",
+        "right": "jade12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "opal14 does not exclude the occurrence of jade14",
+      "names": [
+        "opal14",
+        "jade14"
+      ],
+      "gold": {
+        "left": "opal14",
+        "right": "jade14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "opal14 does not render the occurrence of jade14 impossible",
+      "names": [
+        "opal14",
+        "jade14"
+      ],
+      "gold": {
+        "left": "opal14",
+        "right": "jade14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "jade14 is not excluded by the occurrence of opal14",
+      "names": [
+        "opal14",
+        "jade14"
+      ],
+      "gold": {
+        "left": "opal14",
+        "right": "jade14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "jade14 is not rendered impossible by the occurrence of opal14",
+      "names": [
+        "opal14",
+        "jade14"
+      ],
+      "gold": {
+        "left": "opal14",
+        "right": "jade14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "coral0 might result from pearl0",
+      "names": [
+        "coral0",
+        "pearl0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral1 shares a designation with pearl1",
+      "names": [
+        "coral1",
+        "pearl1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral2 is depicted alongside the image of pearl2",
+      "names": [
+        "coral2",
+        "pearl2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral3 could produce pearl3",
+      "names": [
+        "coral3",
+        "pearl3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral4 has a volume comparable to pearl4",
+      "names": [
+        "coral4",
+        "pearl4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral5 and pearl5 were displayed together",
+      "names": [
+        "coral5",
+        "pearl5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral6 was placed near the image of pearl6",
+      "names": [
+        "coral6",
+        "pearl6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral7 possibly demands pearl7",
+      "names": [
+        "coral7",
+        "pearl7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral8 has a color comparable to pearl8",
+      "names": [
+        "coral8",
+        "pearl8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral9 is pictured next to the image of pearl9",
+      "names": [
+        "coral9",
+        "pearl9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral10 or pearl10 was depicted",
+      "names": [
+        "coral10",
+        "pearl10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "coral11 has a surface similar to pearl11",
+      "names": [
+        "coral11",
+        "pearl11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "quartz0",
+        "mica0",
+        "onyx0"
+      ],
+      "sentences": [
+        "quartz0 attained completion before the onset of mica0",
+        "mica0 attained completion before the onset of onyx0"
+      ],
+      "claim": "quartz0 attained completion before the onset of onyx0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "quartz0",
+        "mica0",
+        "onyx0"
+      ],
+      "sentences": [
+        "quartz0 attained completion before the onset of mica0"
+      ],
+      "claim": "quartz0 did not attain completion before the onset of mica0",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "quartz0",
+        "mica0",
+        "onyx0"
+      ],
+      "sentences": [
+        "quartz0 attained completion before the onset of mica0",
+        "quartz0 did not attain completion before the onset of mica0"
+      ],
+      "claim": "quartz0 attained completion before the onset of mica0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "quartz1",
+        "mica1",
+        "onyx1"
+      ],
+      "sentences": [
+        "quartz1 produced the occurrence of mica1",
+        "mica1 produced the occurrence of onyx1"
+      ],
+      "claim": "quartz1 produced the occurrence of onyx1",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "quartz1",
+        "mica1",
+        "onyx1"
+      ],
+      "sentences": [
+        "quartz1 produced the occurrence of mica1"
+      ],
+      "claim": "quartz1 did not produce the occurrence of mica1",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "quartz1",
+        "mica1",
+        "onyx1"
+      ],
+      "sentences": [
+        "quartz1 produced the occurrence of mica1",
+        "quartz1 did not produce the occurrence of mica1"
+      ],
+      "claim": "quartz1 produced the occurrence of mica1",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "quartz2",
+        "mica2",
+        "onyx2"
+      ],
+      "sentences": [
+        "quartz2 demands the presence of mica2",
+        "mica2 demands the presence of onyx2"
+      ],
+      "claim": "quartz2 demands the presence of onyx2",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "quartz2",
+        "mica2",
+        "onyx2"
+      ],
+      "sentences": [
+        "quartz2 demands the presence of mica2"
+      ],
+      "claim": "quartz2 does not demand the presence of mica2",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "quartz2",
+        "mica2",
+        "onyx2"
+      ],
+      "sentences": [
+        "quartz2 demands the presence of mica2",
+        "quartz2 does not demand the presence of mica2"
+      ],
+      "claim": "quartz2 demands the presence of mica2",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "quartz3",
+        "mica3",
+        "onyx3"
+      ],
+      "sentences": [
+        "quartz3 excludes the occurrence of mica3",
+        "mica3 excludes the occurrence of onyx3"
+      ],
+      "claim": "quartz3 excludes the occurrence of onyx3",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "quartz3",
+        "mica3",
+        "onyx3"
+      ],
+      "sentences": [
+        "quartz3 excludes the occurrence of mica3"
+      ],
+      "claim": "quartz3 does not exclude the occurrence of mica3",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "quartz3",
+        "mica3",
+        "onyx3"
+      ],
+      "sentences": [
+        "quartz3 excludes the occurrence of mica3",
+        "quartz3 does not exclude the occurrence of mica3"
+      ],
+      "claim": "quartz3 excludes the occurrence of mica3",
+      "expected": "HOLD_CONFLICT"
+    }
+  ]
+}
