@@ -1,0 +1,95 @@
+name: JANUS R84H38F semantic crystal
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h38f_semantic_crystal.py'
+      - 'autonomy/federation/R84H38F_TRAIN_BANK.json'
+      - 'autonomy/federation/R84H38F_FROZEN_EXAM.json'
+      - '.github/workflows/r84h38f-semantic-crystal.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h38f-bounded-research
+  cancel-in-progress: false
+jobs:
+  train:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h38f-semantic-crystal-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H38F_TRAIN_BANK.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - run: |
+          test ! -e autonomy/federation/R84H38F_FROZEN_EXAM.json
+          test "$(git hash-object autonomy/federation/R84H38F_TRAIN_BANK.json)" = 7a88c7ef2d85760f1c570ece374350ac8051a534
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h38f_semantic_crystal.py train autonomy/federation/R84H38F_TRAIN_BANK.json "$RUNNER_TEMP/trained"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38f-trained
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  evaluate:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+            autonomy/federation/R84H38F_FROZEN_EXAM.json
+            autonomy/federation/R84H38C_FROZEN_EXAM.json
+            autonomy/federation/R84H38D_FROZEN_EXAM.json
+            autonomy/federation/R84H38E_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38f-trained
+          path: ${{ runner.temp }}/trained
+      - run: |
+          test "$(git hash-object autonomy/federation/R84H38F_FROZEN_EXAM.json)" = cfeb4c8200d63317530a972f15798e2f478d6c37
+          test "$(git hash-object autonomy/federation/r84h38d_world_understanding.py)" = de32d00ff965c5979c130e587b98490754767d62
+          test "$(git hash-object autonomy/federation/r84h38c_semantic_world_graph.py)" = 9ef8806b5796ce7ddc67dd20ab137296b71724cf
+          test "$(git hash-object autonomy/federation/R84H38C_FROZEN_EXAM.json)" = 585a43d61afa2a40443a9702adefcec060f9b463
+          test "$(git hash-object autonomy/federation/R84H38D_FROZEN_EXAM.json)" = 942f9b028bc2a444631a73c88f20f61f9301aea1
+          test "$(git hash-object autonomy/federation/R84H38E_FROZEN_EXAM.json)" = 2edc2507ad8bc908dc741c8c6dfbf2a7613580e7
+          sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)" autonomy/federation/r84h38f_semantic_crystal.py evaluate "$RUNNER_TEMP/trained" autonomy/federation/R84H38F_FROZEN_EXAM.json autonomy/federation/R84H38C_FROZEN_EXAM.json autonomy/federation/R84H38D_FROZEN_EXAM.json autonomy/federation/R84H38E_FROZEN_EXAM.json "$RUNNER_TEMP/results"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38f-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 60
