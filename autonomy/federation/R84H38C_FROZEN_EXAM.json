@@ -1,0 +1,3744 @@
+{
+  "schema": "janus.h38c.frozen.v1",
+  "scope": "same-author typed graph exam; manually assigned expected statuses; no natural-language extraction",
+  "cases": [
+    {
+      "id": "c1",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e2",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c2",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "e2",
+          "rel": "AFTER",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c3",
+      "cohort": "reverse_order",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "e2",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c4",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "e2",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": false
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c5",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e2",
+          "positive": false
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c6",
+      "cohort": "causality_barrier",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "CAUSES",
+          "right": "e2",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c7",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e3",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c8",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          }
+        ],
+        "claim": {
+          "left": "e3",
+          "rel": "AFTER",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c9",
+      "cohort": "reverse_order",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          }
+        ],
+        "claim": {
+          "left": "e3",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c10",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          }
+        ],
+        "claim": {
+          "left": "e3",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": false
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c11",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e3",
+          "positive": false
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c12",
+      "cohort": "causality_barrier",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "CAUSES",
+          "right": "e3",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c13",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e5",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c14",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          }
+        ],
+        "claim": {
+          "left": "e5",
+          "rel": "AFTER",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c15",
+      "cohort": "reverse_order",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          }
+        ],
+        "claim": {
+          "left": "e5",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c16",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          }
+        ],
+        "claim": {
+          "left": "e5",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": false
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c17",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e5",
+          "positive": false
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c18",
+      "cohort": "causality_barrier",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "CAUSES",
+          "right": "e5",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c19",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e11",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c20",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          }
+        ],
+        "claim": {
+          "left": "e11",
+          "rel": "AFTER",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c21",
+      "cohort": "reverse_order",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          }
+        ],
+        "claim": {
+          "left": "e11",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c22",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          }
+        ],
+        "claim": {
+          "left": "e11",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": false
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c23",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e11",
+          "positive": false
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c24",
+      "cohort": "causality_barrier",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "CAUSES",
+          "right": "e11",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c25",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          },
+          {
+            "left": "e12",
+            "rel": "AFTER",
+            "right": "e11",
+            "positive": true,
+            "id": "f12"
+          },
+          {
+            "left": "e12",
+            "rel": "BEFORE",
+            "right": "e13",
+            "positive": true,
+            "id": "f13"
+          },
+          {
+            "left": "e14",
+            "rel": "AFTER",
+            "right": "e13",
+            "positive": true,
+            "id": "f14"
+          },
+          {
+            "left": "e14",
+            "rel": "BEFORE",
+            "right": "e15",
+            "positive": true,
+            "id": "f15"
+          },
+          {
+            "left": "e16",
+            "rel": "AFTER",
+            "right": "e15",
+            "positive": true,
+            "id": "f16"
+          },
+          {
+            "left": "e16",
+            "rel": "BEFORE",
+            "right": "e17",
+            "positive": true,
+            "id": "f17"
+          },
+          {
+            "left": "e18",
+            "rel": "AFTER",
+            "right": "e17",
+            "positive": true,
+            "id": "f18"
+          },
+          {
+            "left": "e18",
+            "rel": "BEFORE",
+            "right": "e19",
+            "positive": true,
+            "id": "f19"
+          },
+          {
+            "left": "e20",
+            "rel": "AFTER",
+            "right": "e19",
+            "positive": true,
+            "id": "f20"
+          },
+          {
+            "left": "e20",
+            "rel": "BEFORE",
+            "right": "e21",
+            "positive": true,
+            "id": "f21"
+          },
+          {
+            "left": "e22",
+            "rel": "AFTER",
+            "right": "e21",
+            "positive": true,
+            "id": "f22"
+          },
+          {
+            "left": "e22",
+            "rel": "BEFORE",
+            "right": "e23",
+            "positive": true,
+            "id": "f23"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e23",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c26",
+      "cohort": "temporal_chain",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          },
+          {
+            "left": "e12",
+            "rel": "AFTER",
+            "right": "e11",
+            "positive": true,
+            "id": "f12"
+          },
+          {
+            "left": "e12",
+            "rel": "BEFORE",
+            "right": "e13",
+            "positive": true,
+            "id": "f13"
+          },
+          {
+            "left": "e14",
+            "rel": "AFTER",
+            "right": "e13",
+            "positive": true,
+            "id": "f14"
+          },
+          {
+            "left": "e14",
+            "rel": "BEFORE",
+            "right": "e15",
+            "positive": true,
+            "id": "f15"
+          },
+          {
+            "left": "e16",
+            "rel": "AFTER",
+            "right": "e15",
+            "positive": true,
+            "id": "f16"
+          },
+          {
+            "left": "e16",
+            "rel": "BEFORE",
+            "right": "e17",
+            "positive": true,
+            "id": "f17"
+          },
+          {
+            "left": "e18",
+            "rel": "AFTER",
+            "right": "e17",
+            "positive": true,
+            "id": "f18"
+          },
+          {
+            "left": "e18",
+            "rel": "BEFORE",
+            "right": "e19",
+            "positive": true,
+            "id": "f19"
+          },
+          {
+            "left": "e20",
+            "rel": "AFTER",
+            "right": "e19",
+            "positive": true,
+            "id": "f20"
+          },
+          {
+            "left": "e20",
+            "rel": "BEFORE",
+            "right": "e21",
+            "positive": true,
+            "id": "f21"
+          },
+          {
+            "left": "e22",
+            "rel": "AFTER",
+            "right": "e21",
+            "positive": true,
+            "id": "f22"
+          },
+          {
+            "left": "e22",
+            "rel": "BEFORE",
+            "right": "e23",
+            "positive": true,
+            "id": "f23"
+          }
+        ],
+        "claim": {
+          "left": "e23",
+          "rel": "AFTER",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c27",
+      "cohort": "reverse_order",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          },
+          {
+            "left": "e12",
+            "rel": "AFTER",
+            "right": "e11",
+            "positive": true,
+            "id": "f12"
+          },
+          {
+            "left": "e12",
+            "rel": "BEFORE",
+            "right": "e13",
+            "positive": true,
+            "id": "f13"
+          },
+          {
+            "left": "e14",
+            "rel": "AFTER",
+            "right": "e13",
+            "positive": true,
+            "id": "f14"
+          },
+          {
+            "left": "e14",
+            "rel": "BEFORE",
+            "right": "e15",
+            "positive": true,
+            "id": "f15"
+          },
+          {
+            "left": "e16",
+            "rel": "AFTER",
+            "right": "e15",
+            "positive": true,
+            "id": "f16"
+          },
+          {
+            "left": "e16",
+            "rel": "BEFORE",
+            "right": "e17",
+            "positive": true,
+            "id": "f17"
+          },
+          {
+            "left": "e18",
+            "rel": "AFTER",
+            "right": "e17",
+            "positive": true,
+            "id": "f18"
+          },
+          {
+            "left": "e18",
+            "rel": "BEFORE",
+            "right": "e19",
+            "positive": true,
+            "id": "f19"
+          },
+          {
+            "left": "e20",
+            "rel": "AFTER",
+            "right": "e19",
+            "positive": true,
+            "id": "f20"
+          },
+          {
+            "left": "e20",
+            "rel": "BEFORE",
+            "right": "e21",
+            "positive": true,
+            "id": "f21"
+          },
+          {
+            "left": "e22",
+            "rel": "AFTER",
+            "right": "e21",
+            "positive": true,
+            "id": "f22"
+          },
+          {
+            "left": "e22",
+            "rel": "BEFORE",
+            "right": "e23",
+            "positive": true,
+            "id": "f23"
+          }
+        ],
+        "claim": {
+          "left": "e23",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": true
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c28",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          },
+          {
+            "left": "e12",
+            "rel": "AFTER",
+            "right": "e11",
+            "positive": true,
+            "id": "f12"
+          },
+          {
+            "left": "e12",
+            "rel": "BEFORE",
+            "right": "e13",
+            "positive": true,
+            "id": "f13"
+          },
+          {
+            "left": "e14",
+            "rel": "AFTER",
+            "right": "e13",
+            "positive": true,
+            "id": "f14"
+          },
+          {
+            "left": "e14",
+            "rel": "BEFORE",
+            "right": "e15",
+            "positive": true,
+            "id": "f15"
+          },
+          {
+            "left": "e16",
+            "rel": "AFTER",
+            "right": "e15",
+            "positive": true,
+            "id": "f16"
+          },
+          {
+            "left": "e16",
+            "rel": "BEFORE",
+            "right": "e17",
+            "positive": true,
+            "id": "f17"
+          },
+          {
+            "left": "e18",
+            "rel": "AFTER",
+            "right": "e17",
+            "positive": true,
+            "id": "f18"
+          },
+          {
+            "left": "e18",
+            "rel": "BEFORE",
+            "right": "e19",
+            "positive": true,
+            "id": "f19"
+          },
+          {
+            "left": "e20",
+            "rel": "AFTER",
+            "right": "e19",
+            "positive": true,
+            "id": "f20"
+          },
+          {
+            "left": "e20",
+            "rel": "BEFORE",
+            "right": "e21",
+            "positive": true,
+            "id": "f21"
+          },
+          {
+            "left": "e22",
+            "rel": "AFTER",
+            "right": "e21",
+            "positive": true,
+            "id": "f22"
+          },
+          {
+            "left": "e22",
+            "rel": "BEFORE",
+            "right": "e23",
+            "positive": true,
+            "id": "f23"
+          }
+        ],
+        "claim": {
+          "left": "e23",
+          "rel": "BEFORE",
+          "right": "e0",
+          "positive": false
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c29",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          },
+          {
+            "left": "e12",
+            "rel": "AFTER",
+            "right": "e11",
+            "positive": true,
+            "id": "f12"
+          },
+          {
+            "left": "e12",
+            "rel": "BEFORE",
+            "right": "e13",
+            "positive": true,
+            "id": "f13"
+          },
+          {
+            "left": "e14",
+            "rel": "AFTER",
+            "right": "e13",
+            "positive": true,
+            "id": "f14"
+          },
+          {
+            "left": "e14",
+            "rel": "BEFORE",
+            "right": "e15",
+            "positive": true,
+            "id": "f15"
+          },
+          {
+            "left": "e16",
+            "rel": "AFTER",
+            "right": "e15",
+            "positive": true,
+            "id": "f16"
+          },
+          {
+            "left": "e16",
+            "rel": "BEFORE",
+            "right": "e17",
+            "positive": true,
+            "id": "f17"
+          },
+          {
+            "left": "e18",
+            "rel": "AFTER",
+            "right": "e17",
+            "positive": true,
+            "id": "f18"
+          },
+          {
+            "left": "e18",
+            "rel": "BEFORE",
+            "right": "e19",
+            "positive": true,
+            "id": "f19"
+          },
+          {
+            "left": "e20",
+            "rel": "AFTER",
+            "right": "e19",
+            "positive": true,
+            "id": "f20"
+          },
+          {
+            "left": "e20",
+            "rel": "BEFORE",
+            "right": "e21",
+            "positive": true,
+            "id": "f21"
+          },
+          {
+            "left": "e22",
+            "rel": "AFTER",
+            "right": "e21",
+            "positive": true,
+            "id": "f22"
+          },
+          {
+            "left": "e22",
+            "rel": "BEFORE",
+            "right": "e23",
+            "positive": true,
+            "id": "f23"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e23",
+          "positive": false
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c30",
+      "cohort": "causality_barrier",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e2",
+            "rel": "AFTER",
+            "right": "e1",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e4",
+            "rel": "AFTER",
+            "right": "e3",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e6",
+            "rel": "AFTER",
+            "right": "e5",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e8",
+            "rel": "AFTER",
+            "right": "e7",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e10",
+            "rel": "AFTER",
+            "right": "e9",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          },
+          {
+            "left": "e12",
+            "rel": "AFTER",
+            "right": "e11",
+            "positive": true,
+            "id": "f12"
+          },
+          {
+            "left": "e12",
+            "rel": "BEFORE",
+            "right": "e13",
+            "positive": true,
+            "id": "f13"
+          },
+          {
+            "left": "e14",
+            "rel": "AFTER",
+            "right": "e13",
+            "positive": true,
+            "id": "f14"
+          },
+          {
+            "left": "e14",
+            "rel": "BEFORE",
+            "right": "e15",
+            "positive": true,
+            "id": "f15"
+          },
+          {
+            "left": "e16",
+            "rel": "AFTER",
+            "right": "e15",
+            "positive": true,
+            "id": "f16"
+          },
+          {
+            "left": "e16",
+            "rel": "BEFORE",
+            "right": "e17",
+            "positive": true,
+            "id": "f17"
+          },
+          {
+            "left": "e18",
+            "rel": "AFTER",
+            "right": "e17",
+            "positive": true,
+            "id": "f18"
+          },
+          {
+            "left": "e18",
+            "rel": "BEFORE",
+            "right": "e19",
+            "positive": true,
+            "id": "f19"
+          },
+          {
+            "left": "e20",
+            "rel": "AFTER",
+            "right": "e19",
+            "positive": true,
+            "id": "f20"
+          },
+          {
+            "left": "e20",
+            "rel": "BEFORE",
+            "right": "e21",
+            "positive": true,
+            "id": "f21"
+          },
+          {
+            "left": "e22",
+            "rel": "AFTER",
+            "right": "e21",
+            "positive": true,
+            "id": "f22"
+          },
+          {
+            "left": "e22",
+            "rel": "BEFORE",
+            "right": "e23",
+            "positive": true,
+            "id": "f23"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "CAUSES",
+          "right": "e23",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c31",
+      "cohort": "explicit_relation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "CAUSES",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "CAUSES",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c32",
+      "cohort": "nontransitive",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "CAUSES",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "CAUSES",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c33",
+      "cohort": "nontransitive",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "CAUSES",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "b",
+          "rel": "CAUSES",
+          "right": "a",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c34",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "CAUSES",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "CAUSES",
+          "right": "b",
+          "positive": false
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c35",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": false,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "CAUSES",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c36",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": false,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "CAUSES",
+          "right": "b",
+          "positive": false
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c37",
+      "cohort": "conflict",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": false,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "x",
+          "rel": "CAUSES",
+          "right": "y",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "c38",
+      "cohort": "cross_relation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c39",
+      "cohort": "explicit_relation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "REQUIRES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "REQUIRES",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "REQUIRES",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c40",
+      "cohort": "nontransitive",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "REQUIRES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "REQUIRES",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "REQUIRES",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c41",
+      "cohort": "nontransitive",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "REQUIRES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "REQUIRES",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "b",
+          "rel": "REQUIRES",
+          "right": "a",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c42",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "REQUIRES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "REQUIRES",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "REQUIRES",
+          "right": "b",
+          "positive": false
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c43",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "REQUIRES",
+            "right": "b",
+            "positive": false,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "REQUIRES",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c44",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "REQUIRES",
+            "right": "b",
+            "positive": false,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "REQUIRES",
+          "right": "b",
+          "positive": false
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c45",
+      "cohort": "conflict",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "REQUIRES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "a",
+            "rel": "REQUIRES",
+            "right": "b",
+            "positive": false,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "x",
+          "rel": "REQUIRES",
+          "right": "y",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "c46",
+      "cohort": "cross_relation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "REQUIRES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c47",
+      "cohort": "explicit_relation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "PREVENTS",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "PREVENTS",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "PREVENTS",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c48",
+      "cohort": "nontransitive",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "PREVENTS",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "PREVENTS",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "PREVENTS",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c49",
+      "cohort": "nontransitive",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "PREVENTS",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "PREVENTS",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "b",
+          "rel": "PREVENTS",
+          "right": "a",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c50",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "PREVENTS",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "PREVENTS",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "PREVENTS",
+          "right": "b",
+          "positive": false
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c51",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "PREVENTS",
+            "right": "b",
+            "positive": false,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "PREVENTS",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c52",
+      "cohort": "scoped_negation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "PREVENTS",
+            "right": "b",
+            "positive": false,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "PREVENTS",
+          "right": "b",
+          "positive": false
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c53",
+      "cohort": "conflict",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "PREVENTS",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "a",
+            "rel": "PREVENTS",
+            "right": "b",
+            "positive": false,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "x",
+          "rel": "PREVENTS",
+          "right": "y",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "c54",
+      "cohort": "cross_relation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "PREVENTS",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c55",
+      "cohort": "conflict",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "a",
+            "rel": "AFTER",
+            "right": "b",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "x",
+          "rel": "BEFORE",
+          "right": "y",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "c56",
+      "cohort": "conflict",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "BEFORE",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "c",
+            "rel": "BEFORE",
+            "right": "a",
+            "positive": true,
+            "id": "f3"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "c57",
+      "cohort": "conflict",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "BEFORE",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "c",
+            "positive": false,
+            "id": "f3"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "c58",
+      "cohort": "conflict",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "a",
+            "positive": true,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "c59",
+      "cohort": "conflict",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "AFTER",
+            "right": "a",
+            "positive": false,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "id": "c60",
+      "cohort": "unknown",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "c",
+            "rel": "BEFORE",
+            "right": "d",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "d",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c61",
+      "cohort": "unknown",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c62",
+      "cohort": "unknown",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": false,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "b",
+          "rel": "BEFORE",
+          "right": "a",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c63",
+      "cohort": "unknown",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": false,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "BEFORE",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c64",
+      "cohort": "unknown",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "b",
+          "rel": "BEFORE",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c65",
+      "cohort": "unknown",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "CAUSES",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "BEFORE",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "CAUSES",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c66",
+      "cohort": "irreflexivity",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "a",
+          "positive": true
+        }
+      },
+      "expected": "CONTRADICTED"
+    },
+    {
+      "id": "c67",
+      "cohort": "irreflexivity",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "a",
+          "positive": false
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c68",
+      "cohort": "branching",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "b",
+            "rel": "BEFORE",
+            "right": "d",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "c",
+            "rel": "BEFORE",
+            "right": "d",
+            "positive": true,
+            "id": "f4"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "d",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c69",
+      "cohort": "branching",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "c",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "b",
+            "rel": "BEFORE",
+            "right": "d",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "c",
+            "rel": "BEFORE",
+            "right": "d",
+            "positive": true,
+            "id": "f4"
+          }
+        ],
+        "claim": {
+          "left": "b",
+          "rel": "BEFORE",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "UNKNOWN"
+    },
+    {
+      "id": "c70",
+      "cohort": "explicit_relation",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f2"
+          }
+        ],
+        "claim": {
+          "left": "b",
+          "rel": "AFTER",
+          "right": "a",
+          "positive": true
+        }
+      },
+      "expected": "ENTAILED"
+    },
+    {
+      "id": "c71",
+      "cohort": "invalid",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "MAGIC",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_INVALID"
+    },
+    {
+      "id": "c72",
+      "cohort": "invalid",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [],
+        "claim": {
+          "left": "a",
+          "rel": "MAGIC",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_INVALID"
+    },
+    {
+      "id": "c73",
+      "cohort": "invalid",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": 1,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "b",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_INVALID"
+    },
+    {
+      "id": "c74",
+      "cohort": "invalid",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "e0",
+            "rel": "BEFORE",
+            "right": "e1",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "e1",
+            "rel": "BEFORE",
+            "right": "e2",
+            "positive": true,
+            "id": "f2"
+          },
+          {
+            "left": "e2",
+            "rel": "BEFORE",
+            "right": "e3",
+            "positive": true,
+            "id": "f3"
+          },
+          {
+            "left": "e3",
+            "rel": "BEFORE",
+            "right": "e4",
+            "positive": true,
+            "id": "f4"
+          },
+          {
+            "left": "e4",
+            "rel": "BEFORE",
+            "right": "e5",
+            "positive": true,
+            "id": "f5"
+          },
+          {
+            "left": "e5",
+            "rel": "BEFORE",
+            "right": "e6",
+            "positive": true,
+            "id": "f6"
+          },
+          {
+            "left": "e6",
+            "rel": "BEFORE",
+            "right": "e7",
+            "positive": true,
+            "id": "f7"
+          },
+          {
+            "left": "e7",
+            "rel": "BEFORE",
+            "right": "e8",
+            "positive": true,
+            "id": "f8"
+          },
+          {
+            "left": "e8",
+            "rel": "BEFORE",
+            "right": "e9",
+            "positive": true,
+            "id": "f9"
+          },
+          {
+            "left": "e9",
+            "rel": "BEFORE",
+            "right": "e10",
+            "positive": true,
+            "id": "f10"
+          },
+          {
+            "left": "e10",
+            "rel": "BEFORE",
+            "right": "e11",
+            "positive": true,
+            "id": "f11"
+          },
+          {
+            "left": "e11",
+            "rel": "BEFORE",
+            "right": "e12",
+            "positive": true,
+            "id": "f12"
+          },
+          {
+            "left": "e12",
+            "rel": "BEFORE",
+            "right": "e13",
+            "positive": true,
+            "id": "f13"
+          },
+          {
+            "left": "e13",
+            "rel": "BEFORE",
+            "right": "e14",
+            "positive": true,
+            "id": "f14"
+          },
+          {
+            "left": "e14",
+            "rel": "BEFORE",
+            "right": "e15",
+            "positive": true,
+            "id": "f15"
+          },
+          {
+            "left": "e15",
+            "rel": "BEFORE",
+            "right": "e16",
+            "positive": true,
+            "id": "f16"
+          },
+          {
+            "left": "e16",
+            "rel": "BEFORE",
+            "right": "e17",
+            "positive": true,
+            "id": "f17"
+          },
+          {
+            "left": "e17",
+            "rel": "BEFORE",
+            "right": "e18",
+            "positive": true,
+            "id": "f18"
+          },
+          {
+            "left": "e18",
+            "rel": "BEFORE",
+            "right": "e19",
+            "positive": true,
+            "id": "f19"
+          },
+          {
+            "left": "e19",
+            "rel": "BEFORE",
+            "right": "e20",
+            "positive": true,
+            "id": "f20"
+          },
+          {
+            "left": "e20",
+            "rel": "BEFORE",
+            "right": "e21",
+            "positive": true,
+            "id": "f21"
+          },
+          {
+            "left": "e21",
+            "rel": "BEFORE",
+            "right": "e22",
+            "positive": true,
+            "id": "f22"
+          },
+          {
+            "left": "e22",
+            "rel": "BEFORE",
+            "right": "e23",
+            "positive": true,
+            "id": "f23"
+          },
+          {
+            "left": "e23",
+            "rel": "BEFORE",
+            "right": "e24",
+            "positive": true,
+            "id": "f24"
+          }
+        ],
+        "claim": {
+          "left": "e0",
+          "rel": "BEFORE",
+          "right": "e24",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_INVALID"
+    },
+    {
+      "id": "c75",
+      "cohort": "invalid",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [],
+        "claim": {
+          "left": "bad node",
+          "rel": "BEFORE",
+          "right": "x",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_INVALID"
+    },
+    {
+      "id": "c76",
+      "cohort": "invalid",
+      "request": {
+        "schema": "janus.event.graph.v1",
+        "facts": [
+          {
+            "left": "a",
+            "rel": "BEFORE",
+            "right": "b",
+            "positive": true,
+            "id": "f1"
+          },
+          {
+            "left": "b",
+            "rel": "BEFORE",
+            "right": "c",
+            "positive": true,
+            "id": "f1"
+          }
+        ],
+        "claim": {
+          "left": "a",
+          "rel": "BEFORE",
+          "right": "c",
+          "positive": true
+        }
+      },
+      "expected": "HOLD_INVALID"
+    }
+  ]
+}
