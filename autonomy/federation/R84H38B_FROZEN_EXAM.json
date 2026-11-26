@@ -1,0 +1,256 @@
+{
+  "schema": "h38b.frozen.v1",
+  "scope": "same-author two-property authored minimal contrasts; exact normalized overlap forbidden, not external replication",
+  "rows": [
+    {
+      "text": "entity has an absent local entry; the backing service is contacted",
+      "y": 0,
+      "family": "fresh0-0"
+    },
+    {
+      "text": "entity has a present local entry; the backing service is never contacted",
+      "y": 1,
+      "family": "fresh0-0"
+    },
+    {
+      "text": "the source is queried; the cache lacks the record for entity",
+      "y": 0,
+      "family": "fresh0-1"
+    },
+    {
+      "text": "the source is not queried; the cache contains the record for entity",
+      "y": 1,
+      "family": "fresh0-1"
+    },
+    {
+      "text": "the cached copy for entity is unavailable; a remote service is called",
+      "y": 0,
+      "family": "fresh0-2"
+    },
+    {
+      "text": "the cached copy for entity is available; no remote service is called",
+      "y": 1,
+      "family": "fresh0-2"
+    },
+    {
+      "text": "the cache misses entity, so an origin fetch is required",
+      "y": 0,
+      "family": "fresh0-3"
+    },
+    {
+      "text": "the cache contains entity, so an origin fetch is not required",
+      "y": 1,
+      "family": "fresh0-3"
+    },
+    {
+      "text": "a source read is needed; the local store has a miss for entity",
+      "y": 0,
+      "family": "fresh0-4"
+    },
+    {
+      "text": "a source read is not needed; the local store has a hit for entity",
+      "y": 1,
+      "family": "fresh0-4"
+    },
+    {
+      "text": "the nearby store lacks entity; the authoritative service is accessed",
+      "y": 0,
+      "family": "fresh0-5"
+    },
+    {
+      "text": "the nearby store contains entity; the authoritative service is never accessed",
+      "y": 1,
+      "family": "fresh0-5"
+    },
+    {
+      "text": "only after the success response for entity does the disk write occur",
+      "y": 2,
+      "family": "fresh2-0"
+    },
+    {
+      "text": "only after the disk write for entity does the success response arrive",
+      "y": 3,
+      "family": "fresh2-0"
+    },
+    {
+      "text": "the disk commit for entity follows the confirmation",
+      "y": 2,
+      "family": "fresh2-1"
+    },
+    {
+      "text": "the confirmation for entity follows the disk commit",
+      "y": 3,
+      "family": "fresh2-1"
+    },
+    {
+      "text": "the acknowledgement for entity occurs before the permanent write",
+      "y": 2,
+      "family": "fresh2-2"
+    },
+    {
+      "text": "the permanent write for entity occurs before the acknowledgement",
+      "y": 3,
+      "family": "fresh2-2"
+    },
+    {
+      "text": "after the success reply for entity comes the disk commit",
+      "y": 2,
+      "family": "fresh2-3"
+    },
+    {
+      "text": "after the disk commit for entity comes the success reply",
+      "y": 3,
+      "family": "fresh2-3"
+    },
+    {
+      "text": "the permanent write for entity takes place after confirmation",
+      "y": 2,
+      "family": "fresh2-4"
+    },
+    {
+      "text": "the confirmation for entity takes place after the permanent write",
+      "y": 3,
+      "family": "fresh2-4"
+    },
+    {
+      "text": "acknowledgement of the update to entity precedes the disk commit",
+      "y": 2,
+      "family": "fresh2-5"
+    },
+    {
+      "text": "the disk commit of the update to entity precedes acknowledgement",
+      "y": 3,
+      "family": "fresh2-5"
+    },
+    {
+      "text": "the cache for entity tracks an entry count",
+      "y": 4,
+      "family": "fresh-u0"
+    },
+    {
+      "text": "the source for entity is located on another machine",
+      "y": 4,
+      "family": "fresh-u1"
+    },
+    {
+      "text": "the local copy of entity is present; the origin is contacted",
+      "y": 4,
+      "family": "fresh-u2"
+    },
+    {
+      "text": "entity has a cache miss and a cache hit",
+      "y": 4,
+      "family": "fresh-u3"
+    },
+    {
+      "text": "whether the local store contains entity remains unclear",
+      "y": 4,
+      "family": "fresh-u4"
+    },
+    {
+      "text": "the cache holds entity or the origin supplies it",
+      "y": 4,
+      "family": "fresh-u5"
+    },
+    {
+      "text": "if the local entry is absent the origin is contacted for entity",
+      "y": 4,
+      "family": "fresh-u6"
+    },
+    {
+      "text": "entity has a cached value but the source policy is unspecified",
+      "y": 4,
+      "family": "fresh-u7"
+    },
+    {
+      "text": "the disk commit for entity has a timestamp",
+      "y": 4,
+      "family": "fresh-u8"
+    },
+    {
+      "text": "acknowledgement of entity uses a request identifier",
+      "y": 4,
+      "family": "fresh-u9"
+    },
+    {
+      "text": "entity is persisted before or after the success response",
+      "y": 4,
+      "family": "fresh-u10"
+    },
+    {
+      "text": "the disk write and confirmation of entity both took place",
+      "y": 4,
+      "family": "fresh-u11"
+    },
+    {
+      "text": "if entity is persisted before acknowledgement the client receives a message",
+      "y": 4,
+      "family": "fresh-u12"
+    },
+    {
+      "text": "entity is not persisted before confirmation",
+      "y": 4,
+      "family": "fresh-u13"
+    },
+    {
+      "text": "entity uses a replicated disk with no specified confirmation order",
+      "y": 4,
+      "family": "fresh-u14"
+    },
+    {
+      "text": "entity permits only one holder",
+      "y": 4,
+      "family": "fresh-u15"
+    }
+  ],
+  "pairs": [
+    [
+      0,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      14,
+      15
+    ],
+    [
+      16,
+      17
+    ],
+    [
+      18,
+      19
+    ],
+    [
+      20,
+      21
+    ],
+    [
+      22,
+      23
+    ]
+  ]
+}
