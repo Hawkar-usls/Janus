@@ -1,0 +1,206 @@
+name: JANUS R84H27 trinity critic
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h27_trinity_critic.py'
+      - '.github/workflows/r84h27-trinity-critic.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h27-bounded-research
+  cancel-in-progress: false
+jobs:
+  critic:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h27-trinity-critic-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/*
+            !autonomy/federation/R84H27_FROZEN_EXAM.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            tools/trinity_r14_verified_oracle.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 scipy==1.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h7-cycle5
+          path: ${{ runner.temp }}/root
+          run-id: 45702441451
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h8-cycle3
+          path: ${{ runner.temp }}/bundle
+          run-id: 45704306939
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h10-trained
+          path: ${{ runner.temp }}/resonance
+          run-id: 45706296802
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h11-trained
+          path: ${{ runner.temp }}/cortex
+          run-id: 45707256292
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h12-trained
+          path: ${{ runner.temp }}/evolution
+          run-id: 45708640174
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h19-results
+          path: ${{ runner.temp }}/h19
+          run-id: 45771158477
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h24-results
+          path: ${{ runner.temp }}/h24
+          run-id: 45790325413
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h25-results
+          path: ${{ runner.temp }}/h25feedback
+          run-id: 45791735192
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h26-results
+          path: ${{ runner.temp }}/h26feedback
+          run-id: 45792927257
+          github-token: ${{ github.token }}
+      - run: |
+          test ! -e autonomy/federation/R84H27_FROZEN_EXAM.json
+          python autonomy/federation/r84h27_trinity_critic.py gate "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/root" "$RUNNER_TEMP/bundle" "$RUNNER_TEMP/resonance" "$RUNNER_TEMP/cortex" "$RUNNER_TEMP/evolution" "$RUNNER_TEMP/h19" "$RUNNER_TEMP/h24" "$RUNNER_TEMP/h25feedback" "$RUNNER_TEMP/h26feedback" demi "$RUNNER_TEMP/critic"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h27-critic
+          path: ${{ runner.temp }}/critic
+          if-no-files-found: error
+          retention-days: 60
+  exam:
+    needs: critic
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            tools/trinity_r14_verified_oracle.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 scipy==1.13.1
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84e-prepared
+          path: ${{ runner.temp }}/prepared
+          run-id: 45678170449
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h7-cycle5
+          path: ${{ runner.temp }}/root
+          run-id: 45702441451
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h8-cycle3
+          path: ${{ runner.temp }}/bundle
+          run-id: 45704306939
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h10-trained
+          path: ${{ runner.temp }}/resonance
+          run-id: 45706296802
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h11-trained
+          path: ${{ runner.temp }}/cortex
+          run-id: 45707256292
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h12-trained
+          path: ${{ runner.temp }}/evolution
+          run-id: 45708640174
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h19-results
+          path: ${{ runner.temp }}/h19
+          run-id: 45771158477
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h24-results
+          path: ${{ runner.temp }}/h24
+          run-id: 45790325413
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h25-results
+          path: ${{ runner.temp }}/h25feedback
+          run-id: 45791735192
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h26-results
+          path: ${{ runner.temp }}/h26feedback
+          run-id: 45792927257
+          github-token: ${{ github.token }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h27-critic
+          path: ${{ runner.temp }}/critic
+      - run: python autonomy/federation/r84h27_trinity_critic.py evaluate "$RUNNER_TEMP/prepared" "$RUNNER_TEMP/root" "$RUNNER_TEMP/bundle" "$RUNNER_TEMP/resonance" "$RUNNER_TEMP/cortex" "$RUNNER_TEMP/evolution" "$RUNNER_TEMP/h19" "$RUNNER_TEMP/h24" "$RUNNER_TEMP/h25feedback" "$RUNNER_TEMP/h26feedback" demi "$RUNNER_TEMP/critic" "$RUNNER_TEMP/results"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h27-results
+          path: ${{ runner.temp }}/results
+          if-no-files-found: error
+          retention-days: 60
