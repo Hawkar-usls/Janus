@@ -1,0 +1,766 @@
+{
+  "schema": "h38n3.exam.v1",
+  "scope": "Same-author frozen exam, no exam data used in repair",
+  "rows": [
+    {
+      "text": "elm0 occurred at a date anterior to oak0",
+      "names": [
+        "elm0",
+        "oak0"
+      ],
+      "gold": {
+        "left": "elm0",
+        "right": "oak0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "elm0 was completed at a time earlier than oak0",
+      "names": [
+        "elm0",
+        "oak0"
+      ],
+      "gold": {
+        "left": "elm0",
+        "right": "oak0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "oak0 occurred at a date posterior to elm0",
+      "names": [
+        "elm0",
+        "oak0"
+      ],
+      "gold": {
+        "left": "elm0",
+        "right": "oak0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "oak0 was completed at a time later than elm0",
+      "names": [
+        "elm0",
+        "oak0"
+      ],
+      "gold": {
+        "left": "elm0",
+        "right": "oak0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "elm2 did not occur at a date anterior to oak2",
+      "names": [
+        "elm2",
+        "oak2"
+      ],
+      "gold": {
+        "left": "elm2",
+        "right": "oak2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "elm2 was not completed at a time earlier than oak2",
+      "names": [
+        "elm2",
+        "oak2"
+      ],
+      "gold": {
+        "left": "elm2",
+        "right": "oak2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "oak2 did not occur at a date posterior to elm2",
+      "names": [
+        "elm2",
+        "oak2"
+      ],
+      "gold": {
+        "left": "elm2",
+        "right": "oak2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "oak2 was not completed at a time later than elm2",
+      "names": [
+        "elm2",
+        "oak2"
+      ],
+      "gold": {
+        "left": "elm2",
+        "right": "oak2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "elm4 induced the occurrence of oak4",
+      "names": [
+        "elm4",
+        "oak4"
+      ],
+      "gold": {
+        "left": "elm4",
+        "right": "oak4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "elm4 initiated oak4 as its effect",
+      "names": [
+        "elm4",
+        "oak4"
+      ],
+      "gold": {
+        "left": "elm4",
+        "right": "oak4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "oak4 was induced by elm4",
+      "names": [
+        "elm4",
+        "oak4"
+      ],
+      "gold": {
+        "left": "elm4",
+        "right": "oak4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "oak4 originated owing to elm4",
+      "names": [
+        "elm4",
+        "oak4"
+      ],
+      "gold": {
+        "left": "elm4",
+        "right": "oak4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "elm6 did not induce the occurrence of oak6",
+      "names": [
+        "elm6",
+        "oak6"
+      ],
+      "gold": {
+        "left": "elm6",
+        "right": "oak6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "elm6 did not initiate oak6 as its effect",
+      "names": [
+        "elm6",
+        "oak6"
+      ],
+      "gold": {
+        "left": "elm6",
+        "right": "oak6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "oak6 was not induced by elm6",
+      "names": [
+        "elm6",
+        "oak6"
+      ],
+      "gold": {
+        "left": "elm6",
+        "right": "oak6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "oak6 did not originate owing to elm6",
+      "names": [
+        "elm6",
+        "oak6"
+      ],
+      "gold": {
+        "left": "elm6",
+        "right": "oak6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "elm8 has oak8 as a necessary precondition",
+      "names": [
+        "elm8",
+        "oak8"
+      ],
+      "gold": {
+        "left": "elm8",
+        "right": "oak8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "elm8 is contingent on the existence of oak8",
+      "names": [
+        "elm8",
+        "oak8"
+      ],
+      "gold": {
+        "left": "elm8",
+        "right": "oak8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "oak8 is a necessary precondition for elm8",
+      "names": [
+        "elm8",
+        "oak8"
+      ],
+      "gold": {
+        "left": "elm8",
+        "right": "oak8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "oak8 is essential for elm8 to exist",
+      "names": [
+        "elm8",
+        "oak8"
+      ],
+      "gold": {
+        "left": "elm8",
+        "right": "oak8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "elm10 does not have oak10 as a necessary precondition",
+      "names": [
+        "elm10",
+        "oak10"
+      ],
+      "gold": {
+        "left": "elm10",
+        "right": "oak10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "elm10 is not contingent on the existence of oak10",
+      "names": [
+        "elm10",
+        "oak10"
+      ],
+      "gold": {
+        "left": "elm10",
+        "right": "oak10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "oak10 is not a necessary precondition for elm10",
+      "names": [
+        "elm10",
+        "oak10"
+      ],
+      "gold": {
+        "left": "elm10",
+        "right": "oak10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "oak10 is not essential for elm10 to exist",
+      "names": [
+        "elm10",
+        "oak10"
+      ],
+      "gold": {
+        "left": "elm10",
+        "right": "oak10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "elm12 obstructs the occurrence of oak12",
+      "names": [
+        "elm12",
+        "oak12"
+      ],
+      "gold": {
+        "left": "elm12",
+        "right": "oak12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "elm12 makes the occurrence of oak12 infeasible",
+      "names": [
+        "elm12",
+        "oak12"
+      ],
+      "gold": {
+        "left": "elm12",
+        "right": "oak12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "oak12 is obstructed from occurring by elm12",
+      "names": [
+        "elm12",
+        "oak12"
+      ],
+      "gold": {
+        "left": "elm12",
+        "right": "oak12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "oak12 is made infeasible by elm12",
+      "names": [
+        "elm12",
+        "oak12"
+      ],
+      "gold": {
+        "left": "elm12",
+        "right": "oak12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "elm14 does not obstruct the occurrence of oak14",
+      "names": [
+        "elm14",
+        "oak14"
+      ],
+      "gold": {
+        "left": "elm14",
+        "right": "oak14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "elm14 does not make the occurrence of oak14 infeasible",
+      "names": [
+        "elm14",
+        "oak14"
+      ],
+      "gold": {
+        "left": "elm14",
+        "right": "oak14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "oak14 is not obstructed from occurring by elm14",
+      "names": [
+        "elm14",
+        "oak14"
+      ],
+      "gold": {
+        "left": "elm14",
+        "right": "oak14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "oak14 is not made infeasible by elm14",
+      "names": [
+        "elm14",
+        "oak14"
+      ],
+      "gold": {
+        "left": "elm14",
+        "right": "oak14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "fir0 might be induced by pine0",
+      "names": [
+        "fir0",
+        "pine0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir1 resembles the texture found on pine1",
+      "names": [
+        "fir1",
+        "pine1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir2 was exhibited beside a sketch of pine2",
+      "names": [
+        "fir2",
+        "pine2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir3 could induce pine3",
+      "names": [
+        "fir3",
+        "pine3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir4 has a circumference comparable to pine4",
+      "names": [
+        "fir4",
+        "pine4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir5 and pine5 were catalogued jointly",
+      "names": [
+        "fir5",
+        "pine5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir6 stands near an illustration of pine6",
+      "names": [
+        "fir6",
+        "pine6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir7 possibly has pine7 as a precondition",
+      "names": [
+        "fir7",
+        "pine7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir8 has a hue comparable to the hue of pine8",
+      "names": [
+        "fir8",
+        "pine8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir9 was photographed alongside a model of pine9",
+      "names": [
+        "fir9",
+        "pine9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir10 or pine10 was inventoried",
+      "names": [
+        "fir10",
+        "pine10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fir11 shares a geometric outline with pine11",
+      "names": [
+        "fir11",
+        "pine11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "luma0",
+        "lumb0",
+        "lumc0"
+      ],
+      "sentences": [
+        "luma0 occurred at a date anterior to lumb0",
+        "lumb0 occurred at a date anterior to lumc0"
+      ],
+      "claim": "luma0 occurred at a date anterior to lumc0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "luma0",
+        "lumb0",
+        "lumc0"
+      ],
+      "sentences": [
+        "luma0 occurred at a date anterior to lumb0"
+      ],
+      "claim": "luma0 did not occur at a date anterior to lumb0",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "luma0",
+        "lumb0",
+        "lumc0"
+      ],
+      "sentences": [
+        "luma0 occurred at a date anterior to lumb0",
+        "luma0 did not occur at a date anterior to lumb0"
+      ],
+      "claim": "luma0 occurred at a date anterior to lumb0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "luma1",
+        "lumb1",
+        "lumc1"
+      ],
+      "sentences": [
+        "luma1 induced the occurrence of lumb1",
+        "lumb1 induced the occurrence of lumc1"
+      ],
+      "claim": "luma1 induced the occurrence of lumc1",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "luma1",
+        "lumb1",
+        "lumc1"
+      ],
+      "sentences": [
+        "luma1 induced the occurrence of lumb1"
+      ],
+      "claim": "luma1 did not induce the occurrence of lumb1",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "luma1",
+        "lumb1",
+        "lumc1"
+      ],
+      "sentences": [
+        "luma1 induced the occurrence of lumb1",
+        "luma1 did not induce the occurrence of lumb1"
+      ],
+      "claim": "luma1 induced the occurrence of lumb1",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "luma2",
+        "lumb2",
+        "lumc2"
+      ],
+      "sentences": [
+        "luma2 has lumb2 as a necessary precondition",
+        "lumb2 has lumc2 as a necessary precondition"
+      ],
+      "claim": "luma2 has lumc2 as a necessary precondition",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "luma2",
+        "lumb2",
+        "lumc2"
+      ],
+      "sentences": [
+        "luma2 has lumb2 as a necessary precondition"
+      ],
+      "claim": "luma2 does not have lumb2 as a necessary precondition",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "luma2",
+        "lumb2",
+        "lumc2"
+      ],
+      "sentences": [
+        "luma2 has lumb2 as a necessary precondition",
+        "luma2 does not have lumb2 as a necessary precondition"
+      ],
+      "claim": "luma2 has lumb2 as a necessary precondition",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "luma3",
+        "lumb3",
+        "lumc3"
+      ],
+      "sentences": [
+        "luma3 obstructs the occurrence of lumb3",
+        "lumb3 obstructs the occurrence of lumc3"
+      ],
+      "claim": "luma3 obstructs the occurrence of lumc3",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "luma3",
+        "lumb3",
+        "lumc3"
+      ],
+      "sentences": [
+        "luma3 obstructs the occurrence of lumb3"
+      ],
+      "claim": "luma3 does not obstruct the occurrence of lumb3",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "luma3",
+        "lumb3",
+        "lumc3"
+      ],
+      "sentences": [
+        "luma3 obstructs the occurrence of lumb3",
+        "luma3 does not obstruct the occurrence of lumb3"
+      ],
+      "claim": "luma3 obstructs the occurrence of lumb3",
+      "expected": "HOLD_CONFLICT"
+    }
+  ]
+}
