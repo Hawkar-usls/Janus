@@ -1,0 +1,766 @@
+{
+  "schema": "h38n1.exam.v1",
+  "scope": "New same-author exam frozen before preflight and training. Original N preserved.",
+  "rows": [
+    {
+      "text": "cedar0 took place at an earlier time than maple0",
+      "names": [
+        "cedar0",
+        "maple0"
+      ],
+      "gold": {
+        "left": "cedar0",
+        "right": "maple0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "cedar0 occurred at a time preceding maple0",
+      "names": [
+        "cedar0",
+        "maple0"
+      ],
+      "gold": {
+        "left": "cedar0",
+        "right": "maple0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "maple0 took place at a later time than cedar0",
+      "names": [
+        "cedar0",
+        "maple0"
+      ],
+      "gold": {
+        "left": "cedar0",
+        "right": "maple0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "maple0 occurred at a time subsequent to cedar0",
+      "names": [
+        "cedar0",
+        "maple0"
+      ],
+      "gold": {
+        "left": "cedar0",
+        "right": "maple0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "cedar2 did not take place at an earlier time than maple2",
+      "names": [
+        "cedar2",
+        "maple2"
+      ],
+      "gold": {
+        "left": "cedar2",
+        "right": "maple2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "cedar2 did not occur at a time preceding maple2",
+      "names": [
+        "cedar2",
+        "maple2"
+      ],
+      "gold": {
+        "left": "cedar2",
+        "right": "maple2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "maple2 did not take place at a later time than cedar2",
+      "names": [
+        "cedar2",
+        "maple2"
+      ],
+      "gold": {
+        "left": "cedar2",
+        "right": "maple2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "maple2 did not occur at a time subsequent to cedar2",
+      "names": [
+        "cedar2",
+        "maple2"
+      ],
+      "gold": {
+        "left": "cedar2",
+        "right": "maple2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "cedar4 brought maple4 into existence",
+      "names": [
+        "cedar4",
+        "maple4"
+      ],
+      "gold": {
+        "left": "cedar4",
+        "right": "maple4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "cedar4 generated maple4 as an effect",
+      "names": [
+        "cedar4",
+        "maple4"
+      ],
+      "gold": {
+        "left": "cedar4",
+        "right": "maple4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "maple4 came about through cedar4",
+      "names": [
+        "cedar4",
+        "maple4"
+      ],
+      "gold": {
+        "left": "cedar4",
+        "right": "maple4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "maple4 was generated as an effect of cedar4",
+      "names": [
+        "cedar4",
+        "maple4"
+      ],
+      "gold": {
+        "left": "cedar4",
+        "right": "maple4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "cedar6 did not bring maple6 into existence",
+      "names": [
+        "cedar6",
+        "maple6"
+      ],
+      "gold": {
+        "left": "cedar6",
+        "right": "maple6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "cedar6 did not generate maple6 as an effect",
+      "names": [
+        "cedar6",
+        "maple6"
+      ],
+      "gold": {
+        "left": "cedar6",
+        "right": "maple6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "maple6 did not come about through cedar6",
+      "names": [
+        "cedar6",
+        "maple6"
+      ],
+      "gold": {
+        "left": "cedar6",
+        "right": "maple6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "maple6 was not generated as an effect of cedar6",
+      "names": [
+        "cedar6",
+        "maple6"
+      ],
+      "gold": {
+        "left": "cedar6",
+        "right": "maple6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "cedar8 is dependent on the presence of maple8",
+      "names": [
+        "cedar8",
+        "maple8"
+      ],
+      "gold": {
+        "left": "cedar8",
+        "right": "maple8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "cedar8 cannot occur without maple8",
+      "names": [
+        "cedar8",
+        "maple8"
+      ],
+      "gold": {
+        "left": "cedar8",
+        "right": "maple8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "maple8 is essential to the occurrence of cedar8",
+      "names": [
+        "cedar8",
+        "maple8"
+      ],
+      "gold": {
+        "left": "cedar8",
+        "right": "maple8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "maple8 must exist for cedar8 to occur",
+      "names": [
+        "cedar8",
+        "maple8"
+      ],
+      "gold": {
+        "left": "cedar8",
+        "right": "maple8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "cedar10 is not dependent on the presence of maple10",
+      "names": [
+        "cedar10",
+        "maple10"
+      ],
+      "gold": {
+        "left": "cedar10",
+        "right": "maple10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "cedar10 can occur without maple10",
+      "names": [
+        "cedar10",
+        "maple10"
+      ],
+      "gold": {
+        "left": "cedar10",
+        "right": "maple10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "maple10 is not essential to the occurrence of cedar10",
+      "names": [
+        "cedar10",
+        "maple10"
+      ],
+      "gold": {
+        "left": "cedar10",
+        "right": "maple10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "maple10 need not exist for cedar10 to occur",
+      "names": [
+        "cedar10",
+        "maple10"
+      ],
+      "gold": {
+        "left": "cedar10",
+        "right": "maple10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "cedar12 makes maple12 impossible to occur",
+      "names": [
+        "cedar12",
+        "maple12"
+      ],
+      "gold": {
+        "left": "cedar12",
+        "right": "maple12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "cedar12 stops maple12 from taking place",
+      "names": [
+        "cedar12",
+        "maple12"
+      ],
+      "gold": {
+        "left": "cedar12",
+        "right": "maple12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "maple12 is made impossible to occur by cedar12",
+      "names": [
+        "cedar12",
+        "maple12"
+      ],
+      "gold": {
+        "left": "cedar12",
+        "right": "maple12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "maple12 is stopped from taking place by cedar12",
+      "names": [
+        "cedar12",
+        "maple12"
+      ],
+      "gold": {
+        "left": "cedar12",
+        "right": "maple12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "cedar14 does not make maple14 impossible to occur",
+      "names": [
+        "cedar14",
+        "maple14"
+      ],
+      "gold": {
+        "left": "cedar14",
+        "right": "maple14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "cedar14 does not stop maple14 from taking place",
+      "names": [
+        "cedar14",
+        "maple14"
+      ],
+      "gold": {
+        "left": "cedar14",
+        "right": "maple14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "maple14 is not made impossible to occur by cedar14",
+      "names": [
+        "cedar14",
+        "maple14"
+      ],
+      "gold": {
+        "left": "cedar14",
+        "right": "maple14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "maple14 is not stopped from taking place by cedar14",
+      "names": [
+        "cedar14",
+        "maple14"
+      ],
+      "gold": {
+        "left": "cedar14",
+        "right": "maple14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "ivy0 might come about through ash0",
+      "names": [
+        "ivy0",
+        "ash0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy1 resembles the surface texture of ash1",
+      "names": [
+        "ivy1",
+        "ash1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy2 was displayed in the vicinity of ash2",
+      "names": [
+        "ivy2",
+        "ash2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy3 could bring ash3 into existence",
+      "names": [
+        "ivy3",
+        "ash3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy4 has a perimeter comparable to ash4",
+      "names": [
+        "ivy4",
+        "ash4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy5 and ash5 were indexed together",
+      "names": [
+        "ivy5",
+        "ash5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy6 appears near a diagram of ash6",
+      "names": [
+        "ivy6",
+        "ash6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy7 possibly depends on ash7",
+      "names": [
+        "ivy7",
+        "ash7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy8 has a brightness comparable to ash8",
+      "names": [
+        "ivy8",
+        "ash8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy9 was painted alongside ash9",
+      "names": [
+        "ivy9",
+        "ash9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy10 or ash10 was photographed",
+      "names": [
+        "ivy10",
+        "ash10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "ivy11 shares a shade of color with ash11",
+      "names": [
+        "ivy11",
+        "ash11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "arcx0",
+        "arcy0",
+        "arcz0"
+      ],
+      "sentences": [
+        "arcx0 took place at an earlier time than arcy0",
+        "arcy0 took place at an earlier time than arcz0"
+      ],
+      "claim": "arcx0 took place at an earlier time than arcz0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "arcx0",
+        "arcy0",
+        "arcz0"
+      ],
+      "sentences": [
+        "arcx0 took place at an earlier time than arcy0"
+      ],
+      "claim": "arcx0 did not take place at an earlier time than arcy0",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "arcx0",
+        "arcy0",
+        "arcz0"
+      ],
+      "sentences": [
+        "arcx0 took place at an earlier time than arcy0",
+        "arcx0 did not take place at an earlier time than arcy0"
+      ],
+      "claim": "arcx0 took place at an earlier time than arcy0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "arcx1",
+        "arcy1",
+        "arcz1"
+      ],
+      "sentences": [
+        "arcx1 brought arcy1 into existence",
+        "arcy1 brought arcz1 into existence"
+      ],
+      "claim": "arcx1 brought arcz1 into existence",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "arcx1",
+        "arcy1",
+        "arcz1"
+      ],
+      "sentences": [
+        "arcx1 brought arcy1 into existence"
+      ],
+      "claim": "arcx1 did not bring arcy1 into existence",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "arcx1",
+        "arcy1",
+        "arcz1"
+      ],
+      "sentences": [
+        "arcx1 brought arcy1 into existence",
+        "arcx1 did not bring arcy1 into existence"
+      ],
+      "claim": "arcx1 brought arcy1 into existence",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "arcx2",
+        "arcy2",
+        "arcz2"
+      ],
+      "sentences": [
+        "arcx2 is dependent on the presence of arcy2",
+        "arcy2 is dependent on the presence of arcz2"
+      ],
+      "claim": "arcx2 is dependent on the presence of arcz2",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "arcx2",
+        "arcy2",
+        "arcz2"
+      ],
+      "sentences": [
+        "arcx2 is dependent on the presence of arcy2"
+      ],
+      "claim": "arcx2 is not dependent on the presence of arcy2",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "arcx2",
+        "arcy2",
+        "arcz2"
+      ],
+      "sentences": [
+        "arcx2 is dependent on the presence of arcy2",
+        "arcx2 is not dependent on the presence of arcy2"
+      ],
+      "claim": "arcx2 is dependent on the presence of arcy2",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "arcx3",
+        "arcy3",
+        "arcz3"
+      ],
+      "sentences": [
+        "arcx3 makes arcy3 impossible to occur",
+        "arcy3 makes arcz3 impossible to occur"
+      ],
+      "claim": "arcx3 makes arcz3 impossible to occur",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "arcx3",
+        "arcy3",
+        "arcz3"
+      ],
+      "sentences": [
+        "arcx3 makes arcy3 impossible to occur"
+      ],
+      "claim": "arcx3 does not make arcy3 impossible to occur",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "arcx3",
+        "arcy3",
+        "arcz3"
+      ],
+      "sentences": [
+        "arcx3 makes arcy3 impossible to occur",
+        "arcx3 does not make arcy3 impossible to occur"
+      ],
+      "claim": "arcx3 makes arcy3 impossible to occur",
+      "expected": "HOLD_CONFLICT"
+    }
+  ]
+}
