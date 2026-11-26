@@ -1,0 +1,51 @@
+{
+  "schema": "r84h28.source_cards.v1",
+  "cards": [
+    {
+      "label": "h12_cache_hit",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+      "anchors": [
+        "cache contains a matching item",
+        "returns the item"
+      ],
+      "text": "Cache hit. A lookup succeeds because the desired record, requested block or matching key already resides in local cached storage. A read can return the saved value without contacting the original database or remote backing service."
+    },
+    {
+      "label": "h12_cache_miss",
+      "url": "https://learn.microsoft.com/en-us/azure/architecture/patterns/cache-aside",
+      "anchors": [
+        "cache miss",
+        "retrieves the item from the data store"
+      ],
+      "text": "Cache miss. The requested object is absent from cached memory; a failed lookup requires reading the authoritative backing store, fetching the missing value and possibly populating the cache."
+    },
+    {
+      "label": "h12_write_through",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching",
+      "anchors": [
+        "write-through caching",
+        "immediately to disk"
+      ],
+      "text": "Write through. A cache update propagates synchronously to backing storage, with the write completed immediately at both layers rather than deferred to a later flush. Persistence is part of the write path."
+    },
+    {
+      "label": "h12_write_back",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/fileio/file-caching",
+      "anchors": [
+        "write-back cache",
+        "lazy writer"
+      ],
+      "text": "Write back or write behind. A modified value is initially held in memory, leaving dirty cached data. The application may finish before persistence; accumulated changes are flushed or synchronized to disk later by a background writer."
+    },
+    {
+      "label": "h12_semaphore",
+      "url": "https://docs.oracle.com/en/java/javase/26/docs/api/java.base/java/util/concurrent/Semaphore.html",
+      "anchors": [
+        "counting semaphore",
+        "set of permits"
+      ],
+      "text": "Counting semaphore. A finite resource pool is managed by a count of available permits or tokens. A participant acquires one before accessing the resource and releases it when finished; the count bounds simultaneous holders. Multiple holders may enter if permits remain."
+    }
+  ],
+  "scope": "Original paraphrases of reviewed primary references, no full text copied. Live anchor checks evidence of page content not semantic proof. Only cards with retrieved anchors enter disposable Cortex. Separate BEETLE leads quarantine."
+}
