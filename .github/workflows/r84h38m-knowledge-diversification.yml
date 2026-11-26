@@ -1,0 +1,169 @@
+name: JANUS R84H38M knowledge diversification
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h38m_knowledge_diversification.py'
+      - '.github/workflows/r84h38m-knowledge-diversification.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h38m-bounded-research
+  cancel-in-progress: false
+jobs:
+  diagnostic:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h38m-knowledge-diversification-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h38m_knowledge_diversification.py
+            autonomy/federation/R84H38L_FROZEN_EXAM.json
+            autonomy/federation/r84h38l_knowledge_crystallization.py
+            autonomy/federation/r84h38j_fractal_self_learning.py
+            autonomy/federation/r84h38i_fractal_reconstruction.py
+            autonomy/federation/r84h38h_semantic_kaleidoscope.py
+            autonomy/federation/r84h38g_semantic_mosaic.py
+            autonomy/federation/r84h38f_semantic_crystal.py
+            autonomy/federation/r84h38e_semantic_invariance.py
+            autonomy/federation/r84h38d_world_understanding.py
+            autonomy/federation/r84h38c_semantic_world_graph.py
+            autonomy/federation/verified_capabilities.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install --disable-pip-version-check numpy==1.26.4 safetensors==0.5.2
+          python -c 'import importlib.util; assert importlib.util.find_spec("transformers") is None; assert importlib.util.find_spec("huggingface_hub") is None'
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38h-trained
+          run-id: 45836412459
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38h
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38g-trained
+          run-id: 45834333513
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38g
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38i-trained
+          run-id: 45837224743
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38i
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38e-trained
+          run-id: 45829342920
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/h38e
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38l-trained
+          run-id: 45840549500
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/lparent
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38l-results
+          run-id: 45840549500
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/lprior
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: 3cbb736f3837e25b50860544ee4f7329d66360f7
+          path: kcode
+          sparse-checkout: research/h38k
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: h38k-intake-state
+          path: kstate
+          sparse-checkout: data/h38k-intake
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: memory-cortex-state
+          path: upstream
+          sparse-checkout: data/memory-cortex
+          persist-credentials: false
+      - run: |
+          set -euo pipefail
+          test "$(git hash-object autonomy/federation/R84H38L_FROZEN_EXAM.json)" = 58a7f234f9d4256ea05dd58763679de93f43e646
+          offline=(sudo unshare --net --setgid "$(id -g)" --setuid "$(id -u)" -- env JANUS_PARENT_NETNS="$(readlink /proc/self/ns/net)" "$(command -v python)")
+          "${offline[@]}" autonomy/federation/r84h38m_knowledge_diversification.py diag "$RUNNER_TEMP/h38h" "$RUNNER_TEMP/h38g" "$RUNNER_TEMP/h38i" "$RUNNER_TEMP/h38e" "$RUNNER_TEMP/lparent" demi "$RUNNER_TEMP/lprior" autonomy/federation/R84H38L_FROZEN_EXAM.json "$RUNNER_TEMP/diagnostic"
+          "${offline[@]}" autonomy/federation/r84h38m_knowledge_diversification.py diversify kcode/research/h38k kstate/data/h38k-intake/queue.json upstream/data/memory-cortex "$RUNNER_TEMP/diagnostic" "$RUNNER_TEMP/diversified"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38m-diagnostic
+          path: |
+            ${{ runner.temp }}/diagnostic
+            ${{ runner.temp }}/diversified
+          if-no-files-found: error
+          retention-days: 60
+  scout:
+    needs: diagnostic
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-lapis
+          ref: f6a30b41fca4ce1dc636909e2c4c14b29891cbaf
+          path: lapis
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check requests==2.32.5
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h38m-diagnostic
+          path: ${{ runner.temp }}/input
+      - name: Feed observed gap to actual bounded Beetle scouts
+        run: |
+          python - <<'PY'
+          import json, os, sys
+          from pathlib import Path
+          p=Path(os.environ["RUNNER_TEMP"])
+          q=json.loads((p/"input/diversified/gap_request.json").read_text())
+          allowed={"relation extraction","semantic parsing","negation scope","natural language inference","temporal relation extraction","semantic role labeling","selective prediction","uncertainty calibration"}
+          terms=q["terms"]
+          assert isinstance(terms,list) and 1<=len(terms)<=8 and set(terms)<=allowed
+          query=" OR ".join('all:"'+t+'"' for t in terms)
+          assert q["query"]==query and q["purpose"]=="SEARCH_METADATA_ONLY_NOT_TRUTH"
+          sys.path.insert(0,str(Path("lapis/tools").resolve()))
+          import universal_beetle as b
+          root=p/"beetle";state=b.State(root)
+          cfg={"schema":"janus.universal_beetle.directions.v1","global_budget":{"max_requests_per_run":2,"max_new_candidates_per_run":12,"max_metadata_bytes_per_run":1000000},"directions":[{"id":"h38m_observed_semantic_gap","title":"Observed JANUS semantic gap","keywords":terms,"priority_keywords":terms,"min_score":1,"sources":[{"kind":"arxiv","query":query,"max_results":6},{"kind":"zenodo","query":" OR ".join('"'+t+'"' for t in terms),"max_results":6}]}]}
+          summary=b.run_scout(cfg,state,None)
+          receipt={"schema":"h38m.beetle.v1","gap":q,"beetle_commit":"f6a30b41fca4ce1dc636909e2c4c14b29891cbaf","summary":summary,"epistemic_status":"DISCOVERY_CANDIDATE_NOT_TRUTH","durable_main_ledger_written":False,"production":False}
+          (root/"H38M_SCOUT.json").write_text(json.dumps(receipt,sort_keys=True)+"\n")
+          print("R84H38M_BEETLE",json.dumps(receipt,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h38m-beetle
+          path: ${{ runner.temp }}/beetle
+          if-no-files-found: error
+          retention-days: 60
