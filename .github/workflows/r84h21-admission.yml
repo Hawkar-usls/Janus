@@ -1,0 +1,95 @@
+name: JANUS R84H21 knowledge admission
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h21_admission.py'
+      - '.github/workflows/r84h21-admission.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h21-bounded-research
+  cancel-in-progress: false
+jobs:
+  sources:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h21-knowledge-admission-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 8c05aa005c0f488c95614bf4e4a85ae7740d13a5
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            janus_model/memory_cortex_growth.py
+            janus_model/memory_512_audit_index_r3.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h20-verified
+          path: ${{ runner.temp }}/h20
+          run-id: 45771609309
+          github-token: ${{ github.token }}
+      - run: python3 autonomy/federation/r84h21_admission.py sources demi "$RUNNER_TEMP/h20" "$RUNNER_TEMP/sources"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h21-source-audit
+          path: ${{ runner.temp }}/sources
+          if-no-files-found: error
+          retention-days: 60
+  train:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h21-knowledge-admission-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          sparse-checkout: |
+            autonomy/federation/r84h21_admission.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - run: |
+          test ! -e autonomy/federation/R84H21_GRAPH_EXAM.json
+          python autonomy/federation/r84h21_admission.py train "$RUNNER_TEMP/trained"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h21-trained
+          path: ${{ runner.temp }}/trained
+          if-no-files-found: error
+          retention-days: 60
+  exam:
+    needs: train
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python -m pip install --disable-pip-version-check torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h21-trained
+          path: ${{ runner.temp }}/trained
+      - run: python autonomy/federation/r84h21_admission.py evaluate "$RUNNER_TEMP/trained" "$RUNNER_TEMP/exam"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h21-graph-exam
+          path: ${{ runner.temp }}/exam
+          if-no-files-found: error
+          retention-days: 60
