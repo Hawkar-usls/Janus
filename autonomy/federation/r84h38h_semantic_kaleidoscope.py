@@ -23,7 +23,7 @@ PINS={
 def verify_sources(reg,cos):
     for p,h in PINS.items():ck(e.blob(reg/p)==h,"SOURCE_PIN:"+p)
     p=cos/"research/seti/retina_5d_mosaic_protocol.json"
-    q=read(p);ck(q["origins"][0]["blob"]==PINS[next(iter(PINS))] and q["input_contract"]["baseline_alert_always_preserved"] and not q["production_adoption"],"COSMOS_PROTOCOL")
+    q=read(p);ck(q["origins"][0]["blob"]==PINS[next(iter(PINS))] and q["input_contract"]["baseline_alert_always_preserved"] and e.blob(p)=="c80b6eb38eb3ac0ed856bfb0d5d66b11e9c2180e" and not q["production_adoption"],"COSMOS_PROTOCOL")
     return {"registry_blobs":PINS,"cosmos_protocol_sha256":sha(p),"pyramid_12d":"BLOCKED_ORIGINAL_NOT_LOCATED"}
 DROP={"evone","evtwo","not","never","did","does","is","was","were","be","been","by","for","to","the","a","an","of","than","directly","effectively"}
 # Remove role/polarity markers only for coarse relation classification; keep
@@ -142,16 +142,34 @@ def evaluate(trained,oldE,oldG,demi,reg,cos,exam,priorc,priord,priore,priorf,pri
         n=e.norm(t,names)
         if n is None:return None
         text,events=n;c,gp,_=score(text);js,conf,margin=m.raw(gp)
-        k="source" if mode=="stack" else mode
+        k="source" if mode in ("stack","fractal") else mode
         relation=decide(c,k,r["rules"][k]["rule"])
         if relation is None:return None
+        if mode=="fractal":
+            # Four recursive children of the same shape: split the normalized
+            # evidence into two role-delimited halves, retain reversible views,
+            # and return their candidate constraints to the parent. Unknown
+            # child constraints do not become new facts.
+            def tree(tokens,depth):
+                st=" ".join(tokens)
+                if not tokens:return {"candidates":set(range(4)),"leaves":0}
+                a=top(probs(ns["views"],[st])[0])
+                b=top(probs(ns["views"],[reverse(st)])[0])
+                support={a[0]} if a[0]==b[0] and a[0]<4 and min(a[1],b[1])>=.95 else set(range(4))
+                if depth==0 or len(tokens)<4:return {"candidates":support,"leaves":1}
+                mid=len(tokens)//2
+                chunks=[tokens[:mid],tokens[mid:],list(reversed(tokens[:mid])),list(reversed(tokens[mid:]))]
+                kids=[tree(v,depth-1) for v in chunks]
+                return {"candidates":support.intersection(*(z["candidates"] for z in kids)),"leaves":sum(z["leaves"] for z in kids)}
+            proof=tree(view(text).split(),2)
+            if relation not in proof["candidates"]:return None
         pol,di_=m.cues(text)
         # Conservatively require old component agreement and calibrated
         # minimum confidence for polarity/direction/certainty; no relation
         # threshold from disabled H38G reused.
         if js[3]!=1 or pol is None or di_ is None or js[1]!=pol or js[2]!=di_ or min(conf[1:])<.9 or min(margin[1:])<.25:return None
         return e.decode(4*relation+2*js[1]+js[2],events)
-    modes=MODES+("h38e","stack")
+    modes=MODES+("fractal","h38e","stack")
     stats={k:{"relation_correct":0,"relation_wrong":0,"unknown_false":0,"raw_relation_correct":0,"crystal_correct":0,"crystal_wrong":0,"crystal_unknown_false":0,"withheld_correct":0,"groups":0} for k in modes}
     details=[]
     for z in ex["rows"]:
@@ -184,6 +202,6 @@ def evaluate(trained,oldE,oldG,demi,reg,cos,exam,priorc,priord,priore,priorf,pri
             a=solve(z["sentences"],z["claim"],ns_,k);replay[k]["correct"]+=a==z["expected"];replay[k]["false_certainty"]+=a in ("ENTAILED","CONTRADICTED") and a!=z["expected"];replay[k]["lost"]+=base==z["expected"] and a!=z["expected"]
     ck(replay["h38e"]["correct"]==46,"H38E_REPLAY")
     old=read(priorc)["cases"];ck(len(old)==76 and all(g.solve(z["request"])["status"]==z["expected"] for z in old),"H38C_REPLAY")
-    result={"schema":"h38h.result.v1","exam_sha":sha(exam),"known_n":sum(z["y"]<16 for z in details),"unknown_n":sum(z["y"]==16 for z in details),"groups_n":len(ex["groups"]),"graphs_n":len(ex["graphs"]),"routes":stats,"graphs":graphs,"h38d_replay":replay,"h38c_replay":76,"cortex_queries":di.calls,"source_pins":sources,"quality_gate":"HOLD","production":False,"scope":"Same-author bounded English with supplied event inventory. Matched data and equal updates direct vs view models. Reversible feature views are correlated, not independent evidence. Source gate is authored correspondence, not external truth. Fixed mosaic slot checks and route ablations are inspired by tiling/Wedjat, not their mathematical proof or a full 12D pyramid. No independent external exam."}
+    result={"schema":"h38h.result.v1","exam_sha":sha(exam),"known_n":sum(z["y"]<16 for z in details),"unknown_n":sum(z["y"]==16 for z in details),"groups_n":len(ex["groups"]),"graphs_n":len(ex["graphs"]),"routes":stats,"graphs":graphs,"h38d_replay":replay,"h38c_replay":76,"cortex_queries":di.calls,"source_pins":sources,"quality_gate":"HOLD","production":False,"scope":"Same-author bounded English with supplied event inventory. Matched data and equal updates direct vs view models. Reversible feature views are correlated, not independent evidence. Source gate is authored correspondence, not external truth. Fixed mosaic slot checks and route ablations are inspired by tiling/Wedjat. Fractal mode is a new depth-two four-child constraint intersection, not a recovered canonical pyramid or a 12D model. No independent external exam."}
     write(out/"result.json",result);write(out/"cases.json",details);print("R84H38H_RESULT",json.dumps(result,sort_keys=True),flush=True)
 if __name__=="__main__":{"train":train,"evaluate":evaluate}[sys.argv[1]](*map(Path,sys.argv[2:]))
