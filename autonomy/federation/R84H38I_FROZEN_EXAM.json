@@ -1,0 +1,773 @@
+{
+  "schema": "h38i.exam.v1",
+  "scope": "New same-author exact normalized templates; disclosed H38H allowed only as repair training, no independent external exam.",
+  "rows": [
+    {
+      "text": "agate0 was completed prior to beryl0",
+      "names": [
+        "agate0",
+        "beryl0"
+      ],
+      "gold": {
+        "left": "agate0",
+        "right": "beryl0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "agate0 ended earlier than beryl0",
+      "names": [
+        "agate0",
+        "beryl0"
+      ],
+      "gold": {
+        "left": "agate0",
+        "right": "beryl0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "beryl0 was completed subsequent to agate0",
+      "names": [
+        "agate0",
+        "beryl0"
+      ],
+      "gold": {
+        "left": "agate0",
+        "right": "beryl0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "beryl0 ended later than agate0",
+      "names": [
+        "agate0",
+        "beryl0"
+      ],
+      "gold": {
+        "left": "agate0",
+        "right": "beryl0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "agate2 was never completed prior to beryl2",
+      "names": [
+        "agate2",
+        "beryl2"
+      ],
+      "gold": {
+        "left": "agate2",
+        "right": "beryl2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "agate2 did not end earlier than beryl2",
+      "names": [
+        "agate2",
+        "beryl2"
+      ],
+      "gold": {
+        "left": "agate2",
+        "right": "beryl2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "beryl2 was never completed subsequent to agate2",
+      "names": [
+        "agate2",
+        "beryl2"
+      ],
+      "gold": {
+        "left": "agate2",
+        "right": "beryl2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "beryl2 did not end later than agate2",
+      "names": [
+        "agate2",
+        "beryl2"
+      ],
+      "gold": {
+        "left": "agate2",
+        "right": "beryl2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "agate4 provoked the occurrence of beryl4",
+      "names": [
+        "agate4",
+        "beryl4"
+      ],
+      "gold": {
+        "left": "agate4",
+        "right": "beryl4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "agate4 activated the occurrence of beryl4",
+      "names": [
+        "agate4",
+        "beryl4"
+      ],
+      "gold": {
+        "left": "agate4",
+        "right": "beryl4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "beryl4 was provoked by the occurrence of agate4",
+      "names": [
+        "agate4",
+        "beryl4"
+      ],
+      "gold": {
+        "left": "agate4",
+        "right": "beryl4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "beryl4 was activated by the occurrence of agate4",
+      "names": [
+        "agate4",
+        "beryl4"
+      ],
+      "gold": {
+        "left": "agate4",
+        "right": "beryl4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "agate6 did not provoke the occurrence of beryl6",
+      "names": [
+        "agate6",
+        "beryl6"
+      ],
+      "gold": {
+        "left": "agate6",
+        "right": "beryl6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "agate6 did not activate the occurrence of beryl6",
+      "names": [
+        "agate6",
+        "beryl6"
+      ],
+      "gold": {
+        "left": "agate6",
+        "right": "beryl6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "beryl6 was not provoked by the occurrence of agate6",
+      "names": [
+        "agate6",
+        "beryl6"
+      ],
+      "gold": {
+        "left": "agate6",
+        "right": "beryl6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "beryl6 was not activated by the occurrence of agate6",
+      "names": [
+        "agate6",
+        "beryl6"
+      ],
+      "gold": {
+        "left": "agate6",
+        "right": "beryl6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "agate8 presupposes completion of beryl8",
+      "names": [
+        "agate8",
+        "beryl8"
+      ],
+      "gold": {
+        "left": "agate8",
+        "right": "beryl8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "agate8 is contingent upon completion of beryl8",
+      "names": [
+        "agate8",
+        "beryl8"
+      ],
+      "gold": {
+        "left": "agate8",
+        "right": "beryl8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "beryl8 is a required precondition for agate8",
+      "names": [
+        "agate8",
+        "beryl8"
+      ],
+      "gold": {
+        "left": "agate8",
+        "right": "beryl8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "beryl8 is required for completion of agate8",
+      "names": [
+        "agate8",
+        "beryl8"
+      ],
+      "gold": {
+        "left": "agate8",
+        "right": "beryl8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "agate10 does not presuppose completion of beryl10",
+      "names": [
+        "agate10",
+        "beryl10"
+      ],
+      "gold": {
+        "left": "agate10",
+        "right": "beryl10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "agate10 is not contingent upon completion of beryl10",
+      "names": [
+        "agate10",
+        "beryl10"
+      ],
+      "gold": {
+        "left": "agate10",
+        "right": "beryl10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "beryl10 is not a required precondition for agate10",
+      "names": [
+        "agate10",
+        "beryl10"
+      ],
+      "gold": {
+        "left": "agate10",
+        "right": "beryl10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "beryl10 is not required for completion of agate10",
+      "names": [
+        "agate10",
+        "beryl10"
+      ],
+      "gold": {
+        "left": "agate10",
+        "right": "beryl10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "agate12 precludes the occurrence of beryl12",
+      "names": [
+        "agate12",
+        "beryl12"
+      ],
+      "gold": {
+        "left": "agate12",
+        "right": "beryl12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "agate12 bars the occurrence of beryl12",
+      "names": [
+        "agate12",
+        "beryl12"
+      ],
+      "gold": {
+        "left": "agate12",
+        "right": "beryl12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "beryl12 is precluded by the occurrence of agate12",
+      "names": [
+        "agate12",
+        "beryl12"
+      ],
+      "gold": {
+        "left": "agate12",
+        "right": "beryl12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "beryl12 is barred by the occurrence of agate12",
+      "names": [
+        "agate12",
+        "beryl12"
+      ],
+      "gold": {
+        "left": "agate12",
+        "right": "beryl12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "agate14 does not preclude the occurrence of beryl14",
+      "names": [
+        "agate14",
+        "beryl14"
+      ],
+      "gold": {
+        "left": "agate14",
+        "right": "beryl14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "agate14 does not bar the occurrence of beryl14",
+      "names": [
+        "agate14",
+        "beryl14"
+      ],
+      "gold": {
+        "left": "agate14",
+        "right": "beryl14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "beryl14 is not precluded by the occurrence of agate14",
+      "names": [
+        "agate14",
+        "beryl14"
+      ],
+      "gold": {
+        "left": "agate14",
+        "right": "beryl14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "beryl14 is not barred by the occurrence of agate14",
+      "names": [
+        "agate14",
+        "beryl14"
+      ],
+      "gold": {
+        "left": "agate14",
+        "right": "beryl14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "elm0 could provoke fir0",
+      "names": [
+        "elm0",
+        "fir0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm1 has a comparable outline to fir1",
+      "names": [
+        "elm1",
+        "fir1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm2 was photographed beside fir2",
+      "names": [
+        "elm2",
+        "fir2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm3 may bar fir3",
+      "names": [
+        "elm3",
+        "fir3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm4 has a matching length to fir4",
+      "names": [
+        "elm4",
+        "fir4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm5 and fir5 were observed",
+      "names": [
+        "elm5",
+        "fir5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm6 was catalogued near fir6",
+      "names": [
+        "elm6",
+        "fir6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm7 possibly precludes fir7",
+      "names": [
+        "elm7",
+        "fir7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm8 has an identical width to fir8",
+      "names": [
+        "elm8",
+        "fir8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm9 is pictured adjacent to fir9",
+      "names": [
+        "elm9",
+        "fir9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm10 or fir10 was observed",
+      "names": [
+        "elm10",
+        "fir10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "elm11 is nearly the height of fir11",
+      "names": [
+        "elm11",
+        "fir11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "nova0",
+        "orbit0",
+        "zenith0"
+      ],
+      "sentences": [
+        "nova0 was completed prior to orbit0",
+        "zenith0 was completed subsequent to orbit0"
+      ],
+      "claim": "nova0 ended earlier than zenith0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "nova0",
+        "orbit0",
+        "zenith0"
+      ],
+      "sentences": [
+        "nova0 was completed prior to orbit0",
+        "zenith0 was completed subsequent to orbit0"
+      ],
+      "claim": "nova0 provoked the occurrence of zenith0",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "nova0",
+        "orbit0",
+        "zenith0"
+      ],
+      "sentences": [
+        "nova0 was completed prior to orbit0",
+        "zenith0 was completed subsequent to orbit0",
+        "zenith0 ended earlier than nova0"
+      ],
+      "claim": "nova0 ended earlier than zenith0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "nova0",
+        "orbit0",
+        "zenith0"
+      ],
+      "sentences": [
+        "nova0 was completed prior to orbit0",
+        "zenith0 was completed subsequent to orbit0"
+      ],
+      "claim": "zenith0 did not end earlier than nova0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "nova1",
+        "orbit1",
+        "zenith1"
+      ],
+      "sentences": [
+        "nova1 was completed prior to orbit1",
+        "zenith1 was completed subsequent to orbit1"
+      ],
+      "claim": "nova1 ended earlier than zenith1",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "nova1",
+        "orbit1",
+        "zenith1"
+      ],
+      "sentences": [
+        "nova1 was completed prior to orbit1",
+        "zenith1 was completed subsequent to orbit1"
+      ],
+      "claim": "nova1 provoked the occurrence of zenith1",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "nova1",
+        "orbit1",
+        "zenith1"
+      ],
+      "sentences": [
+        "nova1 was completed prior to orbit1",
+        "zenith1 was completed subsequent to orbit1",
+        "zenith1 ended earlier than nova1"
+      ],
+      "claim": "nova1 ended earlier than zenith1",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "nova1",
+        "orbit1",
+        "zenith1"
+      ],
+      "sentences": [
+        "nova1 was completed prior to orbit1",
+        "zenith1 was completed subsequent to orbit1"
+      ],
+      "claim": "zenith1 did not end earlier than nova1",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "nova2",
+        "orbit2",
+        "zenith2"
+      ],
+      "sentences": [
+        "nova2 was completed prior to orbit2",
+        "zenith2 was completed subsequent to orbit2"
+      ],
+      "claim": "nova2 ended earlier than zenith2",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "nova2",
+        "orbit2",
+        "zenith2"
+      ],
+      "sentences": [
+        "nova2 was completed prior to orbit2",
+        "zenith2 was completed subsequent to orbit2"
+      ],
+      "claim": "nova2 provoked the occurrence of zenith2",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "nova2",
+        "orbit2",
+        "zenith2"
+      ],
+      "sentences": [
+        "nova2 was completed prior to orbit2",
+        "zenith2 was completed subsequent to orbit2",
+        "zenith2 ended earlier than nova2"
+      ],
+      "claim": "nova2 ended earlier than zenith2",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "nova2",
+        "orbit2",
+        "zenith2"
+      ],
+      "sentences": [
+        "nova2 was completed prior to orbit2",
+        "zenith2 was completed subsequent to orbit2"
+      ],
+      "claim": "zenith2 did not end earlier than nova2",
+      "expected": "ENTAILED"
+    }
+  ]
+}
