@@ -1,0 +1,618 @@
+{
+  "schema": "h38e.exam.v1",
+  "scope": "same-author distinct surface templates; 8 equivalent groups with opposite labels and 12 unknown controls; 12 graph scenarios",
+  "rows": [
+    {
+      "text": "nimbus0 took place earlier than quartz0",
+      "names": [
+        "nimbus0",
+        "quartz0"
+      ],
+      "gold": {
+        "left": "nimbus0",
+        "rel": "BEFORE",
+        "right": "quartz0",
+        "positive": true
+      }
+    },
+    {
+      "text": "quartz0 happened later than nimbus0",
+      "names": [
+        "nimbus0",
+        "quartz0"
+      ],
+      "gold": {
+        "left": "nimbus0",
+        "rel": "BEFORE",
+        "right": "quartz0",
+        "positive": true
+      }
+    },
+    {
+      "text": "nimbus0 was completed ahead of quartz0",
+      "names": [
+        "nimbus0",
+        "quartz0"
+      ],
+      "gold": {
+        "left": "nimbus0",
+        "rel": "BEFORE",
+        "right": "quartz0",
+        "positive": true
+      }
+    },
+    {
+      "text": "nimbus1 was never earlier than quartz1",
+      "names": [
+        "nimbus1",
+        "quartz1"
+      ],
+      "gold": {
+        "left": "nimbus1",
+        "rel": "BEFORE",
+        "right": "quartz1",
+        "positive": false
+      }
+    },
+    {
+      "text": "quartz1 was not completed after nimbus1",
+      "names": [
+        "nimbus1",
+        "quartz1"
+      ],
+      "gold": {
+        "left": "nimbus1",
+        "rel": "BEFORE",
+        "right": "quartz1",
+        "positive": false
+      }
+    },
+    {
+      "text": "nimbus1 did not take place ahead of quartz1",
+      "names": [
+        "nimbus1",
+        "quartz1"
+      ],
+      "gold": {
+        "left": "nimbus1",
+        "rel": "BEFORE",
+        "right": "quartz1",
+        "positive": false
+      }
+    },
+    {
+      "text": "nimbus2 directly brought about quartz2",
+      "names": [
+        "nimbus2",
+        "quartz2"
+      ],
+      "gold": {
+        "left": "nimbus2",
+        "rel": "CAUSES",
+        "right": "quartz2",
+        "positive": true
+      }
+    },
+    {
+      "text": "quartz2 was brought about by nimbus2",
+      "names": [
+        "nimbus2",
+        "quartz2"
+      ],
+      "gold": {
+        "left": "nimbus2",
+        "rel": "CAUSES",
+        "right": "quartz2",
+        "positive": true
+      }
+    },
+    {
+      "text": "nimbus2 gave rise to quartz2",
+      "names": [
+        "nimbus2",
+        "quartz2"
+      ],
+      "gold": {
+        "left": "nimbus2",
+        "rel": "CAUSES",
+        "right": "quartz2",
+        "positive": true
+      }
+    },
+    {
+      "text": "nimbus3 never brought about quartz3",
+      "names": [
+        "nimbus3",
+        "quartz3"
+      ],
+      "gold": {
+        "left": "nimbus3",
+        "rel": "CAUSES",
+        "right": "quartz3",
+        "positive": false
+      }
+    },
+    {
+      "text": "quartz3 was not brought about by nimbus3",
+      "names": [
+        "nimbus3",
+        "quartz3"
+      ],
+      "gold": {
+        "left": "nimbus3",
+        "rel": "CAUSES",
+        "right": "quartz3",
+        "positive": false
+      }
+    },
+    {
+      "text": "nimbus3 did not give rise to quartz3",
+      "names": [
+        "nimbus3",
+        "quartz3"
+      ],
+      "gold": {
+        "left": "nimbus3",
+        "rel": "CAUSES",
+        "right": "quartz3",
+        "positive": false
+      }
+    },
+    {
+      "text": "nimbus4 is dependent on quartz4",
+      "names": [
+        "nimbus4",
+        "quartz4"
+      ],
+      "gold": {
+        "left": "nimbus4",
+        "rel": "REQUIRES",
+        "right": "quartz4",
+        "positive": true
+      }
+    },
+    {
+      "text": "quartz4 is indispensable for nimbus4",
+      "names": [
+        "nimbus4",
+        "quartz4"
+      ],
+      "gold": {
+        "left": "nimbus4",
+        "rel": "REQUIRES",
+        "right": "quartz4",
+        "positive": true
+      }
+    },
+    {
+      "text": "nimbus4 needs quartz4 to proceed",
+      "names": [
+        "nimbus4",
+        "quartz4"
+      ],
+      "gold": {
+        "left": "nimbus4",
+        "rel": "REQUIRES",
+        "right": "quartz4",
+        "positive": true
+      }
+    },
+    {
+      "text": "nimbus5 is not dependent on quartz5",
+      "names": [
+        "nimbus5",
+        "quartz5"
+      ],
+      "gold": {
+        "left": "nimbus5",
+        "rel": "REQUIRES",
+        "right": "quartz5",
+        "positive": false
+      }
+    },
+    {
+      "text": "quartz5 is dispensable for nimbus5",
+      "names": [
+        "nimbus5",
+        "quartz5"
+      ],
+      "gold": {
+        "left": "nimbus5",
+        "rel": "REQUIRES",
+        "right": "quartz5",
+        "positive": false
+      }
+    },
+    {
+      "text": "nimbus5 needs no completion of quartz5",
+      "names": [
+        "nimbus5",
+        "quartz5"
+      ],
+      "gold": {
+        "left": "nimbus5",
+        "rel": "REQUIRES",
+        "right": "quartz5",
+        "positive": false
+      }
+    },
+    {
+      "text": "nimbus6 effectively stops quartz6",
+      "names": [
+        "nimbus6",
+        "quartz6"
+      ],
+      "gold": {
+        "left": "nimbus6",
+        "rel": "PREVENTS",
+        "right": "quartz6",
+        "positive": true
+      }
+    },
+    {
+      "text": "quartz6 is effectively stopped by nimbus6",
+      "names": [
+        "nimbus6",
+        "quartz6"
+      ],
+      "gold": {
+        "left": "nimbus6",
+        "rel": "PREVENTS",
+        "right": "quartz6",
+        "positive": true
+      }
+    },
+    {
+      "text": "nimbus6 obstructs quartz6",
+      "names": [
+        "nimbus6",
+        "quartz6"
+      ],
+      "gold": {
+        "left": "nimbus6",
+        "rel": "PREVENTS",
+        "right": "quartz6",
+        "positive": true
+      }
+    },
+    {
+      "text": "nimbus7 never stops quartz7",
+      "names": [
+        "nimbus7",
+        "quartz7"
+      ],
+      "gold": {
+        "left": "nimbus7",
+        "rel": "PREVENTS",
+        "right": "quartz7",
+        "positive": false
+      }
+    },
+    {
+      "text": "quartz7 is never stopped by nimbus7",
+      "names": [
+        "nimbus7",
+        "quartz7"
+      ],
+      "gold": {
+        "left": "nimbus7",
+        "rel": "PREVENTS",
+        "right": "quartz7",
+        "positive": false
+      }
+    },
+    {
+      "text": "nimbus7 does not obstruct quartz7",
+      "names": [
+        "nimbus7",
+        "quartz7"
+      ],
+      "gold": {
+        "left": "nimbus7",
+        "rel": "PREVENTS",
+        "right": "quartz7",
+        "positive": false
+      }
+    },
+    {
+      "text": "iris0 may trigger opal0",
+      "names": [
+        "iris0",
+        "opal0"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris1 was seen close to opal1",
+      "names": [
+        "iris1",
+        "opal1"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris2 has a label resembling opal2",
+      "names": [
+        "iris2",
+        "opal2"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris3 possibly blocks opal3",
+      "names": [
+        "iris3",
+        "opal3"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris4 shares a timestamp with opal4",
+      "names": [
+        "iris4",
+        "opal4"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris5 and opal5 were mentioned",
+      "names": [
+        "iris5",
+        "opal5"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris6 is next to opal6",
+      "names": [
+        "iris6",
+        "opal6"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris7 might be needed for opal7",
+      "names": [
+        "iris7",
+        "opal7"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris8 or opal8 came first",
+      "names": [
+        "iris8",
+        "opal8"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris9 was discussed near opal9",
+      "names": [
+        "iris9",
+        "opal9"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris10 was not necessarily earlier than opal10",
+      "names": [
+        "iris10",
+        "opal10"
+      ],
+      "gold": null
+    },
+    {
+      "text": "iris11 was compared against opal11",
+      "names": [
+        "iris11",
+        "opal11"
+      ],
+      "gold": null
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2
+    ],
+    [
+      3,
+      4,
+      5
+    ],
+    [
+      6,
+      7,
+      8
+    ],
+    [
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14
+    ],
+    [
+      15,
+      16,
+      17
+    ],
+    [
+      18,
+      19,
+      20
+    ],
+    [
+      21,
+      22,
+      23
+    ]
+  ],
+  "graphs": [
+    {
+      "sentences": [
+        "stepa0 took place earlier than stepb0",
+        "stepc0 happened later than stepb0"
+      ],
+      "claim": "stepa0 was completed ahead of stepc0",
+      "names": [
+        "stepa0",
+        "stepb0",
+        "stepc0"
+      ],
+      "expected": "ENTAILED"
+    },
+    {
+      "sentences": [
+        "stepa0 took place earlier than stepb0",
+        "stepc0 happened later than stepb0"
+      ],
+      "claim": "stepa0 directly brought about stepc0",
+      "names": [
+        "stepa0",
+        "stepb0",
+        "stepc0"
+      ],
+      "expected": "UNKNOWN"
+    },
+    {
+      "sentences": [
+        "stepa0 took place earlier than stepb0",
+        "stepc0 happened later than stepb0",
+        "stepc0 took place earlier than stepa0"
+      ],
+      "claim": "stepa0 was completed ahead of stepc0",
+      "names": [
+        "stepa0",
+        "stepb0",
+        "stepc0"
+      ],
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "sentences": [
+        "stepa1 took place earlier than stepb1",
+        "stepc1 happened later than stepb1"
+      ],
+      "claim": "stepa1 was completed ahead of stepc1",
+      "names": [
+        "stepa1",
+        "stepb1",
+        "stepc1"
+      ],
+      "expected": "ENTAILED"
+    },
+    {
+      "sentences": [
+        "stepa1 took place earlier than stepb1",
+        "stepc1 happened later than stepb1"
+      ],
+      "claim": "stepa1 directly brought about stepc1",
+      "names": [
+        "stepa1",
+        "stepb1",
+        "stepc1"
+      ],
+      "expected": "UNKNOWN"
+    },
+    {
+      "sentences": [
+        "stepa1 took place earlier than stepb1",
+        "stepc1 happened later than stepb1",
+        "stepc1 took place earlier than stepa1"
+      ],
+      "claim": "stepa1 was completed ahead of stepc1",
+      "names": [
+        "stepa1",
+        "stepb1",
+        "stepc1"
+      ],
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "sentences": [
+        "stepa2 took place earlier than stepb2",
+        "stepc2 happened later than stepb2"
+      ],
+      "claim": "stepa2 was completed ahead of stepc2",
+      "names": [
+        "stepa2",
+        "stepb2",
+        "stepc2"
+      ],
+      "expected": "ENTAILED"
+    },
+    {
+      "sentences": [
+        "stepa2 took place earlier than stepb2",
+        "stepc2 happened later than stepb2"
+      ],
+      "claim": "stepa2 directly brought about stepc2",
+      "names": [
+        "stepa2",
+        "stepb2",
+        "stepc2"
+      ],
+      "expected": "UNKNOWN"
+    },
+    {
+      "sentences": [
+        "stepa2 took place earlier than stepb2",
+        "stepc2 happened later than stepb2",
+        "stepc2 took place earlier than stepa2"
+      ],
+      "claim": "stepa2 was completed ahead of stepc2",
+      "names": [
+        "stepa2",
+        "stepb2",
+        "stepc2"
+      ],
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "sentences": [
+        "stepa3 took place earlier than stepb3",
+        "stepc3 happened later than stepb3"
+      ],
+      "claim": "stepa3 was completed ahead of stepc3",
+      "names": [
+        "stepa3",
+        "stepb3",
+        "stepc3"
+      ],
+      "expected": "ENTAILED"
+    },
+    {
+      "sentences": [
+        "stepa3 took place earlier than stepb3",
+        "stepc3 happened later than stepb3"
+      ],
+      "claim": "stepa3 directly brought about stepc3",
+      "names": [
+        "stepa3",
+        "stepb3",
+        "stepc3"
+      ],
+      "expected": "UNKNOWN"
+    },
+    {
+      "sentences": [
+        "stepa3 took place earlier than stepb3",
+        "stepc3 happened later than stepb3",
+        "stepc3 took place earlier than stepa3"
+      ],
+      "claim": "stepa3 was completed ahead of stepc3",
+      "names": [
+        "stepa3",
+        "stepb3",
+        "stepc3"
+      ],
+      "expected": "HOLD_CONFLICT"
+    }
+  ]
+}
