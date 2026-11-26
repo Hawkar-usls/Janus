@@ -1,0 +1,30 @@
+name: CHRONO-DNA R8 node A
+on:
+  push:
+    branches: [research/chrono-dna-r8-node-a]
+    paths:
+      - 'research/chrono_dna_r8/**'
+      - '.github/workflows/chrono-dna-r8-a.yml'
+permissions:
+  contents: write
+concurrency:
+  group: chrono-r8-node-a
+  cancel-in-progress: false
+jobs:
+  pilot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Generate isolated signed outbox
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$GITHUB_REF" = refs/heads/research/chrono-dna-r8-node-a
+          test ! -e research/chrono_dna_r8/outbox
+          python research/chrono_dna_r8/pilot.py generate research/chrono_dna_r8/outbox
+          git config user.name 'chrono-r8-research[bot]'
+          git config user.email 'chrono-r8-research@users.noreply.github.com'
+          git add research/chrono_dna_r8/outbox/bundle.json
+          git commit -m 'R8 test outbox: signed synthetic graph deltas'
+          git push origin HEAD:refs/heads/research/chrono-dna-r8-node-a
