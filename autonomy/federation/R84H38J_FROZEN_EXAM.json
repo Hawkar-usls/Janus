@@ -1,0 +1,766 @@
+{
+  "schema": "h38j.exam.v1",
+  "scope": "Same-author new normalized clauses; four relation families including non-transitivity, explicit polarity and conflict. No independent external exam.",
+  "rows": [
+    {
+      "text": "helium0 concluded before xenon0",
+      "names": [
+        "helium0",
+        "xenon0"
+      ],
+      "gold": {
+        "left": "helium0",
+        "right": "xenon0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "helium0 ended prior to xenon0",
+      "names": [
+        "helium0",
+        "xenon0"
+      ],
+      "gold": {
+        "left": "helium0",
+        "right": "xenon0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "xenon0 concluded after helium0",
+      "names": [
+        "helium0",
+        "xenon0"
+      ],
+      "gold": {
+        "left": "helium0",
+        "right": "xenon0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "xenon0 ended subsequent to helium0",
+      "names": [
+        "helium0",
+        "xenon0"
+      ],
+      "gold": {
+        "left": "helium0",
+        "right": "xenon0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "helium2 did not conclude before xenon2",
+      "names": [
+        "helium2",
+        "xenon2"
+      ],
+      "gold": {
+        "left": "helium2",
+        "right": "xenon2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "helium2 never ended prior to xenon2",
+      "names": [
+        "helium2",
+        "xenon2"
+      ],
+      "gold": {
+        "left": "helium2",
+        "right": "xenon2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "xenon2 did not conclude after helium2",
+      "names": [
+        "helium2",
+        "xenon2"
+      ],
+      "gold": {
+        "left": "helium2",
+        "right": "xenon2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "xenon2 never ended subsequent to helium2",
+      "names": [
+        "helium2",
+        "xenon2"
+      ],
+      "gold": {
+        "left": "helium2",
+        "right": "xenon2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "helium4 set in motion xenon4",
+      "names": [
+        "helium4",
+        "xenon4"
+      ],
+      "gold": {
+        "left": "helium4",
+        "right": "xenon4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "helium4 caused the occurrence of xenon4",
+      "names": [
+        "helium4",
+        "xenon4"
+      ],
+      "gold": {
+        "left": "helium4",
+        "right": "xenon4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "xenon4 was set in motion by helium4",
+      "names": [
+        "helium4",
+        "xenon4"
+      ],
+      "gold": {
+        "left": "helium4",
+        "right": "xenon4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "xenon4 was caused by the occurrence of helium4",
+      "names": [
+        "helium4",
+        "xenon4"
+      ],
+      "gold": {
+        "left": "helium4",
+        "right": "xenon4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "helium6 did not set in motion xenon6",
+      "names": [
+        "helium6",
+        "xenon6"
+      ],
+      "gold": {
+        "left": "helium6",
+        "right": "xenon6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "helium6 did not cause the occurrence of xenon6",
+      "names": [
+        "helium6",
+        "xenon6"
+      ],
+      "gold": {
+        "left": "helium6",
+        "right": "xenon6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "xenon6 was not set in motion by helium6",
+      "names": [
+        "helium6",
+        "xenon6"
+      ],
+      "gold": {
+        "left": "helium6",
+        "right": "xenon6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "xenon6 was not caused by the occurrence of helium6",
+      "names": [
+        "helium6",
+        "xenon6"
+      ],
+      "gold": {
+        "left": "helium6",
+        "right": "xenon6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "helium8 depends upon the completion of xenon8",
+      "names": [
+        "helium8",
+        "xenon8"
+      ],
+      "gold": {
+        "left": "helium8",
+        "right": "xenon8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "helium8 requires the occurrence of xenon8",
+      "names": [
+        "helium8",
+        "xenon8"
+      ],
+      "gold": {
+        "left": "helium8",
+        "right": "xenon8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "xenon8 is a prerequisite for completion of helium8",
+      "names": [
+        "helium8",
+        "xenon8"
+      ],
+      "gold": {
+        "left": "helium8",
+        "right": "xenon8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "xenon8 is required by the occurrence of helium8",
+      "names": [
+        "helium8",
+        "xenon8"
+      ],
+      "gold": {
+        "left": "helium8",
+        "right": "xenon8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "helium10 does not depend upon the completion of xenon10",
+      "names": [
+        "helium10",
+        "xenon10"
+      ],
+      "gold": {
+        "left": "helium10",
+        "right": "xenon10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "helium10 does not require the occurrence of xenon10",
+      "names": [
+        "helium10",
+        "xenon10"
+      ],
+      "gold": {
+        "left": "helium10",
+        "right": "xenon10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "xenon10 is not a prerequisite for completion of helium10",
+      "names": [
+        "helium10",
+        "xenon10"
+      ],
+      "gold": {
+        "left": "helium10",
+        "right": "xenon10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "xenon10 is not required by the occurrence of helium10",
+      "names": [
+        "helium10",
+        "xenon10"
+      ],
+      "gold": {
+        "left": "helium10",
+        "right": "xenon10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "helium12 prevents the occurrence of xenon12",
+      "names": [
+        "helium12",
+        "xenon12"
+      ],
+      "gold": {
+        "left": "helium12",
+        "right": "xenon12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "helium12 inhibits the occurrence of xenon12",
+      "names": [
+        "helium12",
+        "xenon12"
+      ],
+      "gold": {
+        "left": "helium12",
+        "right": "xenon12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "xenon12 is prevented by the occurrence of helium12",
+      "names": [
+        "helium12",
+        "xenon12"
+      ],
+      "gold": {
+        "left": "helium12",
+        "right": "xenon12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "xenon12 is inhibited by the occurrence of helium12",
+      "names": [
+        "helium12",
+        "xenon12"
+      ],
+      "gold": {
+        "left": "helium12",
+        "right": "xenon12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "helium14 does not prevent the occurrence of xenon14",
+      "names": [
+        "helium14",
+        "xenon14"
+      ],
+      "gold": {
+        "left": "helium14",
+        "right": "xenon14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "helium14 does not inhibit the occurrence of xenon14",
+      "names": [
+        "helium14",
+        "xenon14"
+      ],
+      "gold": {
+        "left": "helium14",
+        "right": "xenon14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "xenon14 is not prevented by the occurrence of helium14",
+      "names": [
+        "helium14",
+        "xenon14"
+      ],
+      "gold": {
+        "left": "helium14",
+        "right": "xenon14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "xenon14 is not inhibited by the occurrence of helium14",
+      "names": [
+        "helium14",
+        "xenon14"
+      ],
+      "gold": {
+        "left": "helium14",
+        "right": "xenon14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "reed0 may conclude before pine0",
+      "names": [
+        "reed0",
+        "pine0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed1 has a surface resembling pine1",
+      "names": [
+        "reed1",
+        "pine1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed2 is photographed alongside pine2",
+      "names": [
+        "reed2",
+        "pine2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed3 might set in motion pine3",
+      "names": [
+        "reed3",
+        "pine3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed4 has a comparable diameter to pine4",
+      "names": [
+        "reed4",
+        "pine4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed5 and pine5 were catalogued",
+      "names": [
+        "reed5",
+        "pine5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed6 was indexed beside pine6",
+      "names": [
+        "reed6",
+        "pine6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed7 possibly requires pine7",
+      "names": [
+        "reed7",
+        "pine7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed8 has the same outline as pine8",
+      "names": [
+        "reed8",
+        "pine8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed9 is pictured near pine9",
+      "names": [
+        "reed9",
+        "pine9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed10 or pine10 was catalogued",
+      "names": [
+        "reed10",
+        "pine10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "reed11 has a similar dimension to pine11",
+      "names": [
+        "reed11",
+        "pine11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "arca0",
+        "arcb0",
+        "arcc0"
+      ],
+      "sentences": [
+        "arca0 concluded before arcb0",
+        "arcb0 concluded before arcc0"
+      ],
+      "claim": "arca0 concluded before arcc0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "arca0",
+        "arcb0",
+        "arcc0"
+      ],
+      "sentences": [
+        "arca0 concluded before arcb0"
+      ],
+      "claim": "arca0 did not conclude before arcb0",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "arca0",
+        "arcb0",
+        "arcc0"
+      ],
+      "sentences": [
+        "arca0 concluded before arcb0",
+        "arca0 did not conclude before arcb0"
+      ],
+      "claim": "arca0 concluded before arcb0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "arca1",
+        "arcb1",
+        "arcc1"
+      ],
+      "sentences": [
+        "arca1 set in motion arcb1",
+        "arcb1 set in motion arcc1"
+      ],
+      "claim": "arca1 set in motion arcc1",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "arca1",
+        "arcb1",
+        "arcc1"
+      ],
+      "sentences": [
+        "arca1 set in motion arcb1"
+      ],
+      "claim": "arca1 did not set in motion arcb1",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "arca1",
+        "arcb1",
+        "arcc1"
+      ],
+      "sentences": [
+        "arca1 set in motion arcb1",
+        "arca1 did not set in motion arcb1"
+      ],
+      "claim": "arca1 set in motion arcb1",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "arca2",
+        "arcb2",
+        "arcc2"
+      ],
+      "sentences": [
+        "arca2 depends upon the completion of arcb2",
+        "arcb2 depends upon the completion of arcc2"
+      ],
+      "claim": "arca2 depends upon the completion of arcc2",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "arca2",
+        "arcb2",
+        "arcc2"
+      ],
+      "sentences": [
+        "arca2 depends upon the completion of arcb2"
+      ],
+      "claim": "arca2 does not depend upon the completion of arcb2",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "arca2",
+        "arcb2",
+        "arcc2"
+      ],
+      "sentences": [
+        "arca2 depends upon the completion of arcb2",
+        "arca2 does not depend upon the completion of arcb2"
+      ],
+      "claim": "arca2 depends upon the completion of arcb2",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "arca3",
+        "arcb3",
+        "arcc3"
+      ],
+      "sentences": [
+        "arca3 prevents the occurrence of arcb3",
+        "arcb3 prevents the occurrence of arcc3"
+      ],
+      "claim": "arca3 prevents the occurrence of arcc3",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "arca3",
+        "arcb3",
+        "arcc3"
+      ],
+      "sentences": [
+        "arca3 prevents the occurrence of arcb3"
+      ],
+      "claim": "arca3 does not prevent the occurrence of arcb3",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "arca3",
+        "arcb3",
+        "arcc3"
+      ],
+      "sentences": [
+        "arca3 prevents the occurrence of arcb3",
+        "arca3 does not prevent the occurrence of arcb3"
+      ],
+      "claim": "arca3 prevents the occurrence of arcb3",
+      "expected": "HOLD_CONFLICT"
+    }
+  ]
+}
