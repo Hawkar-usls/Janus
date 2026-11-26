@@ -1,0 +1,766 @@
+{
+  "schema": "h38n2.exam.v1",
+  "scope": "Same-author frozen new clauses and graphs, prior normalized-disjointness mandatory",
+  "rows": [
+    {
+      "text": "atlas0 was chronologically earlier than the occurrence of vega0",
+      "names": [
+        "atlas0",
+        "vega0"
+      ],
+      "gold": {
+        "left": "atlas0",
+        "right": "vega0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "atlas0 took place at a point in time before vega0",
+      "names": [
+        "atlas0",
+        "vega0"
+      ],
+      "gold": {
+        "left": "atlas0",
+        "right": "vega0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 0
+    },
+    {
+      "text": "vega0 was chronologically later than the occurrence of atlas0",
+      "names": [
+        "atlas0",
+        "vega0"
+      ],
+      "gold": {
+        "left": "atlas0",
+        "right": "vega0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "vega0 took place at a point in time after atlas0",
+      "names": [
+        "atlas0",
+        "vega0"
+      ],
+      "gold": {
+        "left": "atlas0",
+        "right": "vega0",
+        "rel": "BEFORE",
+        "positive": true
+      },
+      "y": 1
+    },
+    {
+      "text": "atlas2 was not chronologically earlier than the occurrence of vega2",
+      "names": [
+        "atlas2",
+        "vega2"
+      ],
+      "gold": {
+        "left": "atlas2",
+        "right": "vega2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "atlas2 did not take place at a point in time before vega2",
+      "names": [
+        "atlas2",
+        "vega2"
+      ],
+      "gold": {
+        "left": "atlas2",
+        "right": "vega2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 2
+    },
+    {
+      "text": "vega2 was not chronologically later than the occurrence of atlas2",
+      "names": [
+        "atlas2",
+        "vega2"
+      ],
+      "gold": {
+        "left": "atlas2",
+        "right": "vega2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "vega2 did not take place at a point in time after atlas2",
+      "names": [
+        "atlas2",
+        "vega2"
+      ],
+      "gold": {
+        "left": "atlas2",
+        "right": "vega2",
+        "rel": "BEFORE",
+        "positive": false
+      },
+      "y": 3
+    },
+    {
+      "text": "atlas4 gave occasion to the occurrence of vega4",
+      "names": [
+        "atlas4",
+        "vega4"
+      ],
+      "gold": {
+        "left": "atlas4",
+        "right": "vega4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "atlas4 was responsible for bringing about vega4",
+      "names": [
+        "atlas4",
+        "vega4"
+      ],
+      "gold": {
+        "left": "atlas4",
+        "right": "vega4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 4
+    },
+    {
+      "text": "vega4 came into existence owing to atlas4",
+      "names": [
+        "atlas4",
+        "vega4"
+      ],
+      "gold": {
+        "left": "atlas4",
+        "right": "vega4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "vega4 occurred as an effect of atlas4",
+      "names": [
+        "atlas4",
+        "vega4"
+      ],
+      "gold": {
+        "left": "atlas4",
+        "right": "vega4",
+        "rel": "CAUSES",
+        "positive": true
+      },
+      "y": 5
+    },
+    {
+      "text": "atlas6 did not give occasion to the occurrence of vega6",
+      "names": [
+        "atlas6",
+        "vega6"
+      ],
+      "gold": {
+        "left": "atlas6",
+        "right": "vega6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "atlas6 was not responsible for bringing about vega6",
+      "names": [
+        "atlas6",
+        "vega6"
+      ],
+      "gold": {
+        "left": "atlas6",
+        "right": "vega6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 6
+    },
+    {
+      "text": "vega6 did not come into existence owing to atlas6",
+      "names": [
+        "atlas6",
+        "vega6"
+      ],
+      "gold": {
+        "left": "atlas6",
+        "right": "vega6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "vega6 did not occur as an effect of atlas6",
+      "names": [
+        "atlas6",
+        "vega6"
+      ],
+      "gold": {
+        "left": "atlas6",
+        "right": "vega6",
+        "rel": "CAUSES",
+        "positive": false
+      },
+      "y": 7
+    },
+    {
+      "text": "atlas8 has vega8 as an essential condition",
+      "names": [
+        "atlas8",
+        "vega8"
+      ],
+      "gold": {
+        "left": "atlas8",
+        "right": "vega8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "atlas8 requires the presence of vega8 to occur",
+      "names": [
+        "atlas8",
+        "vega8"
+      ],
+      "gold": {
+        "left": "atlas8",
+        "right": "vega8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 8
+    },
+    {
+      "text": "vega8 constitutes an essential condition for atlas8",
+      "names": [
+        "atlas8",
+        "vega8"
+      ],
+      "gold": {
+        "left": "atlas8",
+        "right": "vega8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "vega8 is necessary for atlas8 to take place",
+      "names": [
+        "atlas8",
+        "vega8"
+      ],
+      "gold": {
+        "left": "atlas8",
+        "right": "vega8",
+        "rel": "REQUIRES",
+        "positive": true
+      },
+      "y": 9
+    },
+    {
+      "text": "atlas10 does not have vega10 as an essential condition",
+      "names": [
+        "atlas10",
+        "vega10"
+      ],
+      "gold": {
+        "left": "atlas10",
+        "right": "vega10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "atlas10 does not require the presence of vega10 to occur",
+      "names": [
+        "atlas10",
+        "vega10"
+      ],
+      "gold": {
+        "left": "atlas10",
+        "right": "vega10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 10
+    },
+    {
+      "text": "vega10 does not constitute an essential condition for atlas10",
+      "names": [
+        "atlas10",
+        "vega10"
+      ],
+      "gold": {
+        "left": "atlas10",
+        "right": "vega10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "vega10 is not necessary for atlas10 to take place",
+      "names": [
+        "atlas10",
+        "vega10"
+      ],
+      "gold": {
+        "left": "atlas10",
+        "right": "vega10",
+        "rel": "REQUIRES",
+        "positive": false
+      },
+      "y": 11
+    },
+    {
+      "text": "atlas12 makes the realization of vega12 impossible",
+      "names": [
+        "atlas12",
+        "vega12"
+      ],
+      "gold": {
+        "left": "atlas12",
+        "right": "vega12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "atlas12 bars vega12 from taking place",
+      "names": [
+        "atlas12",
+        "vega12"
+      ],
+      "gold": {
+        "left": "atlas12",
+        "right": "vega12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 12
+    },
+    {
+      "text": "vega12 is barred from taking place by atlas12",
+      "names": [
+        "atlas12",
+        "vega12"
+      ],
+      "gold": {
+        "left": "atlas12",
+        "right": "vega12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "vega12 is made impossible by the presence of atlas12",
+      "names": [
+        "atlas12",
+        "vega12"
+      ],
+      "gold": {
+        "left": "atlas12",
+        "right": "vega12",
+        "rel": "PREVENTS",
+        "positive": true
+      },
+      "y": 13
+    },
+    {
+      "text": "atlas14 does not make the realization of vega14 impossible",
+      "names": [
+        "atlas14",
+        "vega14"
+      ],
+      "gold": {
+        "left": "atlas14",
+        "right": "vega14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "atlas14 does not bar vega14 from taking place",
+      "names": [
+        "atlas14",
+        "vega14"
+      ],
+      "gold": {
+        "left": "atlas14",
+        "right": "vega14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 14
+    },
+    {
+      "text": "vega14 is not barred from taking place by atlas14",
+      "names": [
+        "atlas14",
+        "vega14"
+      ],
+      "gold": {
+        "left": "atlas14",
+        "right": "vega14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "vega14 is not made impossible by the presence of atlas14",
+      "names": [
+        "atlas14",
+        "vega14"
+      ],
+      "gold": {
+        "left": "atlas14",
+        "right": "vega14",
+        "rel": "PREVENTS",
+        "positive": false
+      },
+      "y": 15
+    },
+    {
+      "text": "fern0 might occur as an effect of moss0",
+      "names": [
+        "fern0",
+        "moss0"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern1 has a shape comparable to the shape of moss1",
+      "names": [
+        "fern1",
+        "moss1"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern2 was exhibited in the vicinity of moss2",
+      "names": [
+        "fern2",
+        "moss2"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern3 could give occasion to moss3",
+      "names": [
+        "fern3",
+        "moss3"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern4 has a mass comparable to that of moss4",
+      "names": [
+        "fern4",
+        "moss4"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern5 and moss5 were listed together",
+      "names": [
+        "fern5",
+        "moss5"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern6 is drawn near the depiction of moss6",
+      "names": [
+        "fern6",
+        "moss6"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern7 possibly constitutes a condition for moss7",
+      "names": [
+        "fern7",
+        "moss7"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern8 has a density comparable to that of moss8",
+      "names": [
+        "fern8",
+        "moss8"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern9 was photographed in proximity to moss9",
+      "names": [
+        "fern9",
+        "moss9"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern10 or moss10 was recorded",
+      "names": [
+        "fern10",
+        "moss10"
+      ],
+      "gold": null,
+      "y": 16
+    },
+    {
+      "text": "fern11 shares a pattern of coloration with moss11",
+      "names": [
+        "fern11",
+        "moss11"
+      ],
+      "gold": null,
+      "y": 16
+    }
+  ],
+  "groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ],
+    [
+      8,
+      9,
+      10,
+      11
+    ],
+    [
+      12,
+      13,
+      14,
+      15
+    ],
+    [
+      16,
+      17,
+      18,
+      19
+    ],
+    [
+      20,
+      21,
+      22,
+      23
+    ],
+    [
+      24,
+      25,
+      26,
+      27
+    ],
+    [
+      28,
+      29,
+      30,
+      31
+    ]
+  ],
+  "graphs": [
+    {
+      "names": [
+        "nexa0",
+        "nexb0",
+        "nexc0"
+      ],
+      "sentences": [
+        "nexa0 was chronologically earlier than the occurrence of nexb0",
+        "nexb0 was chronologically earlier than the occurrence of nexc0"
+      ],
+      "claim": "nexa0 was chronologically earlier than the occurrence of nexc0",
+      "expected": "ENTAILED"
+    },
+    {
+      "names": [
+        "nexa0",
+        "nexb0",
+        "nexc0"
+      ],
+      "sentences": [
+        "nexa0 was chronologically earlier than the occurrence of nexb0"
+      ],
+      "claim": "nexa0 was not chronologically earlier than the occurrence of nexb0",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "nexa0",
+        "nexb0",
+        "nexc0"
+      ],
+      "sentences": [
+        "nexa0 was chronologically earlier than the occurrence of nexb0",
+        "nexa0 was not chronologically earlier than the occurrence of nexb0"
+      ],
+      "claim": "nexa0 was chronologically earlier than the occurrence of nexb0",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "nexa1",
+        "nexb1",
+        "nexc1"
+      ],
+      "sentences": [
+        "nexa1 gave occasion to the occurrence of nexb1",
+        "nexb1 gave occasion to the occurrence of nexc1"
+      ],
+      "claim": "nexa1 gave occasion to the occurrence of nexc1",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "nexa1",
+        "nexb1",
+        "nexc1"
+      ],
+      "sentences": [
+        "nexa1 gave occasion to the occurrence of nexb1"
+      ],
+      "claim": "nexa1 did not give occasion to the occurrence of nexb1",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "nexa1",
+        "nexb1",
+        "nexc1"
+      ],
+      "sentences": [
+        "nexa1 gave occasion to the occurrence of nexb1",
+        "nexa1 did not give occasion to the occurrence of nexb1"
+      ],
+      "claim": "nexa1 gave occasion to the occurrence of nexb1",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "nexa2",
+        "nexb2",
+        "nexc2"
+      ],
+      "sentences": [
+        "nexa2 has nexb2 as an essential condition",
+        "nexb2 has nexc2 as an essential condition"
+      ],
+      "claim": "nexa2 has nexc2 as an essential condition",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "nexa2",
+        "nexb2",
+        "nexc2"
+      ],
+      "sentences": [
+        "nexa2 has nexb2 as an essential condition"
+      ],
+      "claim": "nexa2 does not have nexb2 as an essential condition",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "nexa2",
+        "nexb2",
+        "nexc2"
+      ],
+      "sentences": [
+        "nexa2 has nexb2 as an essential condition",
+        "nexa2 does not have nexb2 as an essential condition"
+      ],
+      "claim": "nexa2 has nexb2 as an essential condition",
+      "expected": "HOLD_CONFLICT"
+    },
+    {
+      "names": [
+        "nexa3",
+        "nexb3",
+        "nexc3"
+      ],
+      "sentences": [
+        "nexa3 makes the realization of nexb3 impossible",
+        "nexb3 makes the realization of nexc3 impossible"
+      ],
+      "claim": "nexa3 makes the realization of nexc3 impossible",
+      "expected": "UNKNOWN"
+    },
+    {
+      "names": [
+        "nexa3",
+        "nexb3",
+        "nexc3"
+      ],
+      "sentences": [
+        "nexa3 makes the realization of nexb3 impossible"
+      ],
+      "claim": "nexa3 does not make the realization of nexb3 impossible",
+      "expected": "CONTRADICTED"
+    },
+    {
+      "names": [
+        "nexa3",
+        "nexb3",
+        "nexc3"
+      ],
+      "sentences": [
+        "nexa3 makes the realization of nexb3 impossible",
+        "nexa3 does not make the realization of nexb3 impossible"
+      ],
+      "claim": "nexa3 makes the realization of nexb3 impossible",
+      "expected": "HOLD_CONFLICT"
+    }
+  ]
+}
