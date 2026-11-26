@@ -1,0 +1,100 @@
+name: JANUS R84H20 bounded exploration link
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - 'autonomy/federation/r84h20_link.py'
+      - '.github/workflows/r84h20-link.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: r84h20-bounded-research
+  cancel-in-progress: false
+jobs:
+  beetle:
+    if: github.repository == 'Hawkar-usls/Janus' && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.head.ref == 'research/r84h20-exploration-link-20261126' && github.run_attempt == 1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/janus-lapis
+          ref: 46d7aaead678f03255606979113d34ca4d2d6d88
+          path: lapis
+          persist-credentials: false
+          sparse-checkout: |
+            tools
+          sparse-checkout-cone-mode: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h19-results
+          path: ${{ runner.temp }}/h19
+          run-id: 45771158477
+          github-token: ${{ github.token }}
+      - run: |
+          python3 -m pip install --disable-pip-version-check requests==2.32.5
+          python3 autonomy/federation/r84h20_link.py scout lapis "$RUNNER_TEMP/h19" "$RUNNER_TEMP/scout"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h20-discovery
+          path: ${{ runner.temp }}/scout
+          if-no-files-found: error
+          retention-days: 60
+  trinity:
+    needs: beetle
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: Hawkar-usls/Janus-Demiurge
+          ref: 7d7d355c7ac15cc94f0034ca8171624cda4017eb
+          path: demi
+          persist-credentials: false
+          sparse-checkout: |
+            tools/trinity_r14_verified_oracle.py
+          sparse-checkout-cone-mode: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h20-discovery
+          path: ${{ runner.temp }}/scout
+      - run: python3 autonomy/federation/r84h20_link.py verify demi "$RUNNER_TEMP/scout" "$RUNNER_TEMP/verified"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h20-verified
+          path: ${{ runner.temp }}/verified
+          if-no-files-found: error
+          retention-days: 60
+  memory-intake:
+    needs: trinity
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h20-discovery
+          path: ${{ runner.temp }}/scout
+      - uses: actions/download-artifact@v4
+        with:
+          name: r84h20-verified
+          path: ${{ runner.temp }}/verified
+      - run: python3 autonomy/federation/r84h20_link.py intake "$RUNNER_TEMP/scout" "$RUNNER_TEMP/verified" "$RUNNER_TEMP/intake"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r84h20-results
+          path: ${{ runner.temp }}/intake
+          if-no-files-found: error
+          retention-days: 60
