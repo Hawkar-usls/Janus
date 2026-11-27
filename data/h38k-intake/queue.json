@@ -1,7 +1,7 @@
 {
-  "last_generation": 7,
-  "last_manifest": "a09bf5834eba12f0ca3f96068c839e440a2c7ed4b90512049efc7b5ce7759fe5",
-  "receipt_sha256": "43612d158d5931d760b6ae2d161b3293f1dfde41bad91c35f34c0208b32c0642",
+  "last_generation": 8,
+  "last_manifest": "4d4040a00ca7cccb7e588bd60688a5e5a60be6202a6970b07c70faacf7d4993f",
+  "receipt_sha256": "0418d08127bf1f4643152d6a85595907bce4091b9830add22f1e5d84c4b93f3a",
   "records": {
     "0162a779ab4f0a3fed97cc4a98de05e14652d38284b261e685f24f0b4924dd1c": {
       "atoms": [
@@ -447,6 +447,43 @@
         "source_sha256": "0c1944480231a56a1a7f8b52a91a3034cae50a224d1a502ae7ead297c0ddd4a4"
       }
     },
+    "0c50a47b6c1a0175ee885550fee0ded020e0aa0a2dc6c4dd51145035b2f8b424": {
+      "atoms": [
+        {
+          "left": "fetch_0c50a47b6c1a0175",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "store_0c50a47b6c1a0175"
+        },
+        {
+          "left": "store_0c50a47b6c1a0175",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "publish_0c50a47b6c1a0175"
+        }
+      ],
+      "derived": {
+        "left": "fetch_0c50a47b6c1a0175",
+        "positive": true,
+        "rel": "BEFORE",
+        "right": "publish_0c50a47b6c1a0175"
+      },
+      "kind": "VERIFIED_OPERATIONAL_PROVENANCE_NOT_SCIENTIFIC_FACT",
+      "model_training_allowed": false,
+      "receipt_sha256": "4271c6adf83dc72a399b0b44d1fb080d88b5a934a1f5f0bea5a8b840c40a9a2a",
+      "scientific_truth": false,
+      "training_status": "QUARANTINED_PENDING_SEPARATE_SEMANTIC_EXAM",
+      "witness": {
+        "beetle_commit": "a7f00d20ca5b5d76ae6bf31db281ed386ca03818",
+        "cortex_commit": "e74967222f3c73cb94189b66ab200578ba5c6dcb",
+        "generation": 8,
+        "manifest_sha256": "4d4040a00ca7cccb7e588bd60688a5e5a60be6202a6970b07c70faacf7d4993f",
+        "primary_id": "arxiv:2611.34863v1",
+        "provider_sha256": "edf9340a23fe71026099198ba47a71e9cfdd3e7fdb9dbb5f13eaa1e865b6a7c6",
+        "source_bytes": 1869,
+        "source_sha256": "0c50a47b6c1a0175ee885550fee0ded020e0aa0a2dc6c4dd51145035b2f8b424"
+      }
+    },
     "0d04c42adac64b26497721a6f99a1664f11fed1c77e83fed2cbbb3dac73cfacc": {
       "atoms": [
         {
@@ -594,8 +631,267 @@
         "source_bytes": 496,
         "source_sha256": "15ebf90c8278f2ea824ed8072c22b2576440737552e79188c9334e8a91bfef8a"
       }
+    },
+    "178e8526aaf12f589b525920f18677e44e81e2eee9a091f659d5cf34746f5b4b": {
+      "atoms": [
+        {
+          "left": "fetch_178e8526aaf12f58",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "store_178e8526aaf12f58"
+        },
+        {
+          "left": "store_178e8526aaf12f58",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "publish_178e8526aaf12f58"
+        }
+      ],
+      "derived": {
+        "left": "fetch_178e8526aaf12f58",
+        "positive": true,
+        "rel": "BEFORE",
+        "right": "publish_178e8526aaf12f58"
+      },
+      "kind": "VERIFIED_OPERATIONAL_PROVENANCE_NOT_SCIENTIFIC_FACT",
+      "model_training_allowed": false,
+      "receipt_sha256": "021b0ef3b685fe471c81dee590045f564b53b5fb61949887629b7c4504e949eb",
+      "scientific_truth": false,
+      "training_status": "QUARANTINED_PENDING_SEPARATE_SEMANTIC_EXAM",
+      "witness": {
+        "beetle_commit": "0ce442a7ff4d561058fe1c99eb9c2a043844b654",
+        "cortex_commit": "e74967222f3c73cb94189b66ab200578ba5c6dcb",
+        "generation": 8,
+        "manifest_sha256": "4d4040a00ca7cccb7e588bd60688a5e5a60be6202a6970b07c70faacf7d4993f",
+        "primary_id": "zenodo:24542151",
+        "provider_sha256": "73c4246c3543f61030a349e3ae0af4e30035cb1fe047b36d991c60e8512b6102",
+        "source_bytes": 513,
+        "source_sha256": "178e8526aaf12f589b525920f18677e44e81e2eee9a091f659d5cf34746f5b4b"
+      }
+    },
+    "1b8fa27644d7705966848ea0070aa841ce1a01ce999d15484462878ec519e2ad": {
+      "atoms": [
+        {
+          "left": "fetch_1b8fa27644d77059",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "store_1b8fa27644d77059"
+        },
+        {
+          "left": "store_1b8fa27644d77059",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "publish_1b8fa27644d77059"
+        }
+      ],
+      "derived": {
+        "left": "fetch_1b8fa27644d77059",
+        "positive": true,
+        "rel": "BEFORE",
+        "right": "publish_1b8fa27644d77059"
+      },
+      "kind": "VERIFIED_OPERATIONAL_PROVENANCE_NOT_SCIENTIFIC_FACT",
+      "model_training_allowed": false,
+      "receipt_sha256": "4dc63b18d627a5877ae6a715b2973cd44e6d3e91c4e3dd406f0a27d6a2a29db0",
+      "scientific_truth": false,
+      "training_status": "QUARANTINED_PENDING_SEPARATE_SEMANTIC_EXAM",
+      "witness": {
+        "beetle_commit": "ddc2613cede3eb5db44752d022e5edc6ca5648ad",
+        "cortex_commit": "e74967222f3c73cb94189b66ab200578ba5c6dcb",
+        "generation": 8,
+        "manifest_sha256": "4d4040a00ca7cccb7e588bd60688a5e5a60be6202a6970b07c70faacf7d4993f",
+        "primary_id": "arxiv:2611.34474v1",
+        "provider_sha256": "2126424aa1a29400e4b89baf2a60a311470012a8a1dd48fb4ec321112cf0437f",
+        "source_bytes": 1015,
+        "source_sha256": "1b8fa27644d7705966848ea0070aa841ce1a01ce999d15484462878ec519e2ad"
+      }
+    },
+    "1c2450945b7b2eb16bc2e6eef13cd56ce7db32acb626d2fe8592d1d6fd75175d": {
+      "atoms": [
+        {
+          "left": "fetch_1c2450945b7b2eb1",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "store_1c2450945b7b2eb1"
+        },
+        {
+          "left": "store_1c2450945b7b2eb1",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "publish_1c2450945b7b2eb1"
+        }
+      ],
+      "derived": {
+        "left": "fetch_1c2450945b7b2eb1",
+        "positive": true,
+        "rel": "BEFORE",
+        "right": "publish_1c2450945b7b2eb1"
+      },
+      "kind": "VERIFIED_OPERATIONAL_PROVENANCE_NOT_SCIENTIFIC_FACT",
+      "model_training_allowed": false,
+      "receipt_sha256": "9694c16868b4b8d20144f573284defe88dbaa3ff701b8ea3378447a5d85e1a98",
+      "scientific_truth": false,
+      "training_status": "QUARANTINED_PENDING_SEPARATE_SEMANTIC_EXAM",
+      "witness": {
+        "beetle_commit": "0ce442a7ff4d561058fe1c99eb9c2a043844b654",
+        "cortex_commit": "e74967222f3c73cb94189b66ab200578ba5c6dcb",
+        "generation": 8,
+        "manifest_sha256": "4d4040a00ca7cccb7e588bd60688a5e5a60be6202a6970b07c70faacf7d4993f",
+        "primary_id": "zenodo:24542529",
+        "provider_sha256": "ab55f0bf9e1d6a8922bad4c742c4afdf91e12c7a3299ca3c21156a50191be3e3",
+        "source_bytes": 1957,
+        "source_sha256": "1c2450945b7b2eb16bc2e6eef13cd56ce7db32acb626d2fe8592d1d6fd75175d"
+      }
+    },
+    "1de2f8aea490a1b3e6c5465709a13f999631771e9f0aaf1957cd745c6d709bba": {
+      "atoms": [
+        {
+          "left": "fetch_1de2f8aea490a1b3",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "store_1de2f8aea490a1b3"
+        },
+        {
+          "left": "store_1de2f8aea490a1b3",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "publish_1de2f8aea490a1b3"
+        }
+      ],
+      "derived": {
+        "left": "fetch_1de2f8aea490a1b3",
+        "positive": true,
+        "rel": "BEFORE",
+        "right": "publish_1de2f8aea490a1b3"
+      },
+      "kind": "VERIFIED_OPERATIONAL_PROVENANCE_NOT_SCIENTIFIC_FACT",
+      "model_training_allowed": false,
+      "receipt_sha256": "775bc9d3d0ac3dfcb0df51056d0884be89a7d3503831298bafe8926458ee22a7",
+      "scientific_truth": false,
+      "training_status": "QUARANTINED_PENDING_SEPARATE_SEMANTIC_EXAM",
+      "witness": {
+        "beetle_commit": "b265e7149ae596ed16fa71c1d303d561b557090e",
+        "cortex_commit": "e74967222f3c73cb94189b66ab200578ba5c6dcb",
+        "generation": 8,
+        "manifest_sha256": "4d4040a00ca7cccb7e588bd60688a5e5a60be6202a6970b07c70faacf7d4993f",
+        "primary_id": "arxiv:2611.32828v1",
+        "provider_sha256": "f3cf9c745d20a4672b45cc9f3597ef9f54136d4acf601fc3f554f0751e5a1094",
+        "source_bytes": 1734,
+        "source_sha256": "1de2f8aea490a1b3e6c5465709a13f999631771e9f0aaf1957cd745c6d709bba"
+      }
+    },
+    "1ed64f092a035003ff5bc3b18dc7cbba6a441252abad2c90bbdcca1e4183ca70": {
+      "atoms": [
+        {
+          "left": "fetch_1ed64f092a035003",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "store_1ed64f092a035003"
+        },
+        {
+          "left": "store_1ed64f092a035003",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "publish_1ed64f092a035003"
+        }
+      ],
+      "derived": {
+        "left": "fetch_1ed64f092a035003",
+        "positive": true,
+        "rel": "BEFORE",
+        "right": "publish_1ed64f092a035003"
+      },
+      "kind": "VERIFIED_OPERATIONAL_PROVENANCE_NOT_SCIENTIFIC_FACT",
+      "model_training_allowed": false,
+      "receipt_sha256": "6b8ec4fa8fb446537796bdc7d93487cac0b3ac646c240e08ee44ff16850fa4d3",
+      "scientific_truth": false,
+      "training_status": "QUARANTINED_PENDING_SEPARATE_SEMANTIC_EXAM",
+      "witness": {
+        "beetle_commit": "a7f00d20ca5b5d76ae6bf31db281ed386ca03818",
+        "cortex_commit": "e74967222f3c73cb94189b66ab200578ba5c6dcb",
+        "generation": 8,
+        "manifest_sha256": "4d4040a00ca7cccb7e588bd60688a5e5a60be6202a6970b07c70faacf7d4993f",
+        "primary_id": "zenodo:24548728",
+        "provider_sha256": "cb9ce6dc020f2ea0c95303d5284c3dd009f19f3590f284465edbc772c7207a06",
+        "source_bytes": 3038,
+        "source_sha256": "1ed64f092a035003ff5bc3b18dc7cbba6a441252abad2c90bbdcca1e4183ca70"
+      }
+    },
+    "1f5c4ce6c4afa4cb57f16ab0f310d4de566be1c8f6c1c159fb0736603174d18b": {
+      "atoms": [
+        {
+          "left": "fetch_1f5c4ce6c4afa4cb",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "store_1f5c4ce6c4afa4cb"
+        },
+        {
+          "left": "store_1f5c4ce6c4afa4cb",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "publish_1f5c4ce6c4afa4cb"
+        }
+      ],
+      "derived": {
+        "left": "fetch_1f5c4ce6c4afa4cb",
+        "positive": true,
+        "rel": "BEFORE",
+        "right": "publish_1f5c4ce6c4afa4cb"
+      },
+      "kind": "VERIFIED_OPERATIONAL_PROVENANCE_NOT_SCIENTIFIC_FACT",
+      "model_training_allowed": false,
+      "receipt_sha256": "c056c2939836803e33710026ee44a4b4b9673ee888651bd533ccd53e132969ae",
+      "scientific_truth": false,
+      "training_status": "QUARANTINED_PENDING_SEPARATE_SEMANTIC_EXAM",
+      "witness": {
+        "beetle_commit": "ffbb5652e7a65dfc2a201a8781e343a107f12f62",
+        "cortex_commit": "e74967222f3c73cb94189b66ab200578ba5c6dcb",
+        "generation": 8,
+        "manifest_sha256": "4d4040a00ca7cccb7e588bd60688a5e5a60be6202a6970b07c70faacf7d4993f",
+        "primary_id": "zenodo:24547571",
+        "provider_sha256": "b3a074bc840e0dcd88b0394d41837972753c4abef3f2e56b2c06236dcda5680d",
+        "source_bytes": 2056,
+        "source_sha256": "1f5c4ce6c4afa4cb57f16ab0f310d4de566be1c8f6c1c159fb0736603174d18b"
+      }
+    },
+    "208919349a5d4efd7c6b38df1b8f050638c34ddbee8e157b759a11a45e085612": {
+      "atoms": [
+        {
+          "left": "fetch_208919349a5d4efd",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "store_208919349a5d4efd"
+        },
+        {
+          "left": "store_208919349a5d4efd",
+          "positive": true,
+          "rel": "BEFORE",
+          "right": "publish_208919349a5d4efd"
+        }
+      ],
+      "derived": {
+        "left": "fetch_208919349a5d4efd",
+        "positive": true,
+        "rel": "BEFORE",
+        "right": "publish_208919349a5d4efd"
+      },
+      "kind": "VERIFIED_OPERATIONAL_PROVENANCE_NOT_SCIENTIFIC_FACT",
+      "model_training_allowed": false,
+      "receipt_sha256": "936acb8ad63bde507f65d3487c8c382c7a56bb4f09b359488ed4965c3a760d5a",
+      "scientific_truth": false,
+      "training_status": "QUARANTINED_PENDING_SEPARATE_SEMANTIC_EXAM",
+      "witness": {
+        "beetle_commit": "a7f00d20ca5b5d76ae6bf31db281ed386ca03818",
+        "cortex_commit": "e74967222f3c73cb94189b66ab200578ba5c6dcb",
+        "generation": 8,
+        "manifest_sha256": "4d4040a00ca7cccb7e588bd60688a5e5a60be6202a6970b07c70faacf7d4993f",
+        "primary_id": "arxiv:2611.34326v1",
+        "provider_sha256": "4cd40d0e75ce23b92875c76d32256b7670b7ec0a196d5ef0f3ffceebda1abf8f",
+        "source_bytes": 1390,
+        "source_sha256": "208919349a5d4efd7c6b38df1b8f050638c34ddbee8e157b759a11a45e085612"
+      }
     }
   },
   "schema": "janus.h38k.intake.v1",
-  "sources_seen": 196
+  "sources_seen": 227
 }
